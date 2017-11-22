@@ -52,7 +52,7 @@ patch::~patch(void){
 }
 
 void patch::kill(void){
-  specie = boost::dynamic_bitset<>(nK,0);
+  specie ^= specie;
 }
 
 double patch::fitness(void){
