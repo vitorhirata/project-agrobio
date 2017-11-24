@@ -3,7 +3,6 @@
 #include <cmath>  // math operation
 #include <fstream> // handling files
 #include <algorithm> // made up algorithms
-//#include <set>
 #include <ctime> // count time of run
 #include <boost/dynamic_bitset.hpp> // binary species
 #include <vector>
@@ -20,7 +19,6 @@ const int tic = 1000; // tic interval in time
 const int nRun = 10;  // numero de rodadas
 class patch;
 double K[k*n];
-//vector<double> K(k*n);
 
 static std::random_device rd;
 static std::mt19937_64 rand64(rd());
@@ -101,42 +99,44 @@ void iterate(patch grid[]){
 
 bool haveNeighbor(patch grid[], int x, int y, int* x_N, int* y_N){
   int xP = x+1, xM = x-1, yP = y+1, yM = y-1;
-  std::vector<int> PossibleX, PossibleY;
-  if(xP == L)
+  std::vector<int> PossibleX(4), PossibleY(4);
+  int nPossible = 0;
+
+  if(x == L - 1)
 		xP = 0;
-	if(xM == -1)
+	else if(x == 0)
 		xM = L-1;
-	if(yP == L)
+	if(y == L - 1)
 		yP = 0;
-	if(yM == -1)
+	else if(y == 0)
 		yM = L-1;
 
-  if(!grid[xP*L+y].specie.any()){
-    PossibleX.push_back(xP);
-    PossibleY.push_back(y);
-  }
-  if(!grid[xM*L+y].specie.any()){
-    PossibleX.push_back(xM);
-    PossibleY.push_back(y);
-  }
-  if(!grid[x*L+yP].specie.any()){
-    PossibleX.push_back(x);
-    PossibleY.push_back(yP);
-  }
-  if(!grid[x*L+yM].specie.any()){
-    PossibleX.push_back(x);
-    PossibleY.push_back(yM);
-  }
 
-  if (PossibleX.size()==0)
+  PossibleX[nPossible] = xP;
+  PossibleY[nPossible] = y;
+  nPossible += !grid[xP*L+y].specie.any();
+
+  PossibleX[nPossible] = xM;
+  PossibleY[nPossible] = y;
+  nPossible += !grid[xM*L+y].specie.any();
+
+  PossibleX[nPossible] = x;
+  PossibleY[nPossible] = yP;
+  nPossible += !grid[x*L+yP].specie.any();
+
+  PossibleX[nPossible] = x;
+  PossibleY[nPossible] = yM;
+  nPossible += !grid[x*L+yM].specie.any();
+
+  if (nPossible==0)
     return false;
-  if (PossibleX.size()==1){
+  if (nPossible==1){
     *x_N = PossibleX[0];
     *y_N = PossibleY[0];
     return true;
   }
   else{
-    uniIntne.param(std::uniform_int_distribution<long>::param_type(0, PossibleX.size()-1));
+    uniIntne.param(std::uniform_int_distribution<long>::param_type(0, nPossible-1));
     int nChoosen = uniIntne(rand64);
     *x_N = PossibleX[nChoosen];
     *y_N = PossibleY[nChoosen];
