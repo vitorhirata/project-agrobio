@@ -8,15 +8,15 @@
 #include <vector>
 using namespace std;
 
-const int L = 50; // size of the lattice
+int L=50; // 50  size of the lattice
+float u = 0.1; // death probability
+float m = 0.0; // mutation probability
 const int n = 3;// number of resources
 const int k = 100; // number of species
 const int nK = 7; // number of bytes to represent species
-const float u = 0.1; // death probability
-const float m = 0.0; // mutation probability
 const int T = 100000; // maximum time
 const int tic = 1000; // tic interval in time
-const int nRun = 10;  // number of runs to average
+const int nRun = 2;  // number of runs to average
 class patch;
 double K[k*n]; // vector containing the half saturation constants
 
@@ -36,12 +36,14 @@ class patch{
     boost::dynamic_bitset<> specie; // binary array
     void kill(void);
     double fitness(void);
+    void mutate(void);
     patch(void);
     ~patch();
 };
 
 // Constructor, initialize resouce with n-sized vector and uniform distribution [0,1], and specie as an int [0,k], convert to an array of binary (size nK bytes).
 patch::patch(void){
+
   for(int i=0;i<n;i++)
     resource.push_back(uniFLOAT(rand64));
   specie = boost::dynamic_bitset<>(nK,uniIntk(rand64));
@@ -69,10 +71,19 @@ double patch::fitness(void){
   return min;
 } //pode ser melhorado, o fitness de uma especie em um grid vai ser sempre igual (na real isso vale so se o recurso for constante)
 
+// Cause a mutation, selecting randomly one 'gene' and changing it
+void patch::mutate(void){
+  int temp = uniIntkb(rand64);
+  specie[temp] = !specie[temp];
+}
+
+
+
 bool haveNeighbor(patch grid[], int x, int y, int* x_N, int* y_N);
 void iterate(patch grid[]);
 int countSpecie(patch grid[]);
-void Run(void);
+void Run_standart(void);
+void Run_varParam(char param, std::vector<float> paramList);
 
 // Receives the grid and iterate one time, passing over all the sites of the grid.
 void iterate(patch grid[]){
@@ -96,10 +107,8 @@ void iterate(patch grid[]){
         else
           if(haveNeighbor(grid, x, y, &x_Neigh,&y_Neigh) && uniFLOAT(rand64) < grid[x*L+y].fitness()){
             grid[x_Neigh*L+y_Neigh].specie = grid[x*L+y].specie;
-            if(uniFLOAT(rand64) < m){ // mutation probability
-              int temp = uniIntkb(rand64);
-              grid[x_Neigh*L+y_Neigh].specie[temp] = !grid[x_Neigh*L+y_Neigh].specie[temp];
-            }
+            if(uniFLOAT(rand64) < m)
+              grid[x_Neigh*L+y_Neigh].mutate();
           }
       }
     }
@@ -172,13 +181,12 @@ int countSpecie(patch grid[]){
     return nDifferentS;
 }
 
-
-// Run the complete model, making nRun rows and putting the result in one txt.
-void Run(void){
+// Run the standart model, saving a txt with the evolution of the number of species.
+void Run_standart(void){
   std::vector<int> result(T/tic,0);
-  fstream arquivo;
-  arquivo.open("specieXtempo.txt",ios::out);
   int i, j;
+  fstream arquivo;
+  arquivo.open("standarts.txt",ios::out);
 
   // Rodo nRun rodadas
   for (int run=0; run < nRun; run++){
@@ -199,14 +207,54 @@ void Run(void){
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     delete[] grid;
   }
+
   for (int t=0;t<T/tic;t++)
     arquivo << t*tic << "; " << result[t]/nRun << endl;
-
   arquivo.close();
+}
 
+// Run the model for some parameter varying, saving a txt with the evolution of the number of species for each parameter value.
+// at the moment working only for m variation
+void Run_varParam(char param, std::vector<float> paramList){
+  std::vector<int> result((T/tic)*paramList.size(),0);
+  fstream arquivo;
+  arquivo.open(std::string ("varParam_")+param+".txt",ios::out);
+  int i, j, idxParam;
+
+  for (idxParam=0; idxParam < paramList.size(); idxParam++){
+    m=paramList[idxParam];
+  // Rodo nRun rodadas
+    for (int run=0; run < nRun; run++){
+      patch* grid;
+      grid = new (nothrow) patch[L*L];
+      if (grid == nullptr)
+        cout << "Erro na alocacao de grid" << endl;
+      for (i=0;i<k;i++)
+        for (j=0;j<n;j++)
+          K[i*n+j] = gauss(rand64);
+
+      //clock_t tStart = clock();
+      for (int t=0;t<T;t++){
+        iterate(grid);
+        if (t % tic == 0)
+          result[(T/tic)*idxParam+(t/tic)] += countSpecie(grid);
+      }
+      //cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
+      delete[] grid;
+    }
+    cout << "Finish m=" << m << endl;
+  }
+
+  for (int t=0;t<T/tic;t++){
+    arquivo << t*tic;
+    for (idxParam=0; idxParam < paramList.size(); idxParam++)
+        arquivo << "; " << result[(T/tic)*idxParam+t]/nRun;
+    arquivo << endl;
+  }
+  arquivo.close();
 }
 
 int main(){
-  Run();
+  Run_varParam('a', {0.01,0.1});
   return 0;
 }
