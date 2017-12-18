@@ -10,9 +10,9 @@ This project will have two different parts, one social and one biological (the f
 This images presents tests for the model. The data is present in the file with the same name, presenting also the parameters used and additional information.
 
 ## Future Steps
-- Make possible varying all parameters.
 - Make possible to use uniform resource along the patch.
 - Make a plot file in python or julia.
-- Fix and comment the tests part
+- Fix and comment the tests part.
 - Add a global class 'ambient'.
 - Optimize 'fitness' function.
+- Start social model.

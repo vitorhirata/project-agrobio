@@ -82,8 +82,8 @@ void patch::mutate(void){
 bool haveNeighbor(patch grid[], int x, int y, int* x_N, int* y_N);
 void iterate(patch grid[]);
 int countSpecie(patch grid[]);
-void Run_standart(void);
-void Run_varParam(char param, std::vector<float> paramList);
+int Run_standart(void);
+int Run_varParam(char param, std::vector<float> paramList);
 
 // Receives the grid and iterate one time, passing over all the sites of the grid.
 void iterate(patch grid[]){
@@ -182,7 +182,7 @@ int countSpecie(patch grid[]){
 }
 
 // Run the standart model, saving a txt with the evolution of the number of species.
-void Run_standart(void){
+int Run_standart(void){
   std::vector<int> result(T/tic,0);
   int i, j;
   fstream arquivo;
@@ -192,8 +192,10 @@ void Run_standart(void){
   for (int run=0; run < nRun; run++){
     patch* grid;
     grid = new (nothrow) patch[L*L];
-    if (grid == nullptr)
+    if (grid == nullptr){
       cout << "Erro na alocacao de grid" << endl;
+      return -1;
+    }
     for (i=0;i<k;i++)
       for (j=0;j<n;j++)
         K[i*n+j] = gauss(rand64);
@@ -211,38 +213,56 @@ void Run_standart(void){
   for (int t=0;t<T/tic;t++)
     arquivo << t*tic << "; " << result[t]/nRun << endl;
   arquivo.close();
+  return 0;
 }
 
 // Run the model for some parameter varying, saving a txt with the evolution of the number of species for each parameter value.
 // at the moment working only for m variation
-void Run_varParam(char param, std::vector<float> paramList){
+int Run_varParam(char param, std::vector<float> paramList){
   std::vector<int> result((T/tic)*paramList.size(),0);
   fstream arquivo;
   arquivo.open(std::string ("varParam_")+param+".txt",ios::out);
   int i, j, idxParam;
 
+  if (param != 'm' && param != 'u' && param != 'L'){
+    cout << "Invalid parameter, only m, u and L can vary." << endl;
+    return -1;
+  }
+
   for (idxParam=0; idxParam < paramList.size(); idxParam++){
-    m=paramList[idxParam];
-  // Rodo nRun rodadas
+    switch (param){
+      case 'm':
+        m=paramList[idxParam];
+        break;
+      case 'u':
+        u=paramList[idxParam];
+        break;
+      case 'L':
+        L=paramList[idxParam];
+        break;
+    }
+
+  // Run nRun rounds
+    clock_t tStart = clock();
     for (int run=0; run < nRun; run++){
       patch* grid;
       grid = new (nothrow) patch[L*L];
-      if (grid == nullptr)
+      if (grid == nullptr){
         cout << "Erro na alocacao de grid" << endl;
+        return -1;
+      }
       for (i=0;i<k;i++)
         for (j=0;j<n;j++)
           K[i*n+j] = gauss(rand64);
 
-      //clock_t tStart = clock();
       for (int t=0;t<T;t++){
         iterate(grid);
         if (t % tic == 0)
           result[(T/tic)*idxParam+(t/tic)] += countSpecie(grid);
       }
-      //cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
       delete[] grid;
     }
-    cout << "Finish m=" << m << endl;
+    cout << "Finish " << param << " = " << paramList[idxParam] << ". Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
   }
 
   for (int t=0;t<T/tic;t++){
@@ -252,9 +272,11 @@ void Run_varParam(char param, std::vector<float> paramList){
     arquivo << endl;
   }
   arquivo.close();
+  return 0;
 }
 
 int main(){
-  Run_varParam('a', {0.01,0.1});
+  //Run_standart();
+  Run_varParam('u', {0.01,0.1});
   return 0;
 }
