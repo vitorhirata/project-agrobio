@@ -7,13 +7,13 @@ This is a project I am doing at my Master in Complex System at Universidade de S
 This project will have two different parts, one social and one biological (the file *model-bio.cpp*).
 
 ## Tests
-This images presents tests for the model.
-- test1 - Test with k=1000 species, n=3 resources, L=500, t=1E6, nRun=2, m=0.0, u=0.1
-- test2 - Test with k=500 species, n=3 resources, L=500, t=1E5, nRun=2, m=0.1, u=0.1
-- test3 - Test with k=100 species, n=3 resources, L=50, t=1E6, nRun=10, m=0.0, u=0.1
-- test4 - Test with k=100 species, n=3 resources, L=50, t=1E6, nRun=10, m=0.01, u=0.1
+This images presents tests for the model. The data is present in the file with the same name, presenting also the parameters used and additional information.
 
 ## Future Steps
+- Make possible varying all parameters.
 - Make possible to use uniform resource along the patch.
+- Make a plot file in python or julia.
+- Fix and comment the tests part
 - Add a global class 'ambient'.
-- Optimeze 'haveNeighbor' and 'fitness' function.
+- Optimize 'fitness' function.
+-

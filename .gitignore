@@ -2,9 +2,4 @@ a.out
 gmon.out
 analysis.txt
 modelo-bio.py
-run1.txt
-run2.txt
-run3.txt
-run4.txt
-specieXtempo.txt
-teste.cpp
+test.cpp
