@@ -1,6 +1,2 @@
-.gitignore
-a.out
-gmon.out
-analysis.txt
-modelo-bio.py
-test.cpp
+*.out
+*.txt
