@@ -16,4 +16,3 @@ This images presents tests for the model. The data is present in the file with t
 - Fix and comment the tests part
 - Add a global class 'ambient'.
 - Optimize 'fitness' function.
--
