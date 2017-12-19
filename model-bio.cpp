@@ -8,6 +8,7 @@
 #include <vector>
 using namespace std;
 
+/* Model Parameters */
 int L=50; // 50  size of the lattice
 float u = 0.1; // death probability
 float m = 0.0; // mutation probability
@@ -20,6 +21,7 @@ const int nRun = 2;  // number of runs to average
 class patch;
 double K[k*n]; // vector containing the half saturation constants
 
+/* Imported functions */
 static std::random_device rd;
 static std::mt19937_64 rand64(rd());
 static std::uniform_int_distribution<long> uniIntkb(0,nK-1);
@@ -28,6 +30,13 @@ static std::uniform_int_distribution<long> uniIntne(0,4 - 1);
 static std::uniform_real_distribution<double> uniFLOAT(0.0,1.0);
 static std::normal_distribution<double> gauss(1.0,0.1);
 
+/* Builted functions */
+class patch;
+bool haveNeighbor(patch grid[], int x, int y, int* x_N, int* y_N);
+void iterate(patch grid[]);
+int countSpecie(patch grid[]);
+int Run_standart(void);
+int Run_varParam(char param, std::vector<float> paramList);
 
 // Each patch equivales to one produceble site, and contain up to one plantation an the resources present in the soil.
 class patch{
@@ -78,12 +87,6 @@ void patch::mutate(void){
 }
 
 
-
-bool haveNeighbor(patch grid[], int x, int y, int* x_N, int* y_N);
-void iterate(patch grid[]);
-int countSpecie(patch grid[]);
-int Run_standart(void);
-int Run_varParam(char param, std::vector<float> paramList);
 
 // Receives the grid and iterate one time, passing over all the sites of the grid.
 void iterate(patch grid[]){
@@ -217,7 +220,6 @@ int Run_standart(void){
 }
 
 // Run the model for some parameter varying, saving a txt with the evolution of the number of species for each parameter value.
-// at the moment working only for m variation
 int Run_varParam(char param, std::vector<float> paramList){
   std::vector<int> result((T/tic)*paramList.size(),0);
   fstream arquivo;
