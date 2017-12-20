@@ -9,12 +9,12 @@
 using namespace std;
 
 /* Model Parameters */
-const int L=50; // 50  size of the lattice
-const float u = 0.1; // death probability
-const float m = 0.0; // mutation probability
+int L=50; // 50  size of the lattice
+float u = 0.1; // death probability
+float m = 0.0; // mutation probability
 const int n = 3;// number of resources
-const int k = 100; // number of species
 const int nK = 7; // number of bytes to represent species
+const int k = 100; // number of species
 const int T = 100000; // maximum time
 const int tic = 1000; // tic interval in time
 const int nRun = 10;  // number of runs to average
@@ -23,7 +23,7 @@ double K[k*n]; // vector containing the half saturation constants
 /* Imported functions */
 static std::random_device rd;
 static std::mt19937_64 rand64(rd());
-static std::uniform_int_distribution<long> uniIntkb(0,nK-1);
+static std::uniform_int_distribution<long> uniIntnK(0,nK-1);
 static std::uniform_int_distribution<long> uniIntk(1,k);
 static std::uniform_int_distribution<long> uniIntne(0,4 - 1);
 static std::uniform_real_distribution<double> uniFLOAT(0.0,1.0);
@@ -41,14 +41,13 @@ class patch{
 private:
   std::vector<float> resource; // each number is the amount of the i'th resource
   double calculateFitness();
-  void mutate(void);
 public:
   bool filed;
   boost::dynamic_bitset<> specie; // binary array
   double fitness;
-  void kill(void);
-  void fill(boost::dynamic_bitset<> newSpecie);
   void initialize(std::vector<float> res, boost::dynamic_bitset<> sp);
+  void kill(void);
+  void fill(boost::dynamic_bitset<> newSpecie, bool withMutation);
 };
 
 // Constructor, initialize resouce with n-sized vector and uniform distribution [0,1], and specie as an int [0,k], convert to an array of binary (size nK bytes).
@@ -70,12 +69,6 @@ double patch::calculateFitness(void){
   return min;
 }
 
-// Cause a mutation, selecting randomly one 'gene' and changing it
-void patch::mutate(void){
-  int temp = uniIntkb(rand64);
-  specie[temp] = !specie[temp];
-}
-
 // Uses XOR to make specie an empty array of binaries. No output.
 void patch::kill(void){
   specie ^= specie;
@@ -83,12 +76,14 @@ void patch::kill(void){
   fitness = 0.0;
 }
 
-// Fill the patch with the given specie
-void patch::fill(boost::dynamic_bitset<> newSpecie){
+// Fill the patch with the given specie, if withMutation cause a mutation
+void patch::fill(boost::dynamic_bitset<> newSpecie, bool withMutation){
+  if (withMutation){
+    int temp = uniIntnK(rand64);
+    newSpecie[temp] = !newSpecie[temp];
+  }
   specie = newSpecie;
-  filed = true;
-  if(uniFLOAT(rand64) < m)
-    mutate();
+  filed = specie.any();
   fitness = calculateFitness();
 }
 
@@ -139,8 +134,12 @@ void ambient::iterate(void){
         if(uniFLOAT(rand64) < u) // death probability
           grid[x*L+y].kill();
         else
-          if(haveNeighbor(x, y, &x_Neigh,&y_Neigh) && uniFLOAT(rand64) < grid[x*L+y].fitness)
-            grid[x_Neigh*L+y_Neigh].fill(grid[x*L+y].specie);
+          if(haveNeighbor(x, y, &x_Neigh,&y_Neigh) && uniFLOAT(rand64) < grid[x*L+y].fitness){
+            if (uniFLOAT(rand64) < m)
+              grid[x_Neigh*L+y_Neigh].fill(grid[x*L+y].specie, true);
+            else
+              grid[x_Neigh*L+y_Neigh].fill(grid[x*L+y].specie, false);
+          }
       }
     }
 }
@@ -216,9 +215,9 @@ int ambient::countSpecie(void){
 // Run the standart model, saving a txt with the evolution of the number of species.
 int Run_standart(void){
   std::vector<int> result(T/tic,0);
-  int i, j;
   fstream arquivo;
   arquivo.open("standarts.txt",ios::out);
+  int i, j;
 
   // Rodo nRun rodadas
   for (int run=0; run < nRun; run++){
@@ -242,18 +241,18 @@ int Run_standart(void){
   return 0;
 }
 
-/*
+
 // Run the model for some parameter varying, saving a txt with the evolution of the number of species for each parameter value.
 int Run_varParam(char param, std::vector<float> paramList){
-  std::vector<int> result((T/tic)*paramList.size(),0);
-  fstream arquivo;
-  arquivo.open(std::string ("varParam_")+param+".txt",ios::out);
-  int i, j, idxParam;
-
   if (param != 'm' && param != 'u' && param != 'L'){
     cout << "Invalid parameter, only m, u and L can vary." << endl;
     return -1;
   }
+
+  std::vector<int> result((T/tic)*paramList.size(),0);
+  fstream arquivo;
+  arquivo.open(std::string ("varParam_")+param+".txt",ios::out);
+  int i, j, idxParam;
 
   for (idxParam=0; idxParam < paramList.size(); idxParam++){
     switch (param){
@@ -271,22 +270,16 @@ int Run_varParam(char param, std::vector<float> paramList){
   // Run nRun rounds
     clock_t tStart = clock();
     for (int run=0; run < nRun; run++){
-      patch* grid;
-      grid = new (nothrow) patch[L*L];
-      if (grid == nullptr){
-        cout << "Erro na alocacao de grid" << endl;
-        return -1;
-      }
+      ambient model;
       for (i=0;i<k;i++)
         for (j=0;j<n;j++)
           K[i*n+j] = gauss(rand64);
 
       for (int t=0;t<T;t++){
-        iterate(grid);
+        model.iterate();
         if (t % tic == 0)
-          result[(T/tic)*idxParam+(t/tic)] += countSpecie(grid);
+          result[(T/tic)*idxParam+t/tic] += model.countSpecie();
       }
-      delete[] grid;
     }
     cout << "Finish " << param << " = " << paramList[idxParam] << ". Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
   }
@@ -299,10 +292,10 @@ int Run_varParam(char param, std::vector<float> paramList){
   }
   arquivo.close();
   return 0;
-}*/
+}
 
 int main(){
-  Run_standart();
-  //Run_varParam('u', {0.01,0.1});
+  //Run_standart();
+  Run_varParam('u', {0.1,0.11});
   return 0;
 }
