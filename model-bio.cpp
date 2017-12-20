@@ -3,9 +3,9 @@
 #include <cmath>  // math operation
 #include <fstream> // handling files
 #include <algorithm> // made up algorithms
+#include <vector>
 #include <ctime> // count time of run
 #include <boost/dynamic_bitset.hpp> // binary species
-#include <vector>
 using namespace std;
 
 /* Model Parameters */
@@ -48,23 +48,15 @@ public:
   double fitness;
   void kill(void);
   void fill(boost::dynamic_bitset<> newSpecie);
-  patch(void);
-  ~patch();
+  void initialize(std::vector<float> res, boost::dynamic_bitset<> sp);
 };
 
 // Constructor, initialize resouce with n-sized vector and uniform distribution [0,1], and specie as an int [0,k], convert to an array of binary (size nK bytes).
-patch::patch(void){
-  for(int i=0;i<n;i++)
-    resource.push_back(uniFLOAT(rand64));
-  specie = boost::dynamic_bitset<>(nK,uniIntk(rand64));
+void patch::initialize(std::vector<float> res, boost::dynamic_bitset<> sp){
+  resource = res;
+  specie = sp;
   filed = true;
   fitness = calculateFitness();
-}
-
-// Destructor, free the memory of resource and specie.
-patch::~patch(void){
-  std::vector<float>().swap(resource);
-  specie = boost::dynamic_bitset<>(0);
 }
 
 // Return the fitness of the population living in the site. Computed using the Monod equation.s
@@ -91,6 +83,7 @@ void patch::kill(void){
   fitness = 0.0;
 }
 
+// Fill the patch with the given specie
 void patch::fill(boost::dynamic_bitset<> newSpecie){
   specie = newSpecie;
   filed = true;
@@ -103,14 +96,28 @@ void patch::fill(boost::dynamic_bitset<> newSpecie){
 
 class ambient{
 private:
-  patch grid[L*L];
+  patch* grid;
   bool haveNeighbor(int x, int y, int* x_N, int* y_N);
 public:
   void iterate(void);
   int countSpecie(void);
-  //ambient(void);
-  //~ambient();
+  ambient(void);
 };
+
+ambient::ambient(){
+  grid = new (nothrow) patch[L*L];
+  if (grid == nullptr)
+    cout << "Erro na alocacao de grid" << endl;
+
+  std::vector<float> res(n);
+  for (int i = 0; i < L; i++){
+    for (int j = 0; j < L; j++){
+      for(int k=0;k<n;k++)
+        res[k] = uniFLOAT(rand64);
+      grid[i*L+j].initialize(res, boost::dynamic_bitset<>(nK,uniIntk(rand64)));
+    }
+  }
+}
 
 // Receives the grid and iterate one time, passing over all the sites of the grid.
 void ambient::iterate(void){
