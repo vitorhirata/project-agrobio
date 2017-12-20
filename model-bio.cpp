@@ -9,16 +9,15 @@
 using namespace std;
 
 /* Model Parameters */
-int L=50; // 50  size of the lattice
-float u = 0.1; // death probability
-float m = 0.0; // mutation probability
+const int L=50; // 50  size of the lattice
+const float u = 0.1; // death probability
+const float m = 0.0; // mutation probability
 const int n = 3;// number of resources
 const int k = 100; // number of species
 const int nK = 7; // number of bytes to represent species
 const int T = 100000; // maximum time
 const int tic = 1000; // tic interval in time
-const int nRun = 2;  // number of runs to average
-class patch;
+const int nRun = 10;  // number of runs to average
 double K[k*n]; // vector containing the half saturation constants
 
 /* Imported functions */
@@ -32,30 +31,34 @@ static std::normal_distribution<double> gauss(1.0,0.1);
 
 /* Builted functions */
 class patch;
-bool haveNeighbor(patch grid[], int x, int y, int* x_N, int* y_N);
-void iterate(patch grid[]);
-int countSpecie(patch grid[]);
+class ambient;
+
 int Run_standart(void);
 int Run_varParam(char param, std::vector<float> paramList);
 
 // Each patch equivales to one produceble site, and contain up to one plantation an the resources present in the soil.
 class patch{
+private:
   std::vector<float> resource; // each number is the amount of the i'th resource
-  public:
-    boost::dynamic_bitset<> specie; // binary array
-    void kill(void);
-    double fitness(void);
-    void mutate(void);
-    patch(void);
-    ~patch();
+  double calculateFitness();
+  void mutate(void);
+public:
+  bool filed;
+  boost::dynamic_bitset<> specie; // binary array
+  double fitness;
+  void kill(void);
+  void fill(boost::dynamic_bitset<> newSpecie);
+  patch(void);
+  ~patch();
 };
 
 // Constructor, initialize resouce with n-sized vector and uniform distribution [0,1], and specie as an int [0,k], convert to an array of binary (size nK bytes).
 patch::patch(void){
-
   for(int i=0;i<n;i++)
     resource.push_back(uniFLOAT(rand64));
   specie = boost::dynamic_bitset<>(nK,uniIntk(rand64));
+  filed = true;
+  fitness = calculateFitness();
 }
 
 // Destructor, free the memory of resource and specie.
@@ -64,13 +67,8 @@ patch::~patch(void){
   specie = boost::dynamic_bitset<>(0);
 }
 
-// Uses XOR to make specie an empty array of binaries. No output.
-void patch::kill(void){
-  specie ^= specie;
-}
-
 // Return the fitness of the population living in the site. Computed using the Monod equation.s
-double patch::fitness(void){
+double patch::calculateFitness(void){
   double min = resource[0]/(K[(specie.to_ulong()-1)*n]+resource[0]);
   for (int i=1;i<n;i++){
     double temp = resource[i]/(K[(specie.to_ulong()-1)*n+i]+resource[i]);
@@ -78,7 +76,7 @@ double patch::fitness(void){
       min = temp;
   }
   return min;
-} //pode ser melhorado, o fitness de uma especie em um grid vai ser sempre igual (na real isso vale so se o recurso for constante)
+}
 
 // Cause a mutation, selecting randomly one 'gene' and changing it
 void patch::mutate(void){
@@ -86,10 +84,36 @@ void patch::mutate(void){
   specie[temp] = !specie[temp];
 }
 
+// Uses XOR to make specie an empty array of binaries. No output.
+void patch::kill(void){
+  specie ^= specie;
+  filed = false;
+  fitness = 0.0;
+}
 
+void patch::fill(boost::dynamic_bitset<> newSpecie){
+  specie = newSpecie;
+  filed = true;
+  if(uniFLOAT(rand64) < m)
+    mutate();
+  fitness = calculateFitness();
+}
+
+
+
+class ambient{
+private:
+  patch grid[L*L];
+  bool haveNeighbor(int x, int y, int* x_N, int* y_N);
+public:
+  void iterate(void);
+  int countSpecie(void);
+  //ambient(void);
+  //~ambient();
+};
 
 // Receives the grid and iterate one time, passing over all the sites of the grid.
-void iterate(patch grid[]){
+void ambient::iterate(void){
   int x, y, x_Neigh, y_Neigh;
   std::vector<int> x_list(L), y_list(L);
 
@@ -104,21 +128,18 @@ void iterate(patch grid[]){
     for(int j=0;j<L;j++){
       x = x_list[i];
       y = y_list[i];
-      if(grid[x*L+y].specie.any()){
+      if(grid[x*L+y].filed){
         if(uniFLOAT(rand64) < u) // death probability
           grid[x*L+y].kill();
         else
-          if(haveNeighbor(grid, x, y, &x_Neigh,&y_Neigh) && uniFLOAT(rand64) < grid[x*L+y].fitness()){
-            grid[x_Neigh*L+y_Neigh].specie = grid[x*L+y].specie;
-            if(uniFLOAT(rand64) < m)
-              grid[x_Neigh*L+y_Neigh].mutate();
-          }
+          if(haveNeighbor(x, y, &x_Neigh,&y_Neigh) && uniFLOAT(rand64) < grid[x*L+y].fitness)
+            grid[x_Neigh*L+y_Neigh].fill(grid[x*L+y].specie);
       }
     }
 }
 
 // Receives the grid, one site (x,y), and a pair of pointers (*x_N, *y_N) where the result will be put. Return false if there aren't empty neighboor and true if there is at least one empy neighboor. Sampling one random site if there are more than one.
-bool haveNeighbor(patch grid[], int x, int y, int* x_N, int* y_N){
+bool ambient::haveNeighbor(int x, int y, int* x_N, int* y_N){
   int xP = x+1, xM = x-1, yP = y+1, yM = y-1;
   std::vector<int> PossibleX(4), PossibleY(4);
   int nPossible = 0;
@@ -135,19 +156,19 @@ bool haveNeighbor(patch grid[], int x, int y, int* x_N, int* y_N){
 
   PossibleX[nPossible] = xP;
   PossibleY[nPossible] = y;
-  nPossible += !grid[xP*L+y].specie.any();
+  nPossible += !grid[xP*L+y].filed;
 
   PossibleX[nPossible] = xM;
   PossibleY[nPossible] = y;
-  nPossible += !grid[xM*L+y].specie.any();
+  nPossible += !grid[xM*L+y].filed;
 
   PossibleX[nPossible] = x;
   PossibleY[nPossible] = yP;
-  nPossible += !grid[x*L+yP].specie.any();
+  nPossible += !grid[x*L+yP].filed;
 
   PossibleX[nPossible] = x;
   PossibleY[nPossible] = yM;
-  nPossible += !grid[x*L+yM].specie.any();
+  nPossible += !grid[x*L+yM].filed;
 
   if (nPossible==0)
     return false;
@@ -166,7 +187,7 @@ bool haveNeighbor(patch grid[], int x, int y, int* x_N, int* y_N){
 }
 
 // Cont the number of observed species at the actual time, on the grid.
-int countSpecie(patch grid[]){
+int ambient::countSpecie(void){
   int nDifferentS=0;
   std::vector<bool> alreadyExist(k+1,false);
 
@@ -184,6 +205,7 @@ int countSpecie(patch grid[]){
     return nDifferentS;
 }
 
+
 // Run the standart model, saving a txt with the evolution of the number of species.
 int Run_standart(void){
   std::vector<int> result(T/tic,0);
@@ -193,24 +215,18 @@ int Run_standart(void){
 
   // Rodo nRun rodadas
   for (int run=0; run < nRun; run++){
-    patch* grid;
-    grid = new (nothrow) patch[L*L];
-    if (grid == nullptr){
-      cout << "Erro na alocacao de grid" << endl;
-      return -1;
-    }
+    ambient model;
     for (i=0;i<k;i++)
       for (j=0;j<n;j++)
         K[i*n+j] = gauss(rand64);
 
     clock_t tStart = clock();
     for (int t=0;t<T;t++){
-      iterate(grid);
+      model.iterate();
       if (t % tic == 0)
-        result[t/tic] += countSpecie(grid);
+        result[t/tic] += model.countSpecie();
     }
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
-    delete[] grid;
   }
 
   for (int t=0;t<T/tic;t++)
@@ -219,6 +235,7 @@ int Run_standart(void){
   return 0;
 }
 
+/*
 // Run the model for some parameter varying, saving a txt with the evolution of the number of species for each parameter value.
 int Run_varParam(char param, std::vector<float> paramList){
   std::vector<int> result((T/tic)*paramList.size(),0);
@@ -275,10 +292,10 @@ int Run_varParam(char param, std::vector<float> paramList){
   }
   arquivo.close();
   return 0;
-}
+}*/
 
 int main(){
-  //Run_standart();
-  Run_varParam('u', {0.01,0.1});
+  Run_standart();
+  //Run_varParam('u', {0.01,0.1});
   return 0;
 }
