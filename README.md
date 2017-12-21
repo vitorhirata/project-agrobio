@@ -10,6 +10,4 @@ There is a file with tests of the model simulation, with the data generated and 
 - Make possible to use uniform resource along the patch.
 - Make a plot file in python or julia.
 - Fix and comment the tests part.
-- Add a global class 'ambient'.
-- Optimize 'fitness' function.
 - Start social model.
