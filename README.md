@@ -9,4 +9,6 @@ There is a file with tests of the model simulation, with the data generated and 
 ## Future Steps
 - Make a plot file in python or julia.
 - Fix and comment the tests part.
+- Improve model description.
+- Put codes in separated files
 - Start social model.
