@@ -9,7 +9,7 @@
 using namespace std;
 
 /* Model Parameters */
-int L=50; // 50  size of the lattice
+int L=10; // 50  size of the lattice
 float u = 0.1; // death probability
 float m = 0.0; // mutation probability
 const int n = 3;// number of resources
@@ -17,7 +17,7 @@ const int nK = 7; // number of bytes to represent species
 const int k = 100; // number of species
 const int T = 100000; // maximum time
 const int tic = 1000; // tic interval in time
-const int nRun = 10;  // number of runs to average
+const int nRun = 1;  // number of runs to average
 double K[k*n]; // vector containing the half saturation constants
 
 /* Imported functions */
@@ -56,6 +56,7 @@ void patch::initialize(std::vector<float> res, boost::dynamic_bitset<> sp){
   specie = sp;
   filed = true;
   fitness = calculateFitness();
+  cout << "Resource = (" << res[0] << ", " << res[1] << ", " << res[2] << ")" << endl;
 }
 
 // Return the fitness of the population living in the site. Computed using the Monod equation.s
@@ -96,20 +97,56 @@ private:
 public:
   void iterate(void);
   int countSpecie(void);
-  ambient(void);
+  ambient(int nResource);
 };
 
-ambient::ambient(){
+ambient::ambient(int nResource){
   grid = new (nothrow) patch[L*L];
-  if (grid == nullptr)
-    cout << "Erro na alocacao de grid" << endl;
+  if (grid == nullptr){
+    cout << "Error: grid alocation not successful." << endl;
+    exit(-1);
+  }
+  if (L % nResource != 0 && L*L % nResource != 0){
+    cout << "Error: only accepted number of resources that are divisible by L or L*L." << endl;
+    exit(-1);
+  }
 
-  std::vector<float> res(n);
-  for (int i = 0; i < L; i++){
-    for (int j = 0; j < L; j++){
-      for(int k=0;k<n;k++)
-        res[k] = uniFLOAT(rand64);
-      grid[i*L+j].initialize(res, boost::dynamic_bitset<>(nK,uniIntk(rand64)));
+  if (nResource == L*L){
+    std::vector<float> res(n);
+    for (int i = 0; i < L; i++){
+      for (int j = 0; j < L; j++){
+        for(int k=0;k<n;k++)
+          res[k] = uniFLOAT(rand64);
+        grid[i*L+j].initialize(res, boost::dynamic_bitset<>(nK,uniIntk(rand64)));
+      }
+    }
+  }
+  else if(L % nResource == 0){
+    vector<vector<float> > res(nResource, vector<float>(n));
+    for (int i=0; i < nResource; i++)
+      for (int j=0; j < n; j++)
+        res[i][j] = uniFLOAT(rand64);
+
+    int idx;
+    for (int i = 0; i < L; i++){
+      idx = i / (L/nResource);
+      for (int j = 0; j < L; j++)
+        grid[i*L+j].initialize(res[idx], boost::dynamic_bitset<>(nK,uniIntk(rand64)));
+    }
+  }
+  else if (L*L % nResource == 0){
+    vector<vector<float> > res(nResource, vector<float>(n));
+    for (int i=0; i < nResource; i++)
+      for (int j=0; j < n; j++)
+        res[i][j] = uniFLOAT(rand64);
+
+    int idxX, idxY;
+    for (int i = 0; i < L; i++){
+      idxX = i / (L/(nResource/2));
+      for (int j = 0; j < L; j++){
+        idxY = j / (L/(nResource/2));
+        grid[i*L+j].initialize(res[idxX*(nResource/2)+idxY], boost::dynamic_bitset<>(nK,uniIntk(rand64)));
+      }
     }
   }
 }
@@ -216,12 +253,12 @@ int ambient::countSpecie(void){
 int Run_standart(void){
   std::vector<int> result(T/tic,0);
   fstream arquivo;
-  arquivo.open("standarts.txt",ios::out);
+  arquivo.open("standart.txt",ios::out);
   int i, j;
 
   // Rodo nRun rodadas
   for (int run=0; run < nRun; run++){
-    ambient model;
+    ambient model(4);
     for (i=0;i<k;i++)
       for (j=0;j<n;j++)
         K[i*n+j] = gauss(rand64);
@@ -270,7 +307,7 @@ int Run_varParam(char param, std::vector<float> paramList){
   // Run nRun rounds
     clock_t tStart = clock();
     for (int run=0; run < nRun; run++){
-      ambient model;
+      ambient model(4);
       for (i=0;i<k;i++)
         for (j=0;j<n;j++)
           K[i*n+j] = gauss(rand64);
@@ -295,7 +332,7 @@ int Run_varParam(char param, std::vector<float> paramList){
 }
 
 int main(){
-  //Run_standart();
-  Run_varParam('u', {0.1,0.11});
+  Run_standart();
+  //Run_varParam('u', {0.1,0.11});
   return 0;
 }
