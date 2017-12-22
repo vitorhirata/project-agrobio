@@ -9,7 +9,7 @@
 using namespace std;
 
 /* Model Parameters */
-int L=10; // 50  size of the lattice
+int L=50; // 50  size of the lattice
 float u = 0.1; // death probability
 float m = 0.0; // mutation probability
 const int n = 3;// number of resources
@@ -17,7 +17,7 @@ const int nK = 7; // number of bytes to represent species
 const int k = 100; // number of species
 const int T = 100000; // maximum time
 const int tic = 1000; // tic interval in time
-const int nRun = 1;  // number of runs to average
+const int nRun = 50;  // number of runs to average
 double K[k*n]; // vector containing the half saturation constants
 
 /* Imported functions */
@@ -56,7 +56,6 @@ void patch::initialize(std::vector<float> res, boost::dynamic_bitset<> sp){
   specie = sp;
   filed = true;
   fitness = calculateFitness();
-  cout << "Resource = (" << res[0] << ", " << res[1] << ", " << res[2] << ")" << endl;
 }
 
 // Return the fitness of the population living in the site. Computed using the Monod equation.s
@@ -253,7 +252,7 @@ int ambient::countSpecie(void){
 int Run_standart(void){
   std::vector<int> result(T/tic,0);
   fstream arquivo;
-  arquivo.open("standart.txt",ios::out);
+  arquivo.open("standart.csv",ios::out);
   int i, j;
 
   // Rodo nRun rodadas
@@ -272,6 +271,7 @@ int Run_standart(void){
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
   }
 
+  arquivo << "Time; nSpecie" << endl;
   for (int t=0;t<T/tic;t++)
     arquivo << t*tic << "; " << result[t]/nRun << endl;
   arquivo.close();
@@ -288,7 +288,7 @@ int Run_varParam(char param, std::vector<float> paramList){
 
   std::vector<int> result((T/tic)*paramList.size(),0);
   fstream arquivo;
-  arquivo.open(std::string ("varParam_")+param+".txt",ios::out);
+  arquivo.open(std::string ("varParam_")+param+".csv",ios::out);
   int i, j, idxParam;
 
   for (idxParam=0; idxParam < paramList.size(); idxParam++){
@@ -321,18 +321,17 @@ int Run_varParam(char param, std::vector<float> paramList){
     cout << "Finish " << param << " = " << paramList[idxParam] << ". Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
   }
 
-  for (int t=0;t<T/tic;t++){
-    arquivo << t*tic;
-    for (idxParam=0; idxParam < paramList.size(); idxParam++)
-        arquivo << "; " << result[(T/tic)*idxParam+t]/nRun;
-    arquivo << endl;
-  }
+  arquivo << "time; nSpecie; param" << endl;
+  for (idxParam=0; idxParam < paramList.size(); idxParam++)
+    for (int t = 0; t < T/tic; t++)
+      arquivo << t*tic << "; " << result[(T/tic)*idxParam+t]/nRun << "; " << paramList[idxParam] << endl;
+
   arquivo.close();
   return 0;
 }
 
 int main(){
-  Run_standart();
-  //Run_varParam('u', {0.1,0.11});
+  //Run_standart();
+  Run_varParam('u', {0.1,0.11});
   return 0;
 }
