@@ -3,7 +3,9 @@ using DataFrames
 
 input_file = ARGS[1]
 mode = ARGS[2]
+
 param = string(input_file[end-4])
+input_file = "test/" * input_file
 output_file = input_file[1:end-4] * ".png"
 
 df = readtable(input_file, separator = ';')
