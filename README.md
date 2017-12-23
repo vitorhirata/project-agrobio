@@ -6,8 +6,9 @@ This is a project I am doing at my Master in Complex System at Universidade de S
 ## Tests
 There is a file with tests of the model simulation, with the data generated and images of that. In the data file it is also presented the parameters used and additional information.
 
-## Future Steps
-- Put codes in separated files
+## TODO
+- Put codes in separated files.
+- Improve parameters place.
 - Fix and comment the tests part.
 - Improve model description.
 - Start social model.
