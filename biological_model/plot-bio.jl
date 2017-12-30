@@ -8,7 +8,7 @@ param = string(input_file[end-4])
 input_file = "test/" * input_file
 output_file = input_file[1:end-4] * ".png"
 
-df = readtable(input_file, separator = ';')
+df = readtable(input_file, separator = ';', skipstart=3)
 
 if mode == "simple"
     p = plot(df, x=:time, y=:nSpecie, Geom.line)

@@ -27,6 +27,10 @@ int Run_standart(void){
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
   }
 
+  arquivo << "### PARAMETERS VALUE ###" << endl;
+  arquivo << "### LATTICESIZE = " << LATTICESIZE << ", NSPECIE = " << NSPECIE << ", NRESOURCE = " << NRESOURCE;
+  arquivo << ", DEATHPROB = " << DEATHPROB << ", MUTATIONPROB = " << MUTATIONPROB << ", NRESOURCEDIST = " << NRESOURCEDIST;
+  arquivo << ", MAXTIME = " << MAXTIME << ", TIMEINTERVAL = " << TIMEINTERVAL << ", NRUN = " << NRUN << " ###" << endl << endl;
   arquivo << "time; nSpecie" << endl;
   for (int t = 0; t < MAXTIME/TIMEINTERVAL; t++)
     arquivo << t*TIMEINTERVAL << "; " << result[t]/NRUN << endl;
@@ -77,6 +81,10 @@ int Run_varParam(char param, std::vector<float> paramList){
     cout << "Finish " << param << " = " << paramList[idxParam] << ". Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
   }
 
+  arquivo << "### PARAMETERS VALUE ###" << endl;
+  arquivo << "### LATTICESIZE = " << LATTICESIZE << "NSPECIE = " << NSPECIE << "NRESOURCE = " << NRESOURCE;
+  arquivo << "DEATHPROB = " << DEATHPROB << "MUTATIONPROB = " << MUTATIONPROB << "NRESOURCEDIST = " << NRESOURCEDIST;
+  arquivo << "MAXTIME = " << MAXTIME << "TIMEINTERVAL = " << TIMEINTERVAL << "NRUN = " << NRUN << " ###" << endl << endl;
   arquivo << "time; nSpecie; param" << endl;
   for (idxParam=0; idxParam < paramList.size(); idxParam++)
     for (int t = 0; t < MAXTIME/TIMEINTERVAL; t++)
@@ -86,8 +94,51 @@ int Run_varParam(char param, std::vector<float> paramList){
   return 0;
 }
 
-int main(){
-  //Run_standart();
-  Run_varParam('u', {0.1,0.11});
+int main(int argc, char *argv[]){
+  char param;
+  std::vector<float> param_value;
+  int pos = 3;
+  float temp;
+
+  if (argc == 1){
+    cout << "ERROR: Number of input argument invalid. Enter the kind of model you want to run on executing this program." << endl;
+    exit(-1);
+  }
+  switch (argv[1][0]) {
+    case 's':
+      if (argc > 2)
+        cout << "WARNING: Number of input argument is invalid." << endl;
+      cout << "Running standart model" << endl;
+      Run_standart();
+      break;
+
+    case 'v':
+      if (argc < 4) {
+        cout << "ERROR: Number of input argument invalid. 'v' mode must have the parameter that will vary and the values it will assume" << endl;
+        exit(-1);
+      }
+      if (argv[2][0] == 'u'|| argv[2][0] == 'm'|| argv[2][0] == 'L')
+        param = argv[2][0];
+      else{
+        cout << "ERROR: Invalid parameter variation." << endl;
+        exit(-1);
+      }
+
+      while (pos < argc) {
+        temp = atof(argv[pos]);
+        param_value.push_back(temp);
+        pos++;
+      }
+
+      cout << "Running variation model, with variable " << param << ". " << endl;
+      Run_varParam(param, param_value);
+      break;
+
+    default:
+      cout << "ERROR: Invalid model type." << endl;
+      exit(-1);
+  }
+
+
   return 0;
 }
