@@ -20,13 +20,14 @@ ambient::ambient(){
     exit(-1);
   }
 
+  boost::dynamic_bitset<> sp(NSPECIEBYTES,uniIntSP(rand64));
   if (NRESOURCEDIST == LATTICESIZE*LATTICESIZE){
     std::vector<float> res(NRESOURCE);
     for (int i = 0; i < LATTICESIZE; i++){
       for (int j = 0; j < LATTICESIZE; j++){
         for(int k=0; k < NRESOURCE; k++)
           res[k] = uniFLOAT(rand64);
-        grid[i*LATTICESIZE+j].initialize(res, boost::dynamic_bitset<>(NSPECIEBYTES,uniIntSP(rand64)));
+        grid[i*LATTICESIZE+j].initialize(res, sp);
       }
     }
   }
@@ -40,7 +41,7 @@ ambient::ambient(){
     for (int i = 0; i < LATTICESIZE; i++){
       idx = i / (LATTICESIZE/NRESOURCEDIST);
       for (int j = 0; j < LATTICESIZE; j++)
-        grid[i*LATTICESIZE+j].initialize(res[idx], boost::dynamic_bitset<>(NSPECIEBYTES,uniIntSP(rand64)));
+        grid[i*LATTICESIZE+j].initialize(res[idx], sp);
     }
   }
   else if (LATTICESIZE*LATTICESIZE % NRESOURCEDIST == 0){
@@ -54,7 +55,7 @@ ambient::ambient(){
       idxX = i / (LATTICESIZE/(NRESOURCEDIST/2));
       for (int j = 0; j < LATTICESIZE; j++){
         idxY = j / (LATTICESIZE/(NRESOURCEDIST/2));
-        grid[i*LATTICESIZE+j].initialize(res[idxX*(NRESOURCEDIST/2)+idxY], boost::dynamic_bitset<>(NSPECIEBYTES,uniIntSP(rand64)));
+        grid[i*LATTICESIZE+j].initialize(res[idxX*(NRESOURCEDIST/2)+idxY], sp);
       }
     }
   }
@@ -141,7 +142,7 @@ bool ambient::haveNeighbor(int x, int y, int* x_N, int* y_N){
 // Count the number of observed species at the actual time, on the grid.
 int ambient::countSpecie(void){
   int nDifferentS=0;
-  std::vector<bool> alreadyExist(NSPECIE+1,false);
+  std::vector<bool> alreadyExist(NMAXSPECIE+1,false);
 
   for(int i=0;i<LATTICESIZE;i++)
     for(int j=0;j<LATTICESIZE;j++){
