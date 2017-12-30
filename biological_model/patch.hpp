@@ -22,9 +22,9 @@ void patch::initialize(std::vector<float> res, boost::dynamic_bitset<> sp){
 
 // Return the fitness of the population living in the site. Computed using the Monod equation.s
 double patch::calculateFitness(void){
-  double min = resource[0]/(K[(specie.to_ulong()-1)*n]+resource[0]);
-  for (int i=1;i<n;i++){
-    double temp = resource[i]/(K[(specie.to_ulong()-1)*n+i]+resource[i]);
+  double min = resource[0]/(K[(specie.to_ulong()-1)*NRESOURCE]+resource[0]);
+  for (int i=1; i < NRESOURCE; i++){
+    double temp = resource[i]/(K[(specie.to_ulong()-1)*NRESOURCE+i]+resource[i]);
     if (temp < min)
       min = temp;
   }
@@ -41,7 +41,7 @@ void patch::kill(void){
 // Fill the patch with the given specie, if withMutation cause a mutation
 void patch::fill(boost::dynamic_bitset<> newSpecie, bool withMutation){
   if (withMutation){
-    int temp = uniIntnK(rand64);
+    int temp = uniIntNSPB(rand64);
     newSpecie[temp] = !newSpecie[temp];
   }
   specie = newSpecie;

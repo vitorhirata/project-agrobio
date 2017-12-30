@@ -6,30 +6,30 @@ int Run_varParam(char param, std::vector<float> paramList);
 
 // Run the standart model, saving a txt with the evolution of the number of species.
 int Run_standart(void){
-  std::vector<int> result(T/tic,0);
+  std::vector<int> result(MAXTIME/TIMEINTERVAL,0);
   fstream arquivo;
   arquivo.open("test/standart.csv",ios::out);
   int i, j;
 
-  // Rodo nRun rodadas
-  for (int run=0; run < nRun; run++){
-    ambient model(nResource);
-    for (i=0;i<k;i++)
-      for (j=0;j<n;j++)
-        K[i*n+j] = gauss(rand64);
+  // Rodo NRUN rodadas
+  for (int run=0; run < NRUN; run++){
+    ambient model(NRESOURCEDIST);
+    for (i = 0; i < NSPECIE; i++)
+      for (j = 0; j < NRESOURCE; j++)
+        K[i*NRESOURCE+j] = gauss(rand64);
 
     clock_t tStart = clock();
-    for (int t=0;t<T;t++){
+    for (int t=0; t < MAXTIME; t++){
       model.iterate();
-      if (t % tic == 0)
-        result[t/tic] += model.countSpecie();
+      if (t % TIMEINTERVAL == 0)
+        result[t/TIMEINTERVAL] += model.countSpecie();
     }
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
   }
 
   arquivo << "time; nSpecie" << endl;
-  for (int t=0;t<T/tic;t++)
-    arquivo << t*tic << "; " << result[t]/nRun << endl;
+  for (int t = 0; t < MAXTIME/TIMEINTERVAL; t++)
+    arquivo << t*TIMEINTERVAL << "; " << result[t]/NRUN << endl;
   arquivo.close();
   return 0;
 }
@@ -42,36 +42,36 @@ int Run_varParam(char param, std::vector<float> paramList){
     return -1;
   }
 
-  std::vector<int> result((T/tic)*paramList.size(),0);
+  std::vector<int> result((MAXTIME/TIMEINTERVAL)*paramList.size(),0);
   fstream arquivo;
   arquivo.open(std::string ("test/varParam_")+param+".csv",ios::out);
-  int i, j, idxParam;
+  uint i, j, idxParam;
 
   for (idxParam=0; idxParam < paramList.size(); idxParam++){
     switch (param){
       case 'm':
-        m=paramList[idxParam];
+        MUTATIONPROB=paramList[idxParam];
         break;
       case 'u':
-        u=paramList[idxParam];
+        DEATHPROB=paramList[idxParam];
         break;
       case 'L':
-        L=paramList[idxParam];
+        LATTICESIZE=paramList[idxParam];
         break;
     }
 
-  // Run nRun rounds
+  // Run NRUN rounds
     clock_t tStart = clock();
-    for (int run=0; run < nRun; run++){
-      ambient model(nResource);
-      for (i=0;i<k;i++)
-        for (j=0;j<n;j++)
-          K[i*n+j] = gauss(rand64);
+    for (int run=0; run < NRUN; run++){
+      ambient model(NRESOURCEDIST);
+      for (i = 0; i < NSPECIE; i++)
+        for (j = 0; j < NRESOURCE; j++)
+          K[i*NRESOURCE+j] = gauss(rand64);
 
-      for (int t=0;t<T;t++){
+      for (int t=0; t < MAXTIME; t++){
         model.iterate();
-        if (t % tic == 0)
-          result[(T/tic)*idxParam+t/tic] += model.countSpecie();
+        if (t % TIMEINTERVAL == 0)
+          result[(MAXTIME/TIMEINTERVAL)*idxParam+t/TIMEINTERVAL] += model.countSpecie();
       }
     }
     cout << "Finish " << param << " = " << paramList[idxParam] << ". Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
@@ -79,8 +79,8 @@ int Run_varParam(char param, std::vector<float> paramList){
 
   arquivo << "time; nSpecie; param" << endl;
   for (idxParam=0; idxParam < paramList.size(); idxParam++)
-    for (int t = 0; t < T/tic; t++)
-      arquivo << t*tic << "; " << result[(T/tic)*idxParam+t]/nRun << "; " << paramList[idxParam] << endl;
+    for (int t = 0; t < MAXTIME/TIMEINTERVAL; t++)
+      arquivo << t*TIMEINTERVAL << "; " << result[(MAXTIME/TIMEINTERVAL)*idxParam+t]/NRUN << "; " << paramList[idxParam] << endl;
 
   arquivo.close();
   return 0;

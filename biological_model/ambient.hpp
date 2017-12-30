@@ -9,51 +9,51 @@ public:
 };
 
 ambient::ambient(int nRes){
-  grid = new (nothrow) patch[L*L];
+  grid = new (nothrow) patch[LATTICESIZE*LATTICESIZE];
   if (grid == nullptr){
     cout << "Error: grid alocation not successful." << endl;
     exit(-1);
   }
-  if (L % nRes != 0 && L*L % nRes != 0){
-    cout << "Error: only accepted number of resources that are divisible by L or L*L." << endl;
+  if (LATTICESIZE % nRes != 0 && LATTICESIZE*LATTICESIZE % nRes != 0){
+    cout << "Error: only accepted number of resources that are divisible by LATTICESIZE or LATTICESIZE^2'." << endl;
     exit(-1);
   }
 
-  if (nRes == L*L){
-    std::vector<float> res(n);
-    for (int i = 0; i < L; i++){
-      for (int j = 0; j < L; j++){
-        for(int k=0;k<n;k++)
+  if (nRes == LATTICESIZE*LATTICESIZE){
+    std::vector<float> res(NRESOURCE);
+    for (int i = 0; i < LATTICESIZE; i++){
+      for (int j = 0; j < LATTICESIZE; j++){
+        for(int k=0; k < NRESOURCE; k++)
           res[k] = uniFLOAT(rand64);
-        grid[i*L+j].initialize(res, boost::dynamic_bitset<>(nK,uniIntk(rand64)));
+        grid[i*LATTICESIZE+j].initialize(res, boost::dynamic_bitset<>(NSPECIEBYTES,uniIntSP(rand64)));
       }
     }
   }
-  else if(L % nRes == 0){
-    vector<vector<float> > res(nRes, vector<float>(n));
+  else if(LATTICESIZE % nRes == 0){
+    vector<vector<float> > res(nRes, vector<float>(NRESOURCE));
     for (int i=0; i < nRes; i++)
-      for (int j=0; j < n; j++)
+      for (int j=0; j < NRESOURCE; j++)
         res[i][j] = uniFLOAT(rand64);
 
     int idx;
-    for (int i = 0; i < L; i++){
-      idx = i / (L/nRes);
-      for (int j = 0; j < L; j++)
-        grid[i*L+j].initialize(res[idx], boost::dynamic_bitset<>(nK,uniIntk(rand64)));
+    for (int i = 0; i < LATTICESIZE; i++){
+      idx = i / (LATTICESIZE/nRes);
+      for (int j = 0; j < LATTICESIZE; j++)
+        grid[i*LATTICESIZE+j].initialize(res[idx], boost::dynamic_bitset<>(NSPECIEBYTES,uniIntSP(rand64)));
     }
   }
-  else if (L*L % nRes == 0){
-    vector<vector<float> > res(nRes, vector<float>(n));
+  else if (LATTICESIZE*LATTICESIZE % nRes == 0){
+    vector<vector<float> > res(nRes, vector<float>(NRESOURCE));
     for (int i=0; i < nRes; i++)
-      for (int j=0; j < n; j++)
+      for (int j=0; j < NRESOURCE; j++)
         res[i][j] = uniFLOAT(rand64);
 
     int idxX, idxY;
-    for (int i = 0; i < L; i++){
-      idxX = i / (L/(nRes/2));
-      for (int j = 0; j < L; j++){
-        idxY = j / (L/(nRes/2));
-        grid[i*L+j].initialize(res[idxX*(nRes/2)+idxY], boost::dynamic_bitset<>(nK,uniIntk(rand64)));
+    for (int i = 0; i < LATTICESIZE; i++){
+      idxX = i / (LATTICESIZE/(nRes/2));
+      for (int j = 0; j < LATTICESIZE; j++){
+        idxY = j / (LATTICESIZE/(nRes/2));
+        grid[i*LATTICESIZE+j].initialize(res[idxX*(nRes/2)+idxY], boost::dynamic_bitset<>(NSPECIEBYTES,uniIntSP(rand64)));
       }
     }
   }
@@ -62,28 +62,28 @@ ambient::ambient(int nRes){
 // Receives the grid and iterate one time, passing over all the sites of the grid.
 void ambient::iterate(void){
   int x, y, x_Neigh, y_Neigh;
-  std::vector<int> x_list(L), y_list(L);
+  std::vector<int> x_list(LATTICESIZE), y_list(LATTICESIZE);
 
   // Initialize the list over which the program will pass updating the program.
-  for(int i=0;i<L;i++)
+  for(int i=0;i<LATTICESIZE;i++)
     x_list[i]=y_list[i]=i;
   std::random_shuffle(x_list.begin(),x_list.end());
   std::random_shuffle(y_list.begin(),y_list.end());
 
 
-  for(int i=0;i<L;i++)
-    for(int j=0;j<L;j++){
+  for(int i=0;i<LATTICESIZE;i++)
+    for(int j=0;j<LATTICESIZE;j++){
       x = x_list[i];
       y = y_list[i];
-      if(grid[x*L+y].filed){
-        if(uniFLOAT(rand64) < u) // death probability
-          grid[x*L+y].kill();
+      if(grid[x*LATTICESIZE+y].filed){
+        if(uniFLOAT(rand64) < DEATHPROB) // death probability
+          grid[x*LATTICESIZE+y].kill();
         else
-          if(haveNeighbor(x, y, &x_Neigh,&y_Neigh) && uniFLOAT(rand64) < grid[x*L+y].fitness){
-            if (uniFLOAT(rand64) < m)
-              grid[x_Neigh*L+y_Neigh].fill(grid[x*L+y].specie, true);
+          if(haveNeighbor(x, y, &x_Neigh,&y_Neigh) && uniFLOAT(rand64) < grid[x*LATTICESIZE+y].fitness){
+            if (uniFLOAT(rand64) < MUTATIONPROB)
+              grid[x_Neigh*LATTICESIZE+y_Neigh].fill(grid[x*LATTICESIZE+y].specie, true);
             else
-              grid[x_Neigh*L+y_Neigh].fill(grid[x*L+y].specie, false);
+              grid[x_Neigh*LATTICESIZE+y_Neigh].fill(grid[x*LATTICESIZE+y].specie, false);
           }
       }
     }
@@ -95,31 +95,31 @@ bool ambient::haveNeighbor(int x, int y, int* x_N, int* y_N){
   std::vector<int> PossibleX(4), PossibleY(4);
   int nPossible = 0;
 
-  if(x == L - 1)
+  if(x == LATTICESIZE - 1)
 		xP = 0;
 	else if(x == 0)
-		xM = L-1;
-	if(y == L - 1)
+		xM = LATTICESIZE-1;
+	if(y == LATTICESIZE - 1)
 		yP = 0;
 	else if(y == 0)
-		yM = L-1;
+		yM = LATTICESIZE-1;
 
 
   PossibleX[nPossible] = xP;
   PossibleY[nPossible] = y;
-  nPossible += !grid[xP*L+y].filed;
+  nPossible += !grid[xP*LATTICESIZE+y].filed;
 
   PossibleX[nPossible] = xM;
   PossibleY[nPossible] = y;
-  nPossible += !grid[xM*L+y].filed;
+  nPossible += !grid[xM*LATTICESIZE+y].filed;
 
   PossibleX[nPossible] = x;
   PossibleY[nPossible] = yP;
-  nPossible += !grid[x*L+yP].filed;
+  nPossible += !grid[x*LATTICESIZE+yP].filed;
 
   PossibleX[nPossible] = x;
   PossibleY[nPossible] = yM;
-  nPossible += !grid[x*L+yM].filed;
+  nPossible += !grid[x*LATTICESIZE+yM].filed;
 
   if (nPossible==0)
     return false;
@@ -140,11 +140,11 @@ bool ambient::haveNeighbor(int x, int y, int* x_N, int* y_N){
 // Cont the number of observed species at the actual time, on the grid.
 int ambient::countSpecie(void){
   int nDifferentS=0;
-  std::vector<bool> alreadyExist(k+1,false);
+  std::vector<bool> alreadyExist(NSPECIE+1,false);
 
-  for(int i=0;i<L;i++)
-    for(int j=0;j<L;j++){
-      int sp=grid[i*L+j].specie.to_ulong();
+  for(int i=0;i<LATTICESIZE;i++)
+    for(int j=0;j<LATTICESIZE;j++){
+      int sp=grid[i*LATTICESIZE+j].specie.to_ulong();
       if(!alreadyExist[sp]){
         alreadyExist[sp] = true;
         nDifferentS++;
