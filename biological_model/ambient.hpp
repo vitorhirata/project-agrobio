@@ -5,21 +5,22 @@ private:
 public:
   void iterate(void);
   int countSpecie(void);
-  ambient(int nRes);
+  ambient();
 };
 
-ambient::ambient(int nRes){
+// Initialize one ambient, distributting resource according to the parameters and initialize all patches.
+ambient::ambient(){
   grid = new (nothrow) patch[LATTICESIZE*LATTICESIZE];
   if (grid == nullptr){
     cout << "Error: grid alocation not successful." << endl;
     exit(-1);
   }
-  if (LATTICESIZE % nRes != 0 && LATTICESIZE*LATTICESIZE % nRes != 0){
+  if (LATTICESIZE % NRESOURCEDIST != 0 && LATTICESIZE*LATTICESIZE % NRESOURCEDIST != 0){
     cout << "Error: only accepted number of resources that are divisible by LATTICESIZE or LATTICESIZE^2'." << endl;
     exit(-1);
   }
 
-  if (nRes == LATTICESIZE*LATTICESIZE){
+  if (NRESOURCEDIST == LATTICESIZE*LATTICESIZE){
     std::vector<float> res(NRESOURCE);
     for (int i = 0; i < LATTICESIZE; i++){
       for (int j = 0; j < LATTICESIZE; j++){
@@ -29,37 +30,37 @@ ambient::ambient(int nRes){
       }
     }
   }
-  else if(LATTICESIZE % nRes == 0){
-    vector<vector<float> > res(nRes, vector<float>(NRESOURCE));
-    for (int i=0; i < nRes; i++)
+  else if(LATTICESIZE % NRESOURCEDIST == 0){
+    vector<vector<float> > res(NRESOURCEDIST, vector<float>(NRESOURCE));
+    for (int i=0; i < NRESOURCEDIST; i++)
       for (int j=0; j < NRESOURCE; j++)
         res[i][j] = uniFLOAT(rand64);
 
     int idx;
     for (int i = 0; i < LATTICESIZE; i++){
-      idx = i / (LATTICESIZE/nRes);
+      idx = i / (LATTICESIZE/NRESOURCEDIST);
       for (int j = 0; j < LATTICESIZE; j++)
         grid[i*LATTICESIZE+j].initialize(res[idx], boost::dynamic_bitset<>(NSPECIEBYTES,uniIntSP(rand64)));
     }
   }
-  else if (LATTICESIZE*LATTICESIZE % nRes == 0){
-    vector<vector<float> > res(nRes, vector<float>(NRESOURCE));
-    for (int i=0; i < nRes; i++)
+  else if (LATTICESIZE*LATTICESIZE % NRESOURCEDIST == 0){
+    vector<vector<float> > res(NRESOURCEDIST, vector<float>(NRESOURCE));
+    for (int i=0; i < NRESOURCEDIST; i++)
       for (int j=0; j < NRESOURCE; j++)
         res[i][j] = uniFLOAT(rand64);
 
     int idxX, idxY;
     for (int i = 0; i < LATTICESIZE; i++){
-      idxX = i / (LATTICESIZE/(nRes/2));
+      idxX = i / (LATTICESIZE/(NRESOURCEDIST/2));
       for (int j = 0; j < LATTICESIZE; j++){
-        idxY = j / (LATTICESIZE/(nRes/2));
-        grid[i*LATTICESIZE+j].initialize(res[idxX*(nRes/2)+idxY], boost::dynamic_bitset<>(NSPECIEBYTES,uniIntSP(rand64)));
+        idxY = j / (LATTICESIZE/(NRESOURCEDIST/2));
+        grid[i*LATTICESIZE+j].initialize(res[idxX*(NRESOURCEDIST/2)+idxY], boost::dynamic_bitset<>(NSPECIEBYTES,uniIntSP(rand64)));
       }
     }
   }
 }
 
-// Receives the grid and iterate one time, passing over all the sites of the grid.
+// Iterate one time, passing over all the sites of the grid.
 void ambient::iterate(void){
   int x, y, x_Neigh, y_Neigh;
   std::vector<int> x_list(LATTICESIZE), y_list(LATTICESIZE);
@@ -137,7 +138,7 @@ bool ambient::haveNeighbor(int x, int y, int* x_N, int* y_N){
   }
 }
 
-// Cont the number of observed species at the actual time, on the grid.
+// Count the number of observed species at the actual time, on the grid.
 int ambient::countSpecie(void){
   int nDifferentS=0;
   std::vector<bool> alreadyExist(NSPECIE+1,false);

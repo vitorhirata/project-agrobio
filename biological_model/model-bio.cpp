@@ -13,7 +13,7 @@ int Run_standart(void){
 
   // Rodo NRUN rodadas
   for (int run=0; run < NRUN; run++){
-    ambient model(NRESOURCEDIST);
+    ambient model;
     for (i = 0; i < NSPECIE; i++)
       for (j = 0; j < NRESOURCE; j++)
         K[i*NRESOURCE+j] = gauss(rand64);
@@ -63,7 +63,7 @@ int Run_varParam(char param, std::vector<float> paramList){
   // Run NRUN rounds
     clock_t tStart = clock();
     for (int run=0; run < NRUN; run++){
-      ambient model(NRESOURCEDIST);
+      ambient model;
       for (i = 0; i < NSPECIE; i++)
         for (j = 0; j < NRESOURCE; j++)
           K[i*NRESOURCE+j] = gauss(rand64);
