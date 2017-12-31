@@ -6,7 +6,7 @@ mode = ARGS[2]
 
 param = string(input_file[end-4])
 input_file = "test/" * input_file
-output_file = input_file[1:end-4] * ".png"
+output_file = input_file[1:end-4] * ".svg"
 
 df = readtable(input_file, separator = ';', skipstart=3)
 
@@ -19,5 +19,5 @@ else
     exit(-1)
 end
 
-draw(PNG(output_file, 12cm, 8cm), p)
+draw(SVG(output_file, 15cm, 9cm), p)
 println("Image $(output_file) successfully generated.")

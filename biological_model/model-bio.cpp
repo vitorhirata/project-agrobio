@@ -41,8 +41,8 @@ int Run_standart(void){
 
 // Run the model for some parameter varying, saving a txt with the evolution of the number of species for each parameter value.
 int Run_varParam(char param, std::vector<float> paramList){
-  if (param != 'm' && param != 'u' && param != 'L' && param != 'n'){
-    cout << "Invalid parameter, only m, u and L can vary." << endl;
+  if (param != 'm' && param != 'u' && param != 'L' && param != 'n' && param != 'r'){
+    cout << "Invalid parameter, only m, u, L, n and r can vary." << endl;
     return -1;
   }
 
@@ -61,6 +61,7 @@ int Run_varParam(char param, std::vector<float> paramList){
         break;
       case 'L':
         LATTICESIZE=paramList[idxParam];
+        NRESOURCEDIST = LATTICESIZE*LATTICESIZE;
         break;
       case 'n':
         if (paramList[idxParam] > NMAXSPECIE){
@@ -68,6 +69,9 @@ int Run_varParam(char param, std::vector<float> paramList){
           exit(-1);
         }
         NSPECIE=paramList[idxParam];
+        break;
+      case 'r':
+        NRESOURCEDIST=paramList[idxParam];
         break;
     }
 
@@ -89,9 +93,9 @@ int Run_varParam(char param, std::vector<float> paramList){
   }
 
   arquivo << "### PARAMETERS VALUE ###" << endl;
-  arquivo << "### LATTICESIZE = " << LATTICESIZE << "NSPECIE = " << NSPECIE << "NRESOURCE = " << NRESOURCE;
-  arquivo << "DEATHPROB = " << DEATHPROB << "MUTATIONPROB = " << MUTATIONPROB << "NRESOURCEDIST = " << NRESOURCEDIST;
-  arquivo << "MAXTIME = " << MAXTIME << "TIMEINTERVAL = " << TIMEINTERVAL << "NRUN = " << NRUN << " ###" << endl << endl;
+  arquivo << "### LATTICESIZE = " << LATTICESIZE << ", NSPECIE = " << NSPECIE << ", NRESOURCE = " << NRESOURCE;
+  arquivo << ", DEATHPROB = " << DEATHPROB << ", MUTATIONPROB = " << MUTATIONPROB << ", NRESOURCEDIST = " << NRESOURCEDIST;
+  arquivo << ", MAXTIME = " << MAXTIME << ", TIMEINTERVAL = " << TIMEINTERVAL << ", NRUN = " << NRUN << " ###" << endl << endl;
   arquivo << "time; nSpecie; param" << endl;
   for (idxParam=0; idxParam < paramList.size(); idxParam++)
     for (int t = 0; t < MAXTIME/TIMEINTERVAL; t++)
@@ -124,7 +128,7 @@ int main(int argc, char *argv[]){
         cout << "ERROR: Number of input argument invalid. 'v' mode must have the parameter that will vary and the values it will assume" << endl;
         exit(-1);
       }
-      if (argv[2][0] == 'u' || argv[2][0] == 'm' || argv[2][0] == 'L' || argv[2][0] == 'n')
+      if (argv[2][0] == 'u' || argv[2][0] == 'm' || argv[2][0] == 'L' || argv[2][0] == 'n' || argv[2][0] == 'r')
         param = argv[2][0];
       else{
         cout << "ERROR: Invalid parameter variation." << endl;
