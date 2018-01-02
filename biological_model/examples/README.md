@@ -2,7 +2,7 @@
 Here it's presented some tests of the model use
 
 ## Simple Examples
-### Test similar to the original model, multiple resource. The source file is presented in 'standart1.csv'.
+##### Test similar to the original model, multiple resource. The source file is presented in 'standart1.csv'.
 ```C
 ## PARAMETERS VALUE ##
 ## LATTICESIZE = 500, NSPECIE = 1000, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0, NRESOURCEDIST = 250000,
@@ -10,7 +10,7 @@ Here it's presented some tests of the model use
 ```
 ![Model1](standart1.svg)
 
-### Test similar to the original model, uniform resource. The source file is presented in 'standart2.csv'.
+##### Test similar to the original model, uniform resource. The source file is presented in 'standart2.csv'.
 ```C
 ## PARAMETERS VALUE ##
 ## LATTICESIZE = 500, NSPECIE = 1000, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0, NRESOURCEDIST = 1,
@@ -19,7 +19,7 @@ Here it's presented some tests of the model use
 ![Model2](standart2.svg)
 
 ## Parameter Variation
-### LATTICESIZE variation (multiple resource LATTICESIZE^2).
+##### LATTICESIZE variation (multiple resource LATTICESIZE^2).
 ```C
 ## PARAMETERS VALUE ##
 ## NSPECIE = 100, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0, MAXTIME = 100000, TIMEINTERVAL = 1000,
@@ -27,7 +27,7 @@ Here it's presented some tests of the model use
 ```
 ![LATTICESIZE Variation multiple resource](varParam_L.svg)
 
-### LATTICESIZE variation (fix 10 resource).
+##### LATTICESIZE variation (fix 10 resource).
 ```C
 ## PARAMETERS VALUE ##
 ## NSPECIE = 100, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0, NRESOURCEDIST = 10, MAXTIME = 100000,
@@ -35,7 +35,7 @@ Here it's presented some tests of the model use
 ```
 ![LATTICESIZE Variation 10 resources](varParam_L_10r.svg)
 
-### DEATHPROB variation.
+##### DEATHPROB variation.
 ```C
 ## PARAMETERS VALUE ##
 ## LATTICESIZE = 50, NSPECIE = 100, NRESOURCE = 3, MUTATIONPROB = 0, NRESOURCEDIST = 2500, MAXTIME = 100000,
@@ -43,7 +43,7 @@ Here it's presented some tests of the model use
 ```
 ![DEATHPROB Variation multiple resource](varParam_u.svg)
 
-### MUTATIONPROB variation.
+##### MUTATIONPROB variation.
 ```C
 ## PARAMETERS VALUE ##
 ## LATTICESIZE = 50, NSPECIE = 100, NRESOURCE = 3, DEATHPROB = 0.1, NRESOURCEDIST = 2500, MAXTIME = 100000,
@@ -51,7 +51,7 @@ Here it's presented some tests of the model use
 ```
 ![MUTATIONPROB Variation multiple resource](varParam_m.svg)
 
-### NRESOURCEDIST variation.
+##### NRESOURCEDIST variation.
 ```C
 ## PARAMETERS VALUE ##
 ## LATTICESIZE = 50, NSPECIE = 100, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0, MAXTIME = 100000,
@@ -59,7 +59,7 @@ Here it's presented some tests of the model use
 ```
 ![NRESOURCEDIST Variation multiple resource](varParam_r.svg)
 
-### NSPECIE variation.
+##### NSPECIE variation.
 ```C
 ## PARAMETERS VALUE ##
 ## LATTICESIZE = 50, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0, NRESOURCEDIST = 2500, MAXTIME = 100000,
