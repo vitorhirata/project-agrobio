@@ -6,5 +6,5 @@ This model takes into account a biological model for the study of biodiversity, 
 There is a file with tests of the model simulation, with the data generated and images of that. In the data file it is also presented the parameters used and additional information.
 
 ## TODO
-- Fix and comment the tests part.
 - Implement tests.
+- Improve comments.
