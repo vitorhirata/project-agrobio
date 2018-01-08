@@ -71,11 +71,10 @@ void ambient::iterate(void){
   std::random_shuffle(x_list.begin(),x_list.end());
   std::random_shuffle(y_list.begin(),y_list.end());
 
-
-  for(int i=0;i<LATTICESIZE;i++)
+  for(int i=0;i<LATTICESIZE;i++){
+    x = x_list[i];
     for(int j=0;j<LATTICESIZE;j++){
-      x = x_list[i];
-      y = y_list[i];
+      y = y_list[j];
       if(grid[x*LATTICESIZE+y].filed){
         if(uniFLOAT(rand64) < DEATHPROB) // death probability
           grid[x*LATTICESIZE+y].kill();
@@ -88,6 +87,7 @@ void ambient::iterate(void){
           }
       }
     }
+  }
 }
 
 // Receives the grid, one site (x,y), and a pair of pointers (*x_N, *y_N) where the result will be put. Return false if there aren't empty neighboor and true if there is at least one empy neighboor. Sampling one random site if there are more than one.

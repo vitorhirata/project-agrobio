@@ -2,7 +2,7 @@
 Here it's presented some tests of the model use
 
 ## Simple Examples
-##### Test similar to the original model, multiple resource. The source file is presented in 'standart1.csv'.
+##### Test similar to the original model, multiple resource. The source file is presented in 'standart1.csv'. (model needs fix)
 ```C
 ## PARAMETERS VALUE ##
 ## LATTICESIZE = 500, NSPECIE = 1000, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0, NRESOURCEDIST = 250000,
@@ -10,7 +10,7 @@ Here it's presented some tests of the model use
 ```
 ![Model1](standart1.svg)
 
-##### Test similar to the original model, uniform resource. The source file is presented in 'standart2.csv'.
+##### Test similar to the original model, uniform resource. The source file is presented in 'standart2.csv'. (model needs fix)
 ```C
 ## PARAMETERS VALUE ##
 ## LATTICESIZE = 500, NSPECIE = 1000, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0, NRESOURCEDIST = 1,
