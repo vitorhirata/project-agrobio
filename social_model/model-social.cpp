@@ -12,10 +12,10 @@ int main(){
     ambient model;
     clock_t tStart = clock();
     for (int t=0; t < MAXTIME; t++){
-      model.iterate();
-      cout << "Time = " << t << endl;
-      if (t % TIMEINTERVAL == 0)
+      if (t % TIMEINTERVAL == 0){
         result[t/TIMEINTERVAL] += model.countSpecie();
+      }
+      model.iterate();
     }
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
   }
@@ -28,5 +28,6 @@ int main(){
   for (int t = 0; t < MAXTIME/TIMEINTERVAL; t++)
     arquivo << t*TIMEINTERVAL << "; " << result[t]/NRUN << endl;
   arquivo.close();
+
   return 0;
 }

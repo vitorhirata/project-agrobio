@@ -10,6 +10,7 @@ public:
   void UpdatePropriety(int prop);
   void iterate(void);
   void replant(void);
+  void printState(void);
   ambient();
 };
 
@@ -99,30 +100,32 @@ void ambient::initializeGrid(void){
 }
 
 void ambient::UpdatePropriety(int prop){
-  std::vector<std::vector<int>> totalSpecie(NMAXSPECIE+1, vector<int>(2,0));
+  std::vector<int> totalSpecie(NMAXSPECIE+1,0);
   std::vector<float> speciePunctuation(NMAXSPECIE+1,0);
 
-  for(int i = proprietyList[prop].LimO; i < proprietyList[prop].LimL; i++)
-    for(int j = proprietyList[prop].LimN; j < proprietyList[prop].LimS; j++){
+  for(int i = proprietyList[prop].LimN; i < proprietyList[prop].LimS+1; i++)
+    for(int j = proprietyList[prop].LimO; j < proprietyList[prop].LimL+1; j++){
       int sp=grid[i*LATTICESIZE+j].specie.to_ulong();
-      totalSpecie[sp][1]++;
-      totalSpecie[sp][0] = sp;
+      totalSpecie[sp]++;
       speciePunctuation[sp] += grid[i*LATTICESIZE+j].punctuation();
     }
+
   totalSpecie.erase(totalSpecie.begin());
+  speciePunctuation.erase(speciePunctuation.begin());
 
   int erased = 0;
   for(int i = 0; i < NMAXSPECIE; i++){
-    if(totalSpecie[i-erased][1] == 0){
+    if(totalSpecie[i-erased] == 0){
       totalSpecie.erase(totalSpecie.begin()+i-erased);
       speciePunctuation.erase(speciePunctuation.begin()+i-erased);
       erased++;
     }
-    else
-      speciePunctuation[i-erased] /= totalSpecie[i-erased][1];
+    else{
+      speciePunctuation[i-erased] /= totalSpecie[i-erased];
+      totalSpecie[i-erased] = i+1;
+    }
   }
-  proprietyList[prop].quantSpecie = totalSpecie;
-  proprietyList[prop].speciesPunctuation = speciePunctuation;
+  proprietyList[prop].setSpecie(totalSpecie, speciePunctuation);
 }
 
 // Iterate one time, passing over all the sites of the grid.
@@ -162,12 +165,19 @@ void ambient::replant(void){
   for(int i = 0; i < LATTICESIZE; i++){
     for(int j = 0; j < LATTICESIZE; j++){
       propNum = (i/propSizeRadix)*propRadix + (j/propSizeRadix);
-      if(!proprietyList[propNum].speciesChoosen.empty())
-        grid[i*LATTICESIZE+j].fill(proprietyList[propNum].plantSpecie());
-      else
-        grid[i*LATTICESIZE+j].kill();
+      grid[i*LATTICESIZE+j].fill(proprietyList[propNum].plantSpecie());
     }
   }
+}
+
+void ambient::printState(void){
+  for(int i=0;i<LATTICESIZE;i++){
+    for(int j=0;j<LATTICESIZE;j++){
+      cout << grid[i*LATTICESIZE+j].specie.to_ulong() << " ";
+    }
+    cout << endl;
+  }
+  cout << endl << endl;
 }
 
 // Count the number of observed species at the actual time, on the grid.

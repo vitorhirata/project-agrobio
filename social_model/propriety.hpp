@@ -1,8 +1,10 @@
 class propriety{
-public:
-  std::vector<std::vector<int>> quantSpecie;
-  std::vector<std::vector<int>> speciesChoosen;
+private:
+  float probDistSigma(float x);
+  std::vector<int> speciesChoosen;
+  std::vector<int> availableSpecie;
   std::vector<float> speciesPunctuation;
+public:
   float probInovation;
   int LimN;
   int LimS;
@@ -10,25 +12,50 @@ public:
   int LimO;
   void chooseSpecie(void);
   boost::dynamic_bitset<> plantSpecie(void);
+  void setSpecie(std::vector<int> sp, std::vector<float> spPunc);
 };
 
 void propriety::chooseSpecie(void){
-  int PropSize = (LimL-LimO)*(LimL-LimO);
-  while(quantSpecie.size() > PropSize){
-    int eraseIndex = std::min_element(speciesPunctuation.begin(), speciesPunctuation.end()) - speciesPunctuation.begin();
-    quantSpecie.erase(quantSpecie.begin() + eraseIndex);
-    speciesPunctuation.erase(speciesPunctuation.begin() + eraseIndex);
+  int PropSize = (1+LimL-LimO)*(1+LimL-LimO);
+
+  if(speciesPunctuation.empty()){
+    speciesChoosen.clear();
+    return;
   }
-  // At this first test it will be choosen to plant the same things that are already planted
-  speciesChoosen = quantSpecie;
+  if(availableSpecie.size() == 1){
+    speciesChoosen = std::vector<int>(PropSize, availableSpecie[0]);
+    return;
+  }
+
+  uniIntne.param(std::uniform_int_distribution<long>::param_type(0, speciesPunctuation.size()-1));
+  speciesChoosen = std::vector<int>(PropSize, 0);
+
+  for(int i = 0; i < PropSize; i++){
+    int plantIdx = uniIntne(rand64);
+    while(!(uniFLOAT(rand64) < speciesPunctuation[plantIdx])){
+      plantIdx = uniIntne(rand64);
+    }
+    speciesChoosen[i] = availableSpecie[plantIdx];
+  }
+}
+
+void propriety::setSpecie(std::vector<int> sp, std::vector<float> spPunc){
+  availableSpecie = sp;
+  speciesPunctuation = spPunc;
+  for(int i = 0; i < speciesPunctuation.size(); i++){
+    speciesPunctuation[i] = probDistSigma(speciesPunctuation[i]);
+    }
+}
+
+float propriety::probDistSigma(float x){
+  // A = B*u/(1+u), B = 1/(u/(1+u)+(m-u)/(1+m-u)), u=2.5, m=5.
+  return  0.5+0.7*(5*x-2.5)/(1+abs(5*x-2.5));
 }
 
 boost::dynamic_bitset<> propriety::plantSpecie(void){
-  boost::dynamic_bitset<> cSp(NSPECIEBYTES, speciesChoosen[0][0]);
-  if (speciesChoosen[0][1] == 1)
-    speciesChoosen.erase(speciesChoosen.begin());
-  else
-    speciesChoosen[0][1]--;
-
+  if (speciesChoosen.empty())
+    return boost::dynamic_bitset<> (NSPECIEBYTES, 0);
+  boost::dynamic_bitset<> cSp(NSPECIEBYTES, speciesChoosen[0]);
+  speciesChoosen.erase(speciesChoosen.begin());
   return cSp;
 }

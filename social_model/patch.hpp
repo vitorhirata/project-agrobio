@@ -20,6 +20,8 @@ void patch::initializePt(std::vector<float> res, boost::dynamic_bitset<> sp){
 
 float patch::punctuation(void){
   float value;
+  if (filed == false)
+    return 0;
   int sp = specie.to_ulong();
   value = 0.5 * VAR[sp].taste + 0.5 * VAR[sp].calculateFitness(resource);
   return value;

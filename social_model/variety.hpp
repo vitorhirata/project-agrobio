@@ -10,7 +10,7 @@ public:
 variety::variety(){
   for (int j = 0; j < NRESOURCE; j++)
     K.push_back(gauss(rand64));
-  taste = gauss(rand64);
+  taste = gauss(rand64)-0.5;
 }
 
 // Return the fitness of the population living in the site. Computed using the Monod equation.
