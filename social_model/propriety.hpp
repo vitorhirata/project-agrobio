@@ -57,5 +57,9 @@ boost::dynamic_bitset<> propriety::plantSpecie(void){
     return boost::dynamic_bitset<> (NSPECIEBYTES, 0);
   boost::dynamic_bitset<> cSp(NSPECIEBYTES, speciesChoosen[0]);
   speciesChoosen.erase(speciesChoosen.begin());
+  if (uniFLOAT(rand64) < MUTATIONPROB){
+    int temp = uniIntNSPB(rand64);
+    cSp[temp] = !cSp[temp];
+  }
   return cSp;
 }
