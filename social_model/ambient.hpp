@@ -130,26 +130,13 @@ void ambient::UpdatePropriety(int prop){
 
 // Iterate one time, passing over all the sites of the grid.
 void ambient::iterate(void){
-  int x, y, x_Neigh, y_Neigh;
-  std::vector<int> x_list(LATTICESIZE), y_list(LATTICESIZE);
 
-  // Initialize the list over which the program will pass updating the program.
   for(int i=0;i<LATTICESIZE;i++)
-    x_list[i]=y_list[i]=i;
-  std::random_shuffle(x_list.begin(),x_list.end());
-  std::random_shuffle(y_list.begin(),y_list.end());
+    for(int j=0;j<LATTICESIZE;j++)
+      if(grid[i*LATTICESIZE+j].filed && uniFLOAT(rand64) < DEATHPROB)
+        grid[x*LATTICESIZE+y].kill();
 
 
-  for(int i=0;i<LATTICESIZE;i++){
-    x = x_list[i];
-    for(int j=0;j<LATTICESIZE;j++){
-      y = y_list[j];
-      if(grid[x*LATTICESIZE+y].filed){
-        if(uniFLOAT(rand64) < DEATHPROB) // death probability
-          grid[x*LATTICESIZE+y].kill();
-      }
-    }
-  }
   for(int i = 0; i < NPROPRIETY; i++){
     UpdatePropriety(i);
     proprietyList[i].chooseSpecie();
