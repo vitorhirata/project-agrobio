@@ -2,10 +2,13 @@ class propriety{
 private:
   float probDistSigma(float x);
   std::vector<int> speciesChoosen;
+public:
   std::vector<int> availableSpecie;
   std::vector<float> speciesPunctuation;
-public:
+  std::vector<int> proprietyConnection;
   float probInovation;
+  int maxSpecie;
+  float maxSpeciePunc;
   int LimN;
   int LimS;
   int LimL;
@@ -42,9 +45,12 @@ void propriety::chooseSpecie(void){
 void propriety::setSpecie(std::vector<int> sp, std::vector<float> spPunc){
   availableSpecie = sp;
   speciesPunctuation = spPunc;
-  for(int i = 0; i < speciesPunctuation.size(); i++){
+  for(int i = 0; i < speciesPunctuation.size(); i++)
     speciesPunctuation[i] = probDistSigma(speciesPunctuation[i]);
-    }
+
+  int idxMax = distance(speciesPunctuation.begin(), max_element(speciesPunctuation.begin(), speciesPunctuation.end()));
+  maxSpecie = availableSpecie[idxMax];
+  maxSpeciePunc = speciesPunctuation[idxMax];
 }
 
 float propriety::probDistSigma(float x){
