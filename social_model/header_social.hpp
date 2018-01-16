@@ -3,23 +3,25 @@
 #include <fstream> // handling files
 #include <vector>
 #include <ctime> // count time of run
+#include <string>
 #include <boost/dynamic_bitset.hpp> // binary species
+#include "BPM/EasyBMP.h" // BITMAP
 using namespace std;
 
 /* Model Parameters */
 int LATTICESIZE = 49; //  size of the lattice (ambient parameter)
 float DEATHPROB = 0.1; // death probability (ambient parameter)
 float MUTATIONPROB = 0.001; // mutation probability (ambient parameter)
-int NSPECIE = 100; // number of species (ambient parameter)
+int NSPECIE = 120; // number of species (ambient parameter)
 int NRESOURCEDIST = 49; // number of different resource vector in grid (ambient parameter)
 const float CONNECTIONPROB = 0.1;
 const int NSPECIEBYTES = 7; // number of bytes to represent species (patch parameter)
 const int NMAXSPECIE = pow(2, NSPECIEBYTES);
 const int NRESOURCE = 3;// number of resources (ambient/patch parameter)
 const int NPROPRIETY = 49;
-const int MAXTIME = 100000; // maximum time (model-social parameter)
-const int TIMEINTERVAL = 1000; // tic interval in time (model-social parameter)
-const int NRUN = 10;  // number of runs to average (model-social parameter)
+const int MAXTIME = 100; // maximum time (model-social parameter)
+const int TIMEINTERVAL = 10; // tic interval in time (model-social parameter)
+const int NRUN = 1;  // number of runs to average (model-social parameter)
 
 
 /* Imported functions */

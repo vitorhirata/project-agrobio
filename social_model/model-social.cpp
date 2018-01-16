@@ -14,6 +14,7 @@ int main(){
     for (int t=0; t < MAXTIME; t++){
       if (t % TIMEINTERVAL == 0){
         result[t/TIMEINTERVAL] += model.countSpecie();
+        model.printState(t);
       }
       model.iterate();
     }

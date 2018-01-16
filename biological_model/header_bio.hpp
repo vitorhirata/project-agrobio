@@ -3,7 +3,9 @@
 #include <fstream> // handling files
 #include <vector>
 #include <ctime> // count time of run
+#include <string>
 #include <boost/dynamic_bitset.hpp> // binary species
+#include "EasyBMP.cpp" // BITMAP
 using namespace std;
 
 /* Model Parameters */

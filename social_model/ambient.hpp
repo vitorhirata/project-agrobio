@@ -8,10 +8,11 @@ private:
   void replant(void);
   void setGraph(void);
   void proprietyTrade(void);
+  bool floatToRGB(int n, int* R, int* G, int* B);
 public:
   int countSpecie(void);
   void iterate(void);
-  void printState(void);
+  void printState(int t);
   ambient();
 };
 
@@ -214,15 +215,6 @@ void ambient::iterate(void){
   replant();
 }
 
-void ambient::printState(void){
-  for(int i=0;i<LATTICESIZE;i++){
-    for(int j=0;j<LATTICESIZE;j++){
-      cout << grid[i*LATTICESIZE+j].specie.to_ulong() << " ";
-    }
-    cout << endl;
-  }
-  cout << endl << endl;
-}
 
 // Count the number of observed species at the actual time, on the grid.
 int ambient::countSpecie(void){
@@ -241,4 +233,78 @@ int ambient::countSpecie(void){
     return nDifferentS-1;
   else
     return nDifferentS;
+}
+
+
+void ambient::printState(int t){
+  BMP Image;
+  std::string name ("test/standart");
+  int SIZE = 10;
+  Image.SetSize(LATTICESIZE*SIZE,LATTICESIZE*SIZE);
+  Image.SetBitDepth(8);
+
+  name += std::to_string(t);
+  name += ".bmp";
+  int r, g, b, sp;
+
+  for(int i=0;i<LATTICESIZE;i++){
+    for(int j=0;j<LATTICESIZE;j++){
+      int sp  = grid[i*LATTICESIZE+j].specie.to_ulong();
+      floatToRGB(sp, &r, &g, &b);
+      for(int x = 0; x < SIZE; x++)
+        for(int y = 0; y < SIZE; y++){
+          Image(i*SIZE+x,j*SIZE+y)->Red = r;
+          Image(i*SIZE+x,j*SIZE+y)->Green = g;
+          Image(i*SIZE+x,j*SIZE+y)->Blue = b;
+          Image(i*SIZE+x,j*SIZE+y)->Alpha = 0.1;
+        }
+    }
+  }
+  //Image.SetDPI(1000,1000);
+  Image.WriteToFile(name.c_str());
+
+}
+
+
+bool ambient::floatToRGB(int n, int* R, int* G, int* B){
+  float r, g, b, x = (float) n / NMAXSPECIE;
+
+  if (x < 0 || x > 1){
+    cout << "ERROR" << endl;
+    return false;
+  }
+  if (x < 0.125){
+    r = 0.5 + 4*x;
+    g = 0;
+    b = 0;
+  }
+  else if (x < 0.375){
+    r = 1;
+    g = -0.5 + 4*x;
+    b = 0;
+  }
+  else if (x < 0.625){
+    r = 2.5 - 4*x;
+    g = 1;
+    b = -1.5 + 4*x;
+  }
+  else if (x < 0.875){
+    r = 0;
+    g = 3.5 - 4*x;
+    b = 1;
+  }
+  else{
+    r = 0;
+    g = 0;
+    b = 4.5 - 4*x;
+  }
+
+  if (r < 0 || g < 0 || b < 0 || r > 1 || g > 1 || b > 1){
+    cout << "ERROR: " << r << ", " << g << ", " << b << endl;
+    return false;
+  }
+  *R = (int) (r * 255);
+  *G = (int) (g * 255);
+  *B = (int) (b * 255);
+  return true;
 }

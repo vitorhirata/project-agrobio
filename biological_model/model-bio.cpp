@@ -3,6 +3,7 @@
 
 int Run_standart(void);
 int Run_varParam(char param, std::vector<float> paramList);
+int Run_plot(void);
 
 // Run the standart model, saving a txt with the evolution of the number of species.
 int Run_standart(void){
@@ -20,9 +21,9 @@ int Run_standart(void){
 
     clock_t tStart = clock();
     for (int t=0; t < MAXTIME; t++){
-      model.iterate();
       if (t % TIMEINTERVAL == 0)
         result[t/TIMEINTERVAL] += model.countSpecie();
+      model.iterate();
     }
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
   }
@@ -37,6 +38,40 @@ int Run_standart(void){
   arquivo.close();
   return 0;
 }
+
+int Run_plot(void){
+  std::vector<int> result(MAXTIME/TIMEINTERVAL,0);
+  fstream arquivo;
+  arquivo.open("test/plot/Runplot.csv",ios::out);
+  int i, j;
+
+  ambient model;
+  for (i = 0; i < NMAXSPECIE; i++)
+    for (j = 0; j < NRESOURCE; j++)
+      K[i*NRESOURCE+j] = gauss(rand64);
+
+  clock_t tStart = clock();
+  for (int t=0; t < MAXTIME; t++){
+    if (t % TIMEINTERVAL == 0){
+      result[t/TIMEINTERVAL] += model.countSpecie();
+      model.printState(t);
+    }
+    model.iterate();
+  }
+  cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
+
+  arquivo << "### PARAMETERS VALUE ###" << endl;
+  arquivo << "### LATTICESIZE = " << LATTICESIZE << ", NSPECIE = " << NSPECIE << ", NRESOURCE = " << NRESOURCE;
+  arquivo << ", DEATHPROB = " << DEATHPROB << ", MUTATIONPROB = " << MUTATIONPROB << ", NRESOURCEDIST = " << NRESOURCEDIST;
+  arquivo << ", MAXTIME = " << MAXTIME << ", TIMEINTERVAL = " << TIMEINTERVAL << ", NRUN = " << NRUN << " ###" << endl << endl;
+  arquivo << "time; nSpecie" << endl;
+  for (int t = 0; t < MAXTIME/TIMEINTERVAL; t++)
+    arquivo << t*TIMEINTERVAL << "; " << result[t]/NRUN << endl;
+  arquivo.close();
+  return 0;
+}
+
+
 
 
 // Run the model for some parameter varying, saving a txt with the evolution of the number of species for each parameter value.
@@ -122,7 +157,12 @@ int main(int argc, char *argv[]){
       cout << "Running standart model" << endl;
       Run_standart();
       break;
-
+    case 'p':
+      if (argc > 2)
+        cout << "WARNING: Number of input argument is invalid." << endl;
+      cout << "Running model with plot" << endl;
+      Run_plot();
+      break;
     case 'v':
       if (argc < 4) {
         cout << "ERROR: Number of input argument invalid. 'v' mode must have the parameter that will vary and the values it will assume" << endl;
