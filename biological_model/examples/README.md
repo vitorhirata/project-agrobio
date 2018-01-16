@@ -5,8 +5,8 @@ Here it's presented some tests of the model use
 ##### Test similar to the original model, multiple resource. The source file is presented in 'standart1.csv'. (model needs fix)
 ```C
 ## PARAMETERS VALUE ##
-## LATTICESIZE = 500, NSPECIE = 1000, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0, NRESOURCEDIST = 250000,
-## MAXTIME = 1000000, TIMEINTERVAL = 10000, NRUN = 50
+## LATTICESIZE = 500, NSPECIE = 1000, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0,
+## NRESOURCEDIST = 250000, MAXTIME = 1000000, TIMEINTERVAL = 10000, NRUN = 50
 ```
 ![Model1](standart1.svg)
 
@@ -62,7 +62,14 @@ Here it's presented some tests of the model use
 ##### NSPECIE variation.
 ```C
 ## PARAMETERS VALUE ##
-## LATTICESIZE = 50, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0, NRESOURCEDIST = 2500, MAXTIME = 100000,
-## TIMEINTERVAL = 1000, NRUN = 10
+## LATTICESIZE = 50, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0, NRESOURCEDIST = 2500,
+## MAXTIME = 100000, TIMEINTERVAL = 1000, NRUN = 10
 ```
 ![NSPECIE Variation multiple resource](varParam_n.svg)
+
+##### Standart Plot
+
+## LATTICESIZE = 50, NSPECIE = 100, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0
+## NRESOURCEDIST = 10, MAXTIME = 10000, TIMEINTERVAL = 100
+
+Click [here](Runplot.mp4) to see the video of an execucion of the program.
