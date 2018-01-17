@@ -39,6 +39,7 @@ int Run_standart(void){
   return 0;
 }
 
+// Run the model with plots at each TIMEINTERVAL. Also in this mode the MAXTIME and TIMEINTERVAL are used divided by 10.
 int Run_plot(void){
   std::vector<int> result(MAXTIME/TIMEINTERVAL,0);
   fstream arquivo;
@@ -51,9 +52,9 @@ int Run_plot(void){
       K[i*NRESOURCE+j] = gauss(rand64);
 
   clock_t tStart = clock();
-  for (int t=0; t < MAXTIME; t++){
-    if (t % TIMEINTERVAL == 0){
-      result[t/TIMEINTERVAL] += model.countSpecie();
+  for (int t=0; t < MAXTIME/10; t++){
+    if (t % (TIMEINTERVAL/10) == 0){
+      result[t/(TIMEINTERVAL/10)] += model.countSpecie();
       model.printState(t);
     }
     model.iterate();
@@ -63,10 +64,10 @@ int Run_plot(void){
   arquivo << "### PARAMETERS VALUE ###" << endl;
   arquivo << "### LATTICESIZE = " << LATTICESIZE << ", NSPECIE = " << NSPECIE << ", NRESOURCE = " << NRESOURCE;
   arquivo << ", DEATHPROB = " << DEATHPROB << ", MUTATIONPROB = " << MUTATIONPROB << ", NRESOURCEDIST = " << NRESOURCEDIST;
-  arquivo << ", MAXTIME = " << MAXTIME << ", TIMEINTERVAL = " << TIMEINTERVAL << ", NRUN = " << NRUN << " ###" << endl << endl;
+  arquivo << ", MAXTIME = " << MAXTIME/10 << ", TIMEINTERVAL = " << TIMEINTERVAL/10 << ", NRUN = " << 1 << " ###" << endl << endl;
   arquivo << "time; nSpecie" << endl;
   for (int t = 0; t < MAXTIME/TIMEINTERVAL; t++)
-    arquivo << t*TIMEINTERVAL << "; " << result[t]/NRUN << endl;
+    arquivo << t*TIMEINTERVAL/10 << "; " << result[t] << endl;
   arquivo.close();
   return 0;
 }
