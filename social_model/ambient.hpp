@@ -273,6 +273,11 @@ bool ambient::floatToRGB(int n, int* R, int* G, int* B){
     cout << "ERROR" << endl;
     return false;
   }
+  if (n == 0){
+    r = 0;
+    g = 0;
+    b = 0;
+  }
   if (x < 0.125){
     r = 0.5 + 4*x;
     g = 0;
