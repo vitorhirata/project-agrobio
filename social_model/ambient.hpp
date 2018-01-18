@@ -9,6 +9,8 @@ private:
   void setGraph(void);
   void proprietyTrade(void);
   bool floatToRGB(int n, int* R, int* G, int* B);
+  int propRadix;
+  int propSizeRadix;
 public:
   int countSpecie(void);
   void iterate(void);
@@ -18,6 +20,8 @@ public:
 
 // Initialize one ambient, distributting resource according to the parameters and initialize all patches.
 ambient::ambient(){
+  propRadix = sqrt(NPROPRIETY);
+  propSizeRadix = LATTICESIZE / propRadix;
   initializeGrid();
   initializeProp();
   setGraph();
@@ -54,16 +58,16 @@ void ambient::initializeProp(void){
     exit(-1);
   }
 
-  int propRadix = round(sqrt(NPROPRIETY));
-  if(propRadix*propRadix == NPROPRIETY && LATTICESIZE % propRadix == 0){
-    int propSizeRadix = LATTICESIZE/propRadix;
-    for(int Col = 0; Col < propRadix; Col++){
-      for(int Lin = 0; Lin < propRadix; Lin++){
-        proprietyList[Col*propRadix+Lin].LimO = Lin*propSizeRadix;
-        proprietyList[Col*propRadix+Lin].LimL = Lin*propSizeRadix + propSizeRadix - 1;
-        proprietyList[Col*propRadix+Lin].LimN = Col*propSizeRadix;
-        proprietyList[Col*propRadix+Lin].LimS = Col*propSizeRadix + propSizeRadix - 1;
-        proprietyList[Col*propRadix+Lin].probInovation = gauss(rand64) - 0.5;
+  int propRadixR = round(sqrt(NPROPRIETY));
+  if(propRadixR*propRadixR == NPROPRIETY && LATTICESIZE % propRadixR == 0){
+    int propSizeRadix = LATTICESIZE/propRadixR;
+    for(int Col = 0; Col < propRadixR; Col++){
+      for(int Lin = 0; Lin < propRadixR; Lin++){
+        proprietyList[Col*propRadixR+Lin].LimO = Lin*propSizeRadix;
+        proprietyList[Col*propRadixR+Lin].LimL = Lin*propSizeRadix + propSizeRadix - 1;
+        proprietyList[Col*propRadixR+Lin].LimN = Col*propSizeRadix;
+        proprietyList[Col*propRadixR+Lin].LimS = Col*propSizeRadix + propSizeRadix - 1;
+        proprietyList[Col*propRadixR+Lin].probInovation = gauss(rand64) - 0.5;
       }
     }
   }
@@ -136,26 +140,19 @@ void ambient::UpdatePropriety(int prop){
       speciePunctuation[sp] += grid[i*LATTICESIZE+j].punctuation();
     }
 
-  totalSpecie.erase(totalSpecie.begin());
-  speciePunctuation.erase(speciePunctuation.begin());
+  std::vector<int> totalSpClear;
+  std::vector<float> spPuncClear;
 
-  int erased = 0;
-  for(int i = 0; i < NMAXSPECIE; i++){
-    if(totalSpecie[i-erased] == 0){
-      totalSpecie.erase(totalSpecie.begin()+i-erased);
-      speciePunctuation.erase(speciePunctuation.begin()+i-erased);
-      erased++;
+  for(int i = 1; i < NMAXSPECIE+1; i++)
+    if(totalSpecie[i] != 0){
+      spPuncClear.push_back(speciePunctuation[i] / totalSpecie[i]);
+      totalSpClear.push_back(i);
     }
-    else{
-      speciePunctuation[i-erased] /= totalSpecie[i-erased];
-      totalSpecie[i-erased] = i+1;
-    }
-  }
-  proprietyList[prop].setSpecie(totalSpecie, speciePunctuation);
+  proprietyList[prop].setSpecie(totalSpClear, spPuncClear);
 }
 
 void ambient::proprietyTrade(void){
-  int x;
+  int x, size, prop, maxSp, maxValue;
   std::vector<int> x_list(NPROPRIETY);
 
   // Initialize the list over which the program will pass updating the program.
@@ -167,18 +164,16 @@ void ambient::proprietyTrade(void){
   for(int i = 0; i < NPROPRIETY; i++){
     x = x_list[i];
     if (uniFLOAT(rand64) < proprietyList[i].probInovation){
-      std::vector<int> propConnection = proprietyList[i].proprietyConnection;
-      int prop, maxSp, maxValue = 0;
-
       // Select the specie with better punctuation along the proprietyConnection list
-      for(int j = 0; j < propConnection.size(); j++){
-        prop = propConnection[j];
+      maxValue = 0;
+      size = proprietyList[i].proprietyConnection.size();
+      for(int j = 0; j < size; j++){
+        prop = proprietyList[i].proprietyConnection[j];
         if (proprietyList[prop].maxSpeciePunc > maxValue){
           maxValue = proprietyList[prop].maxSpeciePunc;
           maxSp = proprietyList[prop].maxSpecie;
         }
       }
-
       // Add specie and punctuation
       proprietyList[i].availableSpecie.push_back(maxSp);
       proprietyList[i].speciesPunctuation.push_back(maxValue);
@@ -187,8 +182,6 @@ void ambient::proprietyTrade(void){
 }
 
 void ambient::replant(void){
-  int propRadix = sqrt(NPROPRIETY);
-  int propSizeRadix = LATTICESIZE / propRadix;
   int propNum;
 
   for(int i = 0; i < LATTICESIZE; i++){
@@ -204,7 +197,7 @@ void ambient::iterate(void){
 
   for(int i=0;i<LATTICESIZE;i++)
     for(int j=0;j<LATTICESIZE;j++)
-      if(grid[i*LATTICESIZE+j].filed && uniFLOAT(rand64) < DEATHPROB)
+      if(uniFLOAT(rand64) < DEATHPROB)
         grid[i*LATTICESIZE+j].kill();
 
   for(int i = 0; i < NPROPRIETY; i++){

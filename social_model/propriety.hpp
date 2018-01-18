@@ -59,10 +59,8 @@ float propriety::probDistSigma(float x){
 }
 
 boost::dynamic_bitset<> propriety::plantSpecie(void){
-  if (speciesChoosen.empty())
-    return boost::dynamic_bitset<> (NSPECIEBYTES, 0);
-  boost::dynamic_bitset<> cSp(NSPECIEBYTES, speciesChoosen[0]);
-  speciesChoosen.erase(speciesChoosen.begin());
+  boost::dynamic_bitset<> cSp(NSPECIEBYTES, speciesChoosen.back());
+  speciesChoosen.pop_back();
   if (uniFLOAT(rand64) < MUTATIONPROB){
     int temp = uniIntNSPB(rand64);
     cSp[temp] = !cSp[temp];
