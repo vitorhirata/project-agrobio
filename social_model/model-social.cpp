@@ -23,8 +23,8 @@ int Run_standart(void){
   }
 
   arquivo << "### PARAMETERS VALUE ###" << endl;
-  arquivo << "### LATTICESIZE = " << LATTICESIZE << ", NSPECIE = " << NSPECIE << ", NRESOURCE = " << NRESOURCE;
-  arquivo << ", DEATHPROB = " << DEATHPROB << ", MUTATIONPROB = " << MUTATIONPROB << ", NRESOURCEDIST = " << NRESOURCEDIST;
+  arquivo << "### LATTICESIZE = " << LATTICESIZE << ", NSPECIE = " << NSPECIE << ", NRESOURCE = " << NRESOURCE << ", DEATHPROB = " << DEATHPROB;
+  arquivo << ", MUTATIONPROB = " << MUTATIONPROB << ", NRESOURCEDIST = " << NRESOURCEDIST << ", NPROPRIETY = " << NPROPRIETY;
   arquivo << ", MAXTIME = " << MAXTIME << ", TIMEINTERVAL = " << TIMEINTERVAL << ", NRUN = " << NRUN << " ###" << endl << endl;
   arquivo << "time; nSpecie" << endl;
   for (int t = 0; t < MAXTIME/TIMEINTERVAL; t++)
@@ -36,7 +36,7 @@ int Run_standart(void){
 int Run_plot(void){
   std::vector<int> result(MAXTIME/TIMEINTERVAL,0);
   fstream arquivo;
-  arquivo.open("test/plot/standart.csv",ios::out);
+  arquivo.open("test/plot/Runplot.csv",ios::out);
   int i, j;
 
   ambient model;
@@ -52,9 +52,9 @@ int Run_plot(void){
 
 
   arquivo << "### PARAMETERS VALUE ###" << endl;
-  arquivo << "### LATTICESIZE = " << LATTICESIZE << ", NSPECIE = " << NSPECIE << ", NRESOURCE = " << NRESOURCE;
-  arquivo << ", DEATHPROB = " << DEATHPROB << ", MUTATIONPROB = " << MUTATIONPROB << ", NRESOURCEDIST = " << NRESOURCEDIST;
-  arquivo << ", MAXTIME = " << MAXTIME << ", TIMEINTERVAL = " << TIMEINTERVAL << ", NRUN = " << 1 << " ###" << endl << endl;
+  arquivo << "### LATTICESIZE = " << LATTICESIZE << ", NSPECIE = " << NSPECIE << ", NRESOURCE = " << NRESOURCE << ", DEATHPROB = " << DEATHPROB;
+  arquivo << ", MUTATIONPROB = " << MUTATIONPROB << ", NRESOURCEDIST = " << NRESOURCEDIST << ", NPROPRIETY = " << NPROPRIETY;
+  arquivo << ", MAXTIME = " << MAXTIME << ", TIMEINTERVAL = " << TIMEINTERVAL << ", NRUN = " << NRUN << " ###" << endl << endl;
   arquivo << "time; nSpecie" << endl;
   for (int t = 0; t < MAXTIME/TIMEINTERVAL; t++)
     arquivo << t*TIMEINTERVAL << "; " << result[t] << endl;
@@ -85,6 +85,7 @@ int Run_varParam(char param, std::vector<float> paramList){
       case 'L':
         LATTICESIZE=paramList[idxParam];
         NRESOURCEDIST = LATTICESIZE*LATTICESIZE;
+        NPROPRIETY = LATTICESIZE;
         break;
       case 'n':
         if (paramList[idxParam] > NMAXSPECIE){
@@ -112,8 +113,8 @@ int Run_varParam(char param, std::vector<float> paramList){
   }
 
   arquivo << "### PARAMETERS VALUE ###" << endl;
-  arquivo << "### LATTICESIZE = " << LATTICESIZE << ", NSPECIE = " << NSPECIE << ", NRESOURCE = " << NRESOURCE;
-  arquivo << ", DEATHPROB = " << DEATHPROB << ", MUTATIONPROB = " << MUTATIONPROB << ", NRESOURCEDIST = " << NRESOURCEDIST;
+  arquivo << "### LATTICESIZE = " << LATTICESIZE << ", NSPECIE = " << NSPECIE << ", NRESOURCE = " << NRESOURCE << ", DEATHPROB = " << DEATHPROB;
+  arquivo << ", MUTATIONPROB = " << MUTATIONPROB << ", NRESOURCEDIST = " << NRESOURCEDIST << ", NPROPRIETY = " << NPROPRIETY;
   arquivo << ", MAXTIME = " << MAXTIME << ", TIMEINTERVAL = " << TIMEINTERVAL << ", NRUN = " << NRUN << " ###" << endl << endl;
   arquivo << "time; nSpecie; param" << endl;
   for (idxParam=0; idxParam < paramList.size(); idxParam++)
