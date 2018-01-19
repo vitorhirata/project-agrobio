@@ -2,6 +2,8 @@ class ambient{
 private:
   propriety* proprietyList;
   patch* grid;
+  int propRadix;
+  int propSizeRadix;
   void initializeGrid(void);
   void initializeProp(void);
   void UpdatePropriety(int prop);
@@ -9,8 +11,6 @@ private:
   void setGraph(void);
   void proprietyTrade(void);
   bool floatToRGB(int n, int* R, int* G, int* B);
-  int propRadix;
-  int propSizeRadix;
 public:
   int countSpecie(void);
   void iterate(void);
@@ -174,9 +174,9 @@ void ambient::proprietyTrade(void){
           maxSp = proprietyList[prop].maxSpecie;
         }
       }
+
       // Add specie and punctuation
-      proprietyList[i].availableSpecie.push_back(maxSp);
-      proprietyList[i].speciesPunctuation.push_back(maxValue);
+      proprietyList[i].addSpecie(maxSp, maxValue);
     }
   }
 }

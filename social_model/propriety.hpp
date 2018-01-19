@@ -2,9 +2,9 @@ class propriety{
 private:
   float probDistSigma(float x);
   std::vector<int> speciesChoosen;
-public:
   std::vector<int> availableSpecie;
   std::vector<float> speciesPunctuation;
+public:
   std::vector<int> proprietyConnection;
   float probInovation;
   int maxSpecie;
@@ -16,6 +16,7 @@ public:
   void chooseSpecie(void);
   boost::dynamic_bitset<> plantSpecie(void);
   void setSpecie(std::vector<int> sp, std::vector<float> spPunc);
+  void addSpecie(int sp, float spPunc);
 };
 
 void propriety::chooseSpecie(void){
@@ -51,6 +52,11 @@ void propriety::setSpecie(std::vector<int> sp, std::vector<float> spPunc){
   int idxMax = distance(speciesPunctuation.begin(), max_element(speciesPunctuation.begin(), speciesPunctuation.end()));
   maxSpecie = availableSpecie[idxMax];
   maxSpeciePunc = speciesPunctuation[idxMax];
+}
+
+void propriety::addSpecie(int sp, float spPunc){
+  availableSpecie.push_back(sp);
+  speciesPunctuation.push_back(spPunc);
 }
 
 float propriety::probDistSigma(float x){
