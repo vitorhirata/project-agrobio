@@ -2,21 +2,21 @@
 Here it's presented some tests of the model use.
 
 ## Simple Examples
-##### Test with the standard model. The source file is presented in 'standart1.csv'.
+##### Test with the standard model. The source file is presented in 'standard1.csv'.
 ```C
 ### PARAMETERS VALUE ###
 ### LATTICESIZE = 49, NSPECIE = 100, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0.001,
 ### NRESOURCEDIST = 49, NPROPRIETY = 49, MAXTIME = 10000, TIMEINTERVAL = 10, NRUN = 10
 ```
-![Model1](standart1.svg)
+![Model1](standard1.svg)
 
-##### Another test with standard model, now with no mutation and increased MAXTIME. The source file is presented in 'standart2.csv'.
+##### Another test with standard model, now with no mutation and increased MAXTIME. The source file is presented in 'standard2.csv'.
 ```C
 ### PARAMETERS VALUE ###
 ### LATTICESIZE = 49, NSPECIE = 100, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0,
 ### NRESOURCEDIST = 49, NPROPRIETY = 49, MAXTIME = 100000, TIMEINTERVAL = 100, NRUN = 10 ###
 ```
-![Model2](standart2.svg)
+![Model2](standard2.svg)
 
 ## Parameter Variation
 ##### LATTICESIZE variation (NRESOURCEDIST and NPROPRIETY set equal to actual LATTICESIZE).
@@ -59,7 +59,7 @@ Here it's presented some tests of the model use.
 ```
 ![NSPECIE Variation multiple resource](varParam_n.svg)
 
-##### Standart Plot
+##### standard Plot
 ```C
 ### PARAMETERS VALUE ###
 ### LATTICESIZE = 49, NSPECIE = 100, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0.001,

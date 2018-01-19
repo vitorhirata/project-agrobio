@@ -2,21 +2,21 @@
 Here it's presented some tests of the model use
 
 ## Simple Examples
-##### Test similar to the original model, multiple resource. The source file is presented in 'standart1.csv'. (model needs fix)
+##### Test similar to the original model, multiple resource. The source file is presented in 'standard1.csv'. (model needs fix)
 ```C
 ## PARAMETERS VALUE ##
 ## LATTICESIZE = 500, NSPECIE = 1000, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0,
 ## NRESOURCEDIST = 250000, MAXTIME = 1000000, TIMEINTERVAL = 10000, NRUN = 50
 ```
-![Model1](standart1.svg)
+![Model1](standard1.svg)
 
-##### Test similar to the original model, uniform resource. The source file is presented in 'standart2.csv'. (model needs fix)
+##### Test similar to the original model, uniform resource. The source file is presented in 'standard2.csv'. (model needs fix)
 ```C
 ## PARAMETERS VALUE ##
 ## LATTICESIZE = 500, NSPECIE = 1000, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0, NRESOURCEDIST = 1,
 ## MAXTIME = 1000000, TIMEINTERVAL = 10000, NRUN = 10
 ```
-![Model2](standart2.svg)
+![Model2](standard2.svg)
 
 ## Parameter Variation
 ##### LATTICESIZE variation (multiple resource LATTICESIZE^2).
@@ -67,7 +67,7 @@ Here it's presented some tests of the model use
 ```
 ![NSPECIE Variation multiple resource](varParam_n.svg)
 
-##### Standart Plot
+##### standard Plot
 ```C
 ## LATTICESIZE = 50, NSPECIE = 100, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0
 ## NRESOURCEDIST = 10, MAXTIME = 10000, TIMEINTERVAL = 100

@@ -1,15 +1,15 @@
 #include "header_bio.hpp"
 
 
-int Run_standart(void);
+int Run_standard(void);
 int Run_varParam(char param, std::vector<float> paramList);
 int Run_plot(void);
 
-// Run the standart model, saving a txt with the evolution of the number of species.
-int Run_standart(void){
+// Run the standard model, saving a txt with the evolution of the number of species.
+int Run_standard(void){
   std::vector<int> result(MAXTIME/TIMEINTERVAL,0);
   fstream arquivo;
-  arquivo.open("test/standart.csv",ios::out);
+  arquivo.open("test/standard.csv",ios::out);
   int i, j;
 
   // Rodo NRUN rodadas
@@ -155,8 +155,8 @@ int main(int argc, char *argv[]){
     case 's':
       if (argc > 2)
         cout << "WARNING: Number of input argument is invalid." << endl;
-      cout << "Running standart model" << endl;
-      Run_standart();
+      cout << "Running standard model" << endl;
+      Run_standard();
       break;
     case 'p':
       if (argc > 2)

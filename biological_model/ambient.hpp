@@ -161,7 +161,7 @@ int ambient::countSpecie(void){
 
 void ambient::printState(int t){
   BMP Image;
-  std::string name ("test/plot/standart");
+  std::string name ("test/plot/standard");
   int SIZE = 10;
   Image.SetSize(LATTICESIZE*SIZE,LATTICESIZE*SIZE);
   Image.SetBitDepth(8);
