@@ -72,4 +72,4 @@ Here it's presented some tests of the model use
 ## LATTICESIZE = 50, NSPECIE = 100, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0
 ## NRESOURCEDIST = 10, MAXTIME = 10000, TIMEINTERVAL = 100
 ```
-Click [here](Runplot.mp4) to see the video of an execucion of the program.
+Click <a href="https://github.com/vitorhirata/project-agrobio/raw/master/biological_model/examples/Runplot.avi" download> here </a> to download a video of an execution of the program.
