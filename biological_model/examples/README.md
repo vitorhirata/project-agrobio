@@ -70,6 +70,6 @@ Here it's presented some tests of the model use
 ##### standard Plot
 ```C
 ## LATTICESIZE = 50, NSPECIE = 100, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0
-## NRESOURCEDIST = 10, MAXTIME = 10000, TIMEINTERVAL = 100
+## NRESOURCEDIST = 4, MAXTIME = 5000, TIMEINTERVAL = 50
 ```
-Click <a href="https://github.com/vitorhirata/project-agrobio/raw/master/biological_model/examples/Runplot.avi" download> here </a> to download a video of an execution of the program.
+![Gif of Running Model](Runplot.gif)
