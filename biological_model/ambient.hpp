@@ -19,7 +19,7 @@ ambient::ambient(){
   }
 
   if (!(LATTICESIZE % NRESOURCEDIST == 0) && !(pow(sqrt(NRESOURCEDIST),2) == NRESOURCEDIST && LATTICESIZE % ((int) sqrt(NRESOURCEDIST)) == 0)){
-    cout << "Error: only accepted number of resources that fit LATTICESIZE or LATTICESIZE^2'." << endl;
+    cout << "Error: only accepted number of resources that fit LATTICESIZE or LATTICESIZE^2." << endl;
     exit(-1);
   }
 
@@ -53,8 +53,8 @@ ambient::ambient(){
   else if(LATTICESIZE % NRESOURCEDIST == 0){
     vector<vector<float> > res(NRESOURCEDIST, vector<float>(NRESOURCE));
     for (int i=0; i < NRESOURCEDIST; i++)
-    for (int j=0; j < NRESOURCE; j++)
-    res[i][j] = uniFLOAT(rand64);
+      for (int j=0; j < NRESOURCE; j++)
+        res[i][j] = uniFLOAT(rand64);
 
     int idx;
     for (int i = 0; i < LATTICESIZE; i++){
