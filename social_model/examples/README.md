@@ -59,10 +59,10 @@ Here it's presented some tests of the model use.
 ```
 ![NSPECIE Variation multiple resource](varParam_n.svg)
 
-##### standard Plot
+##### Standard Plot
 ```C
 ### PARAMETERS VALUE ###
-### LATTICESIZE = 49, NSPECIE = 100, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0.001,
-### NRESOURCEDIST = 49, NPROPRIETY = 49, MAXTIME = 10000, TIMEINTERVAL = 100
+### LATTICESIZE = 49, NSPECIE = 2, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0.001,
+### NRESOURCEDIST = 49, NPROPRIETY = 49, MAXTIME = 1000, TIMEINTERVAL = 10
 ```
-Click <a href="https://github.com/vitorhirata/project-agrobio/raw/master/social_model/examples/Runplot.avi" download> here </a> to download a video of an execution of the program.
+Click <a href="https://github.com/vitorhirata/project-agrobio/raw/master/social_model/examples/Runplot.gif" download> here </a> to download a video of an execution of the program.
