@@ -65,4 +65,4 @@ Here it's presented some tests of the model use.
 ### LATTICESIZE = 49, NSPECIE = 2, NRESOURCE = 3, DEATHPROB = 0.1, MUTATIONPROB = 0.001,
 ### NRESOURCEDIST = 49, NPROPRIETY = 49, MAXTIME = 1000, TIMEINTERVAL = 10
 ```
-Click <a href="https://github.com/vitorhirata/project-agrobio/raw/master/social_model/examples/Runplot.gif" download> here </a> to download a video of an execution of the program.
+![Gif of Running Model](Runplot.gif)
