@@ -17,8 +17,9 @@ ambient::ambient(){
     cout << "Error: grid alocation not successful." << endl;
     exit(-1);
   }
-  if (LATTICESIZE % NRESOURCEDIST != 0 && LATTICESIZE*LATTICESIZE % NRESOURCEDIST != 0){
-    cout << "Error: only accepted number of resources that are divisible by LATTICESIZE or LATTICESIZE^2'." << endl;
+
+  if (!(LATTICESIZE % NRESOURCEDIST == 0) && !(pow(sqrt(NRESOURCEDIST),2) == NRESOURCEDIST && LATTICESIZE % ((int) sqrt(NRESOURCEDIST)) == 0)){
+    cout << "Error: only accepted number of resources that fit LATTICESIZE or LATTICESIZE^2'." << endl;
     exit(-1);
   }
 
@@ -32,32 +33,34 @@ ambient::ambient(){
       }
     }
   }
-  else if(LATTICESIZE % NRESOURCEDIST == 0){
-    vector<vector<float> > res(NRESOURCEDIST, vector<float>(NRESOURCE));
-    for (int i=0; i < NRESOURCEDIST; i++)
-      for (int j=0; j < NRESOURCE; j++)
-        res[i][j] = uniFLOAT(rand64);
-
-    int idx;
-    for (int i = 0; i < LATTICESIZE; i++){
-      idx = i / (LATTICESIZE/NRESOURCEDIST);
-      for (int j = 0; j < LATTICESIZE; j++)
-        grid[i*LATTICESIZE+j].initialize(res[idx], boost::dynamic_bitset<> (NSPECIEBYTES,uniIntSP(rand64)));
-    }
-  }
-  else if (LATTICESIZE*LATTICESIZE % NRESOURCEDIST == 0){
+  else if (LATTICESIZE % ((int) sqrt(NRESOURCEDIST)) == 0){
     vector<vector<float> > res(NRESOURCEDIST, vector<float>(NRESOURCE));
     for (int i=0; i < NRESOURCEDIST; i++)
       for (int j=0; j < NRESOURCE; j++)
         res[i][j] = uniFLOAT(rand64);
 
     int idxX, idxY;
+    int sizeS = LATTICESIZE / sqrt(NRESOURCEDIST);
     for (int i = 0; i < LATTICESIZE; i++){
-      idxX = i / (LATTICESIZE/(NRESOURCEDIST/2));
+      idxX = i / sizeS;
       for (int j = 0; j < LATTICESIZE; j++){
-        idxY = j / (LATTICESIZE/(NRESOURCEDIST/2));
-        grid[i*LATTICESIZE+j].initialize(res[idxX*(NRESOURCEDIST/2)+idxY], boost::dynamic_bitset<> (NSPECIEBYTES,uniIntSP(rand64)));
+        idxY = j / sizeS;
+        grid[i*LATTICESIZE+j].initialize(res[idxX*sqrt(NRESOURCEDIST)+idxY], boost::dynamic_bitset<> (NSPECIEBYTES,uniIntSP(rand64)));
       }
+    }
+  }
+
+  else if(LATTICESIZE % NRESOURCEDIST == 0){
+    vector<vector<float> > res(NRESOURCEDIST, vector<float>(NRESOURCE));
+    for (int i=0; i < NRESOURCEDIST; i++)
+    for (int j=0; j < NRESOURCE; j++)
+    res[i][j] = uniFLOAT(rand64);
+
+    int idx;
+    for (int i = 0; i < LATTICESIZE; i++){
+      idx = i / (LATTICESIZE/NRESOURCEDIST);
+      for (int j = 0; j < LATTICESIZE; j++)
+      grid[i*LATTICESIZE+j].initialize(res[idx], boost::dynamic_bitset<> (NSPECIEBYTES,uniIntSP(rand64)));
     }
   }
 }
