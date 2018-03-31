@@ -6,7 +6,7 @@ public:
   bool filed;
   boost::dynamic_bitset<> specie; // binary array
   void initializePt(std::vector<float> res, boost::dynamic_bitset<> sp);
-  float punctuation(void);
+  float Fitness(void);
   void kill(void);
   void fill(boost::dynamic_bitset<> newSpecie);
 };
@@ -18,12 +18,12 @@ void patch::initializePt(std::vector<float> res, boost::dynamic_bitset<> sp){
   filed = true;
 }
 
-float patch::punctuation(void){
+float patch::Fitness(void){
   float value;
   if (filed == false)
     return 0;
   int sp = specie.to_ulong();
-  value = 0.5 * VAR[sp].taste + 0.5 * VAR[sp].calculateFitness(resource);
+  value = VAR[sp].calculateFitness(resource);
   return value;
 }
 

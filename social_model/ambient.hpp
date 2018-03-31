@@ -61,15 +61,9 @@ void ambient::initializeProp(void){
   int propRadixR = round(sqrt(NPROPRIETY));
   if(propRadixR*propRadixR == NPROPRIETY && LATTICESIZE % propRadixR == 0){
     int propSizeRadix = LATTICESIZE/propRadixR;
-    for(int Col = 0; Col < propRadixR; Col++){
-      for(int Lin = 0; Lin < propRadixR; Lin++){
-        proprietyList[Col*propRadixR+Lin].LimO = Lin*propSizeRadix;
-        proprietyList[Col*propRadixR+Lin].LimL = Lin*propSizeRadix + propSizeRadix - 1;
-        proprietyList[Col*propRadixR+Lin].LimN = Col*propSizeRadix;
-        proprietyList[Col*propRadixR+Lin].LimS = Col*propSizeRadix + propSizeRadix - 1;
-        proprietyList[Col*propRadixR+Lin].probInovation = gauss(rand64) - 0.5;
-      }
-    }
+    for(int Col = 0; Col < propRadixR; Col++)
+      for(int Lin = 0; Lin < propRadixR; Lin++)
+        proprietyList[Col*propRadixR+Lin].proprietyConstruct(Lin, Col);
   }
   else{
     cout << "ERROR: NPROPRIETY should be a perfect square and multiple of LATTICESIZE" << endl;
@@ -139,7 +133,7 @@ void ambient::UpdatePropriety(int prop){
     for(int j = proprietyList[prop].LimO; j < proprietyList[prop].LimL+1; j++){
       int sp=grid[i*LATTICESIZE+j].specie.to_ulong();
       totalSpecie[sp]++;
-      speciePunctuation[sp] += grid[i*LATTICESIZE+j].punctuation();
+      speciePunctuation[sp] += ((proprietyList[prop].weight[0]+proprietyList[prop].weight[1])*grid[i*LATTICESIZE+j].Fitness() + (proprietyList[prop].weight[2]+proprietyList[prop].weight[3])*(1-abs(proprietyList[prop].personalPref-VAR[sp].appearance)));
     }
 
   std::vector<int> totalSpClear;

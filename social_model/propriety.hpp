@@ -6,18 +6,36 @@ private:
   std::vector<float> speciesPunctuation;
 public:
   std::vector<int> proprietyConnection;
-  float probInovation;
-  int maxSpecie;
-  float maxSpeciePunc;
+
   int LimN;
   int LimS;
   int LimL;
   int LimO;
+  float probInovation;
+  float personalPref;
+  float weight[4];
+  int maxSpecie;
+  float maxSpeciePunc;
   void chooseSpecie(void);
   boost::dynamic_bitset<> plantSpecie(void);
   void setSpecie(std::vector<int> sp, std::vector<float> spPunc);
   void addSpecie(int sp, float spPunc);
+  void proprietyConstruct(int xInit, int yInit);
 };
+
+void propriety::proprietyConstruct(int xInit, int yInit){
+  int propSizeRadix = LATTICESIZE/sqrt(NPROPRIETY);
+  LimO = xInit*propSizeRadix;
+  LimL = xInit*propSizeRadix + propSizeRadix - 1;
+  LimN = yInit*propSizeRadix;
+  LimS = yInit*propSizeRadix + propSizeRadix - 1;
+  probInovation = gauss(rand64) - 0.5;
+  personalPref = uniFLOAT(rand64);
+  weight[0] = gauss(rand64)-0.75;
+  weight[1] = gauss(rand64)-0.75;
+  weight[2] = gauss(rand64)-0.75;
+  weight[3] = 1 - weight[0] - weight[1] - weight[2];
+}
 
 void propriety::chooseSpecie(void){
   int PropSize = (1+LimL-LimO)*(1+LimL-LimO);

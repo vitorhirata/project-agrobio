@@ -2,7 +2,7 @@ class variety{
 private:
   std::vector<float> K;
 public:
-  float taste;
+  float appearance;
   float calculateFitness(std::vector<float> resource);
   variety();
 };
@@ -10,7 +10,7 @@ public:
 variety::variety(){
   for (int j = 0; j < NRESOURCE; j++)
     K.push_back(gauss(rand64));
-  taste = gauss(rand64)-0.5;
+  appearance = uniFLOAT(rand64);
 }
 
 // Return the fitness of the population living in the site. Computed using the Monod equation.
