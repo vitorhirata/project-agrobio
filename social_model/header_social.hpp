@@ -4,7 +4,7 @@
 #include <vector>
 #include <ctime> // count time of run
 #include <string>
-#include <boost/dynamic_bitset.hpp> // binary species
+#include <algorithm>
 #include "EasyBMP.cpp" // BITMAP
 using namespace std;
 
@@ -14,8 +14,7 @@ float MUTATIONPROB = 0.00001; // mutation probability (ambient parameter)
 int NSPECIE = 40; // number of species (ambient parameter)
 int NRESOURCEDIST = LATTICESIZE; // number of different resource vector in grid (ambient parameter)
 const float CONNECTIONPROB = 0.001;
-const int NSPECIEBYTES = 7; // number of bytes to represent species (patch parameter)
-const int NMAXSPECIE = pow(2, NSPECIEBYTES);
+const int NMAXSPECIE = 150;
 const int NRESOURCE = 3;// number of resources (ambient/patch parameter)
 int NPROPRIETY = LATTICESIZE;
 const int MAXTIME = 1000; // maximum time (model-social parameter)
@@ -26,7 +25,7 @@ const int NRUN = 10;  // number of runs to average (model-social parameter)
 /* Imported functions */
 static std::random_device rd;
 static std::mt19937_64 rand64(rd());
-static std::uniform_int_distribution<long> uniIntNSPB(0,NSPECIEBYTES-1);
+static std::uniform_int_distribution<long> uniIntNSP(1,NMAXSPECIE);
 static std::uniform_int_distribution<long> uniIntSP(1,NSPECIE);
 static std::uniform_int_distribution<long> uniIntne(0,4 - 1);
 static std::uniform_real_distribution<double> uniFLOAT(0.0,1.0);

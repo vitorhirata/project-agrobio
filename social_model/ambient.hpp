@@ -89,7 +89,7 @@ void ambient::initializeGrid(void){
       for (int j = 0; j < LATTICESIZE; j++){
         for(int k=0; k < NRESOURCE; k++)
           res[k] = uniFLOAT(rand64);
-        grid[i*LATTICESIZE+j].initializePt(res, boost::dynamic_bitset<> (NSPECIEBYTES,45*uniIntSP(rand64)));
+        grid[i*LATTICESIZE+j].initializePt(res, uniIntSP(rand64));
       }
     }
   }
@@ -105,7 +105,7 @@ void ambient::initializeGrid(void){
       idxX = i / sizeS;
       for (int j = 0; j < LATTICESIZE; j++){
         idxY = j / sizeS;
-        grid[i*LATTICESIZE+j].initializePt(res[idxX*sqrt(NRESOURCEDIST)+idxY], boost::dynamic_bitset<> (NSPECIEBYTES,45*uniIntSP(rand64)));
+        grid[i*LATTICESIZE+j].initializePt(res[idxX*sqrt(NRESOURCEDIST)+idxY], uniIntSP(rand64));
       }
     }
   }
@@ -120,7 +120,7 @@ void ambient::initializeGrid(void){
     for (int i = 0; i < LATTICESIZE; i++){
       idx = i / (LATTICESIZE/NRESOURCEDIST);
       for (int j = 0; j < LATTICESIZE; j++)
-        grid[i*LATTICESIZE+j].initializePt(res[idx], boost::dynamic_bitset<> (NSPECIEBYTES,45*uniIntSP(rand64)));
+        grid[i*LATTICESIZE+j].initializePt(res[idx], uniIntSP(rand64));
     }
   }
 }
@@ -131,14 +131,14 @@ void ambient::UpdatePropriety(int prop){
 
   for(int i = proprietyList[prop].LimN; i < proprietyList[prop].LimS+1; i++)
     for(int j = proprietyList[prop].LimO; j < proprietyList[prop].LimL+1; j++){
-      int sp=grid[i*LATTICESIZE+j].specie.to_ulong();
+      int sp=grid[i*LATTICESIZE+j].specie;
 
-      if(uniFLOAT(rand64) < VAR[sp].resistence*(1-grid[i*LATTICESIZE+j].Fitness())){
+      if(uniFLOAT(rand64) < VAR[sp-1].resistence*(1-grid[i*LATTICESIZE+j].Fitness())){
         grid[i*LATTICESIZE+j].kill();
       }
       else{
         totalSpecie[sp]++;
-        speciePunctuation[sp] += ((proprietyList[prop].weight[0]+proprietyList[prop].weight[1])*grid[i*LATTICESIZE+j].Fitness() + (proprietyList[prop].weight[2]+proprietyList[prop].weight[3])*(1-abs(proprietyList[prop].personalPref-VAR[sp].appearance)));
+        speciePunctuation[sp] += ((proprietyList[prop].weight[0]+proprietyList[prop].weight[1])*grid[i*LATTICESIZE+j].Fitness() + (proprietyList[prop].weight[2]+proprietyList[prop].weight[3])*(1-abs(proprietyList[prop].personalPref-VAR[sp-1].appearance)));
       }
     }
 
@@ -213,7 +213,7 @@ int ambient::countSpecie(void){
 
   for(int i=0;i<LATTICESIZE;i++)
     for(int j=0;j<LATTICESIZE;j++){
-      int sp=grid[i*LATTICESIZE+j].specie.to_ulong();
+      int sp=grid[i*LATTICESIZE+j].specie;
       if(!alreadyExist[sp]){
         alreadyExist[sp] = true;
         nDifferentS++;
@@ -239,7 +239,7 @@ void ambient::printState(int t){
 
   for(int i=0;i<LATTICESIZE;i++){
     for(int j=0;j<LATTICESIZE;j++){
-      int sp  = grid[i*LATTICESIZE+j].specie.to_ulong();
+      int sp  = grid[i*LATTICESIZE+j].specie;
       floatToRGB(sp, &r, &g, &b);
       for(int x = 0; x < SIZE; x++)
         for(int y = 0; y < SIZE; y++){

@@ -17,7 +17,7 @@ public:
   int maxSpecie;
   float maxSpeciePunc;
   void chooseSpecie(void);
-  boost::dynamic_bitset<> plantSpecie(void);
+  int plantSpecie(void);
   void setSpecie(std::vector<int> sp, std::vector<float> spPunc);
   void addSpecie(int sp, float spPunc);
   void proprietyConstruct(int xInit, int yInit);
@@ -65,7 +65,7 @@ void propriety::setSpecie(std::vector<int> sp, std::vector<float> spPunc){
   availableSpecie = sp;
   speciesPunctuation = spPunc;
 
-  int idxMax = distance(speciesPunctuation.begin(), max_element(speciesPunctuation.begin(), speciesPunctuation.end()));
+  int idxMax = distance(speciesPunctuation.begin(), std::max_element(speciesPunctuation.begin(), speciesPunctuation.end()));
   maxSpecie = availableSpecie[idxMax];
   maxSpeciePunc = speciesPunctuation[idxMax];
 }
@@ -76,12 +76,11 @@ void propriety::addSpecie(int sp, float spPunc){
 }
 
 
-boost::dynamic_bitset<> propriety::plantSpecie(void){
-  boost::dynamic_bitset<> cSp(NSPECIEBYTES, speciesChoosen.back());
+int propriety::plantSpecie(void){
+  int sp = speciesChoosen.back();
   speciesChoosen.pop_back();
   if (uniFLOAT(rand64) < MUTATIONPROB){
-    int temp = uniIntNSPB(rand64);
-    cSp[temp] = !cSp[temp];
+    sp = uniIntNSP(rand64);
   }
-  return cSp;
+  return sp;
 }
