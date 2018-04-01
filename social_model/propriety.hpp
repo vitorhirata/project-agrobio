@@ -64,8 +64,6 @@ void propriety::chooseSpecie(void){
 void propriety::setSpecie(std::vector<int> sp, std::vector<float> spPunc){
   availableSpecie = sp;
   speciesPunctuation = spPunc;
-  for(int i = 0; i < speciesPunctuation.size(); i++)
-    speciesPunctuation[i] = probDistSigma(speciesPunctuation[i]);
 
   int idxMax = distance(speciesPunctuation.begin(), max_element(speciesPunctuation.begin(), speciesPunctuation.end()));
   maxSpecie = availableSpecie[idxMax];
@@ -77,10 +75,6 @@ void propriety::addSpecie(int sp, float spPunc){
   speciesPunctuation.push_back(spPunc);
 }
 
-float propriety::probDistSigma(float x){
-  // A = B*u/(1+u), B = 1/(u/(1+u)+(m-u)/(1+m-u)), u=2.5, m=5.
-  return  0.5+0.7*(5*x-2.5)/(1+abs(5*x-2.5));
-}
 
 boost::dynamic_bitset<> propriety::plantSpecie(void){
   boost::dynamic_bitset<> cSp(NSPECIEBYTES, speciesChoosen.back());
