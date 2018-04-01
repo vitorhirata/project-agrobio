@@ -23,7 +23,7 @@ int Run_standard(void){
   }
 
   arquivo << "### PARAMETERS VALUE ###" << endl;
-  arquivo << "### LATTICESIZE = " << LATTICESIZE << ", NSPECIE = " << NSPECIE << ", NRESOURCE = " << NRESOURCE << ", DEATHPROB = " << DEATHPROB;
+  arquivo << "### LATTICESIZE = " << LATTICESIZE << ", NSPECIE = " << NSPECIE << ", NRESOURCE = " << NRESOURCE;
   arquivo << ", MUTATIONPROB = " << MUTATIONPROB << ", NRESOURCEDIST = " << NRESOURCEDIST << ", NPROPRIETY = " << NPROPRIETY;
   arquivo << ", MAXTIME = " << MAXTIME << ", TIMEINTERVAL = " << TIMEINTERVAL << ", NRUN = " << NRUN << " ###" << endl << endl;
   arquivo << "time; nSpecie" << endl;
@@ -52,7 +52,7 @@ int Run_plot(void){
 
 
   arquivo << "### PARAMETERS VALUE ###" << endl;
-  arquivo << "### LATTICESIZE = " << LATTICESIZE << ", NSPECIE = " << NSPECIE << ", NRESOURCE = " << NRESOURCE << ", DEATHPROB = " << DEATHPROB;
+  arquivo << "### LATTICESIZE = " << LATTICESIZE << ", NSPECIE = " << NSPECIE << ", NRESOURCE = " << NRESOURCE;
   arquivo << ", MUTATIONPROB = " << MUTATIONPROB << ", NRESOURCEDIST = " << NRESOURCEDIST << ", NPROPRIETY = " << NPROPRIETY;
   arquivo << ", MAXTIME = " << MAXTIME << ", TIMEINTERVAL = " << TIMEINTERVAL << ", NRUN = " << NRUN << " ###" << endl << endl;
   arquivo << "time; nSpecie" << endl;
@@ -64,8 +64,8 @@ int Run_plot(void){
 
 // Run the model for some parameter varying, saving a txt with the evolution of the number of species for each parameter value.
 int Run_varParam(char param, std::vector<float> paramList){
-  if (param != 'm' && param != 'u' && param != 'L' && param != 'n' && param != 'r'){
-    cout << "Invalid parameter, only m, u, L, n and r can vary." << endl;
+  if (param != 'm' && param != 'L' && param != 'n' && param != 'r'){
+    cout << "Invalid parameter, only m, L, n and r can vary." << endl;
     return -1;
   }
 
@@ -78,9 +78,6 @@ int Run_varParam(char param, std::vector<float> paramList){
     switch (param){
       case 'm':
         MUTATIONPROB=paramList[idxParam];
-        break;
-      case 'u':
-        DEATHPROB=paramList[idxParam];
         break;
       case 'L':
         LATTICESIZE=paramList[idxParam];
@@ -113,7 +110,7 @@ int Run_varParam(char param, std::vector<float> paramList){
   }
 
   arquivo << "### PARAMETERS VALUE ###" << endl;
-  arquivo << "### LATTICESIZE = " << LATTICESIZE << ", NSPECIE = " << NSPECIE << ", NRESOURCE = " << NRESOURCE << ", DEATHPROB = " << DEATHPROB;
+  arquivo << "### LATTICESIZE = " << LATTICESIZE << ", NSPECIE = " << NSPECIE << ", NRESOURCE = " << NRESOURCE;
   arquivo << ", MUTATIONPROB = " << MUTATIONPROB << ", NRESOURCEDIST = " << NRESOURCEDIST << ", NPROPRIETY = " << NPROPRIETY;
   arquivo << ", MAXTIME = " << MAXTIME << ", TIMEINTERVAL = " << TIMEINTERVAL << ", NRUN = " << NRUN << " ###" << endl << endl;
   arquivo << "time; nSpecie; param" << endl;

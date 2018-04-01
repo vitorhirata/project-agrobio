@@ -132,8 +132,14 @@ void ambient::UpdatePropriety(int prop){
   for(int i = proprietyList[prop].LimN; i < proprietyList[prop].LimS+1; i++)
     for(int j = proprietyList[prop].LimO; j < proprietyList[prop].LimL+1; j++){
       int sp=grid[i*LATTICESIZE+j].specie.to_ulong();
-      totalSpecie[sp]++;
-      speciePunctuation[sp] += ((proprietyList[prop].weight[0]+proprietyList[prop].weight[1])*grid[i*LATTICESIZE+j].Fitness() + (proprietyList[prop].weight[2]+proprietyList[prop].weight[3])*(1-abs(proprietyList[prop].personalPref-VAR[sp].appearance)));
+
+      if(uniFLOAT(rand64) < VAR[sp].resistence*(1-grid[i*LATTICESIZE+j].Fitness())){
+        grid[i*LATTICESIZE+j].kill();
+      }
+      else{
+        totalSpecie[sp]++;
+        speciePunctuation[sp] += ((proprietyList[prop].weight[0]+proprietyList[prop].weight[1])*grid[i*LATTICESIZE+j].Fitness() + (proprietyList[prop].weight[2]+proprietyList[prop].weight[3])*(1-abs(proprietyList[prop].personalPref-VAR[sp].appearance)));
+      }
     }
 
   std::vector<int> totalSpClear;
@@ -190,11 +196,6 @@ void ambient::replant(void){
 
 // Iterate one time, passing over all the sites of the grid.
 void ambient::iterate(void){
-
-  for(int i=0;i<LATTICESIZE;i++)
-    for(int j=0;j<LATTICESIZE;j++)
-      if(uniFLOAT(rand64) < DEATHPROB)
-        grid[i*LATTICESIZE+j].kill();
 
   for(int i = 0; i < NPROPRIETY; i++){
     UpdatePropriety(i);

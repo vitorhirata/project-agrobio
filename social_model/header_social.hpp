@@ -10,16 +10,15 @@ using namespace std;
 
 /* Model Parameters */
 int LATTICESIZE = 49; //  size of the lattice (ambient parameter)
-float DEATHPROB = 0.1; // death probability (ambient parameter)
-float MUTATIONPROB = 0.001; // mutation probability (ambient parameter)
-int NSPECIE = 100; // number of species (ambient parameter)
+float MUTATIONPROB = 0.00001; // mutation probability (ambient parameter)
+int NSPECIE = 40; // number of species (ambient parameter)
 int NRESOURCEDIST = LATTICESIZE; // number of different resource vector in grid (ambient parameter)
-const float CONNECTIONPROB = 0.1;
+const float CONNECTIONPROB = 0.001;
 const int NSPECIEBYTES = 7; // number of bytes to represent species (patch parameter)
 const int NMAXSPECIE = pow(2, NSPECIEBYTES);
 const int NRESOURCE = 3;// number of resources (ambient/patch parameter)
 int NPROPRIETY = LATTICESIZE;
-const int MAXTIME = 100000; // maximum time (model-social parameter)
+const int MAXTIME = 1000; // maximum time (model-social parameter)
 const int TIMEINTERVAL = 100; // tic interval in time (model-social parameter)
 const int NRUN = 10;  // number of runs to average (model-social parameter)
 
@@ -32,6 +31,7 @@ static std::uniform_int_distribution<long> uniIntSP(1,NSPECIE);
 static std::uniform_int_distribution<long> uniIntne(0,4 - 1);
 static std::uniform_real_distribution<double> uniFLOAT(0.0,1.0);
 static std::normal_distribution<double> gauss(1.0,0.1);
+static std::normal_distribution<double> gaussResistence(0.5,0.15);
 
 /* Builted class and functions */
 class patch;

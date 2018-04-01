@@ -3,6 +3,7 @@ private:
   std::vector<float> K;
 public:
   float appearance;
+  float resistence;
   float calculateFitness(std::vector<float> resource);
   variety();
 };
@@ -11,6 +12,7 @@ variety::variety(){
   for (int j = 0; j < NRESOURCE; j++)
     K.push_back(gauss(rand64));
   appearance = uniFLOAT(rand64);
+  resistence = gaussResistence(rand64);
 }
 
 // Return the fitness of the population living in the site. Computed using the Monod equation.
