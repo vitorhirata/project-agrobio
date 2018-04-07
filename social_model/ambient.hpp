@@ -165,12 +165,12 @@ void ambient::proprietyTrade(void){
 
   for(int i = 0; i < NPROPRIETY; i++){
     x = x_list[i];
-    if (uniFLOAT(rand64) < proprietyList[i].probInovation){
+    if (uniFLOAT(rand64) < proprietyList[x].probInovation){
       // Select the specie with better punctuation along the proprietyConnection list
       maxValue = 0;
-      size = proprietyList[i].proprietyConnection.size();
+      size = proprietyList[x].proprietyConnection.size();
       for(int j = 0; j < size; j++){
-        prop = proprietyList[i].proprietyConnection[j];
+        prop = proprietyList[x].proprietyConnection[j];
         if (proprietyList[prop].maxSpeciePunc > maxValue){
           maxValue = proprietyList[prop].maxSpeciePunc;
           maxSp = proprietyList[prop].maxSpecie;
@@ -178,7 +178,7 @@ void ambient::proprietyTrade(void){
       }
 
       // Add specie and punctuation
-      proprietyList[i].addSpecie(maxSp, maxValue);
+      proprietyList[x].addSpecie(maxSp, maxValue);
     }
   }
 }
@@ -197,11 +197,13 @@ void ambient::replant(void){
 // Iterate one time, passing over all the sites of the grid.
 void ambient::iterate(void){
 
-  for(int i = 0; i < NPROPRIETY; i++){
+  for(int i = 0; i < NPROPRIETY; i++)
     UpdatePropriety(i);
-    proprietyList[i].chooseSpecie();
-  }
+
   proprietyTrade();
+  for(int i = 0; i < NPROPRIETY; i++)
+    proprietyList[i].chooseSpecie();
+
   replant();
 }
 
