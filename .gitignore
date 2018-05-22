@@ -1,3 +1,4 @@
 biological_model/test
-social_model/test
+test/
+examples/
 *.out

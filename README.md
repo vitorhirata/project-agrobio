@@ -2,3 +2,11 @@
 
 ## About
 This is a project I am doing at my Master in Complex System at Universidade de São Paulo (USP), regarding emergence and maintenance of agrobiodiversity in traditional communities. This project will analyse three different dynamics, to study their importance for agrobiodiversity: the social dynamics (ex. seed exchange networks), biologic dynamics (ex. productivity, adaptivity) and the individual criteria for seed selection (ex. cultural importance, size of useful parts). For more information consult this [Master's Project](Masters_Project.pdf) (in portuguese). To see the biological model click [here](biological_model/) and to see the social model click [here](social_model/).
+
+
+## TODO
+- Improve comments and code readability.
+- Improve propriety::chooseSpecie method, maybe using decision theory.
+- Search about the correct value of MUTATIONPROB and update it.
+- Use some risk model and add this property to each specie.
+- Read more case studies.
