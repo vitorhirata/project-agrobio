@@ -8,7 +8,6 @@ private:
   void initializeProp(void);
   void UpdatePropriety(int prop);
   void replant(void);
-  void setGraph(void);
   void proprietyTrade(void);
   bool floatToRGB(int n, int* R, int* G, int* B);
 public:
@@ -24,30 +23,6 @@ ambient::ambient(){
   propSizeRadix = LATTICESIZE / propRadix;
   initializeGrid();
   initializeProp();
-  setGraph();
-}
-
-void ambient::setGraph(void){
-  bool adjMatrix[NPROPRIETY*NPROPRIETY];
-
-  for (int i = 0; i < NPROPRIETY; i++) {
-    for (int j = 0; j < i; j++){
-      if (uniFLOAT(rand64) < CONNECTIONPROB)
-        adjMatrix[i*NPROPRIETY+j] = true;
-    }
-    adjMatrix[i*NPROPRIETY+i] = false;
-  }
-  for (int i = 0; i < NPROPRIETY; i++)
-    for (int j = i+1; j < NPROPRIETY; j++)
-      adjMatrix[i*NPROPRIETY+j] = adjMatrix[j*NPROPRIETY+i];
-
-  for (int i = 0; i < NPROPRIETY; i++) {
-    std::vector<int> propConnection;
-    for (int j = 0; j < NPROPRIETY; j++)
-      if (adjMatrix[i*NPROPRIETY+j] == true)
-        propConnection.push_back(j);
-    proprietyList[i].proprietyConnection = propConnection;
-  }
 }
 
 
@@ -138,7 +113,7 @@ void ambient::UpdatePropriety(int prop){
       }
       else{
         totalSpecie[sp]++;
-        speciePunctuation[sp] += ((proprietyList[prop].weight[0]+proprietyList[prop].weight[1])*grid[i*LATTICESIZE+j].Fitness() + (proprietyList[prop].weight[2]+proprietyList[prop].weight[3])*(1-abs(proprietyList[prop].personalPref-VAR[sp-1].appearance)));
+        speciePunctuation[sp] += (ALPHA*grid[i*LATTICESIZE+j].Fitness() + (1-ALPHA)*(1-abs(proprietyList[prop].personalPref-VAR[sp-1].appearance)));
       }
     }
 
@@ -151,36 +126,6 @@ void ambient::UpdatePropriety(int prop){
       totalSpClear.push_back(i);
     }
   proprietyList[prop].setSpecie(totalSpClear, spPuncClear);
-}
-
-void ambient::proprietyTrade(void){
-  int x, size, prop, maxSp, maxValue;
-  std::vector<int> x_list(NPROPRIETY);
-
-  // Initialize the list over which the program will pass updating the program.
-  for(int i = 0; i < NPROPRIETY; i++)
-    x_list[i] = i;
-  std::random_shuffle(x_list.begin(),x_list.end());
-
-
-  for(int i = 0; i < NPROPRIETY; i++){
-    x = x_list[i];
-    if (uniFLOAT(rand64) < proprietyList[x].probInovation){
-      // Select the specie with better punctuation along the proprietyConnection list
-      maxValue = 0;
-      size = proprietyList[x].proprietyConnection.size();
-      for(int j = 0; j < size; j++){
-        prop = proprietyList[x].proprietyConnection[j];
-        if (proprietyList[prop].maxSpeciePunc > maxValue){
-          maxValue = proprietyList[prop].maxSpeciePunc;
-          maxSp = proprietyList[prop].maxSpecie;
-        }
-      }
-
-      // Add specie and punctuation
-      proprietyList[x].addSpecie(maxSp, maxValue);
-    }
-  }
 }
 
 void ambient::replant(void){
@@ -199,8 +144,6 @@ void ambient::iterate(void){
 
   for(int i = 0; i < NPROPRIETY; i++)
     UpdatePropriety(i);
-
-  proprietyTrade();
   for(int i = 0; i < NPROPRIETY; i++)
     proprietyList[i].chooseSpecie();
 
