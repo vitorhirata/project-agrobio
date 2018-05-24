@@ -90,6 +90,7 @@ int Run_varParam(char param, std::vector<float> paramList){
           exit(-1);
         }
         NSPECIE=paramList[idxParam];
+        uniIntSP.param(std::uniform_int_distribution<long>::param_type(0, NSPECIE));
         break;
       case 'r':
         NRESOURCEDIST = paramList[idxParam];
