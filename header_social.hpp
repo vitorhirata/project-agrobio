@@ -10,16 +10,16 @@ using namespace std;
 
 /* Model Parameters */
 int LATTICESIZE = 49; //  size of the lattice (ambient parameter)
-float MUTATIONPROB = 0.00001; // mutation probability (ambient parameter)
-int NSPECIE = 40; // number of species (ambient parameter)
-int NRESOURCEDIST = LATTICESIZE; // number of different resource vector in grid (ambient parameter)
+float MUTATIONPROB = 0.0001; // mutation probability (ambient parameter)
+int NSPECIE = 50; // number of species (ambient parameter)
+int NRESOURCEDIST = 1; // number of different resource vector in grid (ambient parameter)
 float ALPHA = 1.0;
-const int NMAXSPECIE = 150;
+const int NMAXSPECIE = 100;
 const int NRESOURCE = 3;// number of resources (ambient/patch parameter)
 int NPROPRIETY = LATTICESIZE;
-const int MAXTIME = 1000; // maximum time (model-social parameter)
+const int MAXTIME = 10000; // maximum time (model-social parameter)
 const int TIMEINTERVAL = 100; // tic interval in time (model-social parameter)
-const int NRUN = 10;  // number of runs to average (model-social parameter)
+const int NRUN = 15;  // number of runs to average (model-social parameter)
 
 
 /* Imported functions */
