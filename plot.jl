@@ -13,11 +13,19 @@ df = readtable(input_file, separator = ';', skipstart=3)
 if mode == "simple"
     p = plot(df, x=:time, y=:nSpecie, Geom.line)
 elseif mode == "multiple"
-    p = plot(df, x=:time, y=:nSpecie, color=:param, Geom.line, Scale.color_discrete(), Guide.colorkey(param))
+    p = plot(df, x=:time, y=:nSpecie, color=:param, Geom.line, Scale.color_discrete(), Guide.colorkey(param), Guide.xlabel("Tempo"), Guide.ylabel("Numero de Variedades"))
 else
     println("Error, please enter a valid mode.")
     exit(-1)
 end
 
-draw(SVG(output_file, 15cm, 9cm), p)
+draw(SVG(output_file, 15cm, 10cm), p)
 println("Image $(output_file) successfully generated.")
+
+
+# using Gadfly
+# using DataFrames
+# df = readtable("test/plot/Runplot_dist.csv", separator = ';')
+# plot(df[df[:time] .== 9000,:], x="nVar", Geom.histogram)
+#
+#
