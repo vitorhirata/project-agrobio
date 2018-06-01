@@ -7,7 +7,7 @@ int Run_plot(void);
 int Run_standard(void){
   std::vector<int> result(MAXTIME/TIMEINTERVAL,0);
   fstream arquivo;
-  arquivo.open("test/standard.csv",ios::out);
+  arquivo.open("test/Runplot.csv",ios::out);
   int i, j;
 
   // Rodo NRUN rodadas
@@ -24,8 +24,9 @@ int Run_standard(void){
 
   arquivo << "### PARAMETERS VALUE ###" << endl;
   arquivo << "### LATTICESIZE = " << LATTICESIZE << ", NSPECIE = " << NSPECIE << ", NRESOURCE = " << NRESOURCE;
-  arquivo << ", MUTATIONPROB = " << MUTATIONPROB << ", NRESOURCEDIST = " << NRESOURCEDIST << ", NPROPRIETY = " << NPROPRIETY;
-  arquivo << ", MAXTIME = " << MAXTIME << ", TIMEINTERVAL = " << TIMEINTERVAL << ", NRUN = " << NRUN << " ###" << endl << endl;
+  arquivo << ", MUTATIONPROB = " << MUTATIONPROB << ", NRESOURCEDIST = " << NRESOURCEDIST << ", ALPHA = " << ALPHA;
+  arquivo << ", NPROPRIETY = " << NPROPRIETY << ", MAXTIME = " << MAXTIME << ", TIMEINTERVAL = " << TIMEINTERVAL << ", NRUN = " << NRUN;
+  arquivo << " ###" << endl << endl;
   arquivo << "time; nSpecie" << endl;
   for (int t = 0; t < MAXTIME/TIMEINTERVAL; t++)
     arquivo << t*TIMEINTERVAL << "; " << result[t]/NRUN << endl;
@@ -34,31 +35,58 @@ int Run_standard(void){
 }
 
 int Run_plot(void){
-  std::vector<int> result(MAXTIME/TIMEINTERVAL,0);
-  fstream arquivo;
+  std::vector<int> numberSpecie(MAXTIME/TIMEINTERVAL,0);
+  std::vector<int> spDistribution(NPROPRIETY*(MAXTIME/TIMEINTERVAL), 0);
+  std::vector<int> spDistributionTemp(NPROPRIETY, 0);
+  fstream arquivo, dist;
   arquivo.open("test/plot/Runplot.csv",ios::out);
+  dist.open("test/plot/Runplot_dist.csv",ios::out);
   int i, j;
+  std::vector<int> tList = {0, 1, 10, 100, 1000, 2500, 5000, 9999};
 
   ambient model;
   clock_t tStart = clock();
-  for (int t=0; t < MAXTIME; t++){
-    if (t % TIMEINTERVAL == 0){
-      result[t/TIMEINTERVAL] += model.countSpecie();
-      model.printState(t);
-    }
+
+  // Initial writing
+  numberSpecie[0] += model.countSpecie();
+  model.printState(0);
+  spDistributionTemp = model.countSpecieProp0();
+  for (int i = 0; i < NPROPRIETY; i++)
+    spDistribution[i] = spDistributionTemp[i];
+
+  int idx = 1;
+  for (int t=1; t < MAXTIME; t++){
     model.iterate();
+    if (std::find(std::begin(tList), std::end(tList), t) != std::end(tList)){
+      numberSpecie[idx] += model.countSpecie();
+      model.printState(t);
+
+      spDistributionTemp = model.countSpecieProp();
+      for (int i = 0; i < NPROPRIETY; i++)
+        spDistribution[NPROPRIETY*idx+i] = spDistributionTemp[i];
+      idx++;
+    }
   }
   cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
 
 
   arquivo << "### PARAMETERS VALUE ###" << endl;
   arquivo << "### LATTICESIZE = " << LATTICESIZE << ", NSPECIE = " << NSPECIE << ", NRESOURCE = " << NRESOURCE;
-  arquivo << ", MUTATIONPROB = " << MUTATIONPROB << ", NRESOURCEDIST = " << NRESOURCEDIST << ", NPROPRIETY = " << NPROPRIETY;
-  arquivo << ", MAXTIME = " << MAXTIME << ", TIMEINTERVAL = " << TIMEINTERVAL << ", NRUN = " << NRUN << " ###" << endl << endl;
+  arquivo << ", MUTATIONPROB = " << MUTATIONPROB << ", NRESOURCEDIST = " << NRESOURCEDIST << ", ALPHA = " << ALPHA;
+  arquivo << ", NPROPRIETY = " << NPROPRIETY << ", MAXTIME = " << MAXTIME << ", TIMEINTERVAL = " << TIMEINTERVAL << ", NRUN = " << NRUN;
+  arquivo << " ###" << endl << endl;
   arquivo << "time; nSpecie" << endl;
-  for (int t = 0; t < MAXTIME/TIMEINTERVAL; t++)
-    arquivo << t*TIMEINTERVAL << "; " << result[t] << endl;
+  for (int i = 0; i < tList.size(); i++)
+    arquivo << tList[i] << "; " << numberSpecie[i] << endl;
+
+  dist << "nVar; time" << endl;
+  for (int i = 0; i < tList.size(); i++)
+    for (int j = 0; j < NPROPRIETY; j++)
+      dist << spDistribution[NPROPRIETY*i+j] << "; " << tList[i] << endl;
+
+
   arquivo.close();
+  dist.close();
   return 0;
 }
 
@@ -115,8 +143,9 @@ int Run_varParam(char param, std::vector<float> paramList){
 
   arquivo << "### PARAMETERS VALUE ###" << endl;
   arquivo << "### LATTICESIZE = " << LATTICESIZE << ", NSPECIE = " << NSPECIE << ", NRESOURCE = " << NRESOURCE;
-  arquivo << ", MUTATIONPROB = " << MUTATIONPROB << ", NRESOURCEDIST = " << NRESOURCEDIST << ", NPROPRIETY = " << NPROPRIETY;
-  arquivo << ", MAXTIME = " << MAXTIME << ", TIMEINTERVAL = " << TIMEINTERVAL << ", NRUN = " << NRUN << " ###" << endl << endl;
+  arquivo << ", MUTATIONPROB = " << MUTATIONPROB << ", NRESOURCEDIST = " << NRESOURCEDIST << ", ALPHA = " << ALPHA;
+  arquivo << ", NPROPRIETY = " << NPROPRIETY << ", MAXTIME = " << MAXTIME << ", TIMEINTERVAL = " << TIMEINTERVAL << ", NRUN = " << NRUN;
+  arquivo << " ###" << endl << endl;
   arquivo << "time; nSpecie; param" << endl;
   for (idxParam=0; idxParam < paramList.size(); idxParam++)
     for (int t = 0; t < MAXTIME/TIMEINTERVAL; t++)

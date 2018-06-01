@@ -14,6 +14,8 @@ public:
   int countSpecie(void);
   void iterate(void);
   void printState(int t);
+  std::vector<int> countSpecieProp(void);
+  std::vector<int> countSpecieProp0(void);
   ambient();
 };
 
@@ -168,6 +170,53 @@ int ambient::countSpecie(void){
     return nDifferentS-1;
   else
     return nDifferentS;
+}
+
+std::vector<int> ambient::countSpecieProp0(void){
+  std::vector<int> spDistribution(NPROPRIETY, 0);
+  int size = LATTICESIZE*LATTICESIZE/NPROPRIETY, propNum, sp;
+
+  std::vector<bool> alreadyExist(NSPECIE*NPROPRIETY,false);
+  for(int i = 0; i < LATTICESIZE; i++){
+    for(int j = 0; j < LATTICESIZE; j++){
+      propNum = (i/propSizeRadix)*propRadix + (j/propSizeRadix);
+      sp = grid[i*LATTICESIZE+j].specie;
+      if(!alreadyExist[propNum*NPROPRIETY+sp])
+        alreadyExist[propNum*NPROPRIETY+sp] = true;
+
+    }
+  }
+  for(int i = 0; i < NPROPRIETY; i++){
+    int nDifferentS=0;
+    for(int j = 0; j < NSPECIE; j++){
+      if(alreadyExist[i*NPROPRIETY+j]){
+        nDifferentS++;
+      }
+    }
+    spDistribution[i] = nDifferentS;
+  }
+
+  return spDistribution;
+  // desconsiderando mutações pra facilitar o cálculo
+}
+
+std::vector<int> ambient::countSpecieProp(void){
+  std::vector<int> spDistribution(NPROPRIETY, 0);
+  int size = LATTICESIZE*LATTICESIZE/NPROPRIETY;
+  for(int i = 0; i < NPROPRIETY; i++){
+    int nDifferentS=0;
+    std::vector<bool> alreadyExist(NMAXSPECIE+1,false);
+    for (int j = 0; j < size; j++){
+      int sp = proprietyList[i].speciesChoosen[j];
+      if(!alreadyExist[sp]){
+        alreadyExist[sp] = true;
+        nDifferentS++;
+      }
+    }
+    spDistribution[i] = nDifferentS;
+  }
+  return spDistribution;
+  // desconsiderando mutações pra facilitar o cálculo
 }
 
 

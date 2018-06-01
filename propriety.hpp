@@ -1,9 +1,10 @@
 class propriety{
 private:
-  std::vector<int> speciesChoosen;
   std::vector<int> availableSpecie;
   std::vector<float> speciesPunctuation;
+  int idxChoose;
 public:
+  std::vector<int> speciesChoosen;
   std::vector<int> proprietyConnection;
   int LimN;
   int LimS;
@@ -41,11 +42,11 @@ void propriety::chooseSpecie(void){
     return;
   }
 
+/*
 // Select only the variety with maximum punctuation
-
   int idxMax = distance(speciesPunctuation.begin(), std::max_element(speciesPunctuation.begin(), speciesPunctuation.end()));
   speciesChoosen = std::vector<int>(PropSize, availableSpecie[idxMax]);
-
+*/
 
 
 // Select nomalizing and choose based on that
@@ -70,7 +71,6 @@ void propriety::chooseSpecie(void){
   //cout << endl;
 */
 
-/*
 // Select random variety and the probability of get planted is given by the punctuation
   uniIntne.param(std::uniform_int_distribution<long>::param_type(0, speciesPunctuation.size()-1));
   speciesChoosen = std::vector<int>(PropSize, 0);
@@ -82,8 +82,8 @@ void propriety::chooseSpecie(void){
     }
     speciesChoosen[i] = availableSpecie[plantIdx];
   }
-*/
 
+  idxChoose = 0;
 }
 
 void propriety::setSpecie(std::vector<int> sp, std::vector<float> spPunc){
@@ -98,8 +98,8 @@ void propriety::addSpecie(int sp, float spPunc){
 
 
 int propriety::plantSpecie(void){
-  int sp = speciesChoosen.back();
-  speciesChoosen.pop_back();
+  int sp = speciesChoosen[idxChoose];
+  idxChoose++;
   if (uniFLOAT(rand64) < MUTATIONPROB){
     sp = uniIntNSP(rand64);
   }
