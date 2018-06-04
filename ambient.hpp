@@ -17,6 +17,7 @@ public:
   std::vector<int> countSpecieProp(void);
   std::vector<int> countSpecieProp0(void);
   ambient();
+  ~ambient();
 };
 
 // Initialize one ambient, distributting resource according to the parameters and initialize all patches.
@@ -25,6 +26,11 @@ ambient::ambient(){
   propSizeRadix = LATTICESIZE / propRadix;
   initializeGrid();
   initializeProp();
+}
+
+ambient::~ambient(){
+  grid = nullptr;
+  proprietyList = nullptr;
 }
 
 
