@@ -32,13 +32,16 @@ void propriety::chooseSpecie(void){
   int j;
   float n;
   float acum, sum;
+  idxChoose = 0;
 
   if(speciesPunctuation.empty()){
-    speciesChoosen.clear();
+    speciesChoosen = std::vector<int>(PropSize, uniIntNSP(rand64));
+    cout << "ERROR: No specie" << endl;
     return;
   }
   if(availableSpecie.size() == 1){
     speciesChoosen = std::vector<int>(PropSize, availableSpecie[0]);
+
     return;
   }
 
@@ -83,7 +86,6 @@ void propriety::chooseSpecie(void){
     speciesChoosen[i] = availableSpecie[plantIdx];
   }
 
-  idxChoose = 0;
 }
 
 void propriety::setSpecie(std::vector<int> sp, std::vector<float> spPunc){

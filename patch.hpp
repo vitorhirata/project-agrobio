@@ -20,8 +20,6 @@ void patch::initializePt(std::vector<float> res, int sp){
 
 float patch::Fitness(void){
   float value;
-  if (specie == 0)
-    return 0;
   value = VAR[specie-1].calculateFitness(resource);
   return value;
 }

@@ -25,7 +25,7 @@ const int NRUN = 15;  // number of runs to average (model-social parameter)
 /* Imported functions */
 static std::random_device rd;
 static std::mt19937_64 rand64(rd());
-static std::uniform_int_distribution<long> uniIntNSP(1,NMAXSPECIE);
+static std::uniform_int_distribution<long> uniIntNSP(0,NMAXSPECIE-1);
 static std::uniform_int_distribution<long> uniIntSP(1,NSPECIE);
 static std::uniform_int_distribution<long> uniIntne(0,4 - 1);
 static std::uniform_real_distribution<double> uniFLOAT(0.0,1.0);
