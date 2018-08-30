@@ -4,6 +4,7 @@
 #include <ctime>  // count time of run
 #include <vector> // using std vectors
 #include <algorithm> // allow to use transform
+#include "EasyBMP.cpp" // BITMAP
 
 using namespace std;
 
@@ -24,4 +25,5 @@ class Model;
 #include "Patch.hpp"
 #include "Ambient.hpp"
 #include "DomesticUnity.hpp"
+#include "Metrics.hpp"
 #include "Model.hpp"

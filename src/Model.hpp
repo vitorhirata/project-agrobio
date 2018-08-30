@@ -24,7 +24,8 @@ private:
 public:
   Model(int t_latticeSize, int t_nVariety, int t_numberResources, int t_nResourceDistribution, int t_maxTime, int t_timeInterval, int t_nDomesticUnity, float t_probabilyConnection, float t_outsideTradeLimit, float t_insideTradeLimit);
   ~Model();
-  std::vector<float> runStandard(void);
+  std::vector<int> runStandard(void);
+  std::vector<int> runPlot(void);
 };
 
 // Model constructor, receive model parameters, initialize then, and call for each class initialization.
@@ -102,15 +103,33 @@ void Model::setDomesticUnity(void){
   }
 }
 
-// Run runStandard version of the model. Gives as output a vector with the number of variety at each timeInterval
-std::vector<float> Model::runStandard(void){
+// Run standard version of the model. Gives as output a vector with the number of variety at each timeInterval
+std::vector<int> Model::runStandard(void){
   clock_t tStart = clock();
-  std::vector<float> numberVariety(m_maxTime/m_timeInterval);
+  std::vector<int> numberVariety(m_maxTime/m_timeInterval);
   numberVariety[0] = ambient->countSpecie();
   for(int t = 0; t < m_maxTime; ++t){
     iterate();
     if (t % m_timeInterval == 0)
       numberVariety[t/m_timeInterval] = ambient->countSpecie();
+  }
+  cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
+  return numberVariety;
+}
+
+// Run the model plotting each time image of the simulation. Gives as output a vector with the number of variety at each timeInterval
+std::vector<int> Model::runPlot(void){
+  clock_t tStart = clock();
+  std::vector<int> numberVariety(m_maxTime/m_timeInterval);
+  numberVariety[0] = ambient->countSpecie();
+  metrics::printState(0, ambient->grid, m_latticeSize);
+
+  for(int t = 0; t < m_maxTime; ++t){
+    iterate();
+    if (t % m_timeInterval == 0){
+      numberVariety[t/m_timeInterval] = ambient->countSpecie();
+      metrics::printState(t, ambient->grid, m_latticeSize);
+    }
   }
   cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
   return numberVariety;

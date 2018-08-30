@@ -15,11 +15,11 @@ int main(){
   const float outsideTradeLimit = 0.003;
   const float insideTradeLimit = 0.001;
 
-  std::vector<float> result(maxTime/timeInterval, 0);
-  std::vector<float> temp;
+  std::vector<int> result(maxTime/timeInterval, 0);
+  std::vector<int> temp;
   for(int run = 0; run < nRun; ++run){
     Model model(latticeSize, nVariety, numberResources, nResourceDistribution, maxTime, timeInterval, nDomesticUnity, probabilyConnection, outsideTradeLimit, insideTradeLimit);
-    temp = model.runStandard();
+    temp = model.runPlot();
     std::transform(result.begin(), result.end(), temp.begin(), result.begin(), std::plus<float>());
   }
 
