@@ -8,12 +8,12 @@ param = string(input_file[end-4])
 input_file = "test/" * input_file
 output_file = input_file[1:end-4] * ".svg"
 
-df = readtable(input_file, separator = ';', skipstart=3)
+df = readtable(input_file, separator = ';', skipstart=0)
 
 if mode == "simple"
-    p = plot(df, x=:time, y=:nSpecie, Geom.line)
+    p = plot(df, x=:time, y=:nVar, Geom.line)
 elseif mode == "multiple"
-    p = plot(df, x=:time, y=:nSpecie, color=:param, Geom.line, Scale.color_discrete(), Guide.colorkey(param), Guide.xlabel("Tempo"), Guide.ylabel("Numero de Variedades"))
+    p = plot(df, x=:time, y=:nVar, color=:param, Geom.line, Scale.color_discrete(), Guide.colorkey(param), Guide.xlabel("Tempo"), Guide.ylabel("Numero de Variedades"))
 else
     println("Error, please enter a valid mode.")
     exit(-1)
