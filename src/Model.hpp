@@ -64,10 +64,11 @@ void Model::setVariety(void){
 
   std::vector<float> KTemp(m_numberResources);
   for(int i = 0; i < m_numberVariety; ++i){
-    for(int j = 0; j < m_numberResources; ++j)
+    for(int j = 0; j < m_numberResources; ++j){
       KTemp[j] = gauss(rand64);
-      while (KTemp[j] < 0)
+      while(KTemp[j] < 0)
         KTemp[j] = gauss(rand64);
+    }
     variety[i].K = KTemp;
     variety[i].appearence = uniFLOAT(rand64);
   }
