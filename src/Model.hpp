@@ -13,6 +13,7 @@ private:
   const float m_probabilyConnection; // Probability of connection
   const float m_outsideTradeLimit;
   const float m_insideTradeLimit;
+  const float m_alpha;
 
   Ambient* ambient;
   DomesticUnity* domesticUnity;
@@ -22,14 +23,14 @@ private:
   void setDomesticUnity(void);
   void iterate(void);
 public:
-  Model(int t_latticeSize, int t_nVariety, int t_numberResources, int t_nResourceDistribution, int t_maxTime, int t_timeInterval, int t_nDomesticUnity, float t_probabilyConnection, float t_outsideTradeLimit, float t_insideTradeLimit);
+  Model(int t_latticeSize, int t_nVariety, int t_numberResources, int t_nResourceDistribution, int t_maxTime, int t_timeInterval, int t_nDomesticUnity, float t_probabilyConnection, float t_outsideTradeLimit, float t_insideTradeLimit, float t_alpha);
   ~Model();
   std::vector<int> runStandard(void);
   std::vector<int> runPlot(void);
 };
 
 // Model constructor, receive model parameters, initialize then, and call for each class initialization.
-Model::Model(int t_latticeSize, int t_nVariety, int t_numberResources, int t_nResourceDistribution, int t_maxTime, int t_timeInterval, int t_nDomesticUnity, float t_probabilyConnection, float t_outsideTradeLimit, float t_insideTradeLimit)
+Model::Model(int t_latticeSize, int t_nVariety, int t_numberResources, int t_nResourceDistribution, int t_maxTime, int t_timeInterval, int t_nDomesticUnity, float t_probabilyConnection, float t_outsideTradeLimit, float t_insideTradeLimit, float t_alpha)
   : m_latticeSize(t_latticeSize)
   , m_numberVariety(t_nVariety)
   , m_numberResources(t_numberResources)
@@ -40,6 +41,7 @@ Model::Model(int t_latticeSize, int t_nVariety, int t_numberResources, int t_nRe
   , m_probabilyConnection(t_probabilyConnection)
   , m_outsideTradeLimit(t_outsideTradeLimit)
   , m_insideTradeLimit(t_insideTradeLimit)
+  , m_alpha(t_alpha)
 {
   setVariety();
   setAmbient();
@@ -65,6 +67,7 @@ void Model::setVariety(void){
     for(int j = 0; j < m_numberResources; ++j)
       KTemp[j] = gauss(rand64);
     variety[i].K = KTemp;
+    variety[i].appearence = uniFLOAT(rand64);
   }
 }
 
@@ -99,7 +102,7 @@ void Model::setDomesticUnity(void){
 
   // Pass the parameters to actualy initialize each domesticUnity
   for(int i = 0; i < m_numberDomesticUnity; ++i){
-    domesticUnity[i].initializeDU(domesticUnity, ambient->grid, indexLinkedDUs[i], indexOwenedsPatches[i], m_numberVariety, m_outsideTradeLimit, m_insideTradeLimit);
+    domesticUnity[i].initializeDU(domesticUnity, ambient->grid, indexLinkedDUs[i], indexOwenedsPatches[i], m_numberVariety, m_outsideTradeLimit, m_insideTradeLimit, m_alpha, variety);
   }
 }
 

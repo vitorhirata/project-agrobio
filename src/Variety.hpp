@@ -4,6 +4,7 @@
 // Variety struct contain all the proprieties of each variety
 struct Variety{
   std::vector<float> K;
+  float appearence;
 };
 
 #endif

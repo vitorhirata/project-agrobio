@@ -14,17 +14,19 @@ int main(){
   const int nRun = 50; // number of rounds
   const float outsideTradeLimit = 0.0003;
   const float insideTradeLimit = 0.0001;
+  float alpha = 0.0;
 
   std::vector<int> result(maxTime/timeInterval, 0);
   std::vector<int> temp;
   for(int run = 0; run < nRun; ++run){
-    Model model(latticeSize, nVariety, numberResources, nResourceDistribution, maxTime, timeInterval, nDomesticUnity, probabilyConnection, outsideTradeLimit, insideTradeLimit);
-    temp = model.runPlot();
+    Model model(latticeSize, nVariety, numberResources, nResourceDistribution, maxTime, timeInterval, nDomesticUnity, probabilyConnection, outsideTradeLimit, insideTradeLimit, alpha);
+    temp = model.runStandard();
     std::transform(result.begin(), result.end(), temp.begin(), result.begin(), std::plus<float>());
   }
 
   fstream arquivo;
   arquivo.open("test/standard.csv",ios::out);
+  arquivo << "time; nVar" << endl;
   for(int i = 0; i < maxTime/timeInterval; ++i)
     arquivo << i*timeInterval << "; " << (float) result[i]/nRun << endl;
   arquivo.close();
