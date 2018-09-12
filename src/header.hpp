@@ -12,7 +12,7 @@ using namespace std;
 static std::random_device rd;
 static std::mt19937_64 rand64(rd());
 static std::uniform_real_distribution<double> uniFLOAT(0.0,1.0);
-static std::normal_distribution<double> gauss(1.0,0.1);
+static std::normal_distribution<double> gauss(0.4,0.2);
 
 /* Builted class and functions */
 struct Variety;

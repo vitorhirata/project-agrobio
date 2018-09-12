@@ -20,10 +20,10 @@ namespace metrics{
         floatToRGB(var, &r, &g, &b);
         for(int x = 0; x < SIZE; x++)
           for(int y = 0; y < SIZE; y++){
-            Image(i*SIZE+x,j*SIZE+y)->Red = r;
-            Image(i*SIZE+x,j*SIZE+y)->Green = g;
-            Image(i*SIZE+x,j*SIZE+y)->Blue = b;
-            Image(i*SIZE+x,j*SIZE+y)->Alpha = 0.1;
+            Image(j*SIZE+y,i*SIZE+x)->Red = r;
+            Image(j*SIZE+y,i*SIZE+x)->Green = g;
+            Image(j*SIZE+y,i*SIZE+x)->Blue = b;
+            Image(j*SIZE+y,i*SIZE+x)->Alpha = 0.1;
           }
       }
     }
@@ -34,7 +34,7 @@ namespace metrics{
 
 
   void floatToRGB(int n, int* R, int* G, int* B){
-    float r, g, b, x = (float) n / 50;
+    float r, g, b, x = (float) n / 100;
 
     if (x < 0 || x > 1){
       cout << "ERROR" << endl;
