@@ -21,7 +21,7 @@ class Ambient;
 class DomesticUnity;
 class Model;
 
-#include "Variety.hpp"
+#include "Structs.hpp"
 #include "Patch.hpp"
 #include "Ambient.hpp"
 #include "DomesticUnity.hpp"
