@@ -16,7 +16,6 @@ public:
 // Compute the fitness, using the Monod Equation, considering variety K and the resources available. Store this value
 // in fitness.
 void Patch::computeLocalFitness(const Variety* variety){
-  //cout << "plantedVariety = " << plantedVariety << endl;
   float fitnessTemp = m_resource[0] / (m_resource[0] + variety[plantedVariety].K[0]);;
   for (uint i = 1; i < m_resource.size(); ++i){
     float temp = m_resource[i] / (m_resource[i] + variety[plantedVariety].K[i]);
