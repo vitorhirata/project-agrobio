@@ -20,10 +20,19 @@ class Patch;
 class Ambient;
 class DomesticUnity;
 class Model;
+namespace metrics{
+  void printState(int t, Patch* grid, const int t_latticeSize);
+  void floatToRGB(int n, int* R, int* G, int* B);
+}
+namespace worker{
+  void Run_standard(void);
+  void Run_plot(void);
+  void Run_varParam(char param, std::vector<float> paramList);
+}
 
 #include "Structs.hpp"
 #include "Patch.hpp"
 #include "Ambient.hpp"
 #include "DomesticUnity.hpp"
-#include "Metrics.hpp"
 #include "Model.hpp"
+#include "Namespaces.hpp"
