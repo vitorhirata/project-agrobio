@@ -21,6 +21,7 @@ class Ambient;
 class DomesticUnity;
 class Model;
 namespace metrics{
+  void computeVarietyProfile(Patch* t_grid, Variety* variety, const int t_latticeSize, const int t_numberVariety, const int time);
   void printState(int t, Patch* grid, const int t_latticeSize);
   void floatToRGB(int n, int* R, int* G, int* B);
   void printParameters(fstream& arquivo, Parameter parameter);

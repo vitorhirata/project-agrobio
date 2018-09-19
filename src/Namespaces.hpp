@@ -92,6 +92,19 @@ namespace worker{
 
 namespace metrics{
 
+  void computeVarietyProfile(Patch* t_grid, Variety* variety, const int t_latticeSize, const int t_numberVariety, const int time){
+    std::vector<float> varietyQuantity(t_numberVariety, 0);
+    for(int i = 0; i < t_latticeSize*t_latticeSize; ++i)
+      ++varietyQuantity[t_grid[i].plantedVariety];
+
+    fstream histotram;
+    histotram.open(std::string ("test/histotram_") + std::to_string(time) + ".csv",ios::out);
+    histotram << "appearence; cont" << endl;
+    for(int i = 0; i < t_numberVariety; ++i)
+      if(varietyQuantity[i] > 0)
+        histotram << variety[i].appearence << "; " << varietyQuantity[i] << endl;
+  }
+
   void printParameters(fstream& arquivo, Parameter parameter){
     arquivo << "### PARAMETERS VALUE ###" << endl;
     arquivo << "### LATTICESIZE = " << parameter.latticeSize << ", NVARIETY = " << parameter.numberVariety;

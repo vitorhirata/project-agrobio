@@ -107,6 +107,7 @@ std::vector<int> Model::runPlot(void){
   std::vector<int> numberVariety(m_parameter.maxTime/m_parameter.timeInterval);
   numberVariety[0] = ambient->countSpecie();
   metrics::printState(0, ambient->grid, m_parameter.latticeSize);
+  metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety, 0);
 
   for(int t = 0; t < m_parameter.maxTime; ++t){
     iterate();
@@ -115,6 +116,7 @@ std::vector<int> Model::runPlot(void){
       metrics::printState(t, ambient->grid, m_parameter.latticeSize);
     }
   }
+  metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety, m_parameter.maxTime);
   return numberVariety;
 }
 
