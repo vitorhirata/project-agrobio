@@ -25,7 +25,7 @@ namespace worker{
     Parameter parameter;
     clock_t tStart = clock();
     Model model(parameter);
-    std::vector<int> result = model.runStandard();
+    std::vector<int> result = model.runPlot();
 
     fstream arquivo;
     arquivo.open("test/plot.csv",ios::out);
