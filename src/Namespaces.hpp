@@ -23,7 +23,7 @@ namespace worker{
     metrics::printParameters(arquivo, parameter);
     arquivo << "time; nVar" << endl;
     for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
-      arquivo << i*parameter.timeInterval << "; " << (float) temp[i] << endl;
+      arquivo << i*parameter.timeInterval << "; " << (float) result[i] / parameter.nRun << endl;
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     arquivo.close();
 
@@ -135,7 +135,7 @@ namespace worker{
       }
 
       for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
-        arquivo << i*parameter.timeInterval << "; " << (float) temp[i] << "; " << paramValue << endl;
+        arquivo << i*parameter.timeInterval << "; " << (float) result[i] / parameter.nRun << "; " << paramValue << endl;
 
       for(int i = 0; i < round(1 / 0.05); ++i){
         histotram1 << i*0.05 + 0.025 << "; " << initialFrequency[i] / parameter.nRun << "; " << paramValue << endl;
