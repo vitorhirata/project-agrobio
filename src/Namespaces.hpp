@@ -13,6 +13,7 @@ namespace worker{
 
     fstream arquivo;
     arquivo.open("test/standard.csv",ios::out);
+    metrics::printParameters(arquivo, parameter);
     arquivo << "time; nVar" << endl;
     for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
       arquivo << i*parameter.timeInterval << "; " << (float) temp[i] << endl;
@@ -28,6 +29,7 @@ namespace worker{
 
     fstream arquivo;
     arquivo.open("test/plot.csv",ios::out);
+    metrics::printParameters(arquivo, parameter);
     arquivo << "time; nVar" << endl;
     for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
       arquivo << i*parameter.timeInterval << "; " << result[i] << endl;
@@ -41,6 +43,7 @@ namespace worker{
 
     fstream arquivo;
     arquivo.open(std::string ("test/varParam_")+param+".csv",ios::out);
+    metrics::printParameters(arquivo, parameter);
     arquivo << "time; nVar; param" << endl;
 
     for(auto paramValue : paramList){
@@ -88,6 +91,16 @@ namespace worker{
 
 
 namespace metrics{
+
+  void printParameters(fstream& arquivo, Parameter parameter){
+    arquivo << "### PARAMETERS VALUE ###" << endl;
+    arquivo << "### LATTICESIZE = " << parameter.latticeSize << ", NVARIETY = " << parameter.numberVariety;
+    arquivo << ", NRESOURCE = " << parameter.numberResources << ", NRESOURCEDIST = " << parameter.numberResourceDistribution;
+    arquivo << ", PROBABILITYCONNECTION = " << parameter.probabilyConnection << ", NDOMESTICUNITY = " << parameter.numberDomesticUnity;
+    arquivo << ", OUTSIDETRADELIMIT = " << parameter.outsideTradeLimit << ", INSIDETRADELIMIT = " << parameter.insideTradeLimit;
+    arquivo << ", ALPHA = " << parameter.alpha;
+    arquivo << ", MAXTIME = " << parameter.maxTime << ", TIMEINTERVAL = " << parameter.timeInterval << ", NRUN = " << parameter.nRun << " ###" << endl << endl;
+  }
 
   void printState(int t, Patch* grid, const int t_latticeSize){
     std::string name ("test/plot/standard");

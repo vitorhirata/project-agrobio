@@ -23,6 +23,7 @@ class Model;
 namespace metrics{
   void printState(int t, Patch* grid, const int t_latticeSize);
   void floatToRGB(int n, int* R, int* G, int* B);
+  void printParameters(fstream& arquivo, Parameter parameter);
 }
 namespace worker{
   void Run_standard(void);
