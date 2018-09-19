@@ -14,6 +14,10 @@ if mode == "simple"
     p = plot(df, x=:time, y=:nVar, Geom.line)
 elseif mode == "multiple"
     p = plot(df, x=:time, y=:nVar, color=:param, Geom.line, Scale.color_discrete(), Guide.colorkey(param), Guide.xlabel("Tempo"), Guide.ylabel("Numero de Variedades"))
+elseif mode == "histogramSimple"
+    p = plot(df, x=:appearence, y=:frequency, Geom.line, Scale.y_continuous(minvalue=0, maxvalue=1))
+elseif mode == "histogramMultiple"
+    p = plot(df, x=:appearence, y=:frequency, color=:param, Geom.line, Scale.color_discrete(), Guide.colorkey(param), Scale.y_continuous(minvalue=0, maxvalue=1))
 else
     println("Error, please enter a valid mode.")
     exit(-1)

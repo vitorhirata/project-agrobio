@@ -4,6 +4,7 @@
 #include <ctime>  // count time of run
 #include <vector> // using std vectors
 #include <algorithm> // allow to use transform
+#include <tuple> // allow tuple return
 #include "EasyBMP.cpp" // BITMAP
 
 using namespace std;
@@ -21,7 +22,7 @@ class Ambient;
 class DomesticUnity;
 class Model;
 namespace metrics{
-  void computeVarietyProfile(Patch* t_grid, Variety* variety, const int t_latticeSize, const int t_numberVariety, const int time);
+  std::vector<float> computeVarietyProfile(Patch* t_grid, Variety* variety, const int t_latticeSize, const int t_numberVariety);
   void printState(int t, Patch* grid, const int t_latticeSize);
   void floatToRGB(int n, int* R, int* G, int* B);
   void printParameters(fstream& arquivo, Parameter parameter);

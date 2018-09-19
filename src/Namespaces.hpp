@@ -4,11 +4,18 @@ namespace worker{
 
     clock_t tStart = clock();
     std::vector<int> result(parameter.maxTime/parameter.timeInterval, 0);
+    std::vector<float> initialFrequency(round(1 / 0.05), 0);
+    std::vector<float> finalFrequency(round(1 / 0.05), 0);
     std::vector<int> temp;
+    std::vector<float> temp2;
+    std::vector<float> temp3;
+
     for(int run = 0; run < parameter.nRun; ++run){
       Model model(parameter);
-      temp = model.runStandard();
+      std::tie(temp, temp2, temp3) = model.runStandard();
       std::transform(result.begin(), result.end(), temp.begin(), result.begin(), std::plus<float>());
+      std::transform(initialFrequency.begin(), initialFrequency.end(), temp2.begin(), initialFrequency.begin(), std::plus<float>());
+      std::transform(finalFrequency.begin(), finalFrequency.end(), temp3.begin(), finalFrequency.begin(), std::plus<float>());
     }
 
     fstream arquivo;
@@ -19,13 +26,32 @@ namespace worker{
       arquivo << i*parameter.timeInterval << "; " << (float) temp[i] << endl;
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     arquivo.close();
+
+    fstream histotram1;
+    fstream histotram2;
+    histotram1.open("test/histogramInitial.csv",ios::out);
+    histotram2.open("test/histogramFinal.csv",ios::out);
+    metrics::printParameters(histotram1, parameter);
+    metrics::printParameters(histotram2, parameter);
+    histotram1 << "appearence; frequency" << endl;
+    histotram2 << "appearence; frequency" << endl;
+    for(int i = 0; i < round(1 / 0.05); ++i){
+      histotram1 << i*0.05 + 0.025 << "; " << initialFrequency[i] / parameter.nRun << endl;
+      histotram2 << i*0.05 + 0.025 << "; " << finalFrequency[i] / parameter.nRun << endl;
+    }
+    histotram1.close();
+    histotram2.close();
   }
 
   void Run_plot(void){
     Parameter parameter;
     clock_t tStart = clock();
     Model model(parameter);
-    std::vector<int> result = model.runPlot();
+
+    std::vector<float> initialFrequency;
+    std::vector<float> finalFrequency;
+    std::vector<int> result;
+    std::tie(result, initialFrequency, finalFrequency) = model.runPlot();
 
     fstream arquivo;
     arquivo.open("test/plot.csv",ios::out);
@@ -35,6 +61,21 @@ namespace worker{
       arquivo << i*parameter.timeInterval << "; " << result[i] << endl;
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     arquivo.close();
+
+    fstream histotram1;
+    fstream histotram2;
+    histotram1.open("test/histogramInitial.csv",ios::out);
+    histotram2.open("test/histogramFinal.csv",ios::out);
+    metrics::printParameters(histotram1, parameter);
+    metrics::printParameters(histotram2, parameter);
+    histotram1 << "appearence; frequency" << endl;
+    histotram2 << "appearence; frequency" << endl;
+    for(int i = 0; i < round(1 / 0.05); ++i){
+      histotram1 << i*0.05 + 0.025 << "; " << initialFrequency[i] << endl;
+      histotram2 << i*0.05 + 0.025 << "; " << finalFrequency[i] << endl;
+    }
+    histotram1.close();
+    histotram2.close();
   }
 
 
@@ -45,6 +86,15 @@ namespace worker{
     arquivo.open(std::string ("test/varParam_")+param+".csv",ios::out);
     metrics::printParameters(arquivo, parameter);
     arquivo << "time; nVar; param" << endl;
+
+    fstream histotram1;
+    fstream histotram2;
+    histotram1.open("test/histogramVarInitial.csv",ios::out);
+    histotram2.open("test/histogramVarFinal.csv",ios::out);
+    metrics::printParameters(histotram1, parameter);
+    metrics::printParameters(histotram2, parameter);
+    histotram1 << "appearence; frequency; param" << endl;
+    histotram2 << "appearence; frequency; param" << endl;
 
     for(auto paramValue : paramList){
       switch (param){
@@ -71,19 +121,32 @@ namespace worker{
       }
       clock_t tStart = clock();
       std::vector<int> result(parameter.maxTime/parameter.timeInterval, 0);
+      std::vector<float> initialFrequency(round(1 / 0.05), 0);
+      std::vector<float> finalFrequency(round(1 / 0.05), 0);
       std::vector<int> temp;
+      std::vector<float> temp2;
+      std::vector<float> temp3;
       for(int run = 0; run < parameter.nRun; ++run){
         Model model(parameter);
-        temp = model.runStandard();
+        std::tie(temp, temp2, temp3) = model.runStandard();
         std::transform(result.begin(), result.end(), temp.begin(), result.begin(), std::plus<float>());
+        std::transform(initialFrequency.begin(), initialFrequency.end(), temp2.begin(), initialFrequency.begin(), std::plus<float>());
+        std::transform(finalFrequency.begin(), finalFrequency.end(), temp3.begin(), finalFrequency.begin(), std::plus<float>());
       }
 
       for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
         arquivo << i*parameter.timeInterval << "; " << (float) temp[i] << "; " << paramValue << endl;
-      cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
 
+      for(int i = 0; i < round(1 / 0.05); ++i){
+        histotram1 << i*0.05 + 0.025 << "; " << initialFrequency[i] / parameter.nRun << "; " << paramValue << endl;
+        histotram2 << i*0.05 + 0.025 << "; " << finalFrequency[i] / parameter.nRun << "; " << paramValue << endl;
+      }
+
+      cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     }
     arquivo.close();
+    histotram1.close();
+    histotram2.close();
   }
 
 }
@@ -92,17 +155,23 @@ namespace worker{
 
 namespace metrics{
 
-  void computeVarietyProfile(Patch* t_grid, Variety* variety, const int t_latticeSize, const int t_numberVariety, const int time){
+  // Return the frequency of each range of appearence. The range size is 0.05
+  std::vector<float> computeVarietyProfile(Patch* t_grid, Variety* variety, const int t_latticeSize, const int t_numberVariety){
     std::vector<float> varietyQuantity(t_numberVariety, 0);
     for(int i = 0; i < t_latticeSize*t_latticeSize; ++i)
       ++varietyQuantity[t_grid[i].plantedVariety];
 
-    fstream histotram;
-    histotram.open(std::string ("test/histotram_") + std::to_string(time) + ".csv",ios::out);
-    histotram << "appearence; cont" << endl;
-    for(int i = 0; i < t_numberVariety; ++i)
-      if(varietyQuantity[i] > 0)
-        histotram << variety[i].appearence << "; " << varietyQuantity[i] << endl;
+    std::vector<float> varFrequency(round(1 / 0.05), 0);
+    for(int i = 0; i < t_numberVariety; ++i){
+      if(varietyQuantity[i] > 0){
+        float j = 0;
+        while(j < variety[i].appearence)
+          j += 0.05;
+        int tick = round((j - 0.05) / 0.05);
+        varFrequency[tick] += varietyQuantity[i] / (t_latticeSize*t_latticeSize);
+      }
+    }
+    return varFrequency;
   }
 
   void printParameters(fstream& arquivo, Parameter parameter){

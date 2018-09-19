@@ -15,8 +15,8 @@ private:
 public:
   Model(Parameter t_parameter);
   ~Model();
-  std::vector<int> runStandard(void);
-  std::vector<int> runPlot(void);
+  std::tuple<std::vector<int>, std::vector<float>, std::vector<float> > runStandard(void);
+  std::tuple<std::vector<int>, std::vector<float>, std::vector<float> > runPlot(void);
 };
 
 // Model constructor, receive model parameters, initialize then, and call for each class initialization.
@@ -91,23 +91,31 @@ void Model::setDomesticUnity(void){
 }
 
 // Run standard version of the model. Gives as output a vector with the number of variety at each timeInterval
-std::vector<int> Model::runStandard(void){
+std::tuple<std::vector<int>, std::vector<float>, std::vector<float> > Model::runStandard(void){
+  std::vector<float> initialFrequency;
+  initialFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety);
   std::vector<int> numberVariety(m_parameter.maxTime/m_parameter.timeInterval);
   numberVariety[0] = ambient->countSpecie();
+
   for(int t = 0; t < m_parameter.maxTime; ++t){
     iterate();
     if (t % m_parameter.timeInterval == 0)
       numberVariety[t/m_parameter.timeInterval] = ambient->countSpecie();
   }
-  return numberVariety;
+
+  std::vector<float> finalFrequency;
+  finalFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety);
+
+  return std::make_tuple(numberVariety, initialFrequency, finalFrequency);
 }
 
 // Run the model plotting each time image of the simulation. Gives as output a vector with the number of variety at each timeInterval
-std::vector<int> Model::runPlot(void){
+std::tuple<std::vector<int>, std::vector<float>, std::vector<float> > Model::runPlot(void){
+  std::vector<float> initialFrequency;
+  initialFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety);
   std::vector<int> numberVariety(m_parameter.maxTime/m_parameter.timeInterval);
   numberVariety[0] = ambient->countSpecie();
   metrics::printState(0, ambient->grid, m_parameter.latticeSize);
-  metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety, 0);
 
   for(int t = 0; t < m_parameter.maxTime; ++t){
     iterate();
@@ -116,8 +124,11 @@ std::vector<int> Model::runPlot(void){
       metrics::printState(t, ambient->grid, m_parameter.latticeSize);
     }
   }
-  metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety, m_parameter.maxTime);
-  return numberVariety;
+
+  std::vector<float> finalFrequency;
+  finalFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety);
+
+  return std::make_tuple(numberVariety, initialFrequency, finalFrequency);
 }
 
 // Run one interation of the model, computing the fitness of ambient, computing DU punctuations and evaluating it's production
