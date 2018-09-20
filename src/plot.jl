@@ -15,7 +15,7 @@ if mode == "simple"
 elseif mode == "multiple"
     p = plot(df, x=:time, y=:nVar, color=:param, Geom.line, Scale.color_discrete(), Guide.colorkey(param), Guide.xlabel("Tempo"), Guide.ylabel("Numero de Variedades"))
 elseif mode == "histogramSimple"
-    p = plot(df, x=:appearence, y=:frequency, Geom.line, Scale.y_continuous(minvalue=0, maxvalue=1))
+    p = plot(df, x=:appearence, y=:frequency, Geom.bar)
 elseif mode == "histogramMultiple"
     p = plot(df, x=:appearence, y=:frequency, color=:param, Geom.line, Scale.color_discrete(), Guide.colorkey(param), Scale.y_continuous(minvalue=0, maxvalue=1))
 else
@@ -25,11 +25,3 @@ end
 
 draw(SVG(output_file, 15cm, 10cm), p)
 println("Image $(output_file) successfully generated.")
-
-
-# using Gadfly
-# using DataFrames
-# df = readtable("test/plot/Runplot_dist.csv", separator = ';')
-# plot(df[df[:time] .== 9000,:], x="nVar", Geom.histogram)
-#
-#
