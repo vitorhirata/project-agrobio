@@ -29,10 +29,10 @@ struct Parameter{
   , maxTime(200)
   , timeInterval(5)
   , numberDomesticUnity(49)
-  , nRun(5000)
+  , nRun(500)
   , probabilyConnection(0.15)
   , outsideTradeLimit(0.02)
   , insideTradeLimit(0.001)
-  , alpha(1.0) {}
+  , alpha(0.5) {}
 };
 #endif
