@@ -112,6 +112,9 @@ namespace worker{
           parameter.latticeSize = paramValue;
           parameter.numberDomesticUnity = paramValue;
           break;
+        case 'r':
+          parameter.numberResourceDistribution = paramValue;
+          break;
         case 'n':
           parameter.numberVariety = paramValue;
           break;
