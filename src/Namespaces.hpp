@@ -89,8 +89,8 @@ namespace worker{
 
     fstream histotram1;
     fstream histotram2;
-    histotram1.open("test/histogramVarInitial.csv",ios::out);
-    histotram2.open("test/histogramVarFinal.csv",ios::out);
+    histotram1.open(std::string ("test/histogramVarInitial_") + param + ".csv",ios::out);
+    histotram2.open(std::string ("test/histogramVarFinal_") + param + ".csv",ios::out);
     metrics::printParameters(histotram1, parameter);
     metrics::printParameters(histotram2, parameter);
     histotram1 << "appearence; frequency; param" << endl;
