@@ -54,7 +54,7 @@ namespace worker{
     std::tie(result, initialFrequency, finalFrequency) = model.runPlot();
 
     fstream arquivo;
-    arquivo.open("test/plot.csv",ios::out);
+    arquivo.open("test/plot/standard.csv",ios::out);
     metrics::printParameters(arquivo, parameter);
     arquivo << "time; nVar" << endl;
     for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
@@ -64,8 +64,8 @@ namespace worker{
 
     fstream histotram1;
     fstream histotram2;
-    histotram1.open("test/histogramInitial.csv",ios::out);
-    histotram2.open("test/histogramFinal.csv",ios::out);
+    histotram1.open("test/plot/histogramInitial.csv",ios::out);
+    histotram2.open("test/plot/histogramFinal.csv",ios::out);
     metrics::printParameters(histotram1, parameter);
     metrics::printParameters(histotram2, parameter);
     histotram1 << "appearence; frequency" << endl;
