@@ -22,7 +22,7 @@ public:
   , m_numberVariety(t_numberVariety)
   , m_variety(t_variety)
 {
-  static std::uniform_int_distribution<long> uniIntSP(0,m_numberVariety-1);
+  std::uniform_int_distribution<long> uniIntSP(0,m_numberVariety-1);
   grid = new Patch [m_latticeSize*m_latticeSize];
   for(int i = 0; i < m_latticeSize*m_latticeSize; ++i){
     grid[i].setVariety(uniIntSP(rand64));
