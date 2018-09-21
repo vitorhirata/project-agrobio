@@ -17,6 +17,7 @@ public:
   ~Model();
   std::tuple<std::vector<int>, std::vector<float>, std::vector<float> > runStandard(void);
   std::tuple<std::vector<int>, std::vector<float>, std::vector<float> > runPlot(void);
+  std::tuple< int, std::vector<float>, std::vector<float> > runFixedPoint(void);
 };
 
 // Model constructor, receive model parameters, initialize then, and call for each class initialization.
@@ -102,6 +103,22 @@ std::tuple<std::vector<int>, std::vector<float>, std::vector<float> > Model::run
     if (t % m_parameter.timeInterval == 0)
       numberVariety[t/m_parameter.timeInterval] = ambient->countSpecie();
   }
+
+  std::vector<float> finalFrequency;
+  finalFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety);
+
+  return std::make_tuple(numberVariety, initialFrequency, finalFrequency);
+}
+
+// Run the model giving as output the final number of varieties and both histograms
+std::tuple<int, std::vector<float>, std::vector<float> > Model::runFixedPoint(void){
+  std::vector<float> initialFrequency;
+  initialFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety);
+
+  for(int t = 0; t < m_parameter.maxTime; ++t)
+    iterate();
+
+  int numberVariety = ambient->countSpecie();
 
   std::vector<float> finalFrequency;
   finalFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety);

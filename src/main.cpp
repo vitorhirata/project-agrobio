@@ -42,6 +42,23 @@ int main(int argc, char *argv[]){
       worker::Run_varParam(param, param_list);
       break;
     }
+    case 'f':{
+      char param;
+      if (argc != 3) {
+        cout << "ERROR: Number of input argument invalid. 'f' mode must have only the parameter that will vary" << endl;
+        exit(-1);
+      }
+      if (argv[2][0] == 'o' || argv[2][0] == 'i' || argv[2][0] == 'L' || argv[2][0] == 'r' || argv[2][0] == 'n' || argv[2][0] == 'a')
+        param = argv[2][0];
+      else{
+        cout << "ERROR: Invalid parameter variation." << endl;
+        exit(-1);
+      }
+
+      cout << "Running variation model fixed points, with variable " << param << ". " << endl;
+      worker::Run_varParamFixedPoints(param);
+      break;
+    }
     default:
       cout << "ERROR: Invalid model type." << endl;
       exit(-1);

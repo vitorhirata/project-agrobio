@@ -30,6 +30,7 @@ namespace metrics{
 namespace worker{
   void Run_standard(void);
   void Run_plot(void);
+  void Run_varParamFixedPoints(char param);
   void Run_varParam(char param, std::vector<float> paramList);
 }
 

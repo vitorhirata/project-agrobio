@@ -18,6 +18,8 @@ elseif mode == "histogramSimple"
     p = plot(df, x=:appearence, y=:frequency, Geom.bar)
 elseif mode == "histogramMultiple"
     p = plot(df, x=:appearence, y=:frequency, color=:param, Geom.line, Scale.color_discrete(), Guide.colorkey(param), Scale.y_continuous(minvalue=0, maxvalue=1))
+elseif mode == "multipleFixedPoints"
+    p = plot(df, x=:param, y=:nVar, Geom.line)
 else
     println("Error, please enter a valid mode.")
     exit(-1)
