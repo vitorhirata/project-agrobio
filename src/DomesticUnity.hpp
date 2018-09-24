@@ -93,7 +93,7 @@ void DomesticUnity::computeDUpunctuations(void){
 }
 
 float DomesticUnity::computePunctuation(float varFitness, float varAppererence){
-  return m_alpha * varFitness + (1 - m_alpha) * abs(varAppererence - m_DUpreference);
+  return m_alpha * varFitness + (1 - m_alpha) * std::min(abs(varAppererence - m_DUpreference), 1 - abs(varAppererence - m_DUpreference));
 }
 
 // Find the DU with best punctuation, if the difference is larger than m_outsideTradeLimit it takes this DU best
