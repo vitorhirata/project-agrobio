@@ -18,29 +18,29 @@ namespace worker{
       std::transform(appearenceFrequency.begin(), appearenceFrequency.end(), temp3.begin(), appearenceFrequency.begin(), std::plus<float>());
     }
 
-    fstream arquivo;
-    arquivo.open("test/standard.csv",ios::out);
-    metrics::printParameters(arquivo, parameter);
-    arquivo << "time; nVar" << endl;
+    fstream varietyFile;
+    varietyFile.open("test/standard.csv",ios::out);
+    metrics::printParameters(varietyFile, parameter);
+    varietyFile << "time; nVar" << endl;
     for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
-      arquivo << i*parameter.timeInterval << "; " << (float) result[i] / parameter.nRun << endl;
+      varietyFile << i*parameter.timeInterval << "; " << (float) result[i] / parameter.nRun << endl;
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
-    arquivo.close();
+    varietyFile.close();
 
-    fstream histotram1;
-    fstream histotram2;
-    histotram1.open("test/histogramFitness.csv",ios::out);
-    histotram2.open("test/histogramAppearence.csv",ios::out);
-    metrics::printParameters(histotram1, parameter);
-    metrics::printParameters(histotram2, parameter);
-    histotram1 << "appearence; frequency" << endl;
-    histotram2 << "appearence; frequency" << endl;
+    fstream fitnessFile;
+    fstream appearenceFile;
+    fitnessFile.open("test/histogramFitness.csv",ios::out);
+    appearenceFile.open("test/histogramAppearence.csv",ios::out);
+    metrics::printParameters(fitnessFile, parameter);
+    metrics::printParameters(appearenceFile, parameter);
+    fitnessFile << "appearence; frequency" << endl;
+    appearenceFile << "appearence; frequency" << endl;
     for(int i = 0; i < round(1 / 0.05); ++i){
-      histotram1 << i*0.05 + 0.025 << "; " << fitnessFrequency[i] / parameter.nRun << endl;
-      histotram2 << i*0.05 + 0.025 << "; " << appearenceFrequency[i] / parameter.nRun << endl;
+      fitnessFile << i*0.05 + 0.025 << "; " << fitnessFrequency[i] / parameter.nRun << endl;
+      appearenceFile << i*0.05 + 0.025 << "; " << appearenceFrequency[i] / parameter.nRun << endl;
     }
-    histotram1.close();
-    histotram2.close();
+    fitnessFile.close();
+    appearenceFile.close();
   }
 
   void Run_plot(void){
@@ -53,48 +53,48 @@ namespace worker{
     std::vector<int> result;
     std::tie(result, fitnessFrequency, appearenceFrequency) = model.runPlot();
 
-    fstream arquivo;
-    arquivo.open("test/plot/standard.csv",ios::out);
-    metrics::printParameters(arquivo, parameter);
-    arquivo << "time; nVar" << endl;
+    fstream varietyFile;
+    varietyFile.open("test/plot/standard.csv",ios::out);
+    metrics::printParameters(varietyFile, parameter);
+    varietyFile << "time; nVar" << endl;
     for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
-      arquivo << i*parameter.timeInterval << "; " << result[i] << endl;
+      varietyFile << i*parameter.timeInterval << "; " << result[i] << endl;
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
-    arquivo.close();
+    varietyFile.close();
 
-    fstream histotram1;
-    fstream histotram2;
-    histotram1.open("test/plot/histogramFitness.csv",ios::out);
-    histotram2.open("test/plot/histogramAppearence.csv",ios::out);
-    metrics::printParameters(histotram1, parameter);
-    metrics::printParameters(histotram2, parameter);
-    histotram1 << "appearence; frequency" << endl;
-    histotram2 << "appearence; frequency" << endl;
+    fstream fitnessFile;
+    fstream appearenceFile;
+    fitnessFile.open("test/plot/histogramFitness.csv",ios::out);
+    appearenceFile.open("test/plot/histogramAppearence.csv",ios::out);
+    metrics::printParameters(fitnessFile, parameter);
+    metrics::printParameters(appearenceFile, parameter);
+    fitnessFile << "appearence; frequency" << endl;
+    appearenceFile << "appearence; frequency" << endl;
     for(int i = 0; i < round(1 / 0.05); ++i){
-      histotram1 << i*0.05 + 0.025 << "; " << fitnessFrequency[i] << endl;
-      histotram2 << i*0.05 + 0.025 << "; " << appearenceFrequency[i] << endl;
+      fitnessFile << i*0.05 + 0.025 << "; " << fitnessFrequency[i] << endl;
+      appearenceFile << i*0.05 + 0.025 << "; " << appearenceFrequency[i] << endl;
     }
-    histotram1.close();
-    histotram2.close();
+    fitnessFile.close();
+    appearenceFile.close();
   }
 
 
   void Run_varParam(char param, std::vector<float> paramList){
     Parameter parameter;
 
-    fstream arquivo;
-    arquivo.open(std::string ("test/varParam_")+param+".csv",ios::out);
-    metrics::printParameters(arquivo, parameter);
-    arquivo << "time; nVar; param" << endl;
+    fstream varietyFile;
+    varietyFile.open(std::string ("test/varParam_")+param+".csv",ios::out);
+    metrics::printParameters(varietyFile, parameter);
+    varietyFile << "time; nVar; param" << endl;
 
-    fstream histotram1;
-    fstream histotram2;
-    histotram1.open(std::string ("test/histogramFitnessVar_") + param + ".csv",ios::out);
-    histotram2.open(std::string ("test/histogramAppearenceVar_") + param + ".csv",ios::out);
-    metrics::printParameters(histotram1, parameter);
-    metrics::printParameters(histotram2, parameter);
-    histotram1 << "appearence; frequency; param" << endl;
-    histotram2 << "appearence; frequency; param" << endl;
+    fstream fitnessFile;
+    fstream appearenceFile;
+    fitnessFile.open(std::string ("test/histogramFitnessVar_") + param + ".csv",ios::out);
+    appearenceFile.open(std::string ("test/histogramAppearenceVar_") + param + ".csv",ios::out);
+    metrics::printParameters(fitnessFile, parameter);
+    metrics::printParameters(appearenceFile, parameter);
+    fitnessFile << "appearence; frequency; param" << endl;
+    appearenceFile << "appearence; frequency; param" << endl;
 
     for(auto paramValue : paramList){
       switch (param){
@@ -138,36 +138,36 @@ namespace worker{
       }
 
       for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
-        arquivo << i*parameter.timeInterval << "; " << (float) result[i] / parameter.nRun << "; " << paramValue << endl;
+        varietyFile << i*parameter.timeInterval << "; " << (float) result[i] / parameter.nRun << "; " << paramValue << endl;
 
       for(int i = 0; i < round(1 / 0.05); ++i){
-        histotram1 << i*0.05 + 0.025 << "; " << fitnessFrequency[i] / parameter.nRun << "; " << paramValue << endl;
-        histotram2 << i*0.05 + 0.025 << "; " << appearenceFrequency[i] / parameter.nRun << "; " << paramValue << endl;
+        fitnessFile << i*0.05 + 0.025 << "; " << fitnessFrequency[i] / parameter.nRun << "; " << paramValue << endl;
+        appearenceFile << i*0.05 + 0.025 << "; " << appearenceFrequency[i] / parameter.nRun << "; " << paramValue << endl;
       }
 
       cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     }
-    arquivo.close();
-    histotram1.close();
-    histotram2.close();
+    varietyFile.close();
+    fitnessFile.close();
+    appearenceFile.close();
   }
 
   void Run_varParamFixedPoints(char param){
     Parameter parameter;
 
-    fstream arquivo;
-    arquivo.open(std::string ("test/varParamFixedPoints_")+param+".csv",ios::out);
-    metrics::printParameters(arquivo, parameter);
-    arquivo << "param; nVar" << endl;
+    fstream varietyFile;
+    varietyFile.open(std::string ("test/varParamFixedPoints_")+param+".csv",ios::out);
+    metrics::printParameters(varietyFile, parameter);
+    varietyFile << "param; nVar" << endl;
 
-    fstream histotram1;
-    fstream histotram2;
-    histotram1.open(std::string ("test/histogramFitnessVarFixedPoints_") + param + ".csv",ios::out);
-    histotram2.open(std::string ("test/histogramAppearenceVarFixedPoints_") + param + ".csv",ios::out);
-    metrics::printParameters(histotram1, parameter);
-    metrics::printParameters(histotram2, parameter);
-    histotram1 << "appearence; frequency; param" << endl;
-    histotram2 << "appearence; frequency; param" << endl;
+    fstream fitnessFile;
+    fstream appearenceFile;
+    fitnessFile.open(std::string ("test/histogramFitnessVarFixedPoints_") + param + ".csv",ios::out);
+    appearenceFile.open(std::string ("test/histogramAppearenceVarFixedPoints_") + param + ".csv",ios::out);
+    metrics::printParameters(fitnessFile, parameter);
+    metrics::printParameters(appearenceFile, parameter);
+    fitnessFile << "appearence; frequency; param" << endl;
+    appearenceFile << "appearence; frequency; param" << endl;
 
     std::vector<float> paramList;
     switch (param){
@@ -232,17 +232,17 @@ namespace worker{
         std::transform(appearenceFrequency.begin(), appearenceFrequency.end(), temp3.begin(), appearenceFrequency.begin(), std::plus<float>());
       }
 
-      arquivo << paramValue << "; " << (float) result / parameter.nRun << endl;
+      varietyFile << paramValue << "; " << (float) result / parameter.nRun << endl;
       for(int i = 0; i < round(1 / 0.05); ++i){
-        histotram1 << i*0.05 + 0.025 << "; " << fitnessFrequency[i] / parameter.nRun << "; " << paramValue << endl;
-        histotram2 << i*0.05 + 0.025 << "; " << appearenceFrequency[i] / parameter.nRun << "; " << paramValue << endl;
+        fitnessFile << i*0.05 + 0.025 << "; " << fitnessFrequency[i] / parameter.nRun << "; " << paramValue << endl;
+        appearenceFile << i*0.05 + 0.025 << "; " << appearenceFrequency[i] / parameter.nRun << "; " << paramValue << endl;
       }
 
       cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     }
 
 
-    arquivo.close();
+    varietyFile.close();
   }
 
 }
