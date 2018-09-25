@@ -22,6 +22,7 @@ class Ambient;
 class DomesticUnity;
 class Model;
 namespace metrics{
+  std::vector<float> computeFitnessProfile(Patch* t_grid, const int t_latticeSize);
   std::vector<float> computeVarietyProfile(Patch* t_grid, Variety* variety, const int t_latticeSize, const int t_numberVariety);
   void printState(int t, Patch* grid, const int t_latticeSize);
   void floatToRGB(int n, int* R, int* G, int* B);

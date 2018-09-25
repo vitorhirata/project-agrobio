@@ -19,6 +19,20 @@ namespace metrics{
     return varFrequency;
   }
 
+  // Return the frequency of each range of fitness. The range size is 0.05
+  std::vector<float> computeFitnessProfile(Patch* t_grid, const int t_latticeSize){
+    std::vector<float> fitnessFrequency(round(1 / 0.05), 0);
+    for(int i = 0; i < t_latticeSize*t_latticeSize; ++i){
+      float position = 0;
+      while(position < t_grid[i].fitness)
+        position += 0.05;
+      int tick = round((position - 0.05) / 0.05);
+      //cout << tick << ", " << t_grid[i].fitness << endl;
+      fitnessFrequency[tick] += (1.0 / (t_latticeSize * t_latticeSize));
+    }
+    return fitnessFrequency;
+  }
+
   void printParameters(fstream& arquivo, Parameter parameter){
     arquivo << "### PARAMETERS VALUE ###" << endl;
     arquivo << "### LATTICESIZE = " << parameter.latticeSize << ", NVARIETY = " << parameter.numberVariety;

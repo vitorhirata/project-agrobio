@@ -93,8 +93,6 @@ void Model::setDomesticUnity(void){
 
 // Run standard version of the model. Gives as output a vector with the number of variety at each timeInterval
 std::tuple<std::vector<int>, std::vector<float>, std::vector<float> > Model::runStandard(void){
-  std::vector<float> initialFrequency;
-  initialFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety);
   std::vector<int> numberVariety(m_parameter.maxTime/m_parameter.timeInterval);
   numberVariety[0] = ambient->countSpecie();
 
@@ -103,33 +101,33 @@ std::tuple<std::vector<int>, std::vector<float>, std::vector<float> > Model::run
     if (t % m_parameter.timeInterval == 0)
       numberVariety[t/m_parameter.timeInterval] = ambient->countSpecie();
   }
-
-  std::vector<float> finalFrequency;
-  finalFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety);
-
-  return std::make_tuple(numberVariety, initialFrequency, finalFrequency);
+  ambient->computeAllFitness();
+  std::vector<float> fitnessFrequency;
+  fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
+  std::vector<float> appearenceFrequency;
+  appearenceFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety);
+  return std::make_tuple(numberVariety, fitnessFrequency, appearenceFrequency);
 }
 
 // Run the model giving as output the final number of varieties and both histograms
 std::tuple<int, std::vector<float>, std::vector<float> > Model::runFixedPoint(void){
-  std::vector<float> initialFrequency;
-  initialFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety);
 
   for(int t = 0; t < m_parameter.maxTime; ++t)
     iterate();
 
   int numberVariety = ambient->countSpecie();
 
-  std::vector<float> finalFrequency;
-  finalFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety);
+  ambient->computeAllFitness();
+  std::vector<float> fitnessFrequency;
+  fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
+  std::vector<float> appearenceFrequency;
+  appearenceFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety);
 
-  return std::make_tuple(numberVariety, initialFrequency, finalFrequency);
+  return std::make_tuple(numberVariety, fitnessFrequency, appearenceFrequency);
 }
 
 // Run the model plotting each time image of the simulation. Gives as output a vector with the number of variety at each timeInterval
 std::tuple<std::vector<int>, std::vector<float>, std::vector<float> > Model::runPlot(void){
-  std::vector<float> initialFrequency;
-  initialFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety);
   std::vector<int> numberVariety(m_parameter.maxTime/m_parameter.timeInterval);
   numberVariety[0] = ambient->countSpecie();
   metrics::printState(0, ambient->grid, m_parameter.latticeSize);
@@ -142,10 +140,13 @@ std::tuple<std::vector<int>, std::vector<float>, std::vector<float> > Model::run
     }
   }
 
-  std::vector<float> finalFrequency;
-  finalFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety);
+  ambient->computeAllFitness();
+  std::vector<float> fitnessFrequency;
+  fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
+  std::vector<float> appearenceFrequency;
+  appearenceFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety);
 
-  return std::make_tuple(numberVariety, initialFrequency, finalFrequency);
+  return std::make_tuple(numberVariety, fitnessFrequency, appearenceFrequency);
 }
 
 // Run one interation of the model, computing the fitness of ambient, computing DU punctuations and evaluating it's production
