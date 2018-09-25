@@ -17,9 +17,11 @@ namespace worker{
       std::transform(fitnessFrequency.begin(), fitnessFrequency.end(), temp2.begin(), fitnessFrequency.begin(), std::plus<float>());
       std::transform(appearenceFrequency.begin(), appearenceFrequency.end(), temp3.begin(), appearenceFrequency.begin(), std::plus<float>());
     }
+    time_t now = time(NULL);
+    std::string timestr = to_string(now);
 
     fstream varietyFile;
-    varietyFile.open("test/standard.csv",ios::out);
+    varietyFile.open("test/" + timestr + "_standard.csv",ios::out);
     metrics::printParameters(varietyFile, parameter);
     varietyFile << "time; nVar" << endl;
     for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
@@ -29,8 +31,8 @@ namespace worker{
 
     fstream fitnessFile;
     fstream appearenceFile;
-    fitnessFile.open("test/histogramFitness.csv",ios::out);
-    appearenceFile.open("test/histogramAppearence.csv",ios::out);
+    fitnessFile.open("test/" + timestr + "_histogramFitness.csv",ios::out);
+    appearenceFile.open("test/" + timestr + "_histogramAppearence.csv",ios::out);
     metrics::printParameters(fitnessFile, parameter);
     metrics::printParameters(appearenceFile, parameter);
     fitnessFile << "appearence; frequency" << endl;
@@ -53,8 +55,11 @@ namespace worker{
     std::vector<int> result;
     std::tie(result, fitnessFrequency, appearenceFrequency) = model.runPlot();
 
+    time_t now = time(NULL);
+    std::string timestr = to_string(now);
+
     fstream varietyFile;
-    varietyFile.open("test/plot/standard.csv",ios::out);
+    varietyFile.open("test/plot/" + timestr + "_standard.csv",ios::out);
     metrics::printParameters(varietyFile, parameter);
     varietyFile << "time; nVar" << endl;
     for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
@@ -64,8 +69,8 @@ namespace worker{
 
     fstream fitnessFile;
     fstream appearenceFile;
-    fitnessFile.open("test/plot/histogramFitness.csv",ios::out);
-    appearenceFile.open("test/plot/histogramAppearence.csv",ios::out);
+    fitnessFile.open("test/plot/" + timestr + "_histogramFitness.csv",ios::out);
+    appearenceFile.open("test/plot/" + timestr + "_histogramAppearence.csv",ios::out);
     metrics::printParameters(fitnessFile, parameter);
     metrics::printParameters(appearenceFile, parameter);
     fitnessFile << "appearence; frequency" << endl;
@@ -82,15 +87,18 @@ namespace worker{
   void Run_varParam(char param, std::vector<float> paramList){
     Parameter parameter;
 
+    time_t now = time(NULL);
+    std::string timestr = to_string(now);
+
     fstream varietyFile;
-    varietyFile.open(std::string ("test/varParam_")+param+".csv",ios::out);
+    varietyFile.open("test/" + timestr + "_varParam_" + param + ".csv",ios::out);
     metrics::printParameters(varietyFile, parameter);
     varietyFile << "time; nVar; param" << endl;
 
     fstream fitnessFile;
     fstream appearenceFile;
-    fitnessFile.open(std::string ("test/histogramFitnessVar_") + param + ".csv",ios::out);
-    appearenceFile.open(std::string ("test/histogramAppearenceVar_") + param + ".csv",ios::out);
+    fitnessFile.open("test/" + timestr + "_histogramFitnessVar_" + param + ".csv",ios::out);
+    appearenceFile.open(std::string ("test/" + timestr + "_histogramAppearenceVar_") + param + ".csv",ios::out);
     metrics::printParameters(fitnessFile, parameter);
     metrics::printParameters(appearenceFile, parameter);
     fitnessFile << "appearence; frequency; param" << endl;
@@ -155,15 +163,18 @@ namespace worker{
   void Run_varParamFixedPoints(char param){
     Parameter parameter;
 
+    time_t now = time(NULL);
+    std::string timestr = to_string(now);
+
     fstream varietyFile;
-    varietyFile.open(std::string ("test/varParamFixedPoints_")+param+".csv",ios::out);
+    varietyFile.open("test/" + timestr + "_varParamFixedPoints_" + param + ".csv",ios::out);
     metrics::printParameters(varietyFile, parameter);
     varietyFile << "param; nVar" << endl;
 
     fstream fitnessFile;
     fstream appearenceFile;
-    fitnessFile.open(std::string ("test/histogramFitnessVarFixedPoints_") + param + ".csv",ios::out);
-    appearenceFile.open(std::string ("test/histogramAppearenceVarFixedPoints_") + param + ".csv",ios::out);
+    fitnessFile.open("test/" + timestr + "_histogramFitnessVarFixedPoints_" + param + ".csv",ios::out);
+    appearenceFile.open("test/" + timestr + "_histogramAppearenceVarFixedPoints_" + param + ".csv",ios::out);
     metrics::printParameters(fitnessFile, parameter);
     metrics::printParameters(appearenceFile, parameter);
     fitnessFile << "appearence; frequency; param" << endl;
