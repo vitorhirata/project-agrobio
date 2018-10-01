@@ -1,5 +1,15 @@
 namespace metrics{
 
+  // Return the frequency of the number of varieties owened by the Domestic Unities
+  std::vector<float> computeVarietyProfile(DomesticUnity* domesticUnity, const int t_numberDomesticUnity, const int t_DUsize){
+    std::vector<float> varietyDistribution(t_DUsize, 0);
+    for(int i = 0; i < t_numberDomesticUnity; ++i){
+      int num = domesticUnity[i].varietyOwened.size();
+      varietyDistribution[num-1] += 1.0 / t_numberDomesticUnity;
+    }
+    return varietyDistribution;
+  }
+
   // Return the frequency of each range of appearence. The range size is 0.05
   std::vector<float> computeAppearenceProfile(Patch* t_grid, Variety* variety, const int t_latticeSize, const int t_numberVariety){
     std::vector<float> varietyQuantity(t_numberVariety, 0);

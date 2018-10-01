@@ -17,7 +17,6 @@ private:
   float m_insideTradeLimit;
   std::vector<int> m_indexLinkedDU;
   std::vector<int> m_indexOwenedPatches;
-  std::vector<DUvariety> varietyOwened;
   int m_worstVarietyIdx;
   int m_bestVarietyIdx;
   Variety* m_variety;
@@ -27,6 +26,7 @@ private:
   int findWorstVarietyPlace(void);
   float computePunctuation(float varFitness, float varAppererence);
 public:
+  std::vector<DUvariety> varietyOwened;
   float punctuation;
   int bestVarietyNumber;
   void initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid, std::vector<int> t_indexLinkedDU, std::vector<int> t_indexOwenedPatches, int t_nVariety, float t_outsideTradeLimit, float t_insideTradeLimit, float t_alpha, Variety* t_variety);

@@ -92,7 +92,7 @@ void Model::setDomesticUnity(void){
 
 // Run standard version of the model. Gives as output a vector with the number of variety at each timeInterval
 Result Model::runStandard(void){
-  Result result(0,0);
+  Result result(0, 0, 0);
   result.numberVariety.push_back(ambient->countSpecie());
 
   for(int t = 0; t < m_parameter.maxTime; ++t){
@@ -103,12 +103,13 @@ Result Model::runStandard(void){
   ambient->computeAllFitness();
   result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
   result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberInitialVariety);
+  result.varietyDistribution = metrics::computeVarietyProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
   return result;
 }
 
 // Run the model giving as output the final number of varieties and both histograms
 Result Model::runFixedPoint(void){
-  Result result(0,0);
+  Result result(0, 0, 0);
   for(int t = 0; t < m_parameter.maxTime; ++t)
     iterate();
 
@@ -116,12 +117,13 @@ Result Model::runFixedPoint(void){
   result.numberVariety.push_back(ambient->countSpecie());
   result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
   result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberInitialVariety);
+  result.varietyDistribution = metrics::computeVarietyProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
   return result;
 }
 
 // Run the model plotting each time image of the simulation. Gives as output a vector with the number of variety at each timeInterval
 Result Model::runPlot(void){
-  Result result(0,0);
+  Result result(0, 0, 0);
   result.numberVariety.push_back(ambient->countSpecie());
   metrics::printState(0, ambient->grid, m_parameter.latticeSize);
 
@@ -136,6 +138,7 @@ Result Model::runPlot(void){
   ambient->computeAllFitness();
   result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
   result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberInitialVariety);
+  result.varietyDistribution = metrics::computeVarietyProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
   return result;
 }
 

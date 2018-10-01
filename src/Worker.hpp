@@ -1,8 +1,8 @@
 namespace worker{
   void Run_standard(void){
     Parameter parameter;
-    Result result(parameter.maxTime/parameter.timeInterval, round(1 / 0.05));
-    Result resultTemp(0,0);
+    Result result(parameter.maxTime/parameter.timeInterval, round(1 / 0.05), parameter.latticeSize);
+    Result resultTemp(0, 0, 0);
 
     clock_t tStart = clock();
     for(int run = 0; run < parameter.nRun; ++run){
@@ -11,6 +11,7 @@ namespace worker{
       std::transform(result.numberVariety.begin(), result.numberVariety.end(), resultTemp.numberVariety.begin(), result.numberVariety.begin(), std::plus<float>());
       std::transform(result.fitnessFrequency.begin(), result.fitnessFrequency.end(), resultTemp.fitnessFrequency.begin(), result.fitnessFrequency.begin(), std::plus<float>());
       std::transform(result.appearenceFrequency.begin(), result.appearenceFrequency.end(), resultTemp.appearenceFrequency.begin(), result.appearenceFrequency.begin(), std::plus<float>());
+      std::transform(result.varietyDistribution.begin(), result.varietyDistribution.end(), resultTemp.varietyDistribution.begin(), result.varietyDistribution.begin(), std::plus<float>());
     }
     time_t now = time(NULL);
     std::string timestr = to_string(now);
@@ -26,24 +27,33 @@ namespace worker{
 
     fstream fitnessFile;
     fstream appearenceFile;
+    fstream varietyDistFile;
     fitnessFile.open("test/" + timestr + "_histogramFitness.csv",ios::out);
     appearenceFile.open("test/" + timestr + "_histogramAppearence.csv",ios::out);
+    varietyDistFile.open("test/" + timestr + "_varietyDistribution.csv",ios::out);
     metrics::printParameters(fitnessFile, parameter);
     metrics::printParameters(appearenceFile, parameter);
+    metrics::printParameters(varietyDistFile, parameter);
     fitnessFile << "appearence; frequency" << endl;
     appearenceFile << "appearence; frequency" << endl;
+    varietyDistFile << "param; nVar" << endl;
     for(int i = 0; i < round(1 / 0.05); ++i){
       fitnessFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] / parameter.nRun << endl;
       appearenceFile << i*0.05 + 0.025 << "; " << result.appearenceFrequency[i] / parameter.nRun << endl;
     }
+    for(int i = 0; i < 49; ++i)
+      varietyDistFile << i+1 << "; " << result.varietyDistribution[i] / parameter.nRun << endl;
+
+
     fitnessFile.close();
     appearenceFile.close();
+    varietyDistFile.close();
   }
 
   void Run_plot(void){
     Parameter parameter;
     Model model(parameter);
-    Result result(0, 0);
+    Result result(0, 0, 0);
     clock_t tStart = clock();
     result = model.runPlot();
 
@@ -61,18 +71,25 @@ namespace worker{
 
     fstream fitnessFile;
     fstream appearenceFile;
+    fstream varietyDistFile;
     fitnessFile.open("test/plot/" + timestr + "_histogramFitness.csv",ios::out);
     appearenceFile.open("test/plot/" + timestr + "_histogramAppearence.csv",ios::out);
+    varietyDistFile.open("test/plot/" + timestr + "_varietyDistribution.csv",ios::out);
     metrics::printParameters(fitnessFile, parameter);
     metrics::printParameters(appearenceFile, parameter);
+    metrics::printParameters(varietyDistFile, parameter);
     fitnessFile << "appearence; frequency" << endl;
     appearenceFile << "appearence; frequency" << endl;
+    varietyDistFile << "param; nVar" << endl;
     for(int i = 0; i < round(1 / 0.05); ++i){
       fitnessFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] << endl;
       appearenceFile << i*0.05 + 0.025 << "; " << result.appearenceFrequency[i] << endl;
     }
+    for(int i = 0; i < 49; ++i)
+      varietyDistFile << i+1 << "; " << result.varietyDistribution[i] / parameter.nRun << endl;
     fitnessFile.close();
     appearenceFile.close();
+    varietyDistFile.close();
   }
 
 
@@ -89,12 +106,16 @@ namespace worker{
 
     fstream fitnessFile;
     fstream appearenceFile;
+    fstream varietyDistFile;
     fitnessFile.open("test/" + timestr + "_histogramFitnessVar_" + param + ".csv",ios::out);
     appearenceFile.open(std::string ("test/" + timestr + "_histogramAppearenceVar_") + param + ".csv",ios::out);
+    varietyDistFile.open("test/" + timestr + "_varietyDistribution_" + param + ".csv",ios::out);
     metrics::printParameters(fitnessFile, parameter);
     metrics::printParameters(appearenceFile, parameter);
+    metrics::printParameters(varietyDistFile, parameter);
     fitnessFile << "appearence; frequency; param" << endl;
     appearenceFile << "appearence; frequency; param" << endl;
+    varietyDistFile << "appearence; frequency; param" << endl;
 
     for(auto paramValue : paramList){
       switch (param){
@@ -123,14 +144,15 @@ namespace worker{
           break;
       }
       clock_t tStart = clock();
-      Result result(parameter.maxTime/parameter.timeInterval, round(1 / 0.05));
-      Result resultTemp(0,0);
+      Result result(parameter.maxTime/parameter.timeInterval, round(1 / 0.05), parameter.latticeSize);
+      Result resultTemp(0, 0, 0);
       for(int run = 0; run < parameter.nRun; ++run){
         Model model(parameter);
         resultTemp = model.runStandard();
         std::transform(result.numberVariety.begin(), result.numberVariety.end(), resultTemp.numberVariety.begin(), result.numberVariety.begin(), std::plus<float>());
         std::transform(result.fitnessFrequency.begin(), result.fitnessFrequency.end(), resultTemp.fitnessFrequency.begin(), result.fitnessFrequency.begin(), std::plus<float>());
         std::transform(result.appearenceFrequency.begin(), result.appearenceFrequency.end(), resultTemp.appearenceFrequency.begin(), result.appearenceFrequency.begin(), std::plus<float>());
+        std::transform(result.varietyDistribution.begin(), result.varietyDistribution.end(), resultTemp.varietyDistribution.begin(), result.varietyDistribution.begin(), std::plus<float>());
       }
 
       for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
@@ -140,12 +162,15 @@ namespace worker{
         fitnessFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] / parameter.nRun << "; " << paramValue << endl;
         appearenceFile << i*0.05 + 0.025 << "; " << result.appearenceFrequency[i] / parameter.nRun << "; " << paramValue << endl;
       }
+      for(int i = 0; i < 49; ++i)
+        varietyDistFile << i+1 << "; " << result.varietyDistribution[i] / parameter.nRun << "; " << paramValue << endl;
 
       cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     }
     varietyFile.close();
     fitnessFile.close();
     appearenceFile.close();
+    varietyDistFile.close();
   }
 
   void Run_varParamFixedPoints(char param){
@@ -161,12 +186,16 @@ namespace worker{
 
     fstream fitnessFile;
     fstream appearenceFile;
+    fstream varietyDistFile;
     fitnessFile.open("test/" + timestr + "_histogramFitnessVarFixedPoints_" + param + ".csv",ios::out);
     appearenceFile.open("test/" + timestr + "_histogramAppearenceVarFixedPoints_" + param + ".csv",ios::out);
+    varietyDistFile.open("test/" + timestr + "_varietyDistribution_" + param + ".csv",ios::out);
     metrics::printParameters(fitnessFile, parameter);
     metrics::printParameters(appearenceFile, parameter);
+    metrics::printParameters(varietyDistFile, parameter);
     fitnessFile << "appearence; frequency; param" << endl;
     appearenceFile << "appearence; frequency; param" << endl;
+    varietyDistFile << "appearence; frequency; param" << endl;
 
     std::vector<float> paramList;
     switch (param){
@@ -217,8 +246,8 @@ namespace worker{
           break;
       }
       clock_t tStart = clock();
-      Result result(1, round(1 / 0.05));
-      Result resultTemp(0,0);
+      Result result(1, round(1 / 0.05), parameter.latticeSize);
+      Result resultTemp(0, 0, 0);
       result.numberVariety[0];
       resultTemp.numberVariety.push_back(0);
 
@@ -228,6 +257,7 @@ namespace worker{
         result.numberVariety[0] += resultTemp.numberVariety[0];
         std::transform(result.fitnessFrequency.begin(), result.fitnessFrequency.end(), resultTemp.fitnessFrequency.begin(), result.fitnessFrequency.begin(), std::plus<float>());
         std::transform(result.appearenceFrequency.begin(), result.appearenceFrequency.end(), resultTemp.appearenceFrequency.begin(), result.appearenceFrequency.begin(), std::plus<float>());
+        std::transform(result.varietyDistribution.begin(), result.varietyDistribution.end(), resultTemp.varietyDistribution.begin(), result.varietyDistribution.begin(), std::plus<float>());
       }
 
       varietyFile << paramValue << "; " << (float) result.numberVariety[0] / parameter.nRun << endl;
@@ -235,12 +265,17 @@ namespace worker{
         fitnessFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] / parameter.nRun << "; " << paramValue << endl;
         appearenceFile << i*0.05 + 0.025 << "; " << result.appearenceFrequency[i] / parameter.nRun << "; " << paramValue << endl;
       }
+      for(int i = 0; i < 49; ++i)
+        varietyDistFile << i+1 << "; " << result.varietyDistribution[i] / parameter.nRun << "; " << paramValue << endl;
 
       cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     }
 
 
     varietyFile.close();
+    fitnessFile.close();
+    appearenceFile.close();
+    varietyDistFile.close();
   }
 
 }

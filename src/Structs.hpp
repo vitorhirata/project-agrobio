@@ -34,10 +34,12 @@ struct Result{
   std::vector<int> numberVariety;
   std::vector<float> fitnessFrequency;
   std::vector<float> appearenceFrequency;
-  Result(int nVarSize, int histogramSize)
+  std::vector<float> varietyDistribution;
+  Result(int nVarSize, int histogramSize, int DUsize)
   : numberVariety(nVarSize, 0)
   , fitnessFrequency(histogramSize, 0)
-  , appearenceFrequency(histogramSize, 0) {}
+  , appearenceFrequency(histogramSize, 0)
+  , varietyDistribution(DUsize, 0) {}
 };
 
 // Variety struct contain all the proprieties of each variety
