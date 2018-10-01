@@ -1,21 +1,16 @@
 namespace worker{
   void Run_standard(void){
     Parameter parameter;
+    Result result(parameter.maxTime/parameter.timeInterval, round(1 / 0.05));
+    Result resultTemp(0,0);
 
     clock_t tStart = clock();
-    std::vector<int> result(parameter.maxTime/parameter.timeInterval, 0);
-    std::vector<float> fitnessFrequency(round(1 / 0.05), 0);
-    std::vector<float> appearenceFrequency(round(1 / 0.05), 0);
-    std::vector<int> temp;
-    std::vector<float> temp2;
-    std::vector<float> temp3;
-
     for(int run = 0; run < parameter.nRun; ++run){
       Model model(parameter);
-      std::tie(temp, temp2, temp3) = model.runStandard();
-      std::transform(result.begin(), result.end(), temp.begin(), result.begin(), std::plus<float>());
-      std::transform(fitnessFrequency.begin(), fitnessFrequency.end(), temp2.begin(), fitnessFrequency.begin(), std::plus<float>());
-      std::transform(appearenceFrequency.begin(), appearenceFrequency.end(), temp3.begin(), appearenceFrequency.begin(), std::plus<float>());
+      resultTemp = model.runStandard();
+      std::transform(result.numberVariety.begin(), result.numberVariety.end(), resultTemp.numberVariety.begin(), result.numberVariety.begin(), std::plus<float>());
+      std::transform(result.fitnessFrequency.begin(), result.fitnessFrequency.end(), resultTemp.fitnessFrequency.begin(), result.fitnessFrequency.begin(), std::plus<float>());
+      std::transform(result.appearenceFrequency.begin(), result.appearenceFrequency.end(), resultTemp.appearenceFrequency.begin(), result.appearenceFrequency.begin(), std::plus<float>());
     }
     time_t now = time(NULL);
     std::string timestr = to_string(now);
@@ -25,7 +20,7 @@ namespace worker{
     metrics::printParameters(varietyFile, parameter);
     varietyFile << "time; nVar" << endl;
     for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
-      varietyFile << i*parameter.timeInterval << "; " << (float) result[i] / parameter.nRun << endl;
+      varietyFile << i*parameter.timeInterval << "; " << (float) result.numberVariety[i] / parameter.nRun << endl;
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     varietyFile.close();
 
@@ -38,8 +33,8 @@ namespace worker{
     fitnessFile << "appearence; frequency" << endl;
     appearenceFile << "appearence; frequency" << endl;
     for(int i = 0; i < round(1 / 0.05); ++i){
-      fitnessFile << i*0.05 + 0.025 << "; " << fitnessFrequency[i] / parameter.nRun << endl;
-      appearenceFile << i*0.05 + 0.025 << "; " << appearenceFrequency[i] / parameter.nRun << endl;
+      fitnessFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] / parameter.nRun << endl;
+      appearenceFile << i*0.05 + 0.025 << "; " << result.appearenceFrequency[i] / parameter.nRun << endl;
     }
     fitnessFile.close();
     appearenceFile.close();
@@ -47,13 +42,10 @@ namespace worker{
 
   void Run_plot(void){
     Parameter parameter;
-    clock_t tStart = clock();
     Model model(parameter);
-
-    std::vector<float> fitnessFrequency;
-    std::vector<float> appearenceFrequency;
-    std::vector<int> result;
-    std::tie(result, fitnessFrequency, appearenceFrequency) = model.runPlot();
+    Result result(0, 0);
+    clock_t tStart = clock();
+    result = model.runPlot();
 
     time_t now = time(NULL);
     std::string timestr = to_string(now);
@@ -63,7 +55,7 @@ namespace worker{
     metrics::printParameters(varietyFile, parameter);
     varietyFile << "time; nVar" << endl;
     for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
-      varietyFile << i*parameter.timeInterval << "; " << result[i] << endl;
+      varietyFile << i*parameter.timeInterval << "; " << result.numberVariety[i] << endl;
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     varietyFile.close();
 
@@ -76,8 +68,8 @@ namespace worker{
     fitnessFile << "appearence; frequency" << endl;
     appearenceFile << "appearence; frequency" << endl;
     for(int i = 0; i < round(1 / 0.05); ++i){
-      fitnessFile << i*0.05 + 0.025 << "; " << fitnessFrequency[i] << endl;
-      appearenceFile << i*0.05 + 0.025 << "; " << appearenceFrequency[i] << endl;
+      fitnessFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] << endl;
+      appearenceFile << i*0.05 + 0.025 << "; " << result.appearenceFrequency[i] << endl;
     }
     fitnessFile.close();
     appearenceFile.close();
@@ -124,33 +116,29 @@ namespace worker{
           parameter.numberHabitat = paramValue;
           break;
         case 'n':
-          parameter.numberVariety = paramValue;
+          parameter.numberInitialVariety = paramValue;
           break;
         case 'a':
           parameter.alpha = paramValue;
           break;
       }
       clock_t tStart = clock();
-      std::vector<int> result(parameter.maxTime/parameter.timeInterval, 0);
-      std::vector<float> fitnessFrequency(round(1 / 0.05), 0);
-      std::vector<float> appearenceFrequency(round(1 / 0.05), 0);
-      std::vector<int> temp;
-      std::vector<float> temp2;
-      std::vector<float> temp3;
+      Result result(parameter.maxTime/parameter.timeInterval, round(1 / 0.05));
+      Result resultTemp(0,0);
       for(int run = 0; run < parameter.nRun; ++run){
         Model model(parameter);
-        std::tie(temp, temp2, temp3) = model.runStandard();
-        std::transform(result.begin(), result.end(), temp.begin(), result.begin(), std::plus<float>());
-        std::transform(fitnessFrequency.begin(), fitnessFrequency.end(), temp2.begin(), fitnessFrequency.begin(), std::plus<float>());
-        std::transform(appearenceFrequency.begin(), appearenceFrequency.end(), temp3.begin(), appearenceFrequency.begin(), std::plus<float>());
+        resultTemp = model.runStandard();
+        std::transform(result.numberVariety.begin(), result.numberVariety.end(), resultTemp.numberVariety.begin(), result.numberVariety.begin(), std::plus<float>());
+        std::transform(result.fitnessFrequency.begin(), result.fitnessFrequency.end(), resultTemp.fitnessFrequency.begin(), result.fitnessFrequency.begin(), std::plus<float>());
+        std::transform(result.appearenceFrequency.begin(), result.appearenceFrequency.end(), resultTemp.appearenceFrequency.begin(), result.appearenceFrequency.begin(), std::plus<float>());
       }
 
       for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
-        varietyFile << i*parameter.timeInterval << "; " << (float) result[i] / parameter.nRun << "; " << paramValue << endl;
+        varietyFile << i*parameter.timeInterval << "; " << (float) result.numberVariety[i] / parameter.nRun << "; " << paramValue << endl;
 
       for(int i = 0; i < round(1 / 0.05); ++i){
-        fitnessFile << i*0.05 + 0.025 << "; " << fitnessFrequency[i] / parameter.nRun << "; " << paramValue << endl;
-        appearenceFile << i*0.05 + 0.025 << "; " << appearenceFrequency[i] / parameter.nRun << "; " << paramValue << endl;
+        fitnessFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] / parameter.nRun << "; " << paramValue << endl;
+        appearenceFile << i*0.05 + 0.025 << "; " << result.appearenceFrequency[i] / parameter.nRun << "; " << paramValue << endl;
       }
 
       cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
@@ -222,31 +210,30 @@ namespace worker{
           parameter.numberHabitat = paramValue;
           break;
         case 'n':
-          parameter.numberVariety = paramValue;
+          parameter.numberInitialVariety = paramValue;
           break;
         case 'a':
           parameter.alpha = paramValue;
           break;
       }
       clock_t tStart = clock();
-      int result = 0;
-      std::vector<float> fitnessFrequency(round(1 / 0.05), 0);
-      std::vector<float> appearenceFrequency(round(1 / 0.05), 0);
-      int temp;
-      std::vector<float> temp2;
-      std::vector<float> temp3;
+      Result result(1, round(1 / 0.05));
+      Result resultTemp(0,0);
+      result.numberVariety[0];
+      resultTemp.numberVariety.push_back(0);
+
       for(int run = 0; run < parameter.nRun; ++run){
         Model model(parameter);
-        std::tie(temp, temp2, temp3) = model.runFixedPoint();
-        result += temp;
-        std::transform(fitnessFrequency.begin(), fitnessFrequency.end(), temp2.begin(), fitnessFrequency.begin(), std::plus<float>());
-        std::transform(appearenceFrequency.begin(), appearenceFrequency.end(), temp3.begin(), appearenceFrequency.begin(), std::plus<float>());
+        resultTemp = model.runFixedPoint();
+        result.numberVariety[0] += resultTemp.numberVariety[0];
+        std::transform(result.fitnessFrequency.begin(), result.fitnessFrequency.end(), resultTemp.fitnessFrequency.begin(), result.fitnessFrequency.begin(), std::plus<float>());
+        std::transform(result.appearenceFrequency.begin(), result.appearenceFrequency.end(), resultTemp.appearenceFrequency.begin(), result.appearenceFrequency.begin(), std::plus<float>());
       }
 
-      varietyFile << paramValue << "; " << (float) result / parameter.nRun << endl;
+      varietyFile << paramValue << "; " << (float) result.numberVariety[0] / parameter.nRun << endl;
       for(int i = 0; i < round(1 / 0.05); ++i){
-        fitnessFile << i*0.05 + 0.025 << "; " << fitnessFrequency[i] / parameter.nRun << "; " << paramValue << endl;
-        appearenceFile << i*0.05 + 0.025 << "; " << appearenceFrequency[i] / parameter.nRun << "; " << paramValue << endl;
+        fitnessFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] / parameter.nRun << "; " << paramValue << endl;
+        appearenceFile << i*0.05 + 0.025 << "; " << result.appearenceFrequency[i] / parameter.nRun << "; " << paramValue << endl;
       }
 
       cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;

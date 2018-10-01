@@ -1,16 +1,10 @@
 #ifndef STRUCTS_H
 #define STRUCTS_H
 
-// Variety struct contain all the proprieties of each variety
-struct Variety{
-  std::vector<float> K;
-  float appearence;
-};
-
 // Parameters struct contain all the parameters of one model
 struct Parameter{
   int latticeSize;
-  int numberVariety; // Number of species in initialization
+  int numberInitialVariety; // Number of species in initialization
   int numberResources; // Number of existing resources
   int numberHabitat; // Number of different resources in grid
   int maxTime; // Max time of iteration
@@ -23,7 +17,7 @@ struct Parameter{
   float alpha;
   Parameter()
   : latticeSize(49)
-  , numberVariety(50)
+  , numberInitialVariety(50)
   , numberResources(3)
   , numberHabitat(1)
   , maxTime(200)
@@ -34,5 +28,21 @@ struct Parameter{
   , outsideTradeLimit(0.02)
   , insideTradeLimit(0.001)
   , alpha(0.5) {}
+};
+
+struct Result{
+  std::vector<int> numberVariety;
+  std::vector<float> fitnessFrequency;
+  std::vector<float> appearenceFrequency;
+  Result(int nVarSize, int histogramSize)
+  : numberVariety(nVarSize, 0)
+  , fitnessFrequency(histogramSize, 0)
+  , appearenceFrequency(histogramSize, 0) {}
+};
+
+// Variety struct contain all the proprieties of each variety
+struct Variety{
+  std::vector<float> K;
+  float appearence;
 };
 #endif

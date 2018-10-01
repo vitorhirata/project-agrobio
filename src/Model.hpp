@@ -4,7 +4,6 @@
 class Model{
 private:
   const Parameter m_parameter;
-
   Ambient* ambient;
   DomesticUnity* domesticUnity;
   Variety* variety;
@@ -15,9 +14,9 @@ private:
 public:
   Model(Parameter t_parameter);
   ~Model();
-  std::tuple<std::vector<int>, std::vector<float>, std::vector<float> > runStandard(void);
-  std::tuple<std::vector<int>, std::vector<float>, std::vector<float> > runPlot(void);
-  std::tuple< int, std::vector<float>, std::vector<float> > runFixedPoint(void);
+  Result runStandard(void);
+  Result runPlot(void);
+  Result runFixedPoint(void);
 };
 
 // Model constructor, receive model parameters, initialize then, and call for each class initialization.
@@ -42,10 +41,10 @@ Model::~Model(){
 // Create variety array and initialize it's K value with random gauss distribution
 void Model::setVariety(void){
   static std::normal_distribution<double> gauss(0.4,0.2);
-  variety =  new Variety[m_parameter.numberVariety];
+  variety =  new Variety[m_parameter.numberInitialVariety];
 
   std::vector<float> KTemp(m_parameter.numberResources);
-  for(int i = 0; i < m_parameter.numberVariety; ++i){
+  for(int i = 0; i < m_parameter.numberInitialVariety; ++i){
     for(int j = 0; j < m_parameter.numberResources; ++j){
       KTemp[j] = gauss(rand64);
       while(KTemp[j] < 0)
@@ -58,7 +57,7 @@ void Model::setVariety(void){
 
 // Create ambient, passing the parameters using inside it
 void Model::setAmbient(void){
-  ambient = new Ambient(m_parameter.latticeSize, m_parameter.numberVariety, m_parameter.numberHabitat, m_parameter.numberResources, variety);
+  ambient = new Ambient(m_parameter.latticeSize, m_parameter.numberInitialVariety, m_parameter.numberHabitat, m_parameter.numberResources, variety);
 }
 
 // Create DomesticUnity array, set indexLinkedDUs, indexOwenedsPatches and pass it to initialize each DomesticUnity
@@ -87,66 +86,57 @@ void Model::setDomesticUnity(void){
 
   // Pass the parameters to actualy initialize each domesticUnity
   for(int i = 0; i < m_parameter.numberDomesticUnity; ++i){
-    domesticUnity[i].initializeDU(domesticUnity, ambient->grid, indexLinkedDUs[i], indexOwenedsPatches[i], m_parameter.numberVariety, m_parameter.outsideTradeLimit, m_parameter.insideTradeLimit, m_parameter.alpha, variety);
+    domesticUnity[i].initializeDU(domesticUnity, ambient->grid, indexLinkedDUs[i], indexOwenedsPatches[i], m_parameter.numberInitialVariety, m_parameter.outsideTradeLimit, m_parameter.insideTradeLimit, m_parameter.alpha, variety);
   }
 }
 
 // Run standard version of the model. Gives as output a vector with the number of variety at each timeInterval
-std::tuple<std::vector<int>, std::vector<float>, std::vector<float> > Model::runStandard(void){
-  std::vector<int> numberVariety(m_parameter.maxTime/m_parameter.timeInterval);
-  numberVariety[0] = ambient->countSpecie();
+Result Model::runStandard(void){
+  Result result(0,0);
+  result.numberVariety.push_back(ambient->countSpecie());
 
   for(int t = 0; t < m_parameter.maxTime; ++t){
     iterate();
     if (t % m_parameter.timeInterval == 0)
-      numberVariety[t/m_parameter.timeInterval] = ambient->countSpecie();
+      result.numberVariety.push_back(ambient->countSpecie());
   }
   ambient->computeAllFitness();
-  std::vector<float> fitnessFrequency;
-  fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
-  std::vector<float> appearenceFrequency;
-  appearenceFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety);
-  return std::make_tuple(numberVariety, fitnessFrequency, appearenceFrequency);
+  result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
+  result.appearenceFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberInitialVariety);
+  return result;
 }
 
 // Run the model giving as output the final number of varieties and both histograms
-std::tuple<int, std::vector<float>, std::vector<float> > Model::runFixedPoint(void){
-
+Result Model::runFixedPoint(void){
+  Result result(0,0);
   for(int t = 0; t < m_parameter.maxTime; ++t)
     iterate();
 
-  int numberVariety = ambient->countSpecie();
-
   ambient->computeAllFitness();
-  std::vector<float> fitnessFrequency;
-  fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
-  std::vector<float> appearenceFrequency;
-  appearenceFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety);
-
-  return std::make_tuple(numberVariety, fitnessFrequency, appearenceFrequency);
+  result.numberVariety.push_back(ambient->countSpecie());
+  result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
+  result.appearenceFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberInitialVariety);
+  return result;
 }
 
 // Run the model plotting each time image of the simulation. Gives as output a vector with the number of variety at each timeInterval
-std::tuple<std::vector<int>, std::vector<float>, std::vector<float> > Model::runPlot(void){
-  std::vector<int> numberVariety(m_parameter.maxTime/m_parameter.timeInterval);
-  numberVariety[0] = ambient->countSpecie();
+Result Model::runPlot(void){
+  Result result(0,0);
+  result.numberVariety.push_back(ambient->countSpecie());
   metrics::printState(0, ambient->grid, m_parameter.latticeSize);
 
   for(int t = 0; t < m_parameter.maxTime; ++t){
     iterate();
     if (t % m_parameter.timeInterval == 0){
-      numberVariety[t/m_parameter.timeInterval] = ambient->countSpecie();
+      result.numberVariety.push_back(ambient->countSpecie());
       metrics::printState(t, ambient->grid, m_parameter.latticeSize);
     }
   }
 
   ambient->computeAllFitness();
-  std::vector<float> fitnessFrequency;
-  fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
-  std::vector<float> appearenceFrequency;
-  appearenceFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberVariety);
-
-  return std::make_tuple(numberVariety, fitnessFrequency, appearenceFrequency);
+  result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
+  result.appearenceFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberInitialVariety);
+  return result;
 }
 
 // Run one interation of the model, computing the fitness of ambient, computing DU punctuations and evaluating it's production
@@ -164,6 +154,5 @@ void Model::iterate(void){
   for(auto i : DU_list)
     domesticUnity[i].evaluateProduction();
 }
-
 
 #endif

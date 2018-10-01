@@ -35,7 +35,7 @@ namespace metrics{
 
   void printParameters(fstream& arquivo, Parameter parameter){
     arquivo << "### PARAMETERS VALUE ###" << endl;
-    arquivo << "### LATTICESIZE = " << parameter.latticeSize << ", NVARIETY = " << parameter.numberVariety;
+    arquivo << "### LATTICESIZE = " << parameter.latticeSize << ", NVARIETY = " << parameter.numberInitialVariety;
     arquivo << ", NRESOURCE = " << parameter.numberResources << ", NRESOURCEDIST = " << parameter.numberHabitat;
     arquivo << ", PROBABILITYCONNECTION = " << parameter.probabilyConnection << ", NDOMESTICUNITY = " << parameter.numberDomesticUnity;
     arquivo << ", OUTSIDETRADELIMIT = " << parameter.outsideTradeLimit << ", INSIDETRADELIMIT = " << parameter.insideTradeLimit;
