@@ -1,7 +1,7 @@
 namespace metrics{
 
   // Return the frequency of each range of appearence. The range size is 0.05
-  std::vector<float> computeVarietyProfile(Patch* t_grid, Variety* variety, const int t_latticeSize, const int t_numberVariety){
+  std::vector<float> computeAppearenceProfile(Patch* t_grid, Variety* variety, const int t_latticeSize, const int t_numberVariety){
     std::vector<float> varietyQuantity(t_numberVariety, 0);
     for(int i = 0; i < t_latticeSize*t_latticeSize; ++i)
       ++varietyQuantity[t_grid[i].plantedVariety];

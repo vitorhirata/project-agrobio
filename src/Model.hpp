@@ -102,7 +102,7 @@ Result Model::runStandard(void){
   }
   ambient->computeAllFitness();
   result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
-  result.appearenceFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberInitialVariety);
+  result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberInitialVariety);
   return result;
 }
 
@@ -115,7 +115,7 @@ Result Model::runFixedPoint(void){
   ambient->computeAllFitness();
   result.numberVariety.push_back(ambient->countSpecie());
   result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
-  result.appearenceFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberInitialVariety);
+  result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberInitialVariety);
   return result;
 }
 
@@ -135,7 +135,7 @@ Result Model::runPlot(void){
 
   ambient->computeAllFitness();
   result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
-  result.appearenceFrequency = metrics::computeVarietyProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberInitialVariety);
+  result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberInitialVariety);
   return result;
 }
 
