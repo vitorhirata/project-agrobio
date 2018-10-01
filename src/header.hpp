@@ -17,6 +17,7 @@ static std::uniform_real_distribution<double> uniFLOAT(0.0,1.0);
 /* Builted class and functions */
 struct Variety;
 struct Parameter;
+struct Result;
 class Patch;
 class Ambient;
 class DomesticUnity;
