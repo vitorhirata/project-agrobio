@@ -121,7 +121,7 @@ namespace worker{
           parameter.numberDomesticUnity = paramValue;
           break;
         case 'r':
-          parameter.numberResourceDistribution = paramValue;
+          parameter.numberHabitat = paramValue;
           break;
         case 'n':
           parameter.numberVariety = paramValue;
@@ -219,7 +219,7 @@ namespace worker{
           parameter.numberDomesticUnity = paramValue;
           break;
         case 'r':
-          parameter.numberResourceDistribution = paramValue;
+          parameter.numberHabitat = paramValue;
           break;
         case 'n':
           parameter.numberVariety = paramValue;

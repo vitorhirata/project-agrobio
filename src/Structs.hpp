@@ -12,7 +12,7 @@ struct Parameter{
   int latticeSize;
   int numberVariety; // Number of species in initialization
   int numberResources; // Number of existing resources
-  int numberResourceDistribution; // Number of different resources in grid
+  int numberHabitat; // Number of different resources in grid
   int maxTime; // Max time of iteration
   int timeInterval; // Interval in which metrics are counted
   int numberDomesticUnity; // Number of domestic unities
@@ -25,7 +25,7 @@ struct Parameter{
   : latticeSize(49)
   , numberVariety(50)
   , numberResources(3)
-  , numberResourceDistribution(1)
+  , numberHabitat(1)
   , maxTime(200)
   , timeInterval(5)
   , numberDomesticUnity(49)
