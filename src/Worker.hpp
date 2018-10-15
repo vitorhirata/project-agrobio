@@ -8,11 +8,7 @@ namespace worker{
     for(int run = 0; run < parameter.nRun; ++run){
       Model model(parameter);
       resultTemp = model.runStandard();
-      std::transform(result.numberVariety.begin(), result.numberVariety.end(), resultTemp.numberVariety.begin(), result.numberVariety.begin(), std::plus<float>());
-      std::transform(result.meanVarietyDU.begin(), result.meanVarietyDU.end(), resultTemp.meanVarietyDU.begin(), result.meanVarietyDU.begin(), std::plus<float>());
-      std::transform(result.fitnessFrequency.begin(), result.fitnessFrequency.end(), resultTemp.fitnessFrequency.begin(), result.fitnessFrequency.begin(), std::plus<float>());
-      std::transform(result.appearenceFrequency.begin(), result.appearenceFrequency.end(), resultTemp.appearenceFrequency.begin(), result.appearenceFrequency.begin(), std::plus<float>());
-      std::transform(result.varietyDistribution.begin(), result.varietyDistribution.end(), resultTemp.varietyDistribution.begin(), result.varietyDistribution.begin(), std::plus<float>());
+      metrics::sumResults(&result, &resultTemp);
     }
     time_t now = time(NULL);
     std::string timestr = to_string(now);
@@ -172,11 +168,7 @@ namespace worker{
       for(int run = 0; run < parameter.nRun; ++run){
         Model model(parameter);
         resultTemp = model.runStandard();
-        std::transform(result.numberVariety.begin(), result.numberVariety.end(), resultTemp.numberVariety.begin(), result.numberVariety.begin(), std::plus<float>());
-        std::transform(result.meanVarietyDU.begin(), result.meanVarietyDU.end(), resultTemp.meanVarietyDU.begin(), result.meanVarietyDU.begin(), std::plus<float>());
-        std::transform(result.fitnessFrequency.begin(), result.fitnessFrequency.end(), resultTemp.fitnessFrequency.begin(), result.fitnessFrequency.begin(), std::plus<float>());
-        std::transform(result.appearenceFrequency.begin(), result.appearenceFrequency.end(), resultTemp.appearenceFrequency.begin(), result.appearenceFrequency.begin(), std::plus<float>());
-        std::transform(result.varietyDistribution.begin(), result.varietyDistribution.end(), resultTemp.varietyDistribution.begin(), result.varietyDistribution.begin(), std::plus<float>());
+        metrics::sumResults(&result, &resultTemp);
       }
 
       for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i){

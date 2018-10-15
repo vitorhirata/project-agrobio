@@ -1,5 +1,13 @@
 namespace metrics{
 
+  void sumResults(Result* result, Result* resultTemp){
+    std::transform((*result).numberVariety.begin(), (*result).numberVariety.end(), (*resultTemp).numberVariety.begin(), (*result).numberVariety.begin(), std::plus<float>());
+    std::transform((*result).meanVarietyDU.begin(), (*result).meanVarietyDU.end(), (*resultTemp).meanVarietyDU.begin(), (*result).meanVarietyDU.begin(), std::plus<float>());
+    std::transform((*result).fitnessFrequency.begin(), (*result).fitnessFrequency.end(), (*resultTemp).fitnessFrequency.begin(), (*result).fitnessFrequency.begin(), std::plus<float>());
+    std::transform((*result).appearenceFrequency.begin(), (*result).appearenceFrequency.end(), (*resultTemp).appearenceFrequency.begin(), (*result).appearenceFrequency.begin(), std::plus<float>());
+    std::transform((*result).varietyDistribution.begin(), (*result).varietyDistribution.end(), (*resultTemp).varietyDistribution.begin(), (*result).varietyDistribution.begin(), std::plus<float>());
+  }
+
   // Return the frequency of the number of varieties owened by the Domestic Unities
   std::vector<float> computeVarietyProfile(DomesticUnity* domesticUnity, const int t_numberDomesticUnity, const int t_DUsize){
     std::vector<float> varietyDistribution(t_DUsize, 0);
