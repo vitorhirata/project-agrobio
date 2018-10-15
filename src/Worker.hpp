@@ -9,6 +9,7 @@ namespace worker{
       Model model(parameter);
       resultTemp = model.runStandard();
       std::transform(result.numberVariety.begin(), result.numberVariety.end(), resultTemp.numberVariety.begin(), result.numberVariety.begin(), std::plus<float>());
+      std::transform(result.meanVarietyDU.begin(), result.meanVarietyDU.end(), resultTemp.meanVarietyDU.begin(), result.meanVarietyDU.begin(), std::plus<float>());
       std::transform(result.fitnessFrequency.begin(), result.fitnessFrequency.end(), resultTemp.fitnessFrequency.begin(), result.fitnessFrequency.begin(), std::plus<float>());
       std::transform(result.appearenceFrequency.begin(), result.appearenceFrequency.end(), resultTemp.appearenceFrequency.begin(), result.appearenceFrequency.begin(), std::plus<float>());
       std::transform(result.varietyDistribution.begin(), result.varietyDistribution.end(), resultTemp.varietyDistribution.begin(), result.varietyDistribution.begin(), std::plus<float>());
@@ -24,6 +25,14 @@ namespace worker{
       varietyFile << i*parameter.timeInterval << "; " << (float) result.numberVariety[i] / parameter.nRun << endl;
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     varietyFile.close();
+
+    fstream varietyMeanDUFile;
+    varietyMeanDUFile.open("test/" + timestr + "_meanDU.csv",ios::out);
+    metrics::printParameters(varietyMeanDUFile, parameter);
+    varietyMeanDUFile << "time; nVar" << endl;
+    for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
+      varietyMeanDUFile << i*parameter.timeInterval << "; " << (float) result.meanVarietyDU[i] / parameter.nRun << endl;
+    varietyMeanDUFile.close();
 
     fstream fitnessFile;
     fstream appearenceFile;
@@ -69,6 +78,14 @@ namespace worker{
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     varietyFile.close();
 
+    fstream varietyMeanDUFile;
+    varietyMeanDUFile.open("test/plot" + timestr + "_meanDU.csv",ios::out);
+    metrics::printParameters(varietyMeanDUFile, parameter);
+    varietyMeanDUFile << "time; nVar" << endl;
+    for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
+      varietyMeanDUFile << i*parameter.timeInterval << "; " << result.meanVarietyDU[i] << endl;
+    varietyMeanDUFile.close();
+
     fstream fitnessFile;
     fstream appearenceFile;
     fstream varietyDistFile;
@@ -103,6 +120,12 @@ namespace worker{
     varietyFile.open("test/" + timestr + "_varParam_" + param + ".csv",ios::out);
     metrics::printParameters(varietyFile, parameter);
     varietyFile << "time; nVar; param" << endl;
+
+    fstream varietyMeanDUFile;
+    varietyMeanDUFile.open("test/" + timestr + "_meanDU_" + param + ".csv",ios::out);
+    metrics::printParameters(varietyMeanDUFile, parameter);
+    varietyMeanDUFile << "time; nVar; param" << endl;
+
 
     fstream fitnessFile;
     fstream appearenceFile;
@@ -150,14 +173,16 @@ namespace worker{
         Model model(parameter);
         resultTemp = model.runStandard();
         std::transform(result.numberVariety.begin(), result.numberVariety.end(), resultTemp.numberVariety.begin(), result.numberVariety.begin(), std::plus<float>());
+        std::transform(result.meanVarietyDU.begin(), result.meanVarietyDU.end(), resultTemp.meanVarietyDU.begin(), result.meanVarietyDU.begin(), std::plus<float>());
         std::transform(result.fitnessFrequency.begin(), result.fitnessFrequency.end(), resultTemp.fitnessFrequency.begin(), result.fitnessFrequency.begin(), std::plus<float>());
         std::transform(result.appearenceFrequency.begin(), result.appearenceFrequency.end(), resultTemp.appearenceFrequency.begin(), result.appearenceFrequency.begin(), std::plus<float>());
         std::transform(result.varietyDistribution.begin(), result.varietyDistribution.end(), resultTemp.varietyDistribution.begin(), result.varietyDistribution.begin(), std::plus<float>());
       }
 
-      for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
+      for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i){
         varietyFile << i*parameter.timeInterval << "; " << (float) result.numberVariety[i] / parameter.nRun << "; " << paramValue << endl;
-
+        varietyMeanDUFile << i*parameter.timeInterval << "; " << (float) result.meanVarietyDU[i] / parameter.nRun<< "; " << paramValue << endl;
+      }
       for(int i = 0; i < round(1 / 0.05); ++i){
         fitnessFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] / parameter.nRun << "; " << paramValue << endl;
         appearenceFile << i*0.05 + 0.025 << "; " << result.appearenceFrequency[i] / parameter.nRun << "; " << paramValue << endl;

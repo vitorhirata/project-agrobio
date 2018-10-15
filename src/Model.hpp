@@ -97,8 +97,10 @@ Result Model::runStandard(void){
 
   for(int t = 0; t < m_parameter.maxTime; ++t){
     iterate();
-    if (t % m_parameter.timeInterval == 0)
+    if (t % m_parameter.timeInterval == 0){
       result.numberVariety.push_back(ambient->countSpecie());
+      result.meanVarietyDU.push_back(metrics::computeVarietyMeanProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize));
+    }
   }
   ambient->computeAllFitness();
   result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
@@ -132,6 +134,7 @@ Result Model::runPlot(void){
     if (t % m_parameter.timeInterval == 0){
       result.numberVariety.push_back(ambient->countSpecie());
       metrics::printState(t, ambient->grid, m_parameter.latticeSize);
+      result.meanVarietyDU.push_back(metrics::computeVarietyMeanProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize));
     }
   }
 

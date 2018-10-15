@@ -23,6 +23,7 @@ class Ambient;
 class DomesticUnity;
 class Model;
 namespace metrics{
+  float computeVarietyMeanProfile(DomesticUnity* domesticUnity, const int t_numberDomesticUnity, const int t_DUsize);
   std::vector<float> computeVarietyProfile(DomesticUnity* domesticUnity, const int t_numberDomesticUnity, const int t_DUsize);
   std::vector<float> computeFitnessProfile(Patch* t_grid, const int t_latticeSize);
   std::vector<float> computeAppearenceProfile(Patch* t_grid, Variety* variety, const int t_latticeSize, const int t_numberVariety);
