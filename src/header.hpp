@@ -37,6 +37,7 @@ namespace worker{
   void Run_plot(void);
   void Run_varParamFixedPoints(char param);
   void Run_varParam(char param, std::vector<float> paramList);
+  fstream openFile(std::string fileName, std::string varNames, Parameter parameter);
 }
 
 #include "Structs.hpp"

@@ -13,42 +13,26 @@ namespace worker{
     time_t now = time(NULL);
     std::string timestr = to_string(now);
 
-    fstream varietyFile;
-    varietyFile.open("test/" + timestr + "_standard.csv",ios::out);
-    metrics::printParameters(varietyFile, parameter);
-    varietyFile << "time; nVar" << endl;
+    fstream varietyFile = worker::openFile("test/" + timestr + "_standard.csv", "time; nVar", parameter);
     for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
       varietyFile << i*parameter.timeInterval << "; " << (float) result.numberVariety[i] / parameter.nRun << endl;
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     varietyFile.close();
 
-    fstream varietyMeanDUFile;
-    varietyMeanDUFile.open("test/" + timestr + "_meanDU.csv",ios::out);
-    metrics::printParameters(varietyMeanDUFile, parameter);
-    varietyMeanDUFile << "time; nVar" << endl;
+    fstream varietyMeanDUFile = worker::openFile("test/" + timestr + "_meanDU.csv", "time; nVar", parameter);
     for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
       varietyMeanDUFile << i*parameter.timeInterval << "; " << (float) result.meanVarietyDU[i] / parameter.nRun << endl;
     varietyMeanDUFile.close();
 
-    fstream fitnessFile;
-    fstream appearenceFile;
-    fstream varietyDistFile;
-    fitnessFile.open("test/" + timestr + "_histogramFitness.csv",ios::out);
-    appearenceFile.open("test/" + timestr + "_histogramAppearence.csv",ios::out);
-    varietyDistFile.open("test/" + timestr + "_varietyDistribution.csv",ios::out);
-    metrics::printParameters(fitnessFile, parameter);
-    metrics::printParameters(appearenceFile, parameter);
-    metrics::printParameters(varietyDistFile, parameter);
-    fitnessFile << "appearence; frequency" << endl;
-    appearenceFile << "appearence; frequency" << endl;
-    varietyDistFile << "param; nVar" << endl;
+    fstream fitnessFile = worker::openFile("test/" + timestr + "_histogramFitness.csv", "appearence; frequency", parameter);
+    fstream appearenceFile = worker::openFile("test/" + timestr + "_histogramAppearence.csv", "appearence; frequency", parameter);
+    fstream varietyDistFile = worker::openFile("test/" + timestr + "_varietyDistribution.csv",  "param; nVar", parameter);
     for(int i = 0; i < round(1 / 0.05); ++i){
       fitnessFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] / parameter.nRun << endl;
       appearenceFile << i*0.05 + 0.025 << "; " << result.appearenceFrequency[i] / parameter.nRun << endl;
     }
     for(int i = 0; i < 49; ++i)
       varietyDistFile << i+1 << "; " << result.varietyDistribution[i] / parameter.nRun << endl;
-
 
     fitnessFile.close();
     appearenceFile.close();
@@ -65,35 +49,20 @@ namespace worker{
     time_t now = time(NULL);
     std::string timestr = to_string(now);
 
-    fstream varietyFile;
-    varietyFile.open("test/plot/" + timestr + "_standard.csv",ios::out);
-    metrics::printParameters(varietyFile, parameter);
-    varietyFile << "time; nVar" << endl;
+    fstream varietyFile = worker::openFile("test/plot/" + timestr + "_standard.csv", "time; nVar", parameter);
     for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
       varietyFile << i*parameter.timeInterval << "; " << result.numberVariety[i] << endl;
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     varietyFile.close();
 
-    fstream varietyMeanDUFile;
-    varietyMeanDUFile.open("test/plot" + timestr + "_meanDU.csv",ios::out);
-    metrics::printParameters(varietyMeanDUFile, parameter);
-    varietyMeanDUFile << "time; nVar" << endl;
+    fstream varietyMeanDUFile = worker::openFile("test/plot" + timestr + "_meanDU.csv", "time; nVar", parameter);
     for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
       varietyMeanDUFile << i*parameter.timeInterval << "; " << result.meanVarietyDU[i] << endl;
     varietyMeanDUFile.close();
 
-    fstream fitnessFile;
-    fstream appearenceFile;
-    fstream varietyDistFile;
-    fitnessFile.open("test/plot/" + timestr + "_histogramFitness.csv",ios::out);
-    appearenceFile.open("test/plot/" + timestr + "_histogramAppearence.csv",ios::out);
-    varietyDistFile.open("test/plot/" + timestr + "_varietyDistribution.csv",ios::out);
-    metrics::printParameters(fitnessFile, parameter);
-    metrics::printParameters(appearenceFile, parameter);
-    metrics::printParameters(varietyDistFile, parameter);
-    fitnessFile << "appearence; frequency" << endl;
-    appearenceFile << "appearence; frequency" << endl;
-    varietyDistFile << "param; nVar" << endl;
+    fstream fitnessFile = worker::openFile("test/plot" + timestr + "_histogramFitness.csv", "appearence; frequency", parameter);
+    fstream appearenceFile = worker::openFile("test/plot" + timestr + "_histogramAppearence.csv", "appearence; frequency", parameter);
+    fstream varietyDistFile = worker::openFile("test/plot" + timestr + "_varietyDistribution.csv",  "param; nVar", parameter);
     for(int i = 0; i < round(1 / 0.05); ++i){
       fitnessFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] << endl;
       appearenceFile << i*0.05 + 0.025 << "; " << result.appearenceFrequency[i] << endl;
@@ -112,29 +81,11 @@ namespace worker{
     time_t now = time(NULL);
     std::string timestr = to_string(now);
 
-    fstream varietyFile;
-    varietyFile.open("test/" + timestr + "_varParam_" + param + ".csv",ios::out);
-    metrics::printParameters(varietyFile, parameter);
-    varietyFile << "time; nVar; param" << endl;
-
-    fstream varietyMeanDUFile;
-    varietyMeanDUFile.open("test/" + timestr + "_meanDU_" + param + ".csv",ios::out);
-    metrics::printParameters(varietyMeanDUFile, parameter);
-    varietyMeanDUFile << "time; nVar; param" << endl;
-
-
-    fstream fitnessFile;
-    fstream appearenceFile;
-    fstream varietyDistFile;
-    fitnessFile.open("test/" + timestr + "_histogramFitnessVar_" + param + ".csv",ios::out);
-    appearenceFile.open(std::string ("test/" + timestr + "_histogramAppearenceVar_") + param + ".csv",ios::out);
-    varietyDistFile.open("test/" + timestr + "_varietyDistribution_" + param + ".csv",ios::out);
-    metrics::printParameters(fitnessFile, parameter);
-    metrics::printParameters(appearenceFile, parameter);
-    metrics::printParameters(varietyDistFile, parameter);
-    fitnessFile << "appearence; frequency; param" << endl;
-    appearenceFile << "appearence; frequency; param" << endl;
-    varietyDistFile << "appearence; frequency; param" << endl;
+    fstream varietyFile = worker::openFile("test/" + timestr + "_varParam_" + param + ".csv", "time; nVar; param", parameter);
+    fstream varietyMeanDUFile = worker::openFile("test/" + timestr + "_meanDU_" + param + ".csv", "time; nVar; param", parameter);
+    fstream fitnessFile = worker::openFile("test/" + timestr + "_histogramFitnessVar_" + param + ".csv", "appearence; frequency; param", parameter);
+    fstream appearenceFile = worker::openFile("test/" + timestr + "_histogramAppearenceVar_" + param + ".csv", "appearence; frequency; param", parameter);
+    fstream varietyDistFile = worker::openFile("test/" + timestr + "_varietyDistribution_" + param + ".csv",  "appearence; frequency; param", parameter);
 
     for(auto paramValue : paramList){
       switch (param){
@@ -196,23 +147,10 @@ namespace worker{
     time_t now = time(NULL);
     std::string timestr = to_string(now);
 
-    fstream varietyFile;
-    varietyFile.open("test/" + timestr + "_varParamFixedPoints_" + param + ".csv",ios::out);
-    metrics::printParameters(varietyFile, parameter);
-    varietyFile << "param; nVar" << endl;
-
-    fstream fitnessFile;
-    fstream appearenceFile;
-    fstream varietyDistFile;
-    fitnessFile.open("test/" + timestr + "_histogramFitnessVarFixedPoints_" + param + ".csv",ios::out);
-    appearenceFile.open("test/" + timestr + "_histogramAppearenceVarFixedPoints_" + param + ".csv",ios::out);
-    varietyDistFile.open("test/" + timestr + "_varietyDistribution_" + param + ".csv",ios::out);
-    metrics::printParameters(fitnessFile, parameter);
-    metrics::printParameters(appearenceFile, parameter);
-    metrics::printParameters(varietyDistFile, parameter);
-    fitnessFile << "appearence; frequency; param" << endl;
-    appearenceFile << "appearence; frequency; param" << endl;
-    varietyDistFile << "appearence; frequency; param" << endl;
+    fstream varietyFile = worker::openFile("test/" + timestr + "_varParamFixedPoints_" + param + ".csv", "time; nVar", parameter);
+    fstream fitnessFile = worker::openFile("test/" + timestr + "_histogramFitnessVarFixedPoints_" + param + ".csv", "appearence; frequency; param", parameter);
+    fstream appearenceFile = worker::openFile("test/" + timestr + "_histogramAppearenceVarFixedPoints_" + param + ".csv", "appearence; frequency; param", parameter);
+    fstream varietyDistFile = worker::openFile("test/" + timestr + "_varietyDistribution_" + param + ".csv",  "appearence; frequency; param", parameter);
 
     std::vector<float> paramList;
     switch (param){
@@ -288,11 +226,18 @@ namespace worker{
       cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     }
 
-
     varietyFile.close();
     fitnessFile.close();
     appearenceFile.close();
     varietyDistFile.close();
+  }
+
+  fstream openFile(std::string fileName, std::string varNames, Parameter parameter){
+    fstream file;
+    file.open(fileName,ios::out);
+    metrics::printParameters(file, parameter);
+    file << varNames << endl;
+    return file;
   }
 
 }
