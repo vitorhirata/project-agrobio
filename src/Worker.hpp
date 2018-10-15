@@ -136,6 +136,7 @@ namespace worker{
       cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     }
     varietyFile.close();
+    varietyMeanDUFile.close();
     fitnessFile.close();
     appearenceFile.close();
     varietyDistFile.close();
