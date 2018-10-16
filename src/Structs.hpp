@@ -11,7 +11,10 @@ struct Parameter{
   int timeInterval; // Interval in which metrics are counted
   int numberDomesticUnity; // Number of domestic unities
   int nRun; // number of rounds
-  float probabilyConnection; // Probability of connection
+  int networkType;
+  int kWT;
+  float betaWT;
+  float probabilyConnectionRandom; // Probability of connection
   float outsideTradeLimit;
   float insideTradeLimit;
   float alpha;
@@ -24,7 +27,10 @@ struct Parameter{
   , timeInterval(5)
   , numberDomesticUnity(49)
   , nRun(500)
-  , probabilyConnection(0.15)
+  , networkType(1)
+  , kWT(4)
+  , betaWT(0.2)
+  , probabilyConnectionRandom(0.15)
   , outsideTradeLimit(0.02)
   , insideTradeLimit(0.001)
   , alpha(0.5) {}
