@@ -12,6 +12,7 @@ struct Parameter{
   int numberDomesticUnity; // Number of domestic unities
   int nRun; // number of rounds
   int networkType;
+  int mSF;
   int kWT;
   float betaWT;
   float probabilyConnectionRandom; // Probability of connection
@@ -27,7 +28,8 @@ struct Parameter{
   , timeInterval(5)
   , numberDomesticUnity(49)
   , nRun(500)
-  , networkType(1)
+  , networkType(2)
+  , mSF(2)
   , kWT(4)
   , betaWT(0.2)
   , probabilyConnectionRandom(0.15)

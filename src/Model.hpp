@@ -13,6 +13,8 @@ private:
   void iterate(void);
   std::vector<std::vector<int> > createRandomNetwork(void);
   std::vector<std::vector<int> > createWTNetwork(void);
+  std::vector<std::vector<int> > createSFNetwork(void);
+  std::vector<float> computeCumulativeDistribution(std::vector<std::vector<int> > indexLinkedDUs);
 public:
   Model(Parameter t_parameter);
   ~Model();
@@ -69,9 +71,10 @@ void Model::setDomesticUnity(void){
   std::vector<std::vector<int> > indexLinkedDUs;
   if(m_parameter.networkType == 0)
     indexLinkedDUs = createRandomNetwork();
-  else if(m_parameter.networkType == 1){
+  else if(m_parameter.networkType == 1)
     indexLinkedDUs = createWTNetwork();
-  }
+  else if(m_parameter.networkType == 2)
+    indexLinkedDUs = createSFNetwork();
   else{
     cout << "ERROR: invalid network type." << endl;
     exit(-1);
@@ -170,6 +173,49 @@ std::vector<std::vector<int> > Model::createWTNetwork(){
     }
   }
   return indexLinkedDUs;
+}
+
+// Create indexLinkedDUs based on a scale-free network (Barabasi–Albert Model)
+std::vector<std::vector<int> > Model::createSFNetwork(){
+  int m0 = 2;
+  int t = 47;
+  std::vector<float> cumulative;
+  std::vector<std::vector<int> > indexLinkedDUs(m0);
+  indexLinkedDUs[0].push_back(1);
+  indexLinkedDUs[1].push_back(0);
+  int lastNode = m0;
+  for(int i = 0; i < t; ++i){
+    cumulative = computeCumulativeDistribution(indexLinkedDUs);
+    indexLinkedDUs.push_back(std::vector<int>(0));
+    std::vector<int> newNodes;
+    for(int j = 0; j < m_parameter.mSF; ++j){
+      int node = 0;
+      float rd = uniFLOAT(rand64);
+      while(cumulative[node] < rd)
+        ++node;
+      if(std::find(newNodes.begin(), newNodes.end(), node) != newNodes.end())
+        --j;
+      else{
+        indexLinkedDUs[lastNode].push_back(node);
+        indexLinkedDUs[node].push_back(lastNode);
+        newNodes.push_back(node);
+      }
+    }
+    ++lastNode;
+  }
+  return indexLinkedDUs;
+}
+
+// Compute the cumulative vector based on the degree of the node
+std::vector<float> Model::computeCumulativeDistribution(std::vector<std::vector<int> > indexLinkedDUs){
+  std::vector<float> cumulative(indexLinkedDUs.size());
+  cumulative[0] = indexLinkedDUs[0].size();
+  for(int i = 1; i < indexLinkedDUs.size(); ++i)
+    cumulative[i] = cumulative[i-1] + indexLinkedDUs[i].size();
+  for(int i = 0; i < indexLinkedDUs.size(); ++i)
+    cumulative[i] /= cumulative.back();
+  cumulative.back() = 1.0;
+  return cumulative;
 }
 
 // Run standard version of the model. Gives as output a vector with the number of variety at each timeInterval
