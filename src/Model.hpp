@@ -11,10 +11,6 @@ private:
   void setAmbient(void);
   void setDomesticUnity(void);
   void iterate(void);
-  std::vector<std::vector<int> > createRandomNetwork(void);
-  std::vector<std::vector<int> > createWTNetwork(void);
-  std::vector<std::vector<int> > createSFNetwork(void);
-  std::vector<float> computeCumulativeDistribution(std::vector<std::vector<int> > indexLinkedDUs);
 public:
   Model(Parameter t_parameter);
   ~Model();
@@ -68,17 +64,7 @@ void Model::setAmbient(void){
 void Model::setDomesticUnity(void){
   domesticUnity =  new DomesticUnity [m_parameter.numberDomesticUnity];
 
-  std::vector<std::vector<int> > indexLinkedDUs;
-  if(m_parameter.networkType == 0)
-    indexLinkedDUs = createRandomNetwork();
-  else if(m_parameter.networkType == 1)
-    indexLinkedDUs = createWTNetwork();
-  else if(m_parameter.networkType == 2)
-    indexLinkedDUs = createSFNetwork();
-  else{
-    cout << "ERROR: invalid network type." << endl;
-    exit(-1);
-  }
+  Network network(m_parameter.networkType, m_parameter.mSF, m_parameter.kWT, m_parameter.betaWT, m_parameter.probabilyConnectionER, m_parameter.numberDomesticUnity);
 
   // Set indexOwenedsPatches
   std::vector<std::vector<int> > indexOwenedsPatches(m_parameter.numberDomesticUnity);
@@ -92,130 +78,8 @@ void Model::setDomesticUnity(void){
 
   // Pass the parameters to actualy initialize each domesticUnity
   for(int i = 0; i < m_parameter.numberDomesticUnity; ++i){
-    domesticUnity[i].initializeDU(domesticUnity, ambient->grid, indexLinkedDUs[i], indexOwenedsPatches[i], m_parameter.numberInitialVariety, m_parameter.outsideTradeLimit, m_parameter.insideTradeLimit, m_parameter.alpha, variety);
+    domesticUnity[i].initializeDU(domesticUnity, ambient->grid, network.indexLinkedDUs[i], indexOwenedsPatches[i], m_parameter.numberInitialVariety, m_parameter.outsideTradeLimit, m_parameter.insideTradeLimit, m_parameter.alpha, variety);
   }
-}
-
-// Create indexLinkedDUs based on a random network (Erdos-Renyi Model)
-std::vector<std::vector<int> > Model::createRandomNetwork(){
-  std::vector<std::vector<int> > indexLinkedDUs(m_parameter.numberDomesticUnity);
-  for(int i = 0; i < m_parameter.numberDomesticUnity; ++i){
-    for(int j = i+1; j < m_parameter.numberDomesticUnity; ++j)
-      if(uniFLOAT(rand64) < m_parameter.probabilyConnectionRandom){
-        indexLinkedDUs[i].push_back(j);
-        indexLinkedDUs[j].push_back(i);
-      }
-  }
-  return indexLinkedDUs;
-}
-
-// Create indexLinkedDUs based on a small-world network (Watts–Strogatz Model)
-std::vector<std::vector<int> > Model::createWTNetwork(){
-
-  // Create matrix and make ring network
-  std::vector<int> matrix(m_parameter.numberDomesticUnity*m_parameter.numberDomesticUnity, 0);
-  for(int lin = 0; lin < m_parameter.numberDomesticUnity; ++lin){
-    for(int addTerm = 1; addTerm < 1 + m_parameter.kWT / 2; ++addTerm){
-      int colL = lin - addTerm;
-      int colR = lin + addTerm;
-      if(colL < 0)
-        colL = colL + m_parameter.numberDomesticUnity;
-      if(colR > m_parameter.numberDomesticUnity - 1)
-        colR = colR - m_parameter.numberDomesticUnity;
-      if(colL > lin)
-        matrix[lin*m_parameter.numberDomesticUnity+colL] = 1;
-      if(colR > lin)
-        matrix[lin*m_parameter.numberDomesticUnity+colR] = 1;
-    }
-  }
-
-  // Remove links with probability betaWT
-  int removedLinks = 0;
-  std::uniform_int_distribution<long> uniIntDU(0,m_parameter.numberDomesticUnity-1);
-  for(int i = 0; i < m_parameter.numberDomesticUnity*m_parameter.numberDomesticUnity; ++i){
-    if(matrix[i] == 1 && uniFLOAT(rand64) < m_parameter.kWT){
-      matrix[i] = 0;
-      ++removedLinks;
-      }
-  }
-
-  // Rewire randomly
-  for(int i = 0; i < removedLinks; ++i){
-    int newDU1 = uniIntDU(rand64);
-    int newDU2 = uniIntDU(rand64);
-    while(newDU2 == newDU1 || matrix[newDU1*m_parameter.numberDomesticUnity+newDU2] == 1 || matrix[newDU2*m_parameter.numberDomesticUnity+newDU1] == 1)
-      newDU2 = uniIntDU(rand64);
-    matrix[newDU1*m_parameter.numberDomesticUnity+newDU2] = 1;
-  }
-
-  // Sum transpose
-  for(int lin = 0; lin < m_parameter.numberDomesticUnity; ++lin){
-    for(int col = lin + 1; col < m_parameter.numberDomesticUnity; ++col){
-      matrix[lin*m_parameter.numberDomesticUnity+col] = matrix[lin*m_parameter.numberDomesticUnity+col] + matrix[col*m_parameter.numberDomesticUnity+lin];
-      matrix[col*m_parameter.numberDomesticUnity+lin] = matrix[lin*m_parameter.numberDomesticUnity+col];
-    }
-  }
-
-  // Fill indexLinkedDUs vector of vectors
-  std::vector<std::vector<int> > indexLinkedDUs(m_parameter.numberDomesticUnity);
-  for(int i = 0; i < m_parameter.numberDomesticUnity; ++i){
-    for(int j = 0; j < m_parameter.numberDomesticUnity; ++j)
-      if(matrix[i*m_parameter.numberDomesticUnity+j] == 1)
-        indexLinkedDUs[i].push_back(j);
-  }
-
-  // If there is an unnconnect DU, one additional connection is made
-  for(int i = 0; i < m_parameter.numberDomesticUnity; ++i){
-    if(indexLinkedDUs[i].empty()){
-      int newDU = uniIntDU(rand64);
-      indexLinkedDUs[i].push_back(newDU);
-      indexLinkedDUs[newDU].push_back(i);
-    }
-  }
-  return indexLinkedDUs;
-}
-
-// Create indexLinkedDUs based on a scale-free network (Barabasi–Albert Model)
-std::vector<std::vector<int> > Model::createSFNetwork(){
-  int m0 = 2;
-  int t = 47;
-  std::vector<float> cumulative;
-  std::vector<std::vector<int> > indexLinkedDUs(m0);
-  indexLinkedDUs[0].push_back(1);
-  indexLinkedDUs[1].push_back(0);
-  int lastNode = m0;
-  for(int i = 0; i < t; ++i){
-    cumulative = computeCumulativeDistribution(indexLinkedDUs);
-    indexLinkedDUs.push_back(std::vector<int>(0));
-    std::vector<int> newNodes;
-    for(int j = 0; j < m_parameter.mSF; ++j){
-      int node = 0;
-      float rd = uniFLOAT(rand64);
-      while(cumulative[node] < rd)
-        ++node;
-      if(std::find(newNodes.begin(), newNodes.end(), node) != newNodes.end())
-        --j;
-      else{
-        indexLinkedDUs[lastNode].push_back(node);
-        indexLinkedDUs[node].push_back(lastNode);
-        newNodes.push_back(node);
-      }
-    }
-    ++lastNode;
-  }
-  return indexLinkedDUs;
-}
-
-// Compute the cumulative vector based on the degree of the node
-std::vector<float> Model::computeCumulativeDistribution(std::vector<std::vector<int> > indexLinkedDUs){
-  std::vector<float> cumulative(indexLinkedDUs.size());
-  cumulative[0] = indexLinkedDUs[0].size();
-  for(int i = 1; i < indexLinkedDUs.size(); ++i)
-    cumulative[i] = cumulative[i-1] + indexLinkedDUs[i].size();
-  for(int i = 0; i < indexLinkedDUs.size(); ++i)
-    cumulative[i] /= cumulative.back();
-  cumulative.back() = 1.0;
-  return cumulative;
 }
 
 // Run standard version of the model. Gives as output a vector with the number of variety at each timeInterval

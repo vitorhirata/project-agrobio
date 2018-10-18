@@ -69,8 +69,8 @@ namespace metrics{
     arquivo << "### PARAMETERS VALUE ###" << endl;
     arquivo << "### LATTICESIZE = " << parameter.latticeSize << ", NVARIETY = " << parameter.numberInitialVariety;
     arquivo << ", NRESOURCE = " << parameter.numberResources << ", NRESOURCEDIST = " << parameter.numberHabitat;
-    arquivo << ", NETWORKTYPE = " << parameter.networkType << ", PROBABILITYCONNECTION = " << parameter.probabilyConnectionRandom ;
-    arquivo << ", KWT = " << parameter.kWT << ", BETAWT = " << parameter.betaWT;
+    arquivo << ", NETWORKTYPE = " << parameter.networkType << ", PROBABILITYCONNECTION = " << parameter.probabilyConnectionER ;
+    arquivo << ", KWT = " << parameter.kWT << ", BETAWT = " << parameter.betaWT << ", MSF = " << parameter.mSF ;
     arquivo << ", OUTSIDETRADELIMIT = " << parameter.outsideTradeLimit << ", INSIDETRADELIMIT = " << parameter.insideTradeLimit;
     arquivo << ", ALPHA = " << parameter.alpha << ", NDOMESTICUNITY = " << parameter.numberDomesticUnity;
     arquivo << ", MAXTIME = " << parameter.maxTime << ", TIMEINTERVAL = " << parameter.timeInterval << ", NRUN = " << parameter.nRun << " ###" << endl << endl;

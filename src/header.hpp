@@ -21,6 +21,7 @@ struct Result;
 class Patch;
 class Ambient;
 class DomesticUnity;
+class Network;
 class Model;
 namespace metrics{
   void sumResults(Result* result, Result* resultTemp);
@@ -44,6 +45,7 @@ namespace worker{
 #include "Patch.hpp"
 #include "Ambient.hpp"
 #include "DomesticUnity.hpp"
+#include "Network.hpp"
 #include "Model.hpp"
 #include "Metrics.hpp"
 #include "Worker.hpp"

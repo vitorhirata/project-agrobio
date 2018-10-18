@@ -15,7 +15,7 @@ struct Parameter{
   int mSF;
   int kWT;
   float betaWT;
-  float probabilyConnectionRandom; // Probability of connection
+  float probabilyConnectionER; // Probability of connection
   float outsideTradeLimit;
   float insideTradeLimit;
   float alpha;
@@ -32,7 +32,7 @@ struct Parameter{
   , mSF(2)
   , kWT(4)
   , betaWT(0.2)
-  , probabilyConnectionRandom(0.15)
+  , probabilyConnectionER(0.15)
   , outsideTradeLimit(0.02)
   , insideTradeLimit(0.001)
   , alpha(0.5) {}
