@@ -13,29 +13,20 @@ namespace worker{
     time_t now = time(NULL);
     std::string timestr = to_string(now);
 
-    fstream varietyFile = worker::openFile("test/" + timestr + "_standard.csv", "time; nVar", parameter);
+    fstream varietyFile = worker::openFile("test/" + timestr + "_standard.csv", "time; nVar; meanDU", parameter);
     for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
-      varietyFile << i*parameter.timeInterval << "; " << (float) result.numberVariety[i] / parameter.nRun << endl;
+      varietyFile << i*parameter.timeInterval << "; " << (float) result.numberVariety[i] / parameter.nRun << "; " << (float) result.meanVarietyDU[i] / parameter.nRun << endl;
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     varietyFile.close();
 
-    fstream varietyMeanDUFile = worker::openFile("test/" + timestr + "_meanDU.csv", "time; nVar", parameter);
-    for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
-      varietyMeanDUFile << i*parameter.timeInterval << "; " << (float) result.meanVarietyDU[i] / parameter.nRun << endl;
-    varietyMeanDUFile.close();
-
-    fstream fitnessFile = worker::openFile("test/" + timestr + "_histogramFitness.csv", "appearence; frequency", parameter);
-    fstream appearenceFile = worker::openFile("test/" + timestr + "_histogramAppearence.csv", "appearence; frequency", parameter);
-    fstream varietyDistFile = worker::openFile("test/" + timestr + "_varietyDistribution.csv",  "param; nVar", parameter);
-    for(int i = 0; i < round(1 / 0.05); ++i){
-      fitnessFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] / parameter.nRun << endl;
-      appearenceFile << i*0.05 + 0.025 << "; " << result.appearenceFrequency[i] / parameter.nRun << endl;
-    }
+    fstream histogramFile = worker::openFile("test/" + timestr + "_histogramFitness.csv", "value; fitness; appearence", parameter);
+    fstream varietyDistFile = worker::openFile("test/" + timestr + "_varietyDistribution.csv",  "value; varDist", parameter);
+    for(int i = 0; i < round(1 / 0.05); ++i)
+      histogramFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] / parameter.nRun << "; " << result.appearenceFrequency[i] / parameter.nRun << endl;
     for(int i = 0; i < 49; ++i)
       varietyDistFile << i+1 << "; " << result.varietyDistribution[i] / parameter.nRun << endl;
 
-    fitnessFile.close();
-    appearenceFile.close();
+    histogramFile.close();
     varietyDistFile.close();
   }
 
@@ -49,28 +40,19 @@ namespace worker{
     time_t now = time(NULL);
     std::string timestr = to_string(now);
 
-    fstream varietyFile = worker::openFile("test/plot/" + timestr + "_standard.csv", "time; nVar", parameter);
+    fstream varietyFile = worker::openFile("test/plot/" + timestr + "_standard.csv", "time; nVar; meanDU", parameter);
     for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
-      varietyFile << i*parameter.timeInterval << "; " << result.numberVariety[i] << endl;
+      varietyFile << i*parameter.timeInterval << "; " << result.numberVariety[i] << "; " << result.meanVarietyDU[i] << endl;
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     varietyFile.close();
 
-    fstream varietyMeanDUFile = worker::openFile("test/plot" + timestr + "_meanDU.csv", "time; nVar", parameter);
-    for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
-      varietyMeanDUFile << i*parameter.timeInterval << "; " << result.meanVarietyDU[i] << endl;
-    varietyMeanDUFile.close();
-
-    fstream fitnessFile = worker::openFile("test/plot" + timestr + "_histogramFitness.csv", "appearence; frequency", parameter);
-    fstream appearenceFile = worker::openFile("test/plot" + timestr + "_histogramAppearence.csv", "appearence; frequency", parameter);
+    fstream histogramFile = worker::openFile("test/plot" + timestr + "_histogramFitness.csv", "value; fitness; appearence", parameter);
     fstream varietyDistFile = worker::openFile("test/plot" + timestr + "_varietyDistribution.csv",  "param; nVar", parameter);
-    for(int i = 0; i < round(1 / 0.05); ++i){
-      fitnessFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] << endl;
-      appearenceFile << i*0.05 + 0.025 << "; " << result.appearenceFrequency[i] << endl;
-    }
+    for(int i = 0; i < round(1 / 0.05); ++i)
+      histogramFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] << "; " << result.appearenceFrequency[i] << endl;
     for(int i = 0; i < 49; ++i)
       varietyDistFile << i+1 << "; " << result.varietyDistribution[i] / parameter.nRun << endl;
-    fitnessFile.close();
-    appearenceFile.close();
+    histogramFile.close();
     varietyDistFile.close();
   }
 
@@ -81,11 +63,9 @@ namespace worker{
     time_t now = time(NULL);
     std::string timestr = to_string(now);
 
-    fstream varietyFile = worker::openFile("test/" + timestr + "_varParam_" + param + ".csv", "time; nVar; param", parameter);
-    fstream varietyMeanDUFile = worker::openFile("test/" + timestr + "_meanDU_" + param + ".csv", "time; nVar; param", parameter);
-    fstream fitnessFile = worker::openFile("test/" + timestr + "_histogramFitnessVar_" + param + ".csv", "appearence; frequency; param", parameter);
-    fstream appearenceFile = worker::openFile("test/" + timestr + "_histogramAppearenceVar_" + param + ".csv", "appearence; frequency; param", parameter);
-    fstream varietyDistFile = worker::openFile("test/" + timestr + "_varietyDistribution_" + param + ".csv",  "appearence; frequency; param", parameter);
+    fstream varietyFile = worker::openFile("test/" + timestr + "_varParam_" + param + ".csv", "time; nVar; meanDU; param", parameter);
+    fstream histogramFile = worker::openFile("test/" + timestr + "_histogramFitnessVar_" + param + ".csv", "value; fitness; appearence; param", parameter);
+    fstream varietyDistFile = worker::openFile("test/" + timestr + "_varietyDistribution_" + param + ".csv",  "value; varDist; param", parameter);
 
     for(auto paramValue : paramList){
       switch (param){
@@ -122,23 +102,17 @@ namespace worker{
         metrics::sumResults(&result, &resultTemp);
       }
 
-      for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i){
-        varietyFile << i*parameter.timeInterval << "; " << (float) result.numberVariety[i] / parameter.nRun << "; " << paramValue << endl;
-        varietyMeanDUFile << i*parameter.timeInterval << "; " << (float) result.meanVarietyDU[i] / parameter.nRun<< "; " << paramValue << endl;
-      }
-      for(int i = 0; i < round(1 / 0.05); ++i){
-        fitnessFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] / parameter.nRun << "; " << paramValue << endl;
-        appearenceFile << i*0.05 + 0.025 << "; " << result.appearenceFrequency[i] / parameter.nRun << "; " << paramValue << endl;
-      }
+      for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i)
+        varietyFile << i*parameter.timeInterval << "; " << (float) result.numberVariety[i] / parameter.nRun << "; " << (float) result.meanVarietyDU[i] / parameter.nRun<< "; " << paramValue << endl;
+      for(int i = 0; i < round(1 / 0.05); ++i)
+        histogramFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] / parameter.nRun << "; " << result.appearenceFrequency[i] / parameter.nRun << "; " << paramValue << endl;
       for(int i = 0; i < 49; ++i)
         varietyDistFile << i+1 << "; " << result.varietyDistribution[i] / parameter.nRun << "; " << paramValue << endl;
 
       cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     }
     varietyFile.close();
-    varietyMeanDUFile.close();
-    fitnessFile.close();
-    appearenceFile.close();
+    histogramFile.close();
     varietyDistFile.close();
   }
 
@@ -148,10 +122,9 @@ namespace worker{
     time_t now = time(NULL);
     std::string timestr = to_string(now);
 
-    fstream varietyFile = worker::openFile("test/" + timestr + "_varParamFixedPoints_" + param + ".csv", "time; nVar", parameter);
-    fstream fitnessFile = worker::openFile("test/" + timestr + "_histogramFitnessVarFixedPoints_" + param + ".csv", "appearence; frequency; param", parameter);
-    fstream appearenceFile = worker::openFile("test/" + timestr + "_histogramAppearenceVarFixedPoints_" + param + ".csv", "appearence; frequency; param", parameter);
-    fstream varietyDistFile = worker::openFile("test/" + timestr + "_varietyDistribution_" + param + ".csv",  "appearence; frequency; param", parameter);
+    fstream varietyFile = worker::openFile("test/" + timestr + "_varParamFixedPoints_" + param + ".csv", "param; nVar; meanDU", parameter);
+    fstream histogramFile = worker::openFile("test/" + timestr + "_histogramFitnessVar_" + param + ".csv", "value; fitness; appearence; param", parameter);
+    fstream varietyDistFile = worker::openFile("test/" + timestr + "_varietyDistribution_" + param + ".csv",  "value; varDist; param", parameter);
 
     std::vector<float> paramList;
     switch (param){
@@ -210,17 +183,12 @@ namespace worker{
       for(int run = 0; run < parameter.nRun; ++run){
         Model model(parameter);
         resultTemp = model.runFixedPoint();
-        result.numberVariety[0] += resultTemp.numberVariety[0];
-        std::transform(result.fitnessFrequency.begin(), result.fitnessFrequency.end(), resultTemp.fitnessFrequency.begin(), result.fitnessFrequency.begin(), std::plus<float>());
-        std::transform(result.appearenceFrequency.begin(), result.appearenceFrequency.end(), resultTemp.appearenceFrequency.begin(), result.appearenceFrequency.begin(), std::plus<float>());
-        std::transform(result.varietyDistribution.begin(), result.varietyDistribution.end(), resultTemp.varietyDistribution.begin(), result.varietyDistribution.begin(), std::plus<float>());
+        metrics::sumResults(&result, &resultTemp);
       }
 
-      varietyFile << paramValue << "; " << (float) result.numberVariety[0] / parameter.nRun << endl;
-      for(int i = 0; i < round(1 / 0.05); ++i){
-        fitnessFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] / parameter.nRun << "; " << paramValue << endl;
-        appearenceFile << i*0.05 + 0.025 << "; " << result.appearenceFrequency[i] / parameter.nRun << "; " << paramValue << endl;
-      }
+      varietyFile << paramValue << "; " << (float) result.numberVariety[0] / parameter.nRun << "; " << (float) result.meanVarietyDU[0] / parameter.nRun << endl;
+      for(int i = 0; i < round(1 / 0.05); ++i)
+        histogramFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] / parameter.nRun << "; " << result.appearenceFrequency[i] / parameter.nRun << "; " << paramValue << endl;
       for(int i = 0; i < 49; ++i)
         varietyDistFile << i+1 << "; " << result.varietyDistribution[i] / parameter.nRun << "; " << paramValue << endl;
 
@@ -228,8 +196,7 @@ namespace worker{
     }
 
     varietyFile.close();
-    fitnessFile.close();
-    appearenceFile.close();
+    histogramFile.close();
     varietyDistFile.close();
   }
 

@@ -109,6 +109,7 @@ Result Model::runFixedPoint(void){
 
   ambient->computeAllFitness();
   result.numberVariety.push_back(ambient->countSpecie());
+  result.meanVarietyDU.push_back(metrics::computeVarietyMeanProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize));
   result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
   result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberInitialVariety);
   result.varietyDistribution = metrics::computeVarietyProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
