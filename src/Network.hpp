@@ -13,13 +13,13 @@ private:
   void createSFNetwork(void);
   std::vector<float> computeCumulativeDistribution();
 public:
-  Network(int t_networkType, int t_mSF, int t_kWT, int t_betaWT, int t_probabilyConnectionER, int t_numberDomesticUnity);
+  Network(int t_networkType, int t_mSF, int t_kWT, int t_betaWT, float t_probabilyConnectionER, int t_numberDomesticUnity);
   std::vector<std::vector<int> > indexLinkedDUs;
   void printNetwork(void);
 };
 
 // Network constructor. initialize parameters, create network according to t_networkType
-  Network::Network(int t_networkType, int t_mSF, int t_kWT, int t_betaWT, int t_probabilyConnectionER, int t_numberDomesticUnity)
+  Network::Network(int t_networkType, int t_mSF, int t_kWT, int t_betaWT, float t_probabilyConnectionER, int t_numberDomesticUnity)
   : indexLinkedDUs(t_numberDomesticUnity)
   , m_numberDomesticUnity(t_numberDomesticUnity)
   , m_mSF(t_mSF)
