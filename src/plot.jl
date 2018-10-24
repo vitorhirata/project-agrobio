@@ -17,11 +17,11 @@ if mode == "standard"
             layer(df, x=:time, y=:meanDU, Geom.line, Theme(default_color=colorant"red")),
             Guide.manual_color_key("",["Número de Variedades","Número Médio de Variedades por UD"],["green", "red"]))
     output_file2 = input_file[1:end-4] * "2.svg"
-    draw(SVG(output_file2, 15cm, 10cm), p2)
+    draw(SVG(output_file2, 20cm, 10cm), p2)
     println("Image $(output_file2) successfully generated.")
 elseif mode == "varParam"
     p = plot(df, x=:meanDU, y=:nVar, color=:param, Geom.line, Scale.color_discrete(), Guide.colorkey(param), Guide.xlabel("Numero Medio de Variedades por UD"), Guide.ylabel("Numero de Variedades"))
-    draw(SVG(output_file, 25cm, 10cm), p)
+    draw(SVG(output_file, 15cm, 10cm), p)
     println("Image $(output_file) successfully generated.")
 elseif mode == "varietyDistribution"
     if length(split(input_file, "_")) == 2
