@@ -117,7 +117,7 @@ void Network::createWTNetwork(){
 // Create indexLinkedDUs based on a scale-free network (Barabasi–Albert Model)
 void Network::createSFNetwork(){
   int m0 = 2;
-  int t = 47;
+  int t = m_numberDomesticUnity - m0;
   std::vector<float> cumulative;
   indexLinkedDUs = std::vector<std::vector<int> >(m0);
   indexLinkedDUs[0].push_back(1);
