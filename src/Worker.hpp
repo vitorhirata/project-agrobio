@@ -46,8 +46,8 @@ namespace worker{
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     varietyFile.close();
 
-    fstream histogramFile = worker::openFile("test/plot" + timestr + "_histogramFitness.csv", "value; fitness; appearence", parameter);
-    fstream varietyDistFile = worker::openFile("test/plot" + timestr + "_varietyDistribution.csv",  "param; nVar", parameter);
+    fstream histogramFile = worker::openFile("test/plot/" + timestr + "_histogramFitness.csv", "value; fitness; appearence", parameter);
+    fstream varietyDistFile = worker::openFile("test/plot/" + timestr + "_varietyDistribution.csv",  "param; nVar", parameter);
     for(int i = 0; i < round(1 / 0.05); ++i)
       histogramFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] << "; " << result.appearenceFrequency[i] << endl;
     for(int i = 0; i < 49; ++i)
