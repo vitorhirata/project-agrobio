@@ -108,7 +108,15 @@ namespace metrics{
 
 
   void floatToRGB(int n, int* R, int* G, int* B){
-    float r, g, b, x = (float) n / 1000;
+    float r, g, b, x;
+    if (n < 49)
+      x = (0.8 / 49) * n;
+    else if (n < 999)
+      x = 0.8 + (0.2 / 949) * (n - 50);
+    else{
+      cout << "ERROR: invalid number of variety " << n << "." << endl;
+      exit(-1);
+    }
 
     if (x < 0 || x > 1){
       cout << "ERROR" << endl;
