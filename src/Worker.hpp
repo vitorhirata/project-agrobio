@@ -94,6 +94,9 @@ namespace worker{
           break;
         case 'n':
           parameter.networkType = paramValue;
+          break;
+        case 'p':
+          parameter.probabilityNewVar = paramValue;
       }
       clock_t tStart = clock();
       Result result(parameter.maxTime/parameter.timeInterval, round(1 / 0.05), parameter.latticeSize);
@@ -150,6 +153,9 @@ namespace worker{
         break;
       case 'n':
         paramList = std::vector<float> {0, 1, 2};
+        break;
+      case 'p':
+        paramList = std::vector<float> {0.000025, 0.00005, 0.0001, 0.0002, 0.0005, 0.001};
     }
 
     for(auto paramValue : paramList){
@@ -179,6 +185,9 @@ namespace worker{
           break;
         case 'n':
           parameter.networkType = paramValue;
+          break;
+        case 'p':
+          parameter.probabilityNewVar = paramValue;
       }
       clock_t tStart = clock();
       Result result(1, round(1 / 0.05), parameter.latticeSize);
