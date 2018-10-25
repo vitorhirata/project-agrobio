@@ -5,6 +5,7 @@
 struct Parameter{
   int latticeSize;
   int numberInitialVariety; // Number of species in initialization
+  int numberMaxVariety; // Maximum number of varieties
   int numberResources; // Number of existing resources
   int numberHabitat; // Number of different resources in grid
   int maxTime; // Max time of iteration
@@ -19,9 +20,11 @@ struct Parameter{
   float outsideTradeLimit;
   float insideTradeLimit;
   float alpha;
+  float probabilityNewVar;
   Parameter()
   : latticeSize(49)
   , numberInitialVariety(50)
+  , numberMaxVariety(1000)
   , numberResources(3)
   , numberHabitat(1)
   , maxTime(200)
@@ -35,7 +38,8 @@ struct Parameter{
   , probabilyConnectionER(0.15)
   , outsideTradeLimit(0.02)
   , insideTradeLimit(0.001)
-  , alpha(0.5) {}
+  , alpha(0.5)
+  , probabilityNewVar(0.0001) {}
 };
 
 struct Result{

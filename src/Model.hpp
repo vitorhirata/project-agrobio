@@ -41,10 +41,10 @@ Model::~Model(){
 // Create variety array and initialize it's K value with random gauss distribution
 void Model::setVariety(void){
   static std::normal_distribution<double> gauss(0.4,0.2);
-  variety =  new Variety[m_parameter.numberInitialVariety];
+  variety =  new Variety[m_parameter.numberMaxVariety];
 
   std::vector<float> KTemp(m_parameter.numberResources);
-  for(int i = 0; i < m_parameter.numberInitialVariety; ++i){
+  for(int i = 0; i < m_parameter.numberMaxVariety; ++i){
     for(int j = 0; j < m_parameter.numberResources; ++j){
       KTemp[j] = gauss(rand64);
       while(KTemp[j] < 0)
@@ -57,7 +57,7 @@ void Model::setVariety(void){
 
 // Create ambient, passing the parameters using inside it
 void Model::setAmbient(void){
-  ambient = new Ambient(m_parameter.latticeSize, m_parameter.numberInitialVariety, m_parameter.numberHabitat, m_parameter.numberResources, variety);
+  ambient = new Ambient(m_parameter.latticeSize, m_parameter.numberInitialVariety, m_parameter.numberMaxVariety, m_parameter.numberHabitat, m_parameter.numberResources, variety);
 }
 
 // Create DomesticUnity array, set indexLinkedDUs, indexOwenedsPatches and pass it to initialize each DomesticUnity
@@ -78,7 +78,7 @@ void Model::setDomesticUnity(void){
 
   // Pass the parameters to actualy initialize each domesticUnity
   for(int i = 0; i < m_parameter.numberDomesticUnity; ++i){
-    domesticUnity[i].initializeDU(domesticUnity, ambient->grid, network.indexLinkedDUs[i], indexOwenedsPatches[i], m_parameter.numberInitialVariety, m_parameter.outsideTradeLimit, m_parameter.insideTradeLimit, m_parameter.alpha, variety);
+    domesticUnity[i].initializeDU(domesticUnity, ambient->grid, network.indexLinkedDUs[i], indexOwenedsPatches[i], m_parameter.numberMaxVariety, m_parameter.outsideTradeLimit, m_parameter.insideTradeLimit, m_parameter.alpha, m_parameter.probabilityNewVar, variety);
   }
 }
 
@@ -96,7 +96,7 @@ Result Model::runStandard(void){
   }
   ambient->computeAllFitness();
   result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
-  result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberInitialVariety);
+  result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberMaxVariety);
   result.varietyDistribution = metrics::computeVarietyProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
   return result;
 }
@@ -111,7 +111,7 @@ Result Model::runFixedPoint(void){
   result.numberVariety.push_back(ambient->countSpecie());
   result.meanVarietyDU.push_back(metrics::computeVarietyMeanProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize));
   result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
-  result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberInitialVariety);
+  result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberMaxVariety);
   result.varietyDistribution = metrics::computeVarietyProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
   return result;
 }
@@ -133,7 +133,7 @@ Result Model::runPlot(void){
 
   ambient->computeAllFitness();
   result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
-  result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberInitialVariety);
+  result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberMaxVariety);
   result.varietyDistribution = metrics::computeVarietyProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
   return result;
 }

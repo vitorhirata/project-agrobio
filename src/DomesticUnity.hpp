@@ -11,8 +11,9 @@ private:
   };
   DomesticUnity* m_domesticUnity;
   Patch* m_grid;
-  int m_numberVariety;
+  int m_numberMaxVariety;
   float m_alpha;
+  float m_probabilityNewVar;
   float m_outsideTradeLimit;
   float m_insideTradeLimit;
   std::vector<int> m_indexLinkedDU;
@@ -29,31 +30,34 @@ public:
   std::vector<DUvariety> varietyOwened;
   float punctuation;
   int bestVarietyNumber;
-  void initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid, std::vector<int> t_indexLinkedDU, std::vector<int> t_indexOwenedPatches, int t_nVariety, float t_outsideTradeLimit, float t_insideTradeLimit, float t_alpha, Variety* t_variety);
+  void initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid, std::vector<int> t_indexLinkedDU, std::vector<int> t_indexOwenedPatches, int t_numberMaxVariety, float t_outsideTradeLimit, float t_insideTradeLimit, float t_alpha, float t_probabilityNewVar, Variety* t_variety);
   void computeDUpunctuations(void);
   void evaluateProduction(void);
   void consumeVariety(void);
 };
 
 // Initialize DomesticUnity parameters (have to test member initialize list)
-void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid, std::vector<int> t_indexLinkedDU, std::vector<int> t_indexOwenedPatches, int t_nVariety, float t_outsideTradeLimit, float t_insideTradeLimit, float t_alpha, Variety* t_variety){
+void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid, std::vector<int> t_indexLinkedDU, std::vector<int> t_indexOwenedPatches, int t_numberMaxVariety, float t_outsideTradeLimit, float t_insideTradeLimit, float t_alpha, float t_probabilityNewVar, Variety* t_variety){
   m_domesticUnity = t_domesticUnity;
   m_grid = t_grid;
   m_indexLinkedDU = t_indexLinkedDU;
   m_indexOwenedPatches = t_indexOwenedPatches;
-  m_numberVariety = t_nVariety;
+  m_numberMaxVariety = t_numberMaxVariety;
   m_outsideTradeLimit = t_outsideTradeLimit;
   m_insideTradeLimit = t_insideTradeLimit;
   m_alpha = t_alpha;
   m_variety = t_variety;
+  m_probabilityNewVar = t_probabilityNewVar;
   m_DUpreference = uniFLOAT(rand64);
+  uniIntNSP.param(std::uniform_int_distribution<long>::param_type(0, m_numberMaxVariety-1));
+  uniIntPlace.param(std::uniform_int_distribution<long>::param_type(0, m_indexOwenedPatches.size()-1));
 }
 
 // Iterate over the Oweneds Patches, colect varieties and set varietyOwened, m_worstVarietyIdx,
 // bestVarietyNumber, m_bestVarietySeedQuantity and m_bestVarietyIdx
 void DomesticUnity::computeDUpunctuations(void){
-  std::vector<float> varietyQuantity(m_numberVariety, 0);
-  std::vector<float> varietyFitness(m_numberVariety, 0);
+  std::vector<float> varietyQuantity(m_numberMaxVariety, 0);
+  std::vector<float> varietyFitness(m_numberMaxVariety, 0);
 
   for(auto i : m_indexOwenedPatches){
     int varNumber = m_grid[i].plantedVariety;
@@ -64,7 +68,7 @@ void DomesticUnity::computeDUpunctuations(void){
   varietyOwened.clear();
   float bestVarPunctuation = -100.0;
   float worstVarPunctuation = 100.0;
-  for(int i = 0; i < m_numberVariety; ++i){
+  for(int i = 0; i < m_numberMaxVariety; ++i){
     if(varietyQuantity[i] > 0){
       DUvariety newVar;
       newVar.number = i;
@@ -120,6 +124,12 @@ void DomesticUnity::evaluateProduction(void){
     consumeVariety();
     changeProduction(varNumber);
   }
+  if(uniFLOAT(rand64) < m_probabilityNewVar){
+    int newVar = uniIntNSP(rand64);
+    int newPlace = m_indexOwenedPatches[uniIntPlace(rand64)];
+    m_grid[newPlace].setVariety(newVar);
+  }
+
 }
 
 // Takes one place (between the owened patches) where the worst variety exists and replace it with var

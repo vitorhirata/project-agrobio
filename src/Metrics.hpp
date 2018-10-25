@@ -33,13 +33,13 @@ namespace metrics{
   }
 
   // Return the frequency of each range of appearence. The range size is 0.05
-  std::vector<float> computeAppearenceProfile(Patch* t_grid, Variety* variety, const int t_latticeSize, const int t_numberVariety){
-    std::vector<float> varietyQuantity(t_numberVariety, 0);
+  std::vector<float> computeAppearenceProfile(Patch* t_grid, Variety* variety, const int t_latticeSize, const int t_numberMaxVariety){
+    std::vector<float> varietyQuantity(t_numberMaxVariety, 0);
     for(int i = 0; i < t_latticeSize*t_latticeSize; ++i)
       ++varietyQuantity[t_grid[i].plantedVariety];
 
     std::vector<float> varFrequency(round(1 / 0.05), 0);
-    for(int i = 0; i < t_numberVariety; ++i){
+    for(int i = 0; i < t_numberMaxVariety; ++i){
       if(varietyQuantity[i] > 0){
         float j = 0;
         while(j < variety[i].appearence)
@@ -73,6 +73,7 @@ namespace metrics{
     arquivo << ", KWT = " << parameter.kWT << ", BETAWT = " << parameter.betaWT << ", MSF = " << parameter.mSF ;
     arquivo << ", OUTSIDETRADELIMIT = " << parameter.outsideTradeLimit << ", INSIDETRADELIMIT = " << parameter.insideTradeLimit;
     arquivo << ", ALPHA = " << parameter.alpha << ", NDOMESTICUNITY = " << parameter.numberDomesticUnity;
+    arquivo << ", PROBABILITYNEWVAR = " << parameter.probabilityNewVar;
     arquivo << ", MAXTIME = " << parameter.maxTime << ", TIMEINTERVAL = " << parameter.timeInterval << ", NRUN = " << parameter.nRun << " ###" << endl << endl;
   }
 
@@ -107,7 +108,7 @@ namespace metrics{
 
 
   void floatToRGB(int n, int* R, int* G, int* B){
-    float r, g, b, x = (float) n / 100;
+    float r, g, b, x = (float) n / 1000;
 
     if (x < 0 || x > 1){
       cout << "ERROR" << endl;
