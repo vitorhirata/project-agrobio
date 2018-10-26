@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     xmlns:gadfly="http://www.gadflyjl.org/ns"
+     version="1.2"
+     width="150mm" height="100mm" viewBox="0 0 150 100"
+     stroke="none"
+     fill="#000000"
+     stroke-width="0.3"
+     font-size="3.88"
+>
+<g class="plotroot xscalable yscalable" id="img-daf19870-1">
+  <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="img-daf19870-2">
+    <text x="76.13" y="88.47" text-anchor="middle" dy="0.6em">Numero Medio de Variedades por UD</text>
+  </g>
+  <g class="guide xlabels" font-size="2.82" font-family="'PT Sans Caption','Helvetica Neue','Helvetica',sans-serif" fill="#6C606B" id="img-daf19870-3">
+    <text x="21.11" y="82" text-anchor="middle" dy="0.6em">0</text>
+    <text x="48.62" y="82" text-anchor="middle" dy="0.6em">5</text>
+    <text x="76.13" y="82" text-anchor="middle" dy="0.6em">10</text>
+    <text x="103.64" y="82" text-anchor="middle" dy="0.6em">15</text>
+    <text x="131.15" y="82" text-anchor="middle" dy="0.6em">20</text>
+  </g>
+  <g class="guide colorkey" id="img-daf19870-4">
+    <g fill="#4C404B" font-size="2.82" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" id="img-daf19870-5">
+      <text x="136.89" y="37.8" dy="0.35em" id="img-daf19870-6" class="color_0.005">0.005</text>
+      <text x="136.89" y="41.27" dy="0.35em" id="img-daf19870-7" class="color_0.01">0.01</text>
+      <text x="136.89" y="44.74" dy="0.35em" id="img-daf19870-8" class="color_0.02">0.02</text>
+      <text x="136.89" y="48.21" dy="0.35em" id="img-daf19870-9" class="color_0.04">0.04</text>
+      <text x="136.89" y="51.68" dy="0.35em" id="img-daf19870-10" class="color_0.08">0.08</text>
+    </g>
+    <g stroke="#000000" stroke-opacity="0.000" id="img-daf19870-11">
+      <rect x="134.15" y="36.93" width="1.73" height="1.73" id="img-daf19870-12" class="color_0.005" fill="#00BFFF"/>
+      <rect x="134.15" y="40.4" width="1.73" height="1.73" id="img-daf19870-13" class="color_0.01" fill="#D4CA3A"/>
+      <rect x="134.15" y="43.87" width="1.73" height="1.73" id="img-daf19870-14" class="color_0.02" fill="#FF6DAE"/>
+      <rect x="134.15" y="47.34" width="1.73" height="1.73" id="img-daf19870-15" class="color_0.04" fill="#00B78D"/>
+      <rect x="134.15" y="50.81" width="1.73" height="1.73" id="img-daf19870-16" class="color_0.08" fill="#BEA9FF"/>
+    </g>
+    <g fill="#362A35" font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" stroke="#000000" stroke-opacity="0.000" id="img-daf19870-17">
+      <text x="134.15" y="33.39" id="img-daf19870-18">o</text>
+    </g>
+  </g>
+<g clip-path="url(#img-daf19870-19)">
+  <g id="img-daf19870-20">
+    <g pointer-events="visible" opacity="1" fill="#000000" fill-opacity="0.000" stroke="#000000" stroke-opacity="0.000" class="guide background" id="img-daf19870-21">
+      <rect x="19.11" y="5" width="114.04" height="76" id="img-daf19870-22"/>
+    </g>
+    <g class="guide ygridlines xfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="img-daf19870-23">
+      <path fill="none" d="M19.11,79 L 133.15 79" id="img-daf19870-24"/>
+      <path fill="none" d="M19.11,43 L 133.15 43" id="img-daf19870-25"/>
+      <path fill="none" d="M19.11,7 L 133.15 7" id="img-daf19870-26"/>
+    </g>
+    <g class="guide xgridlines yfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="img-daf19870-27">
+      <path fill="none" d="M21.11,5 L 21.11 81" id="img-daf19870-28"/>
+      <path fill="none" d="M48.62,5 L 48.62 81" id="img-daf19870-29"/>
+      <path fill="none" d="M76.13,5 L 76.13 81" id="img-daf19870-30"/>
+      <path fill="none" d="M103.64,5 L 103.64 81" id="img-daf19870-31"/>
+      <path fill="none" d="M131.15,5 L 131.15 81" id="img-daf19870-32"/>
+    </g>
+    <g class="plotpanel" id="img-daf19870-33">
+      <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" stroke-dasharray="none" id="img-daf19870-34">
+        <path fill="none" d="M26.62,21.85 L 32.12 67.08 37.62 77.5 43.12 78.21 48.62 78.68 54.13 78.87 59.63 78.93 65.13 78.96 70.63 78.98 76.13 78.99 81.63 79 87.14 79 92.64 79 98.14 79 103.64 79 109.14 79 114.65 79 120.15 79 125.65 79 131.15 79 136.65 79 142.16 79 147.66 79 153.16 79 158.66 79 164.16 79 169.66 79 175.17 79 180.67 79 186.17 79 191.67 79 197.17 79 202.68 79 208.18 79 213.68 79 219.18 79 224.68 79 230.19 79 235.69 79 241.19 79 246.69 79 252.19 79 257.69 79 263.2 79 268.7 79 274.2 79 279.7 79 285.2 79 290.71 79" id="img-daf19870-35" stroke="#00B78D" class="geometry color_0.04"/>
+        <path fill="none" d="M26.62,33.03 L 32.12 56.51 37.62 77.33 43.12 78.18 48.62 78.56 54.13 78.74 59.63 78.88 65.13 78.94 70.63 78.95 76.13 78.96 81.63 78.98 87.14 78.99 92.64 78.99 98.14 79 103.64 79 109.14 79 114.65 79 120.15 79 125.65 79 131.15 79 136.65 79 142.16 79 147.66 79 153.16 79 158.66 79 164.16 79 169.66 79 175.17 79 180.67 79 186.17 79 191.67 79 197.17 79 202.68 79 208.18 79 213.68 79 219.18 79 224.68 79 230.19 79 235.69 79 241.19 79 246.69 79 252.19 79 257.69 79 263.2 79 268.7 79 274.2 79 279.7 79 285.2 79 290.71 79" id="img-daf19870-36" stroke="#00BFFF" class="geometry color_0.005"/>
+        <path fill="none" d="M26.62,16.35 L 32.12 72.62 37.62 77.45 43.12 78.27 48.62 78.59 54.13 78.82 59.63 78.94 65.13 78.98 70.63 78.99 76.13 79 81.63 79 87.14 79 92.64 79 98.14 79 103.64 79 109.14 79 114.65 79 120.15 79 125.65 79 131.15 79 136.65 79 142.16 79 147.66 79 153.16 79 158.66 79 164.16 79 169.66 79 175.17 79 180.67 79 186.17 79 191.67 79 197.17 79 202.68 79 208.18 79 213.68 79 219.18 79 224.68 79 230.19 79 235.69 79 241.19 79 246.69 79 252.19 79 257.69 79 263.2 79 268.7 79 274.2 79 279.7 79 285.2 79 290.71 79" id="img-daf19870-37" stroke="#BEA9FF" class="geometry color_0.08"/>
+        <path fill="none" d="M26.62,30.7 L 32.12 58.16 37.62 77.5 43.12 78.42 48.62 78.66 54.13 78.82 59.63 78.91 65.13 78.95 70.63 78.96 76.13 78.97 81.63 79 87.14 78.99 92.64 79 98.14 79 103.64 79 109.14 79 114.65 79 120.15 79 125.65 79 131.15 79 136.65 79 142.16 79 147.66 79 153.16 79 158.66 79 164.16 79 169.66 79 175.17 79 180.67 79 186.17 79 191.67 79 197.17 79 202.68 79 208.18 79 213.68 79 219.18 79 224.68 79 230.19 79 235.69 79 241.19 79 246.69 79 252.19 79 257.69 79 263.2 79 268.7 79 274.2 79 279.7 79 285.2 79 290.71 79" id="img-daf19870-38" stroke="#D4CA3A" class="geometry color_0.01"/>
+        <path fill="none" d="M26.62,27.32 L 32.12 61.28 37.62 77.56 43.12 78.4 48.62 78.73 54.13 78.86 59.63 78.95 65.13 78.96 70.63 78.99 76.13 78.98 81.63 79 87.14 79 92.64 79 98.14 79 103.64 79 109.14 79 114.65 79 120.15 79 125.65 79 131.15 79 136.65 79 142.16 79 147.66 79 153.16 79 158.66 79 164.16 79 169.66 79 175.17 79 180.67 79 186.17 79 191.67 79 197.17 79 202.68 79 208.18 79 213.68 79 219.18 79 224.68 79 230.19 79 235.69 79 241.19 79 246.69 79 252.19 79 257.69 79 263.2 79 268.7 79 274.2 79 279.7 79 285.2 79 290.71 79" id="img-daf19870-39" stroke="#FF6DAE" class="geometry color_0.02"/>
+      </g>
+    </g>
+  </g>
+</g>
+  <g class="guide ylabels" font-size="2.82" font-family="'PT Sans Caption','Helvetica Neue','Helvetica',sans-serif" fill="#6C606B" id="img-daf19870-40">
+    <text x="18.11" y="79" text-anchor="end" dy="0.35em" id="img-daf19870-41">0.0</text>
+    <text x="18.11" y="43" text-anchor="end" dy="0.35em" id="img-daf19870-42">0.5</text>
+    <text x="18.11" y="7" text-anchor="end" dy="0.35em" id="img-daf19870-43">1.0</text>
+  </g>
+  <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="img-daf19870-44">
+    <text x="8.76" y="41" text-anchor="middle" dy="0.35em" transform="rotate(-90, 8.76, 43)" id="img-daf19870-45">Frequencia</text>
+  </g>
+</g>
+<defs>
+  <clipPath id="img-daf19870-19">
+  <path d="M19.11,5 L 133.15 5 133.15 81 19.11 81" />
+</clipPath>
+</defs>
+</svg>
