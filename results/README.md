@@ -13,10 +13,10 @@ Phase diagram of the same two metrics ([data](csv/1540586441_standard.csv)).
 ![Phase_Diagram_Standard](img/1540586441_standard.svg)
 
 Histogram of the appearence and fitness at the end of the program ([data](csv/1540586441_histogramFitness.csv)).
-![Histogram_Standard](img/1540586441_histogramFitness.svg)
+![Histogram_fa_Standard](img/1540586441_histogramFitness.svg)
 
 Histogram of the number of varieties per DU, at the end of the program ([data](csv/1540586441_varietyDistribution.csv)).
-![Histogram_Standard](img/1540586441_varietyDistribution.svg)
+![Histogram_varDU_Standard](img/1540586441_varietyDistribution.svg)
 
 #### Plot example
 Gif with one run of the model, elaborated using the same parameters of the standard case. This data is under the 1540586547 tag.
@@ -36,115 +36,139 @@ Now it will be presented the variation of 8 parameters, the outsideTradeLimit, t
 
 ### alpha variation  
 
+Evolution of the total number of varieties in the system ([data](csv/1540500312_varParam_a.csv)).
+![Evolution_Var_a](img/1540500312_varParam_a2.svg)
+
 Phase diagram of the total number of varieties in the system and the mean number of varieties ([data](csv/1540500312_varParam_a.csv)).
 ![Phase_Diagram_Var_a](img/1540500312_varParam_a.svg)
 
 Histogram of the fitness at the end of the program ([data](csv/1540500312_histogramFitnessVar_a.csv)).
-![Histogram_Standard](img/1540500312_histogramFitnessVar_a.svg)
+![Histogram_f_var_a](img/1540500312_histogramFitnessVar_a.svg)
 
 Histogram of the appearence at the end of the program ([data](csv/1540500312_histogramFitnessVar_a.csv)).
-![Histogram_Standard](img/1540500312_histogramFitnessVar_a2.svg)
+![Histogram_a_var_a](img/1540500312_histogramFitnessVar_a2.svg)
 
 Histogram of the number of varieties per DU, at the end of the program ([data](csv/1540500312_varietyDistribution_a.csv)).
-![Histogram_Standard](img/1540500312_varietyDistribution_a.svg)
+![Histogram_varDU_var_a](img/1540500312_varietyDistribution_a.svg)
 
 ### networkType variation  
 
+Evolution of the total number of varieties in the system ([data](csv/1540502167_varParam_n.csv)).
+![Evolution_var_n](img/1540502167_varParam_n2.svg)
+
 Phase diagram of the total number of varieties in the system and the mean number of varieties ([data](csv/1540502167_varParam_n.csv)).
-![Phase_Diagram_Var_i](img/1540502167_varParam_n.svg)
+![Phase_Diagram_var_n](img/1540502167_varParam_n.svg)
 
 Histogram of the fitness at the end of the program ([data](csv/1540502167_histogramFitnessVar_n.csv)).
-![Histogram_Standard](img/1540502167_histogramFitnessVar_n.svg)
+![Histogram_f_var_n](img/1540502167_histogramFitnessVar_n.svg)
 
 Histogram of the appearence at the end of the program ([data](csv/1540502167_histogramFitnessVar_n.csv)).
-![Histogram_Standard](img/1540502167_histogramFitnessVar_n2.svg)
+![Histogram_a_var_n](img/1540502167_histogramFitnessVar_n2.svg)
 
 Histogram of the number of varieties per DU, at the end of the program ([data](csv/1540502167_varietyDistribution_n.csv)).
-![Histogram_Standard](img/1540502167_varietyDistribution_n.svg)
+![Histogram_varDU_var_n](img/1540502167_varietyDistribution_n.svg)
 
 ### outsideTradeLimit variation  
+
+Evolution of the total number of varieties in the system ([data](csv/1540501784_varParam_o.csv)).
+![Evolution_Var_o](img/1540501784_varParam_o2.svg)
 
 Phase diagram of the total number of varieties in the system and the mean number of varieties ([data](csv/1540501784_varParam_o.csv)).
 ![Phase_Diagram_Var_o](img/1540501784_varParam_o.svg)
 
 Histogram of the fitness at the end of the program ([data](csv/1540501784_histogramFitnessVar_o.csv)).
-![Histogram_Standard](img/1540501784_histogramFitnessVar_o.svg)
+![Histogram_f_Var_o](img/1540501784_histogramFitnessVar_o.svg)
 
 Histogram of the appearence at the end of the program ([data](csv/1540501784_histogramFitnessVar_o.csv)).
-![Histogram_Standard](img/1540501784_histogramFitnessVar_o2.svg)
+![Histogram_a_Var_o](img/1540501784_histogramFitnessVar_o2.svg)
 
 Histogram of the number of varieties per DU, at the end of the program ([data](csv/1540501784_varietyDistribution_o.csv)).
-![Histogram_Standard](img/1540501784_varietyDistribution_o.svg)
+![Histogram_varDU_Var_o](img/1540501784_varietyDistribution_o.svg)
 
 ### insideTradeLimit variation  
+
+Evolution of the total number of varieties in the system ([data](csv/1540501390_varParam_i.csv)).
+![Evolution_Var_i](img/1540501390_varParam_i2.svg)
 
 Phase diagram of the total number of varieties in the system and the mean number of varieties ([data](csv/1540501390_varParam_i.csv)).
 ![Phase_Diagram_Var_i](img/1540501390_varParam_i.svg)
 
 Histogram of the fitness at the end of the program ([data](csv/1540501390_histogramFitnessVar_i.csv)).
-![Histogram_Standard](img/1540501390_histogramFitnessVar_i.svg)
+![Histogram_f_Var_i](img/1540501390_histogramFitnessVar_i.svg)
 
 Histogram of the appearence at the end of the program ([data](csv/1540501390_histogramFitnessVar_i.csv)).
-![Histogram_Standard](img/1540501390_histogramFitnessVar_i2.svg)
+![Histogram_a_Var_i](img/1540501390_histogramFitnessVar_i2.svg)
 
 Histogram of the number of varieties per DU, at the end of the program ([data](csv/1540501390_varietyDistribution_i.csv)).
-![Histogram_Standard](img/1540501390_varietyDistribution_i.svg)
+![Histogram_varDU_Var_i](img/1540501390_varietyDistribution_i.svg)
 
 ### latticeSize variation  
+
+Evolution of the total number of varieties in the system ([data](csv/1540502861_varParam_L.csv)).
+![Evolution_Var_i](img/1540502861_varParam_L2.svg)
 
 Phase diagram of the total number of varieties in the system and the mean number of varieties ([data](csv/1540502861_varParam_L.csv)).
 ![Phase_Diagram_Var_i](img/1540502861_varParam_L.svg)
 
 Histogram of the fitness at the end of the program ([data](csv/1540502861_histogramFitnessVar_L.csv)).
-![Histogram_Standard](img/1540502861_histogramFitnessVar_L.svg)
+![Histogram_f_Var_i](img/1540502861_histogramFitnessVar_L.svg)
 
 Histogram of the appearence at the end of the program ([data](csv/1540502861_histogramFitnessVar_L.csv)).
-![Histogram_Standard](img/1540502861_histogramFitnessVar_L2.svg)
+![Histogram_a_Var_i](img/1540502861_histogramFitnessVar_L2.svg)
 
 Histogram of the number of varieties per DU, at the end of the program ([data](csv/1540502861_varietyDistribution_L.csv)).
-![Histogram_Standard](img/1540502861_varietyDistribution_L.svg)
+![Histogram_varDU_Var_i](img/1540502861_varietyDistribution_L.svg)
 
 ### numberInitialVariety variation  
 
+Evolution of the total number of varieties in the system ([data](csv/1540501011_varParam_v.csv)).
+![Evolution_Var_v](img/1540501011_varParam_v2.svg)
+
 Phase diagram of the total number of varieties in the system and the mean number of varieties ([data](csv/1540501011_varParam_v.csv)).
-![Phase_Diagram_Var_i](img/1540501011_varParam_v.svg)
+![Phase_Diagram_Var_v](img/1540501011_varParam_v.svg)
 
 Histogram of the fitness at the end of the program ([data](csv/1540501011_histogramFitnessVar_v.csv)).
-![Histogram_Standard](img/1540501011_histogramFitnessVar_v.svg)
+![Histogram_f_Var_v](img/1540501011_histogramFitnessVar_v.svg)
 
 Histogram of the appearence at the end of the program ([data](csv/1540501011_histogramFitnessVar_v.csv)).
-![Histogram_Standard](img/1540501011_histogramFitnessVar_v2.svg)
+![Histogram_a_Var_v](img/1540501011_histogramFitnessVar_v2.svg)
 
 Histogram of the number of varieties per DU, at the end of the program ([data](csv/1540501011_varietyDistribution_v.csv)).
-![Histogram_Standard](img/1540501011_varietyDistribution_v.svg)
+![Histogram_varDU_Var_v](img/1540501011_varietyDistribution_v.svg)
 
 ### numberHabitat variation  
+
+Evolution of the total number of varieties in the system ([data](csv/1540500693_varParam_r.csv)).
+![Evolution_Var_r](img/1540500693_varParam_r2.svg)
 
 Phase diagram of the total number of varieties in the system and the mean number of varieties ([data](csv/1540500693_varParam_r.csv)).
 ![Phase_Diagram_Var_r](img/1540500693_varParam_r.svg)
 
 Histogram of the fitness at the end of the program ([data](csv/1540500693_histogramFitnessVar_r.csv)).
-![Histogram_Standard](img/1540500693_histogramFitnessVar_r.svg)
+![Histogram_f_Var_r](img/1540500693_histogramFitnessVar_r.svg)
 
 Histogram of the appearence at the end of the program ([data](csv/1540500693_histogramFitnessVar_r.csv)).
-![Histogram_Standard](img/1540500693_histogramFitnessVar_r2.svg)
+![Histogram_a_Var_r](img/1540500693_histogramFitnessVar_r2.svg)
 
 Histogram of the number of varieties per DU, at the end of the program ([data](csv/1540500693_varietyDistribution_r.csv)).
-![Histogram_Standard](img/1540500693_varietyDistribution_r.svg)
+![Histogram_varDU_Var_r](img/1540500693_varietyDistribution_r.svg)
 
 ### probabilityNewVar variation  
+
+Evolution of the total number of varieties in the system ([data](csv/1540502397_varParam_p.csv)).
+![Evolution_Var_p](img/1540502397_varParam_p2.svg)
 
 Phase diagram of the total number of varieties in the system and the mean number of varieties ([data](csv/1540502397_varParam_p.csv)).
 ![Phase_Diagram_Var_p](img/1540502397_varParam_p.svg)
 
 Histogram of the fitness at the end of the program ([data](csv/1540502397_histogramFitnessVar_p.csv)).
-![Histogram_Standard](img/1540502397_histogramFitnessVar_p.svg)
+![Histogram_f_Var_p](img/1540502397_histogramFitnessVar_p.svg)
 
 Histogram of the appearence at the end of the program ([data](csv/1540502397_histogramFitnessVar_p.csv)).
-![Histogram_Standard](img/1540502397_histogramFitnessVar_p2.svg)
+![Histogram_a_Var_p](img/1540502397_histogramFitnessVar_p2.svg)
 
 Histogram of the number of varieties per DU, at the end of the program ([data](csv/1540502397_varietyDistribution_p.csv)).
-![Histogram_Standard](img/1540502397_varietyDistribution_p.svg)
+![Histogram_varDU_Var_p](img/1540502397_varietyDistribution_p.svg)
 
 ## Fixed points resulting from parameter variation
 
