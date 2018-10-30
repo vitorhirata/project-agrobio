@@ -16,6 +16,7 @@ private:
   float m_outsideTradeLimit;
   float m_insideTradeLimit;
   std::vector<int> m_indexLinkedDU;
+  std::vector<int> m_numberTrades;
   std::vector<int> m_indexOwenedPatches;
   int m_worstVarietyIdx;
   int m_bestVarietyIdx;
@@ -23,6 +24,8 @@ private:
   int m_bestVarietySeedQuantity;
   void changeProduction(int newVar, int duIdx);
   int findVariety(int var);
+  ofstream m_netTradeFile;
+  int m_ownDUidx;
   float computePunctuation(float varFitness, float varAppererence);
   void updateBestVar(int bestVar);
   void fillvarietyOwened(std::map<int,std::vector<float> >* varietyData);
@@ -33,17 +36,18 @@ public:
   void initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
       std::vector<int> t_indexLinkedDU, std::vector<int> t_indexOwenedPatches,
       float t_outsideTradeLimit, float t_insideTradeLimit, float t_alpha,
-      float t_probabilityNewVar);
+      float t_probabilityNewVar, int t_ownDUidx);
   void computeDUpunctuations(void);
   void evaluateProduction(void);
   void consumeVariety(void);
+  void printTrade(void);
 };
 
 // Initialize DomesticUnity parameters (have to test member initialize list)
 void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
     std::vector<int> t_indexLinkedDU, std::vector<int> t_indexOwenedPatches,
     float t_outsideTradeLimit, float t_insideTradeLimit, float t_alpha,
-    float t_probabilityNewVar){
+    float t_probabilityNewVar, int t_ownDUidx){
   m_domesticUnity = t_domesticUnity;
   m_grid = t_grid;
   m_indexLinkedDU = t_indexLinkedDU;
@@ -56,7 +60,10 @@ void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
   while(!(m_DUpreference > 0 && m_DUpreference < 1))
     m_DUpreference = gauss(rand64);
   varietyOwened = std::vector<DUvariety>(m_indexOwenedPatches.size());
+  m_netTradeFile.open("test/plot/networkTrade.csv", std::ios::app);
+  m_ownDUidx = t_ownDUidx;
   uniIntPlace.param(std::uniform_int_distribution<long>::param_type(0, m_indexOwenedPatches.size()-1));
+  m_numberTrades = std::vector<int>(m_indexLinkedDU.size(),0);
 }
 
 // Iterate over the Oweneds Patches, colect varieties and set varietyOwened, m_worstVarietyIdx,
@@ -138,6 +145,12 @@ void DomesticUnity::evaluateProduction(void){
     int varNumber = m_domesticUnity[bestDUindex].bestVarietyNumber;
     changeProduction(varNumber, bestDUindex);
     m_domesticUnity[bestDUindex].consumeVariety();
+    ptrdiff_t pos = distance(m_indexLinkedDU.begin(), find(m_indexLinkedDU.begin(), m_indexLinkedDU.end(), bestDUindex));
+    if (pos == m_indexLinkedDU.size() ){
+      cout << "ERROR" << endl;
+      exit(-1);
+    }
+    ++m_numberTrades[pos];
   }
   else if(intpunctuationDifference > m_insideTradeLimit &&
       bestVarietyNumber != varietyOwened[m_worstVarietyIdx].number){
@@ -198,4 +211,9 @@ void DomesticUnity::updateBestVar(int bestVar){
   m_bestVarietySeedQuantity = 3 * varietyOwened[m_bestVarietyIdx].quantity;
 }
 
+void DomesticUnity::printTrade(void){
+  for(int i = 0; i < m_numberTrades.size(); ++i)
+    if(m_numberTrades[i] != 0)
+      m_netTradeFile << m_indexLinkedDU[i] << ";" << m_ownDUidx << ";" << m_numberTrades[i] << endl;
+}
 #endif

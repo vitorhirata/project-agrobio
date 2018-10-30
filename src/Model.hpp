@@ -6,6 +6,7 @@ private:
   const Parameter m_parameter;
   Ambient* ambient;
   DomesticUnity* domesticUnity;
+  Network network;
   void setAmbient(void);
   void setDomesticUnity(void);
   void iterate(void);
@@ -20,6 +21,7 @@ public:
 // Model constructor, receive model parameters, initialize then, and call for each class initialization.
 Model::Model(Parameter t_parameter)
   : m_parameter(t_parameter)
+  , network(m_parameter.networkType, m_parameter.mSF, m_parameter.kWT, m_parameter.betaWT, m_parameter.probabilyConnectionER, m_parameter.numberDomesticUnity)
 {
   setAmbient();
   setDomesticUnity();
@@ -42,8 +44,6 @@ void Model::setAmbient(void){
 void Model::setDomesticUnity(void){
   domesticUnity =  new DomesticUnity [m_parameter.numberDomesticUnity];
 
-  Network network(m_parameter.networkType, m_parameter.mSF, m_parameter.kWT, m_parameter.betaWT, m_parameter.probabilyConnectionER, m_parameter.numberDomesticUnity);
-
   // Set indexOwenedsPatches
   std::vector<std::vector<int> > indexOwenedsPatches(m_parameter.numberDomesticUnity);
   int indexDU, sizeDU = m_parameter.latticeSize/sqrt(m_parameter.numberDomesticUnity);
@@ -54,9 +54,13 @@ void Model::setDomesticUnity(void){
     }
   }
 
+  fstream netTradeFile;
+  netTradeFile.open("test/plot/networkTrade.csv", ios::out);
+  netTradeFile << "Source;Target;Weight" << endl;
+  netTradeFile.close();
   // Pass the parameters to actualy initialize each domesticUnity
   for(int i = 0; i < m_parameter.numberDomesticUnity; ++i){
-    domesticUnity[i].initializeDU(domesticUnity, ambient->grid, network.indexLinkedDUs[i], indexOwenedsPatches[i], m_parameter.outsideTradeLimit, m_parameter.insideTradeLimit, m_parameter.alpha, m_parameter.probabilityNewVar);
+    domesticUnity[i].initializeDU(domesticUnity, ambient->grid, network.indexLinkedDUs[i], indexOwenedsPatches[i], m_parameter.outsideTradeLimit, m_parameter.insideTradeLimit, m_parameter.alpha, m_parameter.probabilityNewVar, i);
   }
 }
 
@@ -99,6 +103,7 @@ Result Model::runPlot(void){
   Result result(0, 0, 0);
   result.numberVariety.push_back(ambient->countSpecie());
   metrics::printState(0, ambient->grid, m_parameter.latticeSize);
+  network.printNetwork();
 
   for(int t = 0; t < m_parameter.maxTime; ++t){
     iterate();
@@ -108,6 +113,8 @@ Result Model::runPlot(void){
       result.meanVarietyDU.push_back(metrics::computeVarietyMeanProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize));
     }
   }
+  for(int i = 0; i < m_parameter.numberDomesticUnity; ++i)
+    domesticUnity[i].printTrade();
 
   ambient->computeAllFitness();
   result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);

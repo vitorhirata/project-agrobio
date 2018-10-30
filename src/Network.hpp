@@ -157,12 +157,12 @@ std::vector<float> Network::computeCumulativeDistribution(void){
 }
 
 void Network::printNetwork(void){
-  for(uint i = 0; i < indexLinkedDUs.size(); ++i){
-    cout << "DU number " << i << ": ";
+  fstream networkFile;
+  networkFile.open("test/plot/network.csv",ios::out);
+  networkFile << "Source;Target" << endl;
+  for(int i = 0; i < indexLinkedDUs.size(); ++i)
     for(auto j : indexLinkedDUs[i])
-      cout << j << ", ";
-    cout << endl;
-  }
+      networkFile << i << ";" << j << endl;
 }
 
 #endif
