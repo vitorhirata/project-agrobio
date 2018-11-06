@@ -9,64 +9,64 @@
      stroke-width="0.3"
      font-size="3.88"
 >
-<g class="plotroot xscalable yscalable" id="img-0d95a721-1">
-  <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="img-0d95a721-2">
-    <text x="74.35" y="89.18" text-anchor="middle" dy="0.6em">Time</text>
+<g class="plotroot xscalable yscalable" id="img-d733f80d-1">
+  <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="img-d733f80d-2">
+    <text x="74.35" y="88.82" text-anchor="middle" dy="0.6em">Parâmetro</text>
   </g>
-  <g class="guide xlabels" font-size="2.82" font-family="'PT Sans Caption','Helvetica Neue','Helvetica',sans-serif" fill="#6C606B" id="img-0d95a721-3">
-    <text x="12.53" y="82.71" text-anchor="middle" dy="0.6em">0.0000</text>
-    <text x="74.35" y="82.71" text-anchor="middle" dy="0.6em">0.0005</text>
-    <text x="136.17" y="82.71" text-anchor="middle" dy="0.6em">0.0010</text>
+  <g class="guide xlabels" font-size="2.82" font-family="'PT Sans Caption','Helvetica Neue','Helvetica',sans-serif" fill="#6C606B" id="img-d733f80d-3">
+    <text x="12.53" y="82.36" text-anchor="middle" dy="0.6em">0.0000</text>
+    <text x="74.35" y="82.36" text-anchor="middle" dy="0.6em">0.0005</text>
+    <text x="136.17" y="82.36" text-anchor="middle" dy="0.6em">0.0010</text>
   </g>
-  <g class="guide colorkey" id="img-0d95a721-4">
-    <g fill="#4C404B" font-size="2.82" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" id="img-0d95a721-5">
-      <text x="142.44" y="43.35" dy="0.35em">Número de Variedades</text>
-      <text x="142.44" y="47.88" dy="0.35em">Número Médio de Variedades por UD</text>
+  <g class="guide colorkey" id="img-d733f80d-4">
+    <g fill="#4C404B" font-size="2.82" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" id="img-d733f80d-5">
+      <text x="142.44" y="43.18" dy="0.35em">Número de Variedades</text>
+      <text x="142.44" y="47.71" dy="0.35em">Número Médio de Variedades por UD</text>
     </g>
-    <g stroke="#000000" stroke-opacity="0.000" id="img-0d95a721-6">
-      <rect x="139.17" y="42.22" width="2.26" height="2.26" fill="#008000"/>
-      <rect x="139.17" y="46.75" width="2.26" height="2.26" fill="#FF0000"/>
+    <g stroke="#000000" stroke-opacity="0.000" id="img-d733f80d-6">
+      <rect x="139.17" y="42.05" width="2.26" height="2.26" fill="#008000"/>
+      <rect x="139.17" y="46.57" width="2.26" height="2.26" fill="#FF0000"/>
     </g>
-    <g fill="#362A35" font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" stroke="#000000" stroke-opacity="0.000" id="img-0d95a721-7">
-      <text x="139.17" y="36.83"></text>
+    <g fill="#362A35" font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" stroke="#000000" stroke-opacity="0.000" id="img-d733f80d-7">
+      <text x="139.17" y="36.65"></text>
     </g>
   </g>
-<g clip-path="url(#img-0d95a721-8)">
-  <g id="img-0d95a721-9">
-    <g pointer-events="visible" opacity="1" fill="#000000" fill-opacity="0.000" stroke="#000000" stroke-opacity="0.000" class="guide background" id="img-0d95a721-10">
-      <rect x="10.53" y="5" width="127.64" height="76.71"/>
+<g clip-path="url(#img-d733f80d-8)">
+  <g id="img-d733f80d-9">
+    <g pointer-events="visible" opacity="1" fill="#000000" fill-opacity="0.000" stroke="#000000" stroke-opacity="0.000" class="guide background" id="img-d733f80d-10">
+      <rect x="10.53" y="5" width="127.64" height="76.36"/>
     </g>
-    <g class="guide ygridlines xfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="img-0d95a721-11">
-      <path fill="none" d="M10.53,79.71 L 138.17 79.71"/>
-      <path fill="none" d="M10.53,55.47 L 138.17 55.47"/>
-      <path fill="none" d="M10.53,31.24 L 138.17 31.24"/>
+    <g class="guide ygridlines xfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="img-d733f80d-11">
+      <path fill="none" d="M10.53,79.36 L 138.17 79.36"/>
+      <path fill="none" d="M10.53,55.24 L 138.17 55.24"/>
+      <path fill="none" d="M10.53,31.12 L 138.17 31.12"/>
       <path fill="none" d="M10.53,7 L 138.17 7"/>
     </g>
-    <g class="guide xgridlines yfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="img-0d95a721-12">
-      <path fill="none" d="M12.53,5 L 12.53 81.71"/>
-      <path fill="none" d="M74.35,5 L 74.35 81.71"/>
-      <path fill="none" d="M136.17,5 L 136.17 81.71"/>
+    <g class="guide xgridlines yfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="img-d733f80d-12">
+      <path fill="none" d="M12.53,5 L 12.53 81.36"/>
+      <path fill="none" d="M74.35,5 L 74.35 81.36"/>
+      <path fill="none" d="M136.17,5 L 136.17 81.36"/>
     </g>
-    <g class="plotpanel" id="img-0d95a721-13">
-      <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" stroke-dasharray="none" stroke="#FF0000" id="img-0d95a721-14">
-        <path fill="none" d="M15.62,73.18 L 18.71 73.11 24.89 73.12 37.26 73.15 74.35 73.16 136.17 73.15"/>
+    <g class="plotpanel" id="img-d733f80d-13">
+      <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" stroke-dasharray="none" stroke="#FF0000" id="img-d733f80d-14">
+        <path fill="none" d="M15.62,72.85 L 18.71 72.79 24.89 72.8 37.26 72.83 74.35 72.84 136.17 72.83"/>
       </g>
-      <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" stroke-dasharray="none" stroke="#008000" id="img-0d95a721-15">
-        <path fill="none" d="M15.62,13.41 L 18.71 14.12 24.89 12.22 37.26 13.56 74.35 12.58 136.17 13.49"/>
+      <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" stroke-dasharray="none" stroke="#008000" id="img-d733f80d-15">
+        <path fill="none" d="M15.62,13.38 L 18.71 14.08 24.89 12.19 37.26 13.53 74.35 12.56 136.17 13.45"/>
       </g>
     </g>
   </g>
 </g>
-  <g class="guide ylabels" font-size="2.82" font-family="'PT Sans Caption','Helvetica Neue','Helvetica',sans-serif" fill="#6C606B" id="img-0d95a721-16">
-    <text x="9.53" y="79.71" text-anchor="end" dy="0.35em">0</text>
-    <text x="9.53" y="55.47" text-anchor="end" dy="0.35em">5</text>
-    <text x="9.53" y="31.24" text-anchor="end" dy="0.35em">10</text>
+  <g class="guide ylabels" font-size="2.82" font-family="'PT Sans Caption','Helvetica Neue','Helvetica',sans-serif" fill="#6C606B" id="img-d733f80d-16">
+    <text x="9.53" y="79.36" text-anchor="end" dy="0.35em">0</text>
+    <text x="9.53" y="55.24" text-anchor="end" dy="0.35em">5</text>
+    <text x="9.53" y="31.12" text-anchor="end" dy="0.35em">10</text>
     <text x="9.53" y="7" text-anchor="end" dy="0.35em">15</text>
   </g>
 </g>
 <defs>
-  <clipPath id="img-0d95a721-8">
-  <path d="M10.53,5 L 138.17 5 138.17 81.71 10.53 81.71" />
+  <clipPath id="img-d733f80d-8">
+  <path d="M10.53,5 L 138.17 5 138.17 81.36 10.53 81.36" />
 </clipPath>
 </defs>
 </svg>
