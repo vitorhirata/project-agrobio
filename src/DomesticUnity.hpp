@@ -48,7 +48,10 @@ void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid, 
   m_alpha = t_alpha;
   m_variety = t_variety;
   m_probabilityNewVar = t_probabilityNewVar;
-  m_DUpreference = uniFLOAT(rand64);
+  m_DUpreference = gauss(rand64);
+  while(m_DUpreference < 0 || m_DUpreference > 1)
+    m_DUpreference = gauss(rand64);
+
   uniIntNSP.param(std::uniform_int_distribution<long>::param_type(0, m_numberMaxVariety-1));
   uniIntPlace.param(std::uniform_int_distribution<long>::param_type(0, m_indexOwenedPatches.size()-1));
 }
@@ -97,7 +100,7 @@ void DomesticUnity::computeDUpunctuations(void){
 }
 
 float DomesticUnity::computePunctuation(float varFitness, float varAppererence){
-  return m_alpha * varFitness + (1 - m_alpha) * std::min(abs(varAppererence - m_DUpreference), 1 - abs(varAppererence - m_DUpreference));
+  return m_alpha * varFitness + (1 - m_alpha) * (1 - std::min(abs(varAppererence - m_DUpreference), 1 - abs(varAppererence - m_DUpreference)));
 }
 
 // Find the DU with best punctuation, if the difference is larger than m_outsideTradeLimit it takes this DU best

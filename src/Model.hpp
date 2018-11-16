@@ -40,7 +40,6 @@ Model::~Model(){
 
 // Create variety array and initialize it's K value with random gauss distribution
 void Model::setVariety(void){
-  static std::normal_distribution<double> gauss(0.4,0.2);
   variety =  new Variety[m_parameter.numberMaxVariety];
 
   std::vector<float> KTemp(m_parameter.numberResources);

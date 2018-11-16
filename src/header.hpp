@@ -13,8 +13,9 @@ using namespace std;
 static std::random_device rd;
 static std::mt19937_64 rand64(rd());
 static std::uniform_real_distribution<double> uniFLOAT(0.0,1.0);
-std::uniform_int_distribution<long> uniIntNSP(0,1000-1);
-std::uniform_int_distribution<long> uniIntPlace(0,49-1);
+static std::uniform_int_distribution<long> uniIntNSP(0,1000-1);
+static std::uniform_int_distribution<long> uniIntPlace(0,49-1);
+static std::normal_distribution<double> gauss(0.4,0.2);
 
 /* Builted class and functions */
 struct Variety;
