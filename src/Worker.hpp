@@ -59,6 +59,8 @@ namespace worker{
 
   void Run_varParam(char param, std::vector<float> paramList){
     Parameter parameter;
+    if(param == 'm')
+      parameter.nRun = 1;
 
     time_t now = time(NULL);
     std::string timestr = to_string(now);

@@ -59,6 +59,18 @@ int main(int argc, char *argv[]){
       worker::Run_varParamFixedPoints(param);
       break;
     }
+    case 'm':{
+      if (argc != 3){
+        cout << "ERROR: Number of input argument invalid. 'm' mode must have only the parameter the number of runs" << endl;
+        exit(-1);
+      }
+      int numRun = std::stoi(argv[2]);
+      std::vector<float> param_list(numRun);
+      std::iota(param_list.begin(), param_list.end(), 0);
+      cout << "Running multiple run model, with " << numRun << " runs." << endl;
+      worker::Run_varParam('m', param_list);
+      break;
+    }
     default:
       cout << "ERROR: Invalid model type." << endl;
       exit(-1);
