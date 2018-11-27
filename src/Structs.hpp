@@ -31,13 +31,13 @@ struct Parameter{
   , timeInterval(5)
   , numberDomesticUnity(49)
   , nRun(500)
-  , networkType(2)
+  , networkType(1)
   , mSF(2)
   , kWT(4)
   , betaWT(0.2)
   , probabilyConnectionER(0.15)
-  , outsideTradeLimit(0.02)
-  , insideTradeLimit(0.001)
+  , outsideTradeLimit(0.15)
+  , insideTradeLimit(0.05)
   , alpha(0.5)
   , probabilityNewVar(0.0001) {}
 };
