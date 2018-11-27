@@ -117,12 +117,12 @@ void DomesticUnity::evaluateProduction(void){
       bestDUpunctuation = m_domesticUnity[bestDUindex].punctuation;
     }
   }
-  if(bestDUpunctuation - punctuation > m_outsideTradeLimit && m_domesticUnity[bestDUindex].bestVarietyNumber != varietyOwened[m_worstVarietyIdx].number){
+  if(bestDUpunctuation - punctuation < m_outsideTradeLimit && bestDUpunctuation - punctuation > 0 && m_domesticUnity[bestDUindex].bestVarietyNumber != varietyOwened[m_worstVarietyIdx].number){
     int varNumber = m_domesticUnity[bestDUindex].bestVarietyNumber;
     m_domesticUnity[bestDUindex].consumeVariety();
     changeProduction(varNumber);
   }
-  else if(bestDUpunctuation - punctuation > m_insideTradeLimit){
+  else if(bestDUpunctuation - punctuation < m_insideTradeLimit && bestDUpunctuation - punctuation > 0){
     int varNumber = bestVarietyNumber;
     consumeVariety();
     changeProduction(varNumber);
