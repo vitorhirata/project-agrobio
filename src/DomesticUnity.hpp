@@ -25,7 +25,10 @@ private:
   void changeProduction(int newVar, int duIdx);
   int findVariety(int var);
   ofstream m_netTradeFile;
+  ofstream m_netTradeTimeFile;
+  ofstream m_differencePuncFile;
   int m_ownDUidx;
+  int m_time;
   float computePunctuation(float varFitness, float varAppererence);
   void updateBestVar(int bestVar);
   void fillvarietyOwened(std::map<int,std::vector<float> >* varietyData);
@@ -61,6 +64,9 @@ void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
     m_DUpreference = gauss(rand64);
   varietyOwened = std::vector<DUvariety>(m_indexOwenedPatches.size());
   m_netTradeFile.open("test/plot/networkTrade.csv", std::ios::app);
+  m_netTradeTimeFile.open("test/plot/networkTradeTime.csv", std::ios::app);
+  m_differencePuncFile.open("test/plot/puncDifference.csv", std::ios::app);
+  m_time = 0;
   m_ownDUidx = t_ownDUidx;
   uniIntPlace.param(std::uniform_int_distribution<long>::param_type(0, m_indexOwenedPatches.size()-1));
   m_numberTrades = std::vector<int>(m_indexLinkedDU.size(),0);
@@ -142,6 +148,7 @@ void DomesticUnity::evaluateProduction(void){
   float intpunctuationDifference = varietyOwened[m_bestVarietyIdx].punctuation - varietyOwened[m_worstVarietyIdx].punctuation;
   if(extpunctuationDifference > m_outsideTradeLimit && extpunctuationDifference > 0
       && m_domesticUnity[bestDUindex].bestVarietyNumber != varietyOwened[m_worstVarietyIdx].number){
+    m_differencePuncFile << m_ownDUidx << ";" << bestDUpunctuation - punctuation << ";" << m_time << endl;
     int varNumber = m_domesticUnity[bestDUindex].bestVarietyNumber;
     changeProduction(varNumber, bestDUindex);
     m_domesticUnity[bestDUindex].consumeVariety();
@@ -151,11 +158,13 @@ void DomesticUnity::evaluateProduction(void){
       exit(-1);
     }
     ++m_numberTrades[pos];
+    m_netTradeTimeFile << 0 << ";" << m_ownDUidx << ";"  << bestDUindex << ";" << m_time << endl;
   }
   else if(intpunctuationDifference > m_insideTradeLimit &&
       bestVarietyNumber != varietyOwened[m_worstVarietyIdx].number){
     changeProduction(bestVarietyNumber, -1);
     consumeVariety();
+    m_netTradeTimeFile << 1 << ";" << m_ownDUidx << ";"  << m_ownDUidx << ";" << m_time << endl;
   }
   if(uniFLOAT(rand64) < m_probabilityNewVar){
     int newPlace = m_indexOwenedPatches[uniIntPlace(rand64)];
@@ -163,6 +172,7 @@ void DomesticUnity::evaluateProduction(void){
     if(findVariety(bestVarietyNumber) == -1) // If bestVariety no longer exists update
       updateBestVar(bestVarietyNumber);
   }
+  ++m_time;
 }
 
 // Takes one place (between the owened patches) where the worst variety exists and replace it with var

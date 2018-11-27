@@ -53,11 +53,10 @@ void Model::setDomesticUnity(void){
       indexOwenedsPatches[indexDU].push_back(lin*m_parameter.latticeSize + col);
     }
   }
+  worker::openFile("test/plot/networkTrade.csv", "Source;Target;Weight", m_parameter);
+  worker::openFile("test/plot/networkTradeTime.csv", "Type;Source;Target;Time", m_parameter);
+  worker::openFile("test/plot/puncDifference.csv", "DU;difference;Time", m_parameter);
 
-  fstream netTradeFile;
-  netTradeFile.open("test/plot/networkTrade.csv", ios::out);
-  netTradeFile << "Source;Target;Weight" << endl;
-  netTradeFile.close();
   // Pass the parameters to actualy initialize each domesticUnity
   for(int i = 0; i < m_parameter.numberDomesticUnity; ++i){
     domesticUnity[i].initializeDU(domesticUnity, ambient->grid, network.indexLinkedDUs[i], indexOwenedsPatches[i], m_parameter.outsideTradeLimit, m_parameter.insideTradeLimit, m_parameter.alpha, m_parameter.probabilityNewVar, i);
