@@ -136,10 +136,10 @@ namespace worker{
     std::vector<float> paramList;
     switch (param){
       case 'o':
-        paramList = std::vector<float> {0.001, 0.005, 0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.04, 0.045, 0.05, 0.075, 0.1, 0.25, 0.5};
+        paramList = std::vector<float> {0.08, 0.085, 0.09, 0.095, 0.1, 0.125, 0.15, 0.175, 0.2, 0.25, 0.3};
         break;
       case 'i':
-        paramList = std::vector<float> {0.0001, 0.0005, 0.001, 0.0015, 0.002, 0.0025, 0.003, 0.0035, 0.004, 0.0045, 0.005, 0.0075, 0.01};
+        paramList = std::vector<float> {0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1};
         break;
       case 'L':
         paramList = std::vector<float> {25, 36, 49, 64};
