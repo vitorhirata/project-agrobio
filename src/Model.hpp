@@ -6,8 +6,6 @@ private:
   const Parameter m_parameter;
   Ambient* ambient;
   DomesticUnity* domesticUnity;
-  Variety* variety;
-  void setVariety(void);
   void setAmbient(void);
   void setDomesticUnity(void);
   void iterate(void);
@@ -23,7 +21,6 @@ public:
 Model::Model(Parameter t_parameter)
   : m_parameter(t_parameter)
 {
-  setVariety();
   setAmbient();
   setDomesticUnity();
 }
@@ -32,31 +29,13 @@ Model::Model(Parameter t_parameter)
 Model::~Model(){
   delete ambient;
   delete[] domesticUnity;
-  delete[] variety;
   ambient = nullptr;
   domesticUnity = nullptr;
-  variety = nullptr;
-}
-
-// Create variety array and initialize it's K value with random gauss distribution
-void Model::setVariety(void){
-  variety =  new Variety[m_parameter.numberMaxVariety];
-
-  std::vector<float> KTemp(m_parameter.numberResources);
-  for(int i = 0; i < m_parameter.numberMaxVariety; ++i){
-    for(int j = 0; j < m_parameter.numberResources; ++j){
-      KTemp[j] = gauss(rand64);
-      while(KTemp[j] < 0)
-        KTemp[j] = gauss(rand64);
-    }
-    variety[i].K = KTemp;
-    variety[i].appearence = uniFLOAT(rand64);
-  }
 }
 
 // Create ambient, passing the parameters using inside it
 void Model::setAmbient(void){
-  ambient = new Ambient(m_parameter.latticeSize, m_parameter.numberInitialVariety, m_parameter.numberMaxVariety, m_parameter.numberHabitat, m_parameter.numberResources, variety);
+  ambient = new Ambient(m_parameter.latticeSize, m_parameter.numberHabitat, m_parameter.numberResources, m_parameter.numberInitialVariety);
 }
 
 // Create DomesticUnity array, set indexLinkedDUs, indexOwenedsPatches and pass it to initialize each DomesticUnity
@@ -77,7 +56,7 @@ void Model::setDomesticUnity(void){
 
   // Pass the parameters to actualy initialize each domesticUnity
   for(int i = 0; i < m_parameter.numberDomesticUnity; ++i){
-    domesticUnity[i].initializeDU(domesticUnity, ambient->grid, network.indexLinkedDUs[i], indexOwenedsPatches[i], m_parameter.numberMaxVariety, m_parameter.outsideTradeLimit, m_parameter.insideTradeLimit, m_parameter.alpha, m_parameter.probabilityNewVar, variety);
+    domesticUnity[i].initializeDU(domesticUnity, ambient->grid, network.indexLinkedDUs[i], indexOwenedsPatches[i], m_parameter.outsideTradeLimit, m_parameter.insideTradeLimit, m_parameter.alpha, m_parameter.probabilityNewVar);
   }
 }
 
@@ -95,7 +74,7 @@ Result Model::runStandard(void){
   }
   ambient->computeAllFitness();
   result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
-  result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberMaxVariety);
+  result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, m_parameter.latticeSize);
   result.varietyDistribution = metrics::computeVarietyProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
   return result;
 }
@@ -110,7 +89,7 @@ Result Model::runFixedPoint(void){
   result.numberVariety.push_back(ambient->countSpecie());
   result.meanVarietyDU.push_back(metrics::computeVarietyMeanProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize));
   result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
-  result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberMaxVariety);
+  result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, m_parameter.latticeSize);
   result.varietyDistribution = metrics::computeVarietyProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
   return result;
 }
@@ -132,7 +111,7 @@ Result Model::runPlot(void){
 
   ambient->computeAllFitness();
   result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
-  result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, variety, m_parameter.latticeSize, m_parameter.numberMaxVariety);
+  result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, m_parameter.latticeSize);
   result.varietyDistribution = metrics::computeVarietyProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
   return result;
 }
@@ -140,13 +119,12 @@ Result Model::runPlot(void){
 // Run one interation of the model, computing the fitness of ambient, computing DU punctuations and evaluating it's production
 void Model::iterate(void){
   ambient->computeAllFitness();
-
   for(int i = 0; i < m_parameter.numberDomesticUnity; ++i)
     domesticUnity[i].computeDUpunctuations();
 
   // Shuffle order randomly
   std::vector<int> DU_list(m_parameter.numberDomesticUnity);
-  for(int i = 0; i < m_parameter.numberDomesticUnity;++i)
+  for(int i = 0; i < m_parameter.numberDomesticUnity; ++i)
     DU_list[i] = i;
   std::random_shuffle(DU_list.begin(),DU_list.end());
   for(auto i : DU_list)

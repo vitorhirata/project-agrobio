@@ -5,29 +5,52 @@
 class Patch{
 private:
   std::vector<float> m_resource;
-public:
-  int plantedVariety;
-  float fitness;
-  void computeLocalFitness(const Variety* variety);
-  void setVariety(int t_var);
   void setLocalResource(std::vector<float> t_resource);
+public:
+  float fitness;
+  Variety variety;
+  void initializePatch(std::vector<float> t_resource, VarietyData t_data);
+  void computeLocalFitness(void);
+  void setVariety(VarietyData t_data);
+  VarietyData giveVarietyData(void);
+  void setRandomVariety(void);
 };
+
+// Initialize the patch, setting up the resources and variety according to received values
+void Patch::initializePatch(std::vector<float> t_resource, VarietyData t_data){
+  setLocalResource(t_resource);
+  setVariety(t_data);
+}
+
 
 // Compute the fitness, using the Monod Equation, considering variety K and the resources available. Store this value
 // in fitness.
-void Patch::computeLocalFitness(const Variety* variety){
-  float fitnessTemp = m_resource[0] / (m_resource[0] + variety[plantedVariety].K[0]);;
+void Patch::computeLocalFitness(void){
+  float fitnessTemp = m_resource[0] / (m_resource[0] + variety.halfSaturation[0]);
   for (uint i = 1; i < m_resource.size(); ++i){
-    float temp = m_resource[i] / (m_resource[i] + variety[plantedVariety].K[i]);
+    float temp = m_resource[i] / (m_resource[i] + variety.halfSaturation[i]);
     if(temp < fitnessTemp)
       fitnessTemp = temp;
   }
   fitness = fitnessTemp;
 }
 
-// Set the plantedVariety as var
-void Patch::setVariety(int t_var){
-  plantedVariety = t_var;
+// Substitute actual variety by a randomly choosen variety
+void Patch::setRandomVariety(void){
+  variety.setRandomVariety();
+}
+
+// Substitute actual variety by variety with the received data
+void Patch::setVariety(VarietyData t_data){
+  variety.setVariety(t_data);
+}
+
+// Return the data about the variety in the patch
+VarietyData Patch::giveVarietyData(void){
+  VarietyData data;
+  data.halfSaturation = variety.halfSaturation;
+  data.appearence = variety.appearence;
+  return data;
 }
 
 // Set the resource as t_resource

@@ -33,20 +33,12 @@ namespace metrics{
   }
 
   // Return the frequency of each range of appearence. The range size is 0.05
-  std::vector<float> computeAppearenceProfile(Patch* t_grid, Variety* variety, const int t_latticeSize, const int t_numberMaxVariety){
-    std::vector<float> varietyQuantity(t_numberMaxVariety, 0);
-    for(int i = 0; i < t_latticeSize*t_latticeSize; ++i)
-      ++varietyQuantity[t_grid[i].plantedVariety];
-
-    std::vector<float> varFrequency(round(1 / 0.05), 0);
-    for(int i = 0; i < t_numberMaxVariety; ++i){
-      if(varietyQuantity[i] > 0){
-        float j = 0;
-        while(j < variety[i].appearence)
-          j += 0.05;
-        int tick = round((j - 0.05) / 0.05);
-        varFrequency[tick] += varietyQuantity[i] / (t_latticeSize*t_latticeSize);
-      }
+  std::vector<float> computeAppearenceProfile(Patch* t_grid, const int t_latticeSize){
+    float step = 0.05;
+    std::vector<float> varFrequency(round(1 / step), 0);
+    for(int i = 0; i < t_latticeSize*t_latticeSize; ++i){
+      int idx = floor(t_grid[i].variety.appearence / step);
+      varFrequency[idx] += 1.0 / (t_latticeSize*t_latticeSize);
     }
     return varFrequency;
   }
@@ -59,7 +51,6 @@ namespace metrics{
       while(position < t_grid[i].fitness)
         position += 0.05;
       int tick = round((position - 0.05) / 0.05);
-      //cout << tick << ", " << t_grid[i].fitness << endl;
       fitnessFrequency[tick] += (1.0 / (t_latticeSize * t_latticeSize));
     }
     return fitnessFrequency;
@@ -90,7 +81,7 @@ namespace metrics{
 
     for(int i = 0; i < t_latticeSize; ++i){
       for(int j = 0; j < t_latticeSize; ++j){
-        int var  = grid[i*t_latticeSize+j].plantedVariety;
+        int var  = grid[i*t_latticeSize+j].variety.varietyNumber;
         floatToRGB(var, &r, &g, &b);
         for(int x = 0; x < SIZE; x++)
           for(int y = 0; y < SIZE; y++){
@@ -108,15 +99,7 @@ namespace metrics{
 
 
   void floatToRGB(int n, int* R, int* G, int* B){
-    float r, g, b, x;
-    if (n < 49)
-      x = (0.8 / 49) * n;
-    else if (n < 999)
-      x = 0.8 + (0.2 / 949) * (n - 50);
-    else{
-      cout << "ERROR: invalid number of variety " << n << "." << endl;
-      exit(-1);
-    }
+    float r, g, b, x = (float) n / 160000;
 
     if (x < 0 || x > 1){
       cout << "ERROR" << endl;

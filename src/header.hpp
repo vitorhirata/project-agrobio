@@ -13,14 +13,14 @@ using namespace std;
 static std::random_device rd;
 static std::mt19937_64 rand64(rd());
 static std::uniform_real_distribution<double> uniFLOAT(0.0,1.0);
-static std::uniform_int_distribution<long> uniIntNSP(0,1000-1);
 static std::uniform_int_distribution<long> uniIntPlace(0,49-1);
-static std::normal_distribution<double> gauss(0.4,0.2);
+static std::normal_distribution<double> gauss(0.5,0.1);
 
 /* Builted class and functions */
-struct Variety;
+struct VarietyData;
 struct Parameter;
 struct Result;
+class Variety;
 class Patch;
 class Ambient;
 class DomesticUnity;
@@ -31,7 +31,7 @@ namespace metrics{
   float computeVarietyMeanProfile(DomesticUnity* domesticUnity, const int t_numberDomesticUnity, const int t_DUsize);
   std::vector<float> computeVarietyProfile(DomesticUnity* domesticUnity, const int t_numberDomesticUnity, const int t_DUsize);
   std::vector<float> computeFitnessProfile(Patch* t_grid, const int t_latticeSize);
-  std::vector<float> computeAppearenceProfile(Patch* t_grid, Variety* variety, const int t_latticeSize, const int t_numberVariety);
+  std::vector<float> computeAppearenceProfile(Patch* t_grid, const int t_latticeSize);
   void printState(int t, Patch* grid, const int t_latticeSize);
   void floatToRGB(int n, int* R, int* G, int* B);
   void printParameters(fstream& arquivo, Parameter parameter);
@@ -45,6 +45,7 @@ namespace worker{
 }
 
 #include "Structs.hpp"
+#include "Variety.hpp"
 #include "Patch.hpp"
 #include "Ambient.hpp"
 #include "DomesticUnity.hpp"

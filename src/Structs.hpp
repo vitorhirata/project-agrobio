@@ -5,7 +5,6 @@
 struct Parameter{
   int latticeSize;
   int numberInitialVariety; // Number of species in initialization
-  int numberMaxVariety; // Maximum number of varieties
   int numberResources; // Number of existing resources
   int numberHabitat; // Number of different resources in grid
   int maxTime; // Max time of iteration
@@ -24,7 +23,6 @@ struct Parameter{
   Parameter()
   : latticeSize(49)
   , numberInitialVariety(50)
-  , numberMaxVariety(1000)
   , numberResources(3)
   , numberHabitat(1)
   , maxTime(300)
@@ -57,8 +55,8 @@ struct Result{
 };
 
 // Variety struct contain all the proprieties of each variety
-struct Variety{
-  std::vector<float> K;
+struct VarietyData{
+  std::vector<float> halfSaturation;
   float appearence;
 };
 #endif
