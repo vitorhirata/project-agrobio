@@ -25,7 +25,7 @@ int main(int argc, char *argv[]){
         cout << "ERROR: Number of input argument invalid. 'v' mode must have the parameter that will vary and the values it will assume" << endl;
         exit(-1);
       }
-      if (argv[2][0] == 'o' || argv[2][0] == 'i' || argv[2][0] == 'L' || argv[2][0] == 'r' || argv[2][0] == 'v' || argv[2][0] == 'a' || argv[2][0] == 'n' || argv[2][0] == 'p')
+      if (argv[2][0] == 'o' || argv[2][0] == 'i' || argv[2][0] == 'L' || argv[2][0] == 'r' || argv[2][0] == 'v' || argv[2][0] == 'a' || argv[2][0] == 'n' || argv[2][0] == 'p' || argv[2][0] == 'b')
         param = argv[2][0];
       else{
         cout << "ERROR: Invalid parameter variation." << endl;
@@ -48,7 +48,7 @@ int main(int argc, char *argv[]){
         cout << "ERROR: Number of input argument invalid. 'f' mode must have only the parameter that will vary" << endl;
         exit(-1);
       }
-      if (argv[2][0] == 'o' || argv[2][0] == 'i' || argv[2][0] == 'L' || argv[2][0] == 'r' || argv[2][0] == 'v' || argv[2][0] == 'a' || argv[2][0] == 'n' || argv[2][0] == 'p')
+      if (argv[2][0] == 'o' || argv[2][0] == 'i' || argv[2][0] == 'L' || argv[2][0] == 'r' || argv[2][0] == 'v' || argv[2][0] == 'a' || argv[2][0] == 'n' || argv[2][0] == 'p' || argv[2][0] == 'b')
         param = argv[2][0];
       else{
         cout << "ERROR: Invalid parameter variation." << endl;
