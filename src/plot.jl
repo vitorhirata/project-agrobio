@@ -67,7 +67,7 @@ for i in ARGS
         p=plot(layer(df, x=:param, y=:nVar, Geom.line, Theme(default_color=colorant"green")),
                 layer(df, x=:param, y=:meanDU, Geom.line, Theme(default_color=colorant"red")),
                 Guide.manual_color_key("",["Número de Variedades","Número Médio de Variedades por UD"],["green", "red"]),
-                Guide.ylabel(""), Guide.xlabel("Parâmetro"))
+                Guide.ylabel(""), Guide.xlabel(param))
         draw(SVG(output_file, 20cm, 10cm), p)
         println("Image $(output_file) successfully generated.")
     else
