@@ -25,7 +25,6 @@ private:
   int findVariety(int var);
   float computePunctuation(float varFitness, float varAppererence);
   void updateBestVar(int bestVar);
-  void updateWorstVar(int worstVar);
 public:
   std::vector<DUvariety> varietyOwened;
   float punctuation;
@@ -144,8 +143,6 @@ void DomesticUnity::evaluateProduction(void){
     m_grid[newPlace].setRandomVariety();
     if(findVariety(bestVarietyNumber) == -1) // If bestVariety no longer exists update
       updateBestVar(bestVarietyNumber);
-    if(findVariety(varietyOwened[m_worstVarietyIdx].number) == -1) // If worstVariety no longer exists update
-      updateWorstVar(varietyOwened[m_worstVarietyIdx].number);
   }
 
 }
@@ -196,15 +193,4 @@ void DomesticUnity::updateBestVar(int bestVar){
   m_bestVarietySeedQuantity = 3 * varietyOwened[m_bestVarietyIdx].quantity;
 }
 
-// Receive the actual worstVariety and update the worst variety, so that it is not the received value
-void DomesticUnity::updateWorstVar(int worstVar){
-  int oldWorstVar = worstVar;
-  float worstVarPunctuation = 100;
-  for(uint i = 0; i < varietyOwened.size(); ++i){
-    if(varietyOwened[i].punctuation < worstVarPunctuation && varietyOwened[i].number != oldWorstVar){
-      worstVarPunctuation = varietyOwened[i].punctuation;
-      m_worstVarietyIdx = i;
-    }
-  }
-}
 #endif
