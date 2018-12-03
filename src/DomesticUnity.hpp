@@ -158,7 +158,7 @@ void DomesticUnity::evaluateProduction(void){
       exit(-1);
     }
     ++m_numberTrades[pos];
-    m_netTradeTimeFile << 0 << ";" << m_ownDUidx << ";"  << bestDUindex << ";" << m_time << endl;
+    m_netTradeTimeFile << 0 << ";" << bestDUindex << ";" << m_ownDUidx << ";" << m_time << endl;
   }
   else if(intpunctuationDifference > m_insideTradeLimit &&
       bestVarietyNumber != varietyOwened[m_worstVarietyIdx].number){
