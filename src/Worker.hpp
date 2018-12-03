@@ -151,13 +151,13 @@ namespace worker{
         paramList = std::vector<float> {5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100};
         break;
       case 'a':
-        paramList = std::vector<float> {0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0};
+        paramList = std::vector<float> {0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0};
         break;
       case 'n':
         paramList = std::vector<float> {0, 1, 2};
         break;
       case 'p':
-        paramList = std::vector<float> {0.000025, 0.00005, 0.0001, 0.0002, 0.0005, 0.001};
+        paramList = std::vector<float> {0.000025, 0.00005, 0.0001, 0.0002, 0.0005, 0.001, 0.002, 0.005, 0.01};
     }
 
     for(auto paramValue : paramList){
