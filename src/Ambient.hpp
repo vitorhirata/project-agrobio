@@ -100,9 +100,9 @@ int Ambient::countSpecie(void){
   std::vector<int> varietyList {grid[0].variety.varietyNumber};
   for(int i = 1; i < m_latticeSize*m_latticeSize; ++i){
     int varNumber = grid[i].variety.varietyNumber;
-    int idx = std::lower_bound(varietyList.begin(), varietyList.end(), varNumber) - varietyList.begin();
-    if(varietyList[idx] != varNumber)
-      varietyList.insert(varietyList.begin()+idx, varNumber);
+    vector<int>::iterator vectorIterator = std::lower_bound(varietyList.begin(), varietyList.end(), varNumber);
+    if(*vectorIterator != varNumber)
+      varietyList.insert(vectorIterator, varNumber);
   }
   return varietyList.size();
 }

@@ -20,12 +20,12 @@ public:
 
 // Network constructor. initialize parameters, create network according to t_networkType
   Network::Network(int t_networkType, int t_mSF, int t_kWT, int t_betaWT, float t_probabilyConnectionER, int t_numberDomesticUnity)
-  : indexLinkedDUs(t_numberDomesticUnity)
-  , m_numberDomesticUnity(t_numberDomesticUnity)
+  : m_numberDomesticUnity(t_numberDomesticUnity)
   , m_mSF(t_mSF)
   , m_kWT(t_kWT)
   , m_betaWT(t_betaWT)
   , m_probabilyConnectionER(t_probabilyConnectionER)
+  , indexLinkedDUs(t_numberDomesticUnity)
 {
   if(t_networkType == 0)
     createRandomNetwork();
@@ -129,8 +129,8 @@ void Network::createSFNetwork(){
     std::vector<int> newNodes;
     for(int j = 0; j < m_mSF; ++j){
       int node = 0;
-      float rd = uniFLOAT(rand64);
-      while(cumulative[node] < rd)
+      float randNumber = uniFLOAT(rand64);
+      while(cumulative[node] < randNumber)
         ++node;
       if(std::find(newNodes.begin(), newNodes.end(), node) != newNodes.end())
         --j;
@@ -148,16 +148,16 @@ void Network::createSFNetwork(){
 std::vector<float> Network::computeCumulativeDistribution(void){
   std::vector<float> cumulative(indexLinkedDUs.size());
   cumulative[0] = indexLinkedDUs[0].size();
-  for(int i = 1; i < indexLinkedDUs.size(); ++i)
+  for(uint i = 1; i < indexLinkedDUs.size(); ++i)
     cumulative[i] = cumulative[i-1] + indexLinkedDUs[i].size();
-  for(int i = 0; i < indexLinkedDUs.size(); ++i)
+  for(uint i = 0; i < indexLinkedDUs.size(); ++i)
     cumulative[i] /= cumulative.back();
   cumulative.back() = 1.0;
   return cumulative;
 }
 
 void Network::printNetwork(void){
-  for(int i = 0; i < indexLinkedDUs.size(); ++i){
+  for(uint i = 0; i < indexLinkedDUs.size(); ++i){
     cout << "DU number " << i << ": ";
     for(auto j : indexLinkedDUs[i])
       cout << j << ", ";

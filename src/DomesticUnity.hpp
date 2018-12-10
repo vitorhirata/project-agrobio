@@ -85,7 +85,7 @@ void DomesticUnity::computeDUpunctuations(void){
   varietyOwened.clear();
   float bestVarPunctuation = -100.0;
   float worstVarPunctuation = 100.0;
-  for(int i = 0; i < varietyList.size(); ++i){
+  for(uint i = 0; i < varietyList.size(); ++i){
     DUvariety newVar;
     newVar.number = varietyList[i];
     newVar.quantity = varietyQuantity[i];
@@ -123,7 +123,7 @@ void DomesticUnity::evaluateProduction(void){
   int bestDUindex;
 
 
-  for(int i = 0; i < m_indexLinkedDU.size(); ++i){
+  for(uint i = 0; i < m_indexLinkedDU.size(); ++i){
     if(m_domesticUnity[m_indexLinkedDU[i]].punctuation > bestDUpunctuation){
       bestDUindex = m_indexLinkedDU[i];
       bestDUpunctuation = m_domesticUnity[bestDUindex].punctuation;
