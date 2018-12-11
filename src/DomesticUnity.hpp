@@ -25,18 +25,28 @@ private:
   int findVariety(int var);
   float computePunctuation(float varFitness, float varAppererence);
   void updateBestVar(int bestVar);
+  void fillvarietyOwened(std::vector<int> varietyList,
+      std::vector<int> varietyQuantity,
+      std::vector<float> varietyFitness,
+      std::vector<float> varietyAppearence);
 public:
   std::vector<DUvariety> varietyOwened;
   float punctuation;
   int bestVarietyNumber;
-  void initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid, std::vector<int> t_indexLinkedDU, std::vector<int> t_indexOwenedPatches, float t_outsideTradeLimit, float t_insideTradeLimit, float t_alpha, float t_probabilityNewVar);
+  void initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
+      std::vector<int> t_indexLinkedDU, std::vector<int> t_indexOwenedPatches,
+      float t_outsideTradeLimit, float t_insideTradeLimit, float t_alpha,
+      float t_probabilityNewVar);
   void computeDUpunctuations(void);
   void evaluateProduction(void);
   void consumeVariety(void);
 };
 
 // Initialize DomesticUnity parameters (have to test member initialize list)
-void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid, std::vector<int> t_indexLinkedDU, std::vector<int> t_indexOwenedPatches, float t_outsideTradeLimit, float t_insideTradeLimit, float t_alpha, float t_probabilityNewVar){
+void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
+    std::vector<int> t_indexLinkedDU, std::vector<int> t_indexOwenedPatches,
+    float t_outsideTradeLimit, float t_insideTradeLimit, float t_alpha,
+    float t_probabilityNewVar){
   m_domesticUnity = t_domesticUnity;
   m_grid = t_grid;
   m_indexLinkedDU = t_indexLinkedDU;
@@ -82,6 +92,21 @@ void DomesticUnity::computeDUpunctuations(void){
     varietyAppearence[idx] += m_grid[patchNumber].variety.appearence;
   }
 
+  fillvarietyOwened(varietyList, varietyQuantity, varietyFitness, varietyAppearence);
+
+  //Set DU punctuation
+  float puncTemp = 0;
+  for(auto i : varietyOwened){
+    puncTemp += i.punctuation;
+  }
+  punctuation = puncTemp / varietyOwened.size();
+}
+
+
+void DomesticUnity::fillvarietyOwened(std::vector<int> varietyList,
+      std::vector<int> varietyQuantity,
+      std::vector<float> varietyFitness,
+      std::vector<float> varietyAppearence){
   varietyOwened.clear();
   float bestVarPunctuation = -100.0;
   float worstVarPunctuation = 100.0;
@@ -102,17 +127,11 @@ void DomesticUnity::computeDUpunctuations(void){
     }
   }
   m_bestVarietySeedQuantity = 3 * varietyOwened[m_bestVarietyIdx].quantity;
-
-  //Set DU punctuation
-  float puncTemp = 0;
-  for(auto i : varietyOwened){
-    puncTemp += i.punctuation;
-  }
-  punctuation = puncTemp / varietyOwened.size();
 }
 
 float DomesticUnity::computePunctuation(float varFitness, float varAppererence){
-  return m_alpha * varFitness + (1 - m_alpha) * (1 - std::min(abs(varAppererence - m_DUpreference), 1 - abs(varAppererence - m_DUpreference)));
+  float appearencePunc = 1 - std::min(abs(varAppererence - m_DUpreference), 1 - abs(varAppererence - m_DUpreference));
+  return m_alpha * varFitness + (1 - m_alpha) * appearencePunc;
 }
 
 // Find the DU with best punctuation, if the difference is larger than m_outsideTradeLimit it takes this DU best
@@ -122,19 +141,22 @@ void DomesticUnity::evaluateProduction(void){
   float bestDUpunctuation = -1;
   int bestDUindex;
 
-
   for(uint i = 0; i < m_indexLinkedDU.size(); ++i){
     if(m_domesticUnity[m_indexLinkedDU[i]].punctuation > bestDUpunctuation){
       bestDUindex = m_indexLinkedDU[i];
       bestDUpunctuation = m_domesticUnity[bestDUindex].punctuation;
     }
   }
-  if(bestDUpunctuation - punctuation < m_outsideTradeLimit && bestDUpunctuation - punctuation > 0 && m_domesticUnity[bestDUindex].bestVarietyNumber != varietyOwened[m_worstVarietyIdx].number){
+
+  float punctuationDifference = bestDUpunctuation - punctuation;
+  if(punctuationDifference < m_outsideTradeLimit && punctuationDifference > 0
+      && m_domesticUnity[bestDUindex].bestVarietyNumber != varietyOwened[m_worstVarietyIdx].number){
     int varNumber = m_domesticUnity[bestDUindex].bestVarietyNumber;
     changeProduction(varNumber, bestDUindex);
     m_domesticUnity[bestDUindex].consumeVariety();
   }
-  else if(bestDUpunctuation - punctuation < m_insideTradeLimit && bestDUpunctuation - punctuation > 0 && bestVarietyNumber != varietyOwened[m_worstVarietyIdx].number){
+  else if(punctuationDifference < m_insideTradeLimit &&
+      punctuationDifference > 0 && bestVarietyNumber != varietyOwened[m_worstVarietyIdx].number){
     changeProduction(bestVarietyNumber, -1);
     consumeVariety();
   }
@@ -144,7 +166,6 @@ void DomesticUnity::evaluateProduction(void){
     if(findVariety(bestVarietyNumber) == -1) // If bestVariety no longer exists update
       updateBestVar(bestVarietyNumber);
   }
-
 }
 
 // Takes one place (between the owened patches) where the worst variety exists and replace it with var
