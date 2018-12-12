@@ -29,6 +29,7 @@ private:
       std::vector<int> varietyQuantity,
       std::vector<float> varietyFitness,
       std::vector<float> varietyAppearence);
+  void insertElement(int* v1, float* v2, float* v3, int pos);
 public:
   std::vector<DUvariety> varietyOwened;
   float punctuation;
@@ -58,7 +59,7 @@ void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
   m_DUpreference = gauss(rand64);
   while(!(m_DUpreference > 0 && m_DUpreference < 1))
     m_DUpreference = gauss(rand64);
-
+  varietyOwened = std::vector<DUvariety>(m_indexOwenedPatches.size());
   uniIntPlace.param(std::uniform_int_distribution<long>::param_type(0, m_indexOwenedPatches.size()-1));
 }
 
@@ -66,15 +67,15 @@ void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
 // bestVarietyNumber, m_bestVarietySeedQuantity and m_bestVarietyIdx
 void DomesticUnity::computeDUpunctuations(void){
   std::vector<int> varietyList;
-  std::vector<int> varietyQuantity;
-  std::vector<float> varietyFitness;
-  std::vector<float> varietyAppearence;
+  std::vector<int> varietyQuantity(varietyOwened.size()+4, -1);
+  std::vector<float> varietyFitness(varietyOwened.size()+4, -1);
+  std::vector<float> varietyAppearence(varietyOwened.size()+4, -1);
 
   // Add first element
   varietyList.push_back(m_grid[m_indexOwenedPatches[0]].variety.varietyNumber);
-  varietyQuantity.push_back(1);
-  varietyFitness.push_back(m_grid[m_indexOwenedPatches[0]].fitness);
-  varietyAppearence.push_back(m_grid[m_indexOwenedPatches[0]].variety.appearence);
+  varietyQuantity[0] = 1;
+  varietyFitness[0] = m_grid[m_indexOwenedPatches[0]].fitness;
+  varietyAppearence[0] = m_grid[m_indexOwenedPatches[0]].variety.appearence;
 
   // Complete to fill the vectors
   for(uint i = 1; i < m_indexOwenedPatches.size(); ++i){
@@ -83,9 +84,7 @@ void DomesticUnity::computeDUpunctuations(void){
     int idx = std::lower_bound(varietyList.begin(), varietyList.end(), varNumber) - varietyList.begin();
     if(varietyList[idx] != varNumber){
       varietyList.insert(varietyList.begin()+idx, varNumber);
-      varietyQuantity.insert(varietyQuantity.begin()+idx, 0);
-      varietyFitness.insert(varietyFitness.begin()+idx, 0);
-      varietyAppearence.insert(varietyAppearence.begin()+idx, 0);
+      insertElement(varietyQuantity.data(), varietyFitness.data(), varietyAppearence.data(), idx);
     }
     ++varietyQuantity[idx];
     varietyFitness[idx] += m_grid[patchNumber].fitness;
@@ -100,6 +99,25 @@ void DomesticUnity::computeDUpunctuations(void){
     puncTemp += i.punctuation;
   }
   punctuation = puncTemp / varietyOwened.size();
+}
+
+// Insert a 0 element in the position pos for the three vector (v1, v2, v3)
+void DomesticUnity::insertElement(int* v1, float* v2, float*v3, int pos){
+  int temp1 = v1[pos];
+  float temp2 = v2[pos];
+  float temp3 = v3[pos];
+  v1[pos] = v2[pos] = v3[pos] = 0;
+
+  ++pos;
+  while(v1[pos] != -1){
+    std::swap(v1[pos], temp1);
+    std::swap(v2[pos], temp2);
+    std::swap(v3[pos], temp3);
+    ++pos;
+  }
+  v1[pos] = temp1;
+  v2[pos] = temp2;
+  v3[pos] = temp3;
 }
 
 
@@ -129,6 +147,7 @@ void DomesticUnity::fillvarietyOwened(std::vector<int> varietyList,
   m_bestVarietySeedQuantity = 3 * varietyOwened[m_bestVarietyIdx].quantity;
 }
 
+// Compute the punctuation based on the fitness appearence and alpha
 float DomesticUnity::computePunctuation(float varFitness, float varAppererence){
   float appearencePunc = 1 - std::min(abs(varAppererence - m_DUpreference), 1 - abs(varAppererence - m_DUpreference));
   return m_alpha * varFitness + (1 - m_alpha) * appearencePunc;
