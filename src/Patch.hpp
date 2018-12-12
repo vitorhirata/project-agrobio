@@ -26,13 +26,12 @@ void Patch::initializePatch(std::vector<float> t_resource, VarietyData t_data){
 // Compute the fitness, using the Monod Equation, considering variety K and the resources available. Store this value
 // in fitness.
 void Patch::computeLocalFitness(void){
-  float fitnessTemp = m_resource[0] / (m_resource[0] + variety.halfSaturation[0]);
+  fitness = m_resource[0] / (m_resource[0] + variety.halfSaturation[0]);
   for (uint i = 1; i < m_resource.size(); ++i){
     float temp = m_resource[i] / (m_resource[i] + variety.halfSaturation[i]);
-    if(temp < fitnessTemp)
-      fitnessTemp = temp;
+    if(temp < fitness)
+      fitness = temp;
   }
-  fitness = fitnessTemp;
 }
 
 // Substitute actual variety by a randomly choosen variety
