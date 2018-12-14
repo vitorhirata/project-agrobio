@@ -6,6 +6,7 @@
 #include <algorithm> // allow to use transform
 #include <tuple> // allow tuple return
 #include "EasyBMP.cpp" // BITMAP
+#include <map>
 
 using namespace std;
 
