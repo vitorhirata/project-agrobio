@@ -1,5 +1,7 @@
 using Gadfly
 using DataFrames
+using Colors
+using CSV
 
 for i in ARGS
     input_file = i
@@ -8,7 +10,7 @@ for i in ARGS
     param = string(input_file[end-4])
     input_file = "test/" * input_file
     output_file = input_file[1:end-4] * ".svg"
-    df = readtable(input_file, separator = ';', skipstart=3)
+    df = CSV.File(input_file, delim = "; ", header=4) |> DataFrame
 
     if mode == "standard"
         p = plot(df, x=:meanDU, y=:nVar, Geom.line, Guide.ylabel("Numero de Variedades"), Guide.xlabel("Numero Medio de Variedades por UD"))
@@ -22,14 +24,14 @@ for i in ARGS
         draw(SVG(output_file2, 20cm, 10cm), p2)
         println("Image $(output_file2) successfully generated.")
     elseif mode == "varParam"
-        p = plot(df, x=:meanDU, y=:nVar, color=:param, Geom.line, Scale.color_discrete(), Guide.colorkey(param), Guide.xlabel("Numero Medio de Variedades por UD"), Guide.ylabel("Numero de Variedades"))
+        p = plot(df, x=:meanDU, y=:nVar, color=:param, Geom.line, Scale.color_discrete(), Guide.colorkey(title=param), Guide.xlabel("Numero Medio de Variedades por UD"), Guide.ylabel("Numero de Variedades"))
         draw(SVG(output_file, 15cm, 10cm), p)
         println("Image $(output_file) successfully generated.")
-        p2 = plot(df, x=:time, y=:nVar, color=:param, Geom.line, Scale.color_discrete(), Guide.colorkey(param), Guide.xlabel("Tempo"), Guide.ylabel("Numero de Variedades"))
+        p2 = plot(df, x=:time, y=:nVar, color=:param, Geom.line, Scale.color_discrete(), Guide.colorkey(title=param), Guide.xlabel("Tempo"), Guide.ylabel("Numero de Variedades"))
         output_file2 = input_file[1:end-4] * "2.svg"
         draw(SVG(output_file2, 15cm, 10cm), p2)
         println("Image $(output_file2) successfully generated.")
-        p3 = plot(df, x=:time, y=:meanDU, color=:param, Geom.line, Scale.color_discrete(), Guide.colorkey(param), Guide.xlabel("Time"), Guide.ylabel("Numero Medio de Variedades por UD"))
+        p3 = plot(df, x=:time, y=:meanDU, color=:param, Geom.line, Scale.color_discrete(), Guide.colorkey(title=param), Guide.xlabel("Time"), Guide.ylabel("Numero Medio de Variedades por UD"))
         output_file3 = input_file[1:end-4] * "3.svg"
         draw(SVG(output_file3, 20cm, 10cm), p3)
         println("Image $(output_file3) successfully generated.")
@@ -42,7 +44,7 @@ for i in ARGS
             println("Image $(output_file) successfully generated.")
         elseif length(split(input_file, "_")) == 3
             p = plot(df, x=:value, y=:varDist, color=:param, Geom.line, Scale.color_discrete(),
-                    Guide.colorkey(param), Coord.cartesian(xmin=0, xmax=20, ymin=0, ymax=1),
+                    Guide.colorkey(title=param), Coord.cartesian(xmin=0, xmax=20, ymin=0, ymax=1),
                     Guide.ylabel("Frequencia"), Guide.xlabel("Numero Medio de Variedades por UD"))
             draw(SVG(output_file, 15cm, 10cm), p)
             println("Image $(output_file) successfully generated.")
@@ -54,11 +56,11 @@ for i in ARGS
         draw(SVG(output_file, 15cm, 10cm), p)
         println("Image $(output_file) successfully generated.")
     elseif mode == "histogramFitnessVar"
-        p = plot(df, x=:value, y=:fitness, color=:param, Geom.line, Scale.color_discrete(), Guide.colorkey(param),
+        p = plot(df, x=:value, y=:fitness, color=:param, Geom.line, Scale.color_discrete(), Guide.colorkey(title=param),
                 Scale.y_continuous(minvalue=0, maxvalue=0.2), Guide.ylabel("Frequencia"), Guide.xlabel("Fitness"))
         draw(SVG(output_file, 15cm, 10cm), p)
         println("Image $(output_file) successfully generated.")
-        p2 = plot(df, x=:value, y=:appearence, color=:param, Geom.line, Scale.color_discrete(), Guide.colorkey(param),
+        p2 = plot(df, x=:value, y=:appearence, color=:param, Geom.line, Scale.color_discrete(), Guide.colorkey(title=param),
                 Scale.y_continuous(minvalue=0, maxvalue=0.1), Guide.ylabel("Frequencia"), Guide.xlabel("Appearence"))
         output_file2 = input_file[1:end-4] * "2.svg"
         draw(SVG(output_file2, 15cm, 10cm), p2)
