@@ -153,13 +153,13 @@ void DomesticUnity::evaluateProduction(void){
 
   float extpunctuationDifference = bestDUpunctuation - punctuation;
   float intpunctuationDifference = varietyOwened[m_bestVarietyIdx].punctuation - varietyOwened[m_worstVarietyIdx].punctuation;
-  if(extpunctuationDifference < m_outsideTradeLimit && extpunctuationDifference > 0
+  if(extpunctuationDifference > m_outsideTradeLimit && extpunctuationDifference > 0
       && m_domesticUnity[bestDUindex].bestVarietyNumber != varietyOwened[m_worstVarietyIdx].number){
     int varNumber = m_domesticUnity[bestDUindex].bestVarietyNumber;
     changeProduction(varNumber, bestDUindex);
     m_domesticUnity[bestDUindex].consumeVariety();
   }
-  else if(intpunctuationDifference < m_insideTradeLimit &&
+  else if(intpunctuationDifference > m_insideTradeLimit &&
       bestVarietyNumber != varietyOwened[m_worstVarietyIdx].number){
     changeProduction(bestVarietyNumber, -1);
     consumeVariety();
@@ -181,7 +181,7 @@ void DomesticUnity::changeProduction(int newVar, int duIdx){
   else
     bestVarietyPlace = m_domesticUnity[duIdx].findVariety(newVar);
   if(worstVarietyPlace == -1 || bestVarietyPlace == -1){
-    cout << "ERROR in DomesticUnity::findVariety. Variety not found, best=" << bestVarietyPlace << ", worst=" << worstVarietyPlace << ". DUidx=" << duIdx << endl;
+    cout << "ERROR in DomesticUnity::findVariety. Variety not found, best=" << newVar << "bestPlace=" << bestVarietyPlace << ", worst=" << varietyOwened[m_worstVarietyIdx].number << "worstPlace" << worstVarietyPlace << ". DUidx=" << duIdx << endl;
     exit(-1);
   }
   VarietyData data = m_grid[bestVarietyPlace].giveVarietyData();
