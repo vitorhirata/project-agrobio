@@ -97,14 +97,12 @@ void Ambient::computeAllFitness(void){
 
 // Count the number of different varieties in the grid, return a int to that number
 int Ambient::countSpecie(void){
-  std::vector<int> varietyList {grid[0].variety.varietyNumber};
-  for(int i = 1; i < m_latticeSize*m_latticeSize; ++i){
+  std::map<int,bool> varietyAvailability;
+  for(int i = 0; i < m_latticeSize*m_latticeSize; ++i){
     int varNumber = grid[i].variety.varietyNumber;
-    vector<int>::iterator vectorIterator = std::lower_bound(varietyList.begin(), varietyList.end(), varNumber);
-    if(*vectorIterator != varNumber)
-      varietyList.insert(vectorIterator, varNumber);
+    varietyAvailability[varNumber] = true;
   }
-  return varietyList.size();
+  return varietyAvailability.size();
 }
 
 

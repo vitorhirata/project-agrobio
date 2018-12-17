@@ -25,10 +25,7 @@ private:
   int findVariety(int var);
   float computePunctuation(float varFitness, float varAppererence);
   void updateBestVar(int bestVar);
-  void fillvarietyOwened(std::vector<int> varietyList,
-      std::vector<int> varietyQuantity,
-      std::vector<float> varietyFitness,
-      std::vector<float> varietyAppearence);
+  void fillvarietyOwened(std::map<int,std::vector<float> >* varietyData);
   void insertElement(int* v1, float* v2, float* v3, int pos);
 public:
   std::vector<DUvariety> varietyOwened;
@@ -66,32 +63,21 @@ void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
 // Iterate over the Oweneds Patches, colect varieties and set varietyOwened, m_worstVarietyIdx,
 // bestVarietyNumber, m_bestVarietySeedQuantity and m_bestVarietyIdx
 void DomesticUnity::computeDUpunctuations(void){
-  std::vector<int> varietyList;
-  std::vector<int> varietyQuantity(varietyOwened.size()+4, -1);
-  std::vector<float> varietyFitness(varietyOwened.size()+4, -1);
-  std::vector<float> varietyAppearence(varietyOwened.size()+4, -1);
+  // Map the variety in a vector, where the 0th element is quantity, the 1st fitness and the 2nd appearence
+  std::map<int,std::vector<float> > varietyData;
 
-  // Add first element
-  varietyList.push_back(m_grid[m_indexOwenedPatches[0]].variety.varietyNumber);
-  varietyQuantity[0] = 1;
-  varietyFitness[0] = m_grid[m_indexOwenedPatches[0]].fitness;
-  varietyAppearence[0] = m_grid[m_indexOwenedPatches[0]].variety.appearence;
-
-  // Complete to fill the vectors
-  for(uint i = 1; i < m_indexOwenedPatches.size(); ++i){
+  // Fill the map
+  for(uint i = 0; i < m_indexOwenedPatches.size(); ++i){
     int patchNumber = m_indexOwenedPatches[i];
     int varNumber = m_grid[patchNumber].variety.varietyNumber;
-    int idx = std::lower_bound(varietyList.begin(), varietyList.end(), varNumber) - varietyList.begin();
-    if(varietyList[idx] != varNumber){
-      varietyList.insert(varietyList.begin()+idx, varNumber);
-      insertElement(varietyQuantity.data(), varietyFitness.data(), varietyAppearence.data(), idx);
-    }
-    ++varietyQuantity[idx];
-    varietyFitness[idx] += m_grid[patchNumber].fitness;
-    varietyAppearence[idx] += m_grid[patchNumber].variety.appearence;
+    if(varietyData.count(varNumber) == 0)
+      varietyData[varNumber] = std::vector<float>(3,0);
+    ++varietyData[varNumber][0];
+    varietyData[varNumber][1] += m_grid[patchNumber].fitness;
+    varietyData[varNumber][2] += m_grid[patchNumber].variety.appearence;
   }
 
-  fillvarietyOwened(varietyList, varietyQuantity, varietyFitness, varietyAppearence);
+  fillvarietyOwened(&varietyData);
 
   //Set DU punctuation
   float puncTemp = 0;
@@ -121,27 +107,25 @@ void DomesticUnity::insertElement(int* v1, float* v2, float*v3, int pos){
 }
 
 
-void DomesticUnity::fillvarietyOwened(std::vector<int> varietyList,
-      std::vector<int> varietyQuantity,
-      std::vector<float> varietyFitness,
-      std::vector<float> varietyAppearence){
+void DomesticUnity::fillvarietyOwened(std::map<int,std::vector<float> >* varietyData){
   varietyOwened.clear();
   float bestVarPunctuation = -100.0;
   float worstVarPunctuation = 100.0;
-  for(uint i = 0; i < varietyList.size(); ++i){
+  map<int, std::vector<float> >::iterator itr;
+  for(itr = varietyData->begin(); itr != varietyData->end(); ++itr){
     DUvariety newVar;
-    newVar.number = varietyList[i];
-    newVar.quantity = varietyQuantity[i];
-    newVar.punctuation = computePunctuation(varietyFitness[i] / varietyQuantity[i], varietyAppearence[i] / varietyQuantity[i]);
+    newVar.number = itr->first;
+    newVar.quantity = itr->second[0];
+    newVar.punctuation = computePunctuation(itr->second[1] / itr->second[0], itr->second[2] / itr->second[0]);
     varietyOwened.push_back(newVar);
     if(newVar.punctuation > bestVarPunctuation){
       bestVarPunctuation = newVar.punctuation;
       bestVarietyNumber = newVar.number;
-      m_bestVarietyIdx = i;
+      m_bestVarietyIdx = varietyOwened.size() - 1;
     }
     if(newVar.punctuation < worstVarPunctuation){
       worstVarPunctuation = newVar.punctuation;
-      m_worstVarietyIdx = i;
+      m_worstVarietyIdx = varietyOwened.size() - 1;
     }
   }
   m_bestVarietySeedQuantity = 3 * varietyOwened[m_bestVarietyIdx].quantity;
