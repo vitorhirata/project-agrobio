@@ -26,7 +26,6 @@ private:
   float computePunctuation(float varFitness, float varAppererence);
   void updateBestVar(int bestVar);
   void fillvarietyOwened(std::map<int,std::vector<float> >* varietyData);
-  void insertElement(int* v1, float* v2, float* v3, int pos);
 public:
   std::vector<DUvariety> varietyOwened;
   float punctuation;
@@ -87,26 +86,7 @@ void DomesticUnity::computeDUpunctuations(void){
   punctuation = puncTemp / varietyOwened.size();
 }
 
-// Insert a 0 element in the position pos for the three vector (v1, v2, v3)
-void DomesticUnity::insertElement(int* v1, float* v2, float*v3, int pos){
-  int temp1 = v1[pos];
-  float temp2 = v2[pos];
-  float temp3 = v3[pos];
-  v1[pos] = v2[pos] = v3[pos] = 0;
-
-  ++pos;
-  while(v1[pos] != -1){
-    std::swap(v1[pos], temp1);
-    std::swap(v2[pos], temp2);
-    std::swap(v3[pos], temp3);
-    ++pos;
-  }
-  v1[pos] = temp1;
-  v2[pos] = temp2;
-  v3[pos] = temp3;
-}
-
-
+// Fill the varietyOwened vector with the data provided by the input map
 void DomesticUnity::fillvarietyOwened(std::map<int,std::vector<float> >* varietyData){
   varietyOwened.clear();
   float bestVarPunctuation = -100.0;
