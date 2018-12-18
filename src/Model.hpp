@@ -55,7 +55,7 @@ void Model::setDomesticUnity(void){
   }
   worker::openFile("test/plot/networkTrade.csv", "Source;Target;Weight", m_parameter);
   worker::openFile("test/plot/networkTradeTime.csv", "Type;Source;Target;Time", m_parameter);
-  worker::openFile("test/plot/puncDifference.csv", "DU;difference;Time", m_parameter);
+  worker::openFile("test/plot/puncDifference.csv", "DU;Type;difference;Time", m_parameter);
 
   // Pass the parameters to actualy initialize each domesticUnity
   for(int i = 0; i < m_parameter.numberDomesticUnity; ++i){

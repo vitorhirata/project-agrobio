@@ -146,9 +146,10 @@ void DomesticUnity::evaluateProduction(void){
 
   float extpunctuationDifference = bestDUpunctuation - punctuation;
   float intpunctuationDifference = varietyOwened[m_bestVarietyIdx].punctuation - varietyOwened[m_worstVarietyIdx].punctuation;
+  m_differencePuncFile << m_ownDUidx << ";0;" << extpunctuationDifference << ";" << m_time << endl;
+  m_differencePuncFile << m_ownDUidx << ";1;" << intpunctuationDifference << ";" << m_time << endl;
   if(extpunctuationDifference > m_outsideTradeLimit && extpunctuationDifference > 0
       && m_domesticUnity[bestDUindex].bestVarietyNumber != varietyOwened[m_worstVarietyIdx].number){
-    m_differencePuncFile << m_ownDUidx << ";" << bestDUpunctuation - punctuation << ";" << m_time << endl;
     int varNumber = m_domesticUnity[bestDUindex].bestVarietyNumber;
     changeProduction(varNumber, bestDUindex);
     m_domesticUnity[bestDUindex].consumeVariety();
