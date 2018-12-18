@@ -24,7 +24,8 @@ private:
   void changeProduction(int newVar, int duIdx);
   int findVariety(int var);
   float computePunctuation(float varFitness, float varAppererence);
-  void updateBestVar(int bestVar);
+  void updateBestVar(int oldBestVar);
+  void updateWorstVar(int oldWorstVar);
   void fillvarietyOwened(std::map<int,std::vector<float> >* varietyData);
 public:
   std::vector<DUvariety> varietyOwened;
@@ -138,8 +139,10 @@ void DomesticUnity::evaluateProduction(void){
     int varNumber = m_domesticUnity[bestDUindex].bestVarietyNumber;
     changeProduction(varNumber, bestDUindex);
     m_domesticUnity[bestDUindex].consumeVariety();
+    if(varietyOwened[m_worstVarietyIdx].quantity == 1)
+      updateWorstVar(varietyOwened[m_worstVarietyIdx].number);
   }
-  else if(intpunctuationDifference > m_insideTradeLimit &&
+  if(intpunctuationDifference > m_insideTradeLimit &&
       bestVarietyNumber != varietyOwened[m_worstVarietyIdx].number){
     changeProduction(bestVarietyNumber, -1);
     consumeVariety();
@@ -185,8 +188,7 @@ void DomesticUnity::consumeVariety(void){
 }
 
 // Receive the actual bestVariety and update the best variety, so that it is not the received value
-void DomesticUnity::updateBestVar(int bestVar){
-  int oldBestVar = bestVar;
+void DomesticUnity::updateBestVar(int oldBestVar){
   float bestVarPunctuation = -1;
   for(uint i = 0; i < varietyOwened.size(); ++i){
     if(varietyOwened[i].punctuation > bestVarPunctuation && varietyOwened[i].number != oldBestVar && findVariety(varietyOwened[i].number) != -1){
@@ -198,4 +200,14 @@ void DomesticUnity::updateBestVar(int bestVar){
   m_bestVarietySeedQuantity = 3 * varietyOwened[m_bestVarietyIdx].quantity;
 }
 
+// Receive the actual worstVariety and update the worst variety, so that it is not the received value
+void DomesticUnity::updateWorstVar(int oldWorstVar){
+  float worstVarPunctuation = 100;
+  for(uint i = 0; i < varietyOwened.size(); ++i){
+    if(varietyOwened[i].punctuation < worstVarPunctuation && varietyOwened[i].number != oldWorstVar){
+      worstVarPunctuation = varietyOwened[i].punctuation;
+      m_worstVarietyIdx = i;
+    }
+  }
+}
 #endif
