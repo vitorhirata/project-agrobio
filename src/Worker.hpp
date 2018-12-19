@@ -51,7 +51,7 @@ namespace worker{
     for(int i = 0; i < round(1 / 0.05); ++i)
       histogramFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] << "; " << result.appearenceFrequency[i] << endl;
     for(int i = 0; i < 49; ++i)
-      varietyDistFile << i+1 << "; " << result.varietyDistribution[i] / parameter.nRun << endl;
+      varietyDistFile << i+1 << "; " << result.varietyDistribution[i] << endl;
     histogramFile.close();
     varietyDistFile.close();
   }
