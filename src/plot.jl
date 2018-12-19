@@ -33,7 +33,7 @@ for i in ARGS
         println("Image $(output_file2) successfully generated.")
         p3 = plot(df, x=:time, y=:meanDU, color=:param, Geom.line, Scale.color_discrete(), Guide.colorkey(title=param), Guide.xlabel("Time"), Guide.ylabel("Numero Medio de Variedades por UD"))
         output_file3 = input_file[1:end-4] * "3.svg"
-        draw(SVG(output_file3, 20cm, 10cm), p3)
+        draw(SVG(output_file3, 15cm, 10cm), p3)
         println("Image $(output_file3) successfully generated.")
 
     elseif mode == "varietyDistribution"
