@@ -8,4 +8,4 @@ To utilize the project start running the script initialize.sh, that will set up 
 
 To compile the code go to /src and run "g++ main.cpp -std=c++11 -I lib/bmp -o program.out".
 To execute the code run ./program.out and the desired mode: 's' for standard, 'p' for plot, 'v' for parameter variation, and 'f' to get the fixed points under parameter variation. For 'v' and 'f' mode it is necessary to type the parameter that will vary: 'a', 'i', 'o', 'n', 'r', 'v', 'L'.
-The result will be saved in src/test, in a csv format. To plot this results run "julia plot.jl name-of-file".
+The result will be saved in src/test, in a csv format. The julia file src/plot.jl contain the function plotAll that plot the csv files in the specified folder".
