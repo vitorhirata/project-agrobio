@@ -52,7 +52,7 @@ void Ambient::setPatch(int numberResources, int nResourceDistribution, int numbe
     for(int i = 0; i < m_latticeSize*m_latticeSize; ++i)
       grid[i].initializePatch(resources, varietyAvailable[uniIntSP(rand64)]);
   }
-  else if(m_latticeSize % nResourceDistribution == 0){
+  else{
     std::vector<vector<float>> resources;
     for(int i = 0; i < nResourceDistribution; ++i){
       std::vector<float> temp(numberResources);
@@ -61,16 +61,14 @@ void Ambient::setPatch(int numberResources, int nResourceDistribution, int numbe
       resources.push_back(temp);
     }
 
-    int size = m_latticeSize / nResourceDistribution;
+    int sizeH = ceil(m_latticeSize / (nResourceDistribution / 2.0));
+    int sizeV = ceil(m_latticeSize / 2.0);
     for(int lin = 0; lin < m_latticeSize; ++lin){
-      int idx = lin / size;
-      for(int col = 0; col < m_latticeSize; ++col)
+      for(int col = 0; col < m_latticeSize; ++col){
+        int idx = (lin / sizeV) * nResourceDistribution / 2 + col / sizeH;
         grid[lin*m_latticeSize+col].initializePatch(resources[idx], varietyAvailable[uniIntSP(rand64)]);
+      }
     }
-  }
-  else{
-    cout << "ERROR in Ambient::setGlobalResource: " << nResourceDistribution << " is not multiple of " << m_latticeSize << "." << endl;
-    exit(-1);
   }
 }
 

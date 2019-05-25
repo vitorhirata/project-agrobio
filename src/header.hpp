@@ -7,6 +7,7 @@
 #include <tuple> // allow tuple return
 #include "EasyBMP.cpp" // BITMAP
 #include <map>
+#include <cmath>
 
 using namespace std;
 
