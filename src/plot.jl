@@ -90,7 +90,7 @@ function plotVarietyDistribution(df, output_file)
     elseif length(split(output_file, "_")) == 3
       p = plot(df, x=:value, y=:varDist, color=:param, Geom.line,
                    Scale.color_discrete(),Guide.colorkey(title=param),
-                   Coord.cartesian(xmin=0, xmax=20, ymin=0, ymax=1),
+                   Coord.cartesian(xmin=0, xmax=20),
                    Guide.ylabel("Frequencia"),
                    Guide.xlabel("Numero Medio de Variedades por UD"))
       draw(SVG(output_file, 15cm, 10cm), p)
