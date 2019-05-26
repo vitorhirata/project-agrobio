@@ -148,7 +148,7 @@ namespace worker{
         paramList = std::vector<float> {25, 36, 49, 64};
         break;
       case 'r':
-        paramList = std::vector<float> {1, 7, 49, 2401};
+        paramList = std::vector<float> {1, 2, 4, 8, 15, 25, 35, 49, 1000, 2401};
         break;
       case 'v':
         paramList = std::vector<float> {5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100};

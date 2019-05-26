@@ -24,7 +24,7 @@ struct Parameter{
   : latticeSize(49)
   , numberInitialVariety(50)
   , numberResources(3)
-  , numberHabitat(1)
+  , numberHabitat(8)
   , maxTime(1000)
   , timeInterval(10)
   , numberDomesticUnity(49)
@@ -34,8 +34,8 @@ struct Parameter{
   , kWT(4)
   , betaWT(0.2)
   , probabilyConnectionER(0.15)
-  , outsideTradeLimit(0.01)
-  , insideTradeLimit(0.05)
+  , outsideTradeLimit(0.006)
+  , insideTradeLimit(0.03)
   , alpha(0.5)
   , probabilityNewVar(0.0001) {}
 };
