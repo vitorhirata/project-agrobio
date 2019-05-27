@@ -99,7 +99,7 @@ namespace metrics{
 
 
   void floatToRGB(int n, int* R, int* G, int* B){
-    float r, g, b, x = (float) n / 160000;
+    float r, g, b, x = (float) n / 3500;
 
     if (x < 0 || x > 1){
       cout << "ERROR" << endl;

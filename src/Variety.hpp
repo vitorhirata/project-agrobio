@@ -32,16 +32,16 @@ void Variety::setVariety(VarietyData t_data){
 // Compute the number of the variety, according to the data contained in the variety
 int Variety::computeVarietyNumber(void){
   int varNumber = 0;
-  float step = 0.05;
+  float step = 0.2;
   int scale = 1 / step;
   int temp;
-  int actualScale = scale;
+  int actualScale = scale*scale;
   for(auto i : halfSaturation){
     temp = floor(i / step);
     varNumber += actualScale * temp;
     actualScale *= scale;
   }
-  varNumber += floor(appearence / step);
+  varNumber += floor(appearence / (step * step));
 
   return varNumber;
 }
