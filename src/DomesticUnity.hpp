@@ -8,6 +8,7 @@ private:
     int number;
     int quantity;
     float punctuation;
+    float fitness_punctuation;
   };
   DomesticUnity* m_domesticUnity;
   Patch* m_grid;
@@ -30,6 +31,7 @@ private:
 public:
   std::vector<DUvariety> varietyOwened;
   float punctuation;
+  float fitness_punctuation;
   int bestVarietyNumber;
   void initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
       std::vector<int> t_indexLinkedDU, std::vector<int> t_indexOwenedPatches,
@@ -81,10 +83,13 @@ void DomesticUnity::computeDUpunctuations(void){
 
   //Set DU punctuation
   float puncTemp = 0;
+  float fitnessPuncTemp = 0;
   for(auto i : varietyOwened){
     puncTemp += (i.punctuation * i.quantity);
+    fitnessPuncTemp += (i.fitness_punctuation * i.quantity);
   }
   punctuation = puncTemp / m_indexOwenedPatches.size();
+  fitness_punctuation = fitnessPuncTemp / m_indexOwenedPatches.size();
 }
 
 // Fill the varietyOwened vector with the data provided by the input map
@@ -98,6 +103,7 @@ void DomesticUnity::fillvarietyOwened(std::map<int,std::vector<float> >* variety
     newVar.number = itr->first;
     newVar.quantity = itr->second[0];
     newVar.punctuation = computePunctuation(itr->second[1] / itr->second[0], itr->second[2] / itr->second[0]);
+    newVar.fitness_punctuation = itr->second[1] / itr->second[0];
     varietyOwened.push_back(newVar);
     if(newVar.punctuation > bestVarPunctuation){
       bestVarPunctuation = newVar.punctuation;

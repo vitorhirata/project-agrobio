@@ -3,6 +3,10 @@ namespace metrics{
   void sumResults(Result* result, Result* resultTemp){
     std::transform((*result).numberVariety.begin(), (*result).numberVariety.end(), (*resultTemp).numberVariety.begin(), (*result).numberVariety.begin(), std::plus<float>());
     std::transform((*result).meanVarietyDU.begin(), (*result).meanVarietyDU.end(), (*resultTemp).meanVarietyDU.begin(), (*result).meanVarietyDU.begin(), std::plus<float>());
+    if(!(*resultTemp).totalPunctuation.empty()){
+    std::transform((*result).totalPunctuation.begin(), (*result).totalPunctuation.end(), (*resultTemp).totalPunctuation.begin(), (*result).totalPunctuation.begin(), std::plus<float>());
+    std::transform((*result).fitnessPunctuation.begin(), (*result).fitnessPunctuation.end(), (*resultTemp).fitnessPunctuation.begin(), (*result).fitnessPunctuation.begin(), std::plus<float>());
+    }
     std::transform((*result).fitnessFrequency.begin(), (*result).fitnessFrequency.end(), (*resultTemp).fitnessFrequency.begin(), (*result).fitnessFrequency.begin(), std::plus<float>());
     std::transform((*result).appearenceFrequency.begin(), (*result).appearenceFrequency.end(), (*resultTemp).appearenceFrequency.begin(), (*result).appearenceFrequency.begin(), std::plus<float>());
     std::transform((*result).varietyDistribution.begin(), (*result).varietyDistribution.end(), (*resultTemp).varietyDistribution.begin(), (*result).varietyDistribution.begin(), std::plus<float>());
@@ -16,6 +20,18 @@ namespace metrics{
       varietyDistribution[num-1] += 1.0 / t_numberDomesticUnity;
     }
     return varietyDistribution;
+  }
+
+  // Return the average punctuation of Domestic Unities
+  std::vector<float> computePunctuationAverage(DomesticUnity* domesticUnity, const int t_numberDomesticUnity){
+    std::vector<float> punctuationAverage(2, 0);
+    for(int i = 0; i < t_numberDomesticUnity; ++i){
+      punctuationAverage[0] += domesticUnity[i].punctuation;
+      punctuationAverage[1] += domesticUnity[i].fitness_punctuation;
+    }
+    punctuationAverage[0] /= t_numberDomesticUnity;
+    punctuationAverage[1] /= t_numberDomesticUnity;
+    return punctuationAverage;
   }
 
   // Return the mean number of varieties owened by the Domestic Unities

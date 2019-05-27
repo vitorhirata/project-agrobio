@@ -70,6 +70,9 @@ Result Model::runStandard(void){
     if (t % m_parameter.timeInterval == 0){
       result.numberVariety.push_back(ambient->countSpecie());
       result.meanVarietyDU.push_back(metrics::computeVarietyMeanProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize));
+      std::vector<float> tempPunctuation = metrics::computePunctuationAverage(domesticUnity, m_parameter.numberDomesticUnity);
+      result.totalPunctuation.push_back(tempPunctuation[0]);
+      result.fitnessPunctuation.push_back(tempPunctuation[1]);
     }
   }
   ambient->computeAllFitness();
@@ -106,6 +109,9 @@ Result Model::runPlot(void){
       result.numberVariety.push_back(ambient->countSpecie());
       metrics::printState(t, ambient->grid, m_parameter.latticeSize);
       result.meanVarietyDU.push_back(metrics::computeVarietyMeanProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize));
+      std::vector<float> tempPunctuation = metrics::computePunctuationAverage(domesticUnity, m_parameter.numberDomesticUnity);
+      result.totalPunctuation.push_back(tempPunctuation[0]);
+      result.fitnessPunctuation.push_back(tempPunctuation[1]);
     }
   }
 
