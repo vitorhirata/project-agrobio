@@ -82,9 +82,9 @@ void DomesticUnity::computeDUpunctuations(void){
   //Set DU punctuation
   float puncTemp = 0;
   for(auto i : varietyOwened){
-    puncTemp += i.punctuation;
+    puncTemp += (i.punctuation * i.quantity);
   }
-  punctuation = puncTemp / varietyOwened.size();
+  punctuation = puncTemp / m_indexOwenedPatches.size();
 }
 
 // Fill the varietyOwened vector with the data provided by the input map
