@@ -31,7 +31,8 @@ class Model;
 namespace metrics{
   void sumResults(Result* result, Result* resultTemp);
   float computeVarietyMeanProfile(DomesticUnity* domesticUnity, const int t_numberDomesticUnity, const int t_DUsize);
-  std::vector<float> computeVarietyProfile(DomesticUnity* domesticUnity, const int t_numberDomesticUnity, const int t_DUsize);
+  std::vector<float> computeDUprofile(DomesticUnity* domesticUnity, const int t_numberDomesticUnity, const int t_DUsize);
+  std::vector<float> computeVarietyProfile(DomesticUnity* domesticUnity, const int t_numberDomesticUnity);
   std::vector<float> computePunctuationAverage(DomesticUnity* domesticUnity, const int t_numberDomesticUnity);
   std::vector<float> computeFitnessProfile(Patch* t_grid, const int t_latticeSize);
   std::vector<float> computeAppearenceProfile(Patch* t_grid, const int t_latticeSize);

@@ -25,6 +25,8 @@ function plotHandler(input_file)
     plotPunctuation(df, output_file)
   elseif mode == "varParam"
     plotVarParam(df, output_file)
+  elseif mode == "duDistribution"
+    plotduDistribution(df, output_file)
   elseif mode == "varietyDistribution"
     plotVarietyDistribution(df, output_file)
   elseif mode == "histogramFitness"
@@ -96,19 +98,39 @@ function plotVarParam(df, output_file)
     println("Image $(output_file3) successfully generated.")
 end
 
-function plotVarietyDistribution(df, output_file)
+function plotduDistribution(df, output_file)
     param = string(output_file[end-4])
     if length(split(output_file, "_")) == 2
-      p = plot(df, x=:value, y=:varDist, Geom.bar,
+      p = plot(df, x=:value, y=:duDist, Geom.bar,
                   Guide.ylabel("Frequencia"),
                   Guide.xlabel("Numero Medio de Variedades por UD"))
       draw(SVG(output_file, 15cm, 10cm), p)
       println("Image $(output_file) successfully generated.")
     elseif length(split(output_file, "_")) == 3
-      p = plot(df, x=:value, y=:varDist, color=:param, Geom.line,
+      p = plot(df, x=:value, y=:duDist, color=:param, Geom.line,
                    Scale.color_discrete(),Guide.colorkey(title=param),
                    Guide.ylabel("Frequencia"),
                    Guide.xlabel("Numero Medio de Variedades por UD"))
+      draw(SVG(output_file, 15cm, 10cm), p)
+      println("Image $(output_file) successfully generated.")
+    end
+end
+
+function plotVarietyDistribution(df, output_file)
+    param = string(output_file[end-4])
+    if length(split(output_file, "_")) == 2
+      p = plot(df, x=:value, y=:varDist, Geom.bar,
+                  Guide.ylabel("Porcentagem de Variedades"),
+                  Guide.xlabel("Porcentagem de Unidades Domésticas"),
+                  Coord.cartesian(xmin=0, xmax=1))
+      draw(SVG(output_file, 15cm, 10cm), p)
+      println("Image $(output_file) successfully generated.")
+    elseif length(split(output_file, "_")) == 3
+      p = plot(df, x=:value, y=:varDist, color=:param, Geom.line,
+                   Scale.color_discrete(),Guide.colorkey(title=param),
+                  Guide.ylabel("Porcentagem de Variedades"),
+                  Guide.xlabel("Porcentagem de Unidades Domésticas"),
+                  Coord.cartesian(xmin=0, xmax=1))
       draw(SVG(output_file, 15cm, 10cm), p)
       println("Image $(output_file) successfully generated.")
     end

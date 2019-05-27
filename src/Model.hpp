@@ -78,7 +78,8 @@ Result Model::runStandard(void){
   ambient->computeAllFitness();
   result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
   result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, m_parameter.latticeSize);
-  result.varietyDistribution = metrics::computeVarietyProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
+  result.duDistribution = metrics::computeDUprofile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
+  result.varietyDistribution = metrics::computeVarietyProfile(domesticUnity, m_parameter.numberDomesticUnity);
   return result;
 }
 
@@ -93,7 +94,8 @@ Result Model::runFixedPoint(void){
   result.meanVarietyDU.push_back(metrics::computeVarietyMeanProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize));
   result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
   result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, m_parameter.latticeSize);
-  result.varietyDistribution = metrics::computeVarietyProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
+  result.duDistribution = metrics::computeDUprofile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
+  result.varietyDistribution = metrics::computeVarietyProfile(domesticUnity, m_parameter.numberDomesticUnity);
   return result;
 }
 
@@ -118,7 +120,8 @@ Result Model::runPlot(void){
   ambient->computeAllFitness();
   result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
   result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, m_parameter.latticeSize);
-  result.varietyDistribution = metrics::computeVarietyProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
+  result.duDistribution = metrics::computeDUprofile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
+  result.varietyDistribution = metrics::computeVarietyProfile(domesticUnity, m_parameter.numberDomesticUnity);
   return result;
 }
 

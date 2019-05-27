@@ -25,13 +25,17 @@ namespace worker{
     punctuationFile.close();
 
     fstream histogramFile = worker::openFile("test/" + timestr + "_histogramFitness.csv", "value; fitness; appearence", parameter);
+    fstream duDistFile = worker::openFile("test/" + timestr + "_duDistribution.csv",  "value; duDist", parameter);
     fstream varietyDistFile = worker::openFile("test/" + timestr + "_varietyDistribution.csv",  "value; varDist", parameter);
     for(int i = 0; i < round(1 / 0.05); ++i)
       histogramFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] / parameter.nRun << "; " << result.appearenceFrequency[i] / parameter.nRun << endl;
-    for(int i = 0; i < 49; ++i)
-      varietyDistFile << i+1 << "; " << result.varietyDistribution[i] / parameter.nRun << endl;
+    for(int i = 0; i < parameter.numberDomesticUnity; ++i){
+      duDistFile << i+1 << "; " << result.duDistribution[i] / parameter.nRun << endl;
+      varietyDistFile << (i+1.0) / parameter.numberDomesticUnity << "; " << result.varietyDistribution[i] / parameter.nRun << endl;
+    }
 
     histogramFile.close();
+    duDistFile.close();
     varietyDistFile.close();
   }
 
@@ -57,12 +61,16 @@ namespace worker{
     punctuationFile.close();
 
     fstream histogramFile = worker::openFile("test/plot/" + timestr + "_histogramFitness.csv", "value; fitness; appearence", parameter);
+    fstream duDistFile = worker::openFile("test/plot/" + timestr + "_duDistribution.csv",  "value; duDist", parameter);
     fstream varietyDistFile = worker::openFile("test/plot/" + timestr + "_varietyDistribution.csv",  "value; varDist", parameter);
     for(int i = 0; i < round(1 / 0.05); ++i)
       histogramFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] << "; " << result.appearenceFrequency[i] << endl;
-    for(int i = 0; i < 49; ++i)
-      varietyDistFile << i+1 << "; " << result.varietyDistribution[i] << endl;
+    for(int i = 0; i < parameter.numberDomesticUnity; ++i){
+      duDistFile << i+1 << "; " << result.duDistribution[i] << endl;
+      varietyDistFile << (i+1.0) / parameter.numberDomesticUnity << "; " << result.varietyDistribution[i] << endl;
+    }
     histogramFile.close();
+    duDistFile.close();
     varietyDistFile.close();
   }
 
@@ -77,7 +85,8 @@ namespace worker{
 
     fstream varietyFile = worker::openFile("test/" + timestr + "_varParam_" + param + ".csv", "time; nVar; meanDU; param", parameter);
     fstream histogramFile = worker::openFile("test/" + timestr + "_histogramFitnessVar_" + param + ".csv", "value; fitness; appearence; param", parameter);
-    fstream varietyDistFile = worker::openFile("test/" + timestr + "_varietyDistribution_" + param + ".csv",  "value; varDist; param", parameter);
+    fstream duDistFile = worker::openFile("test/" + timestr + "_duDistribution_" + param + ".csv",  "value; duDist; param", parameter);
+    fstream varietyDistFile = worker::openFile("test/" + timestr + "_varietyDistribution_" + param + ".csv", "value; varDist; param", parameter);
 
     for(auto paramValue : paramList){
       switch (param){
@@ -128,13 +137,16 @@ namespace worker{
         varietyFile << i*parameter.timeInterval << "; " << (float) result.numberVariety[i] / parameter.nRun << "; " << (float) result.meanVarietyDU[i] / parameter.nRun<< "; " << paramValue << endl;
       for(int i = 0; i < round(1 / 0.05); ++i)
         histogramFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] / parameter.nRun << "; " << result.appearenceFrequency[i] / parameter.nRun << "; " << paramValue << endl;
-      for(int i = 0; i < 49; ++i)
-        varietyDistFile << i+1 << "; " << result.varietyDistribution[i] / parameter.nRun << "; " << paramValue << endl;
+      for(int i = 0; i < parameter.numberDomesticUnity; ++i){
+        duDistFile << i+1 << "; " << result.duDistribution[i] / parameter.nRun << "; " << paramValue << endl;
+        varietyDistFile << (i+1.0) / parameter.numberDomesticUnity << "; " << result.varietyDistribution[i] / parameter.nRun << "; " << paramValue << endl;
+      }
 
       cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     }
     varietyFile.close();
     histogramFile.close();
+    duDistFile.close();
     varietyDistFile.close();
   }
 
@@ -146,7 +158,8 @@ namespace worker{
 
     fstream varietyFile = worker::openFile("test/" + timestr + "_varParamFixedPoints_" + param + ".csv", "param; nVar; meanDU", parameter);
     fstream histogramFile = worker::openFile("test/" + timestr + "_histogramFitnessVar_" + param + ".csv", "value; fitness; appearence; param", parameter);
-    fstream varietyDistFile = worker::openFile("test/" + timestr + "_varietyDistribution_" + param + ".csv",  "value; varDist; param", parameter);
+    fstream duDistFile = worker::openFile("test/" + timestr + "_duDistribution_" + param + ".csv",  "value; duDist; param", parameter);
+    fstream varietyDistFile = worker::openFile("test/" + timestr + "_varietyDistribution_" + param + ".csv", "value; varDist; param", parameter);
 
     std::vector<float> paramList;
     switch (param){
@@ -232,14 +245,17 @@ namespace worker{
       varietyFile << paramValue << "; " << (float) result.numberVariety[0] / parameter.nRun << "; " << (float) result.meanVarietyDU[0] / parameter.nRun << endl;
       for(int i = 0; i < round(1 / 0.05); ++i)
         histogramFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] / parameter.nRun << "; " << result.appearenceFrequency[i] / parameter.nRun << "; " << paramValue << endl;
-      for(int i = 0; i < 49; ++i)
-        varietyDistFile << i+1 << "; " << result.varietyDistribution[i] / parameter.nRun << "; " << paramValue << endl;
+      for(int i = 0; i < parameter.numberDomesticUnity; ++i){
+        duDistFile << i+1 << "; " << result.duDistribution[i] / parameter.nRun << "; " << paramValue << endl;
+        varietyDistFile << (i+1.0) / parameter.numberDomesticUnity << "; " << result.varietyDistribution[i] / parameter.nRun << "; " << paramValue << endl;
+      }
 
       cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     }
 
     varietyFile.close();
     histogramFile.close();
+    duDistFile.close();
     varietyDistFile.close();
   }
 

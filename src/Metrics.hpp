@@ -7,19 +7,38 @@ namespace metrics{
     std::transform((*result).totalPunctuation.begin(), (*result).totalPunctuation.end(), (*resultTemp).totalPunctuation.begin(), (*result).totalPunctuation.begin(), std::plus<float>());
     std::transform((*result).fitnessPunctuation.begin(), (*result).fitnessPunctuation.end(), (*resultTemp).fitnessPunctuation.begin(), (*result).fitnessPunctuation.begin(), std::plus<float>());
     }
+    std::transform((*result).varietyDistribution.begin(), (*result).varietyDistribution.end(), (*resultTemp).varietyDistribution.begin(), (*result).varietyDistribution.begin(), std::plus<float>());
     std::transform((*result).fitnessFrequency.begin(), (*result).fitnessFrequency.end(), (*resultTemp).fitnessFrequency.begin(), (*result).fitnessFrequency.begin(), std::plus<float>());
     std::transform((*result).appearenceFrequency.begin(), (*result).appearenceFrequency.end(), (*resultTemp).appearenceFrequency.begin(), (*result).appearenceFrequency.begin(), std::plus<float>());
-    std::transform((*result).varietyDistribution.begin(), (*result).varietyDistribution.end(), (*resultTemp).varietyDistribution.begin(), (*result).varietyDistribution.begin(), std::plus<float>());
+    std::transform((*result).duDistribution.begin(), (*result).duDistribution.end(), (*resultTemp).duDistribution.begin(), (*result).duDistribution.begin(), std::plus<float>());
   }
 
   // Return the frequency of the number of varieties owened by the Domestic Unities
-  std::vector<float> computeVarietyProfile(DomesticUnity* domesticUnity, const int t_numberDomesticUnity, const int t_DUsize){
-    std::vector<float> varietyDistribution(t_DUsize, 0);
+  std::vector<float> computeDUprofile(DomesticUnity* domesticUnity, const int t_numberDomesticUnity, const int t_DUsize){
+    std::vector<float> duDistribution(t_DUsize, 0);
     for(int i = 0; i < t_numberDomesticUnity; ++i){
       int num = domesticUnity[i].varietyOwened.size();
-      varietyDistribution[num-1] += 1.0 / t_numberDomesticUnity;
+      duDistribution[num-1] += 1.0 / t_numberDomesticUnity;
     }
-    return varietyDistribution;
+    return duDistribution;
+  }
+
+  // Return the frequency of the number of DU cultivating each variety
+  std::vector<float> computeVarietyProfile(DomesticUnity* domesticUnity, const int t_numberDomesticUnity){
+    std::map<int,int> numberDU;
+    for(int i = 0; i < t_numberDomesticUnity; ++i){
+      for(auto var : domesticUnity[i].varietyOwened){
+        if(numberDU.count(var.number) > 0)
+          ++numberDU[var.number];
+        else
+          numberDU[var.number] = 1;
+      }
+    }
+    std::vector<float> varietyProfile(t_numberDomesticUnity, 0);
+    for(auto i : numberDU)
+      varietyProfile[i.second-1] += 1.0 / numberDU.size();
+
+    return varietyProfile;
   }
 
   // Return the average punctuation of Domestic Unities

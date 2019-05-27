@@ -48,6 +48,7 @@ struct Result{
   std::vector<float> fitnessFrequency;
   std::vector<float> appearenceFrequency;
   std::vector<float> varietyDistribution;
+  std::vector<float> duDistribution;
 
   Result(int timeSize, int histogramSize, int DUsize)
   : numberVariety(timeSize, 0)
@@ -56,7 +57,8 @@ struct Result{
   , fitnessPunctuation(timeSize, 0)
   , fitnessFrequency(histogramSize, 0)
   , appearenceFrequency(histogramSize, 0)
-  , varietyDistribution(DUsize, 0) {}
+  , varietyDistribution(DUsize, 0)
+  , duDistribution(DUsize, 0) {}
 };
 
 // Variety struct contain all the proprieties of each variety
