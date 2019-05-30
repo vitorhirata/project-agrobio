@@ -121,8 +121,10 @@ namespace worker{
           break;
         case 'b':
           parameter.betaWT = paramValue;
+          break;
         case 'R':
           parameter.numberResources = paramValue;
+          break;
         case 'd':
           parameter.probabilityDeath = paramValue;
       }
@@ -191,8 +193,10 @@ namespace worker{
         break;
       case 'b':
         paramList = std::vector<float> {0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.6, 0.7, 0.8, 0.9};
+        break;
       case 'R':
         paramList = std::vector<float> {1, 3, 5, 7, 10};
+        break;
       case 'd':
         paramList = std::vector<float> {0.001, 0.005, 0.01, 0.025, 0.05};
     }
@@ -230,8 +234,10 @@ namespace worker{
           break;
         case 'b':
           parameter.betaWT = paramValue;
+          break;
         case 'R':
           parameter.numberResources = paramValue;
+          break;
         case 'd':
           parameter.probabilityDeath = paramValue;
       }
