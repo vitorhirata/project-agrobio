@@ -16,6 +16,7 @@ private:
   float m_probabilityNewVar;
   float m_outsideTradeLimit;
   float m_insideTradeLimit;
+  float m_probabilityDeath;
   std::vector<int> m_indexLinkedDU;
   std::vector<int> m_indexOwenedPatches;
   int m_worstVarietyIdx;
@@ -33,10 +34,11 @@ public:
   float punctuation;
   float fitness_punctuation;
   int bestVarietyNumber;
+  int numberVarietyOwened(void);
   void initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
       std::vector<int> t_indexLinkedDU, std::vector<int> t_indexOwenedPatches,
       float t_outsideTradeLimit, float t_insideTradeLimit, float t_alpha,
-      float t_probabilityNewVar);
+      float t_probabilityNewVar, float t_probabilityDeath);
   void computeDUpunctuations(void);
   void evaluateProduction(void);
   void consumeVariety(void);
@@ -46,7 +48,7 @@ public:
 void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
     std::vector<int> t_indexLinkedDU, std::vector<int> t_indexOwenedPatches,
     float t_outsideTradeLimit, float t_insideTradeLimit, float t_alpha,
-    float t_probabilityNewVar){
+    float t_probabilityNewVar, float t_probabilityDeath){
   m_domesticUnity = t_domesticUnity;
   m_grid = t_grid;
   m_indexLinkedDU = t_indexLinkedDU;
@@ -55,6 +57,7 @@ void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
   m_insideTradeLimit = t_insideTradeLimit;
   m_alpha = t_alpha;
   m_probabilityNewVar = t_probabilityNewVar;
+  m_probabilityDeath = t_probabilityDeath;
   m_DUpreference = gauss(rand64);
   while(!(m_DUpreference > 0 && m_DUpreference < 1))
     m_DUpreference = gauss(rand64);
@@ -102,8 +105,14 @@ void DomesticUnity::fillvarietyOwened(std::map<int,std::vector<float> >* variety
     DUvariety newVar;
     newVar.number = itr->first;
     newVar.quantity = itr->second[0];
-    newVar.punctuation = computePunctuation(itr->second[1] / itr->second[0], itr->second[2] / itr->second[0]);
-    newVar.fitness_punctuation = itr->second[1] / itr->second[0];
+    if(newVar.number == -1){ // if there is no variety punctuation is zero
+      newVar.punctuation = 0;
+      newVar.fitness_punctuation = 0;
+    }
+    else{
+      newVar.punctuation = computePunctuation(itr->second[1] / itr->second[0], itr->second[2] / itr->second[0]);
+      newVar.fitness_punctuation = itr->second[1] / itr->second[0];
+    }
     varietyOwened.push_back(newVar);
     if(newVar.punctuation > bestVarPunctuation){
       bestVarPunctuation = newVar.punctuation;
@@ -156,6 +165,12 @@ void DomesticUnity::evaluateProduction(void){
   if(uniFLOAT(rand64) < m_probabilityNewVar){
     int newPlace = m_indexOwenedPatches[uniIntPlace(rand64)];
     m_grid[newPlace].setRandomVariety();
+    if(findVariety(bestVarietyNumber) == -1) // If bestVariety no longer exists update
+      updateBestVar(bestVarietyNumber);
+  }
+  if(uniFLOAT(rand64) < m_probabilityDeath){
+    int newPlace = m_indexOwenedPatches[uniIntPlace(rand64)];
+    m_grid[newPlace].killVariety();
     if(findVariety(bestVarietyNumber) == -1) // If bestVariety no longer exists update
       updateBestVar(bestVarietyNumber);
   }
@@ -215,5 +230,14 @@ void DomesticUnity::updateWorstVar(int oldWorstVar){
       m_worstVarietyIdx = i;
     }
   }
+}
+
+// Return the number of variety owened by the DU, excluding empty patches.
+int DomesticUnity::numberVarietyOwened(void){
+  for(auto i : varietyOwened){
+    if(i.number == -1)
+      return varietyOwened.size() - 1;
+  }
+  return varietyOwened.size();
 }
 #endif

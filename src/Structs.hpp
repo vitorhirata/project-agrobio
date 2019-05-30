@@ -20,6 +20,7 @@ struct Parameter{
   float insideTradeLimit;
   float alpha;
   float probabilityNewVar;
+  float probabilityDeath;
   Parameter()
   : latticeSize(49)
   , numberInitialVariety(50)
@@ -37,7 +38,8 @@ struct Parameter{
   , outsideTradeLimit(0.04)
   , insideTradeLimit(0.02)
   , alpha(0.5)
-  , probabilityNewVar(0.0005) {}
+  , probabilityNewVar(0.0005)
+  , probabilityDeath(0.01) {}
 };
 
 struct Result{

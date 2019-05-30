@@ -9,6 +9,7 @@ public:
   int computeVarietyNumber(void);
   void setRandomVariety(void);
   void setVariety(VarietyData t_data);
+  void killVariety(void);
   };
 
 // Set variety with a randomly choosen variety
@@ -20,6 +21,10 @@ void Variety::setRandomVariety(void){
   }
   appearence = uniFLOAT(rand64);
   varietyNumber = computeVarietyNumber();
+}
+
+void Variety::killVariety(void){
+  varietyNumber = -1;
 }
 
 // Set variety to a new one, according to the received value

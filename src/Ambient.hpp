@@ -100,6 +100,8 @@ int Ambient::countSpecie(void){
     int varNumber = grid[i].variety.varietyNumber;
     varietyAvailability[varNumber] = true;
   }
+  if(varietyAvailability.count(-1))
+    return varietyAvailability.size() - 1;
   return varietyAvailability.size();
 }
 

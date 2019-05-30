@@ -123,6 +123,8 @@ namespace worker{
           parameter.betaWT = paramValue;
         case 'R':
           parameter.numberResources = paramValue;
+        case 'd':
+          parameter.probabilityDeath = paramValue;
       }
       clock_t tStart = clock();
       Result result(parameter.maxTime/parameter.timeInterval, round(1 / 0.05), parameter.latticeSize);
@@ -191,6 +193,8 @@ namespace worker{
         paramList = std::vector<float> {0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.6, 0.7, 0.8, 0.9};
       case 'R':
         paramList = std::vector<float> {1, 3, 5, 7, 10};
+      case 'd':
+        paramList = std::vector<float> {0.001, 0.005, 0.01, 0.025, 0.05};
     }
 
     for(auto paramValue : paramList){
@@ -228,7 +232,8 @@ namespace worker{
           parameter.betaWT = paramValue;
         case 'R':
           parameter.numberResources = paramValue;
-
+        case 'd':
+          parameter.probabilityDeath = paramValue;
       }
       clock_t tStart = clock();
       Result result(1, round(1 / 0.05), parameter.latticeSize);

@@ -17,7 +17,7 @@ namespace metrics{
   std::vector<float> computeDUprofile(DomesticUnity* domesticUnity, const int t_numberDomesticUnity, const int t_DUsize){
     std::vector<float> duDistribution(t_DUsize, 0);
     for(int i = 0; i < t_numberDomesticUnity; ++i){
-      int num = domesticUnity[i].varietyOwened.size();
+      int num = domesticUnity[i].numberVarietyOwened();;
       duDistribution[num-1] += 1.0 / t_numberDomesticUnity;
     }
     return duDistribution;
@@ -34,6 +34,8 @@ namespace metrics{
           numberDU[var.number] = 1;
       }
     }
+    if(numberDU.count(-1) > 0)
+      numberDU.erase(-1);
     std::vector<float> varietyProfile(t_numberDomesticUnity, 0);
     for(auto i : numberDU)
       varietyProfile[i.second-1] += 1.0 / numberDU.size();
@@ -57,7 +59,7 @@ namespace metrics{
   float computeVarietyMeanProfile(DomesticUnity* domesticUnity, const int t_numberDomesticUnity, const int t_DUsize){
     std::vector<float> varietyDistribution(t_DUsize, 0);
     for(int i = 0; i < t_numberDomesticUnity; ++i){
-      int num = domesticUnity[i].varietyOwened.size();
+      int num = domesticUnity[i].numberVarietyOwened();
       varietyDistribution[num-1] += 1.0 / t_numberDomesticUnity;
     }
     float mean = 0;
@@ -99,7 +101,7 @@ namespace metrics{
     arquivo << ", KWT = " << parameter.kWT << ", BETAWT = " << parameter.betaWT << ", MSF = " << parameter.mSF ;
     arquivo << ", OUTSIDETRADELIMIT = " << parameter.outsideTradeLimit << ", INSIDETRADELIMIT = " << parameter.insideTradeLimit;
     arquivo << ", ALPHA = " << parameter.alpha << ", NDOMESTICUNITY = " << parameter.numberDomesticUnity;
-    arquivo << ", PROBABILITYNEWVAR = " << parameter.probabilityNewVar;
+    arquivo << ", PROBABILITYNEWVAR = " << parameter.probabilityNewVar << ", PROBABILITYDEATH = " << parameter.probabilityDeath;
     arquivo << ", MAXTIME = " << parameter.maxTime << ", TIMEINTERVAL = " << parameter.timeInterval << ", NRUN = " << parameter.nRun << " ###" << endl << endl;
   }
 
@@ -117,13 +119,19 @@ namespace metrics{
     for(int i = 0; i < t_latticeSize; ++i){
       for(int j = 0; j < t_latticeSize; ++j){
         int var  = grid[i*t_latticeSize+j].variety.varietyNumber;
-        floatToRGB(var, &r, &g, &b);
+        float alpha = 0.1;
+        if(var == -1){
+          r = g = b = 0;
+          alpha = 0.0;
+        }
+        else
+          floatToRGB(var, &r, &g, &b);
         for(int x = 0; x < SIZE; x++)
           for(int y = 0; y < SIZE; y++){
             Image(j*SIZE+y,i*SIZE+x)->Red = r;
             Image(j*SIZE+y,i*SIZE+x)->Green = g;
             Image(j*SIZE+y,i*SIZE+x)->Blue = b;
-            Image(j*SIZE+y,i*SIZE+x)->Alpha = 0.1;
+            Image(j*SIZE+y,i*SIZE+x)->Alpha = alpha;
           }
       }
     }
@@ -137,13 +145,8 @@ namespace metrics{
     float r, g, b, x = (float) n / 3500;
 
     if (x < 0 || x > 1){
-      cout << "ERROR" << endl;
+      cout << "ERROR: INVALID VARIETY NUMBER." << endl;
       exit(-1);
-    }
-    if (n == 0){
-      r = 0;
-      g = 0;
-      b = 0;
     }
     if (x < 0.125){
       r = 0.5 + 4*x;
