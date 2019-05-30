@@ -12,11 +12,7 @@ private:
   };
   DomesticUnity* m_domesticUnity;
   Patch* m_grid;
-  float m_alpha;
-  float m_probabilityNewVar;
-  float m_outsideTradeLimit;
-  float m_insideTradeLimit;
-  float m_probabilityDeath;
+  DUParameter m_duParameter;
   std::vector<int> m_indexLinkedDU;
   std::vector<int> m_indexOwenedPatches;
   int m_worstVarietyIdx;
@@ -37,8 +33,7 @@ public:
   int numberVarietyOwened(void);
   void initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
       std::vector<int> t_indexLinkedDU, std::vector<int> t_indexOwenedPatches,
-      float t_outsideTradeLimit, float t_insideTradeLimit, float t_alpha,
-      float t_probabilityNewVar, float t_probabilityDeath);
+      DUParameter t_duParameter);
   void computeDUpunctuations(void);
   void evaluateProduction(void);
   void consumeVariety(void);
@@ -47,17 +42,16 @@ public:
 // Initialize DomesticUnity parameters (have to test member initialize list)
 void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
     std::vector<int> t_indexLinkedDU, std::vector<int> t_indexOwenedPatches,
-    float t_outsideTradeLimit, float t_insideTradeLimit, float t_alpha,
-    float t_probabilityNewVar, float t_probabilityDeath){
+    DUParameter t_duParameter){
   m_domesticUnity = t_domesticUnity;
   m_grid = t_grid;
   m_indexLinkedDU = t_indexLinkedDU;
   m_indexOwenedPatches = t_indexOwenedPatches;
-  m_outsideTradeLimit = t_outsideTradeLimit;
-  m_insideTradeLimit = t_insideTradeLimit;
-  m_alpha = t_alpha;
-  m_probabilityNewVar = t_probabilityNewVar;
-  m_probabilityDeath = t_probabilityDeath;
+  m_duParameter.outsideTradeLimit = t_duParameter.outsideTradeLimit;
+  m_duParameter.insideTradeLimit = t_duParameter.insideTradeLimit;
+  m_duParameter.alpha = t_duParameter.alpha;
+  m_duParameter.probabilityNewVar = t_duParameter.probabilityNewVar;
+  m_duParameter.probabilityDeath = t_duParameter.probabilityDeath;
   m_DUpreference = gauss(rand64);
   while(!(m_DUpreference > 0 && m_DUpreference < 1))
     m_DUpreference = gauss(rand64);
@@ -130,11 +124,11 @@ void DomesticUnity::fillvarietyOwened(std::map<int,std::vector<float> >* variety
 // Compute the punctuation based on the fitness appearence and alpha
 float DomesticUnity::computePunctuation(float varFitness, float varAppererence){
   float appearencePunc = 1 - std::min(abs(varAppererence - m_DUpreference), 1 - abs(varAppererence - m_DUpreference));
-  return m_alpha * varFitness + (1 - m_alpha) * appearencePunc;
+  return m_duParameter.alpha * varFitness + (1 - m_duParameter.alpha) * appearencePunc;
 }
 
-// Find the DU with best punctuation, if the difference is larger than m_outsideTradeLimit it takes this DU best
-// variety and replace for the DU worst variety. If the difference is larger than m_insideTradeLimit it makes
+// Find the DU with best punctuation, if the difference is larger than m_duParameter.outsideTradeLimit it takes this DU best
+// variety and replace for the DU worst variety. If the difference is larger than m_duParameter.insideTradeLimit it makes
 // the same thing but with best variety of the own DU.
 void DomesticUnity::evaluateProduction(void){
   float bestDUpunctuation = -1;
@@ -149,7 +143,7 @@ void DomesticUnity::evaluateProduction(void){
 
   float extpunctuationDifference = bestDUpunctuation - punctuation;
   float intpunctuationDifference = varietyOwened[m_bestVarietyIdx].punctuation - varietyOwened[m_worstVarietyIdx].punctuation;
-  if(extpunctuationDifference > m_outsideTradeLimit && extpunctuationDifference > 0
+  if(extpunctuationDifference > m_duParameter.outsideTradeLimit && extpunctuationDifference > 0
       && m_domesticUnity[bestDUindex].bestVarietyNumber != varietyOwened[m_worstVarietyIdx].number){
     int varNumber = m_domesticUnity[bestDUindex].bestVarietyNumber;
     changeProduction(varNumber, bestDUindex);
@@ -157,18 +151,18 @@ void DomesticUnity::evaluateProduction(void){
     if(varietyOwened[m_worstVarietyIdx].quantity == 1)
       updateWorstVar(varietyOwened[m_worstVarietyIdx].number);
   }
-  if(intpunctuationDifference > m_insideTradeLimit &&
+  if(intpunctuationDifference > m_duParameter.insideTradeLimit &&
       bestVarietyNumber != varietyOwened[m_worstVarietyIdx].number){
     changeProduction(bestVarietyNumber, -1);
     consumeVariety();
   }
-  if(uniFLOAT(rand64) < m_probabilityNewVar){
+  if(uniFLOAT(rand64) < m_duParameter.probabilityNewVar){
     int newPlace = m_indexOwenedPatches[uniIntPlace(rand64)];
     m_grid[newPlace].setRandomVariety();
     if(findVariety(bestVarietyNumber) == -1) // If bestVariety no longer exists update
       updateBestVar(bestVarietyNumber);
   }
-  if(uniFLOAT(rand64) < m_probabilityDeath){
+  if(uniFLOAT(rand64) < m_duParameter.probabilityDeath){
     int newPlace = m_indexOwenedPatches[uniIntPlace(rand64)];
     m_grid[newPlace].killVariety();
     if(findVariety(bestVarietyNumber) == -1) // If bestVariety no longer exists update

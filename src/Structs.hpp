@@ -68,4 +68,19 @@ struct VarietyData{
   std::vector<float> halfSaturation;
   float appearence;
 };
+
+struct DUParameter{
+  float alpha;
+  float probabilityNewVar;
+  float outsideTradeLimit;
+  float insideTradeLimit;
+  float probabilityDeath;
+  DUParameter(){}
+  DUParameter(Parameter parameter)
+  : alpha(parameter.alpha)
+  , probabilityNewVar(parameter.probabilityNewVar)
+  , outsideTradeLimit(parameter.outsideTradeLimit)
+  , insideTradeLimit(parameter.insideTradeLimit)
+  , probabilityDeath(parameter.probabilityDeath) {}
+};
 #endif

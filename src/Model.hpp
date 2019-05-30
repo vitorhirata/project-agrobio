@@ -40,6 +40,7 @@ void Model::setAmbient(void){
 
 // Create DomesticUnity array, set indexLinkedDUs, indexOwenedsPatches and pass it to initialize each DomesticUnity
 void Model::setDomesticUnity(void){
+  DUParameter duParameter(m_parameter);
   domesticUnity =  new DomesticUnity [m_parameter.numberDomesticUnity];
 
   Network network(m_parameter.networkType, m_parameter.mSF, m_parameter.kWT, m_parameter.betaWT, m_parameter.probabilyConnectionER, m_parameter.numberDomesticUnity);
@@ -56,7 +57,7 @@ void Model::setDomesticUnity(void){
 
   // Pass the parameters to actualy initialize each domesticUnity
   for(int i = 0; i < m_parameter.numberDomesticUnity; ++i){
-    domesticUnity[i].initializeDU(domesticUnity, ambient->grid, network.indexLinkedDUs[i], indexOwenedsPatches[i], m_parameter.outsideTradeLimit, m_parameter.insideTradeLimit, m_parameter.alpha, m_parameter.probabilityNewVar, m_parameter.probabilityDeath);
+    domesticUnity[i].initializeDU(domesticUnity, ambient->grid, network.indexLinkedDUs[i], indexOwenedsPatches[i], duParameter);
   }
 }
 
