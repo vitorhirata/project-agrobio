@@ -108,6 +108,8 @@ Result Model::runPlot(void){
 
   for(int t = 0; t < m_parameter.maxTime; ++t){
     iterate();
+    if (t == 100)
+      ambient->runAdversity();
     if (t % m_parameter.timeInterval == 0){
       result.numberVariety.push_back(ambient->countSpecie());
       metrics::printState(t+1, ambient->grid, m_parameter.latticeSize);

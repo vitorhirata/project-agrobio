@@ -60,11 +60,11 @@ namespace metrics{
     std::vector<float> varietyDistribution(t_DUsize, 0);
     for(int i = 0; i < t_numberDomesticUnity; ++i){
       int num = domesticUnity[i].numberVarietyOwened();
-      varietyDistribution[num-1] += 1.0 / t_numberDomesticUnity;
+      varietyDistribution[num] += 1.0 / t_numberDomesticUnity;
     }
     float mean = 0;
     for(int i = 0; i < t_DUsize; ++i){
-      mean += varietyDistribution[i] * (i + 1);
+      mean += varietyDistribution[i] * i;
     }
     return mean;
   }

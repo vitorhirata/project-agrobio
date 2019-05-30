@@ -13,6 +13,7 @@ public:
   ~Ambient();
   void computeAllFitness(void);
   int countSpecie(void);
+  void runAdversity(void);
 };
 
 // Ambient constructor. initialize parameters, create grid set it's varieties and resources
@@ -105,5 +106,30 @@ int Ambient::countSpecie(void){
   return varietyAvailability.size();
 }
 
+void Ambient::runAdversity(void){
+  std::map<int,int> numberVariety;
+  for(int i = 0; i < m_latticeSize*m_latticeSize; ++i){
+    int varNumber = grid[i].variety.varietyNumber;
+    if(numberVariety.count(varNumber) > 0)
+      ++numberVariety[varNumber];
+    else
+      numberVariety[varNumber] = 1;
+  }
+
+  float majorNumberDU = -10;
+  int majorVariety = -1;
+  for(auto i : numberVariety){
+    if(i.second > majorNumberDU){
+      majorNumberDU = i.second;
+      majorVariety = i.first;
+    }
+  }
+
+  for(int i = 0; i < m_latticeSize*m_latticeSize; ++i){
+    int varNumber = grid[i].variety.varietyNumber;
+    if(varNumber == majorVariety)
+      grid[i].killVariety();
+  }
+}
 
 #endif
