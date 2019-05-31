@@ -31,7 +31,7 @@ namespace worker{
       histogramFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] / parameter.nRun << "; " << result.appearenceFrequency[i] / parameter.nRun << endl;
     for(int i = 0; i < parameter.numberDomesticUnity; ++i){
       duDistFile << i+1 << "; " << result.duDistribution[i] / parameter.nRun << endl;
-      varietyDistFile << (i+1.0) / parameter.numberDomesticUnity << "; " << result.varietyDistribution[i] / parameter.nRun << endl;
+      varietyDistFile << i+1 << "; " << result.varietyDistribution[i] / parameter.nRun << endl;
     }
 
     histogramFile.close();
@@ -67,7 +67,7 @@ namespace worker{
       histogramFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] << "; " << result.appearenceFrequency[i] << endl;
     for(int i = 0; i < parameter.numberDomesticUnity; ++i){
       duDistFile << i+1 << "; " << result.duDistribution[i] << endl;
-      varietyDistFile << (i+1.0) / parameter.numberDomesticUnity << "; " << result.varietyDistribution[i] << endl;
+      varietyDistFile << i+1 << "; " << result.varietyDistribution[i] << endl;
     }
     histogramFile.close();
     duDistFile.close();
@@ -143,7 +143,7 @@ namespace worker{
         histogramFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] / parameter.nRun << "; " << result.appearenceFrequency[i] / parameter.nRun << "; " << paramValue << endl;
       for(int i = 0; i < parameter.numberDomesticUnity; ++i){
         duDistFile << i+1 << "; " << result.duDistribution[i] / parameter.nRun << "; " << paramValue << endl;
-        varietyDistFile << (i+1.0) / parameter.numberDomesticUnity << "; " << result.varietyDistribution[i] / parameter.nRun << "; " << paramValue << endl;
+        varietyDistFile << i+1 << "; " << result.varietyDistribution[i] / parameter.nRun << "; " << paramValue << endl;
       }
 
       cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
@@ -258,7 +258,7 @@ namespace worker{
         histogramFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i] / parameter.nRun << "; " << result.appearenceFrequency[i] / parameter.nRun << "; " << paramValue << endl;
       for(int i = 0; i < parameter.numberDomesticUnity; ++i){
         duDistFile << i+1 << "; " << result.duDistribution[i] / parameter.nRun << "; " << paramValue << endl;
-        varietyDistFile << (i+1.0) / parameter.numberDomesticUnity << "; " << result.varietyDistribution[i] / parameter.nRun << "; " << paramValue << endl;
+        varietyDistFile << i+1 << "; " << result.varietyDistribution[i] / parameter.nRun << "; " << paramValue << endl;
       }
 
       cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;

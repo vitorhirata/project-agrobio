@@ -121,16 +121,16 @@ function plotVarietyDistribution(df, output_file)
     if length(split(output_file, "_")) == 2
       p = plot(df, x=:value, y=:varDist, Geom.bar,
                   Guide.ylabel("Porcentagem de Variedades"),
-                  Guide.xlabel("Porcentagem de Unidades Domésticas"),
-                  Coord.cartesian(xmin=0, xmax=1))
+                  Guide.xlabel("Número de Unidades Domésticas"),
+                  Coord.cartesian(xmin=0, xmax=49))
       draw(SVG(output_file, 15cm, 10cm), p)
       println("Image $(output_file) successfully generated.")
     elseif length(split(output_file, "_")) == 3
       p = plot(df, x=:value, y=:varDist, color=:param, Geom.line,
                    Scale.color_discrete(),Guide.colorkey(title=param),
                   Guide.ylabel("Porcentagem de Variedades"),
-                  Guide.xlabel("Porcentagem de Unidades Domésticas"),
-                  Coord.cartesian(xmin=0, xmax=1))
+                  Guide.xlabel("Número de Unidades Domésticas"),
+                  Coord.cartesian(xmin=0, xmax=49))
       draw(SVG(output_file, 15cm, 10cm), p)
       println("Image $(output_file) successfully generated.")
     end
