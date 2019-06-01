@@ -19,7 +19,7 @@ private:
   int m_bestVarietyIdx;
   float m_DUpreference;
   void updateVarietyOwened(int oldVar, int newVar = -1);
-  void changeProduction(int newVar, int duIdx);
+  void changeProduction(int newVar, int duIdx = -1);
   int findVariety(int var);
   float computePunctuation(float varFitness, float varAppererence);
   void computeBestVar(void);
@@ -141,15 +141,15 @@ void DomesticUnity::evaluateProduction(void){
 
   float extpunctuationDifference = bestDUpunctuation - punctuation;
   float intpunctuationDifference = varietyOwened[m_bestVarietyIdx].punctuation - varietyOwened[m_worstVarietyIdx].punctuation;
-  if(extpunctuationDifference > m_duParameter.outsideTradeLimit && extpunctuationDifference > 0
-      && m_domesticUnity[bestDUindex].bestVarietyNumber != varietyOwened[m_worstVarietyIdx].number){
+  if(extpunctuationDifference > m_duParameter.outsideTradeLimit &&
+      m_domesticUnity[bestDUindex].bestVarietyNumber != varietyOwened[m_worstVarietyIdx].number){
     int varNumber = m_domesticUnity[bestDUindex].bestVarietyNumber;
     changeProduction(varNumber, bestDUindex);
     updateVarietyOwened(varietyOwened[m_worstVarietyIdx].number, varNumber);
   }
   if(intpunctuationDifference > m_duParameter.insideTradeLimit &&
       bestVarietyNumber != varietyOwened[m_worstVarietyIdx].number){
-    changeProduction(bestVarietyNumber, -1);
+    changeProduction(bestVarietyNumber);
     updateVarietyOwened(varietyOwened[m_worstVarietyIdx].number);
   }
   if(uniFLOAT(rand64) < m_duParameter.probabilityNewVar){
@@ -201,19 +201,30 @@ void DomesticUnity::updateVarietyOwened(int oldVar, int newVar){
   --varietyOwened[varIdx].quantity;
   if(varietyOwened[varIdx].quantity == 0){
     varietyOwened.erase(varietyOwened.begin() + varIdx);
-    if(m_worstVarietyIdx == varIdx)
+    if(m_worstVarietyIdx > varIdx)
+      --m_worstVarietyIdx;
+    else if(m_worstVarietyIdx == varIdx)
       computeWorstVar();
-    if(m_bestVarietyIdx == varIdx)
+    if(m_bestVarietyIdx > varIdx)
+      --m_bestVarietyIdx;
+    else if(m_bestVarietyIdx == varIdx)
       computeBestVar();
   }
 
   if(newVar != -1){
-    DUvariety duVariety;
-    duVariety.number = newVar;
-    duVariety.quantity = 1;
-    duVariety.punctuation = 0;
-    duVariety.fitness_punctuation = 0;
-    varietyOwened.push_back(duVariety);
+    uint varIdx = 0;
+    while(varietyOwened[varIdx].number != newVar && varIdx < varietyOwened.size())
+      ++varIdx;
+    if(varIdx == varietyOwened.size()){
+      DUvariety duVariety;
+      duVariety.number = newVar;
+      duVariety.quantity = 1;
+      duVariety.punctuation = 0;
+      duVariety.fitness_punctuation = 0;
+      varietyOwened.push_back(duVariety);
+    } else
+      ++varietyOwened[varIdx].quantity;
+
   }
 }
 

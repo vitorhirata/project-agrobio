@@ -29,11 +29,13 @@ void Patch::initializePatch(std::vector<float> t_resource, VarietyData t_data){
 void Patch::computeLocalFitness(void){
   if(variety.varietyNumber == -1)
     fitness = 0;
-  fitness = m_resource[0] / (m_resource[0] + variety.halfSaturation[0]);
-  for (uint i = 1; i < m_resource.size(); ++i){
-    float temp = m_resource[i] / (m_resource[i] + variety.halfSaturation[i]);
-    if(temp < fitness)
-      fitness = temp;
+  else{
+    fitness = m_resource[0] / (m_resource[0] + variety.halfSaturation[0]);
+    for (uint i = 1; i < m_resource.size(); ++i){
+      float temp = m_resource[i] / (m_resource[i] + variety.halfSaturation[i]);
+      if(temp < fitness)
+        fitness = temp;
+    }
   }
 }
 
@@ -45,6 +47,7 @@ void Patch::setRandomVariety(void){
 // Kill the variety in the patch
 void Patch::killVariety(void){
   variety.killVariety();
+  fitness = 0;
 }
 
 // Substitute actual variety by variety with the received data

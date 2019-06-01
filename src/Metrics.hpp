@@ -37,8 +37,13 @@ namespace metrics{
     if(numberDU.count(-1) > 0)
       numberDU.erase(-1);
     std::vector<float> varietyProfile(t_numberDomesticUnity, 0);
-    for(auto i : numberDU)
+    for(auto i : numberDU){
+      if(i.second < 0 || i.second > t_numberDomesticUnity+1){
+        cout << "ERROR :) ." << i.first << ", " << i.second-1 << endl;
+        exit(-1);
+      }
       varietyProfile[i.second-1] += 1.0 / numberDU.size();
+    }
 
     return varietyProfile;
   }
@@ -82,12 +87,13 @@ namespace metrics{
 
   // Return the frequency of each range of fitness. The range size is 0.05
   std::vector<float> computeFitnessProfile(Patch* t_grid, const int t_latticeSize){
-    std::vector<float> fitnessFrequency(round(1 / 0.05), 0);
+    float step = 0.05;
+    std::vector<float> fitnessFrequency(round(1 / step), 0);
     for(int i = 0; i < t_latticeSize*t_latticeSize; ++i){
-      float position = 0;
+      float position = step;
       while(position < t_grid[i].fitness)
-        position += 0.05;
-      int tick = round((position - 0.05) / 0.05);
+        position += step;
+      int tick = round(position / step);
       fitnessFrequency[tick] += (1.0 / (t_latticeSize * t_latticeSize));
     }
     return fitnessFrequency;
