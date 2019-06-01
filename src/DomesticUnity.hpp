@@ -9,6 +9,7 @@ private:
     int quantity;
     float punctuation;
     float fitness_punctuation;
+    VarietyData varietyData;
   };
   DomesticUnity* m_domesticUnity;
   Patch* m_grid;
@@ -16,19 +17,17 @@ private:
   std::vector<int> m_indexLinkedDU;
   std::vector<int> m_indexOwenedPatches;
   int m_worstVarietyIdx;
-  int m_bestVarietyIdx;
   float m_DUpreference;
-  void changeProduction(int newVar, int duIdx);
+  void changeProduction(VarietyData varietyData);
   int findVariety(int var);
   float computePunctuation(float varFitness, float varAppererence);
-  void updateBestVar(int oldBestVar);
   void updateWorstVar(int oldWorstVar);
   void fillvarietyOwened(std::map<int,std::vector<float> >* varietyData);
 public:
   std::vector<DUvariety> varietyOwened;
   float punctuation;
   float fitness_punctuation;
-  int bestVarietyNumber;
+  int bestVarietyIdx;
   int numberVarietyOwened(void);
   void initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
       std::vector<int> t_indexLinkedDU, std::vector<int> t_indexOwenedPatches,
@@ -58,7 +57,7 @@ void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
 }
 
 // Iterate over the Oweneds Patches, colect varieties and set varietyOwened, m_worstVarietyIdx,
-// bestVarietyNumber and m_bestVarietyIdx
+// and bestVarietyIdx
 void DomesticUnity::computeDUpunctuations(void){
   // Map the variety in a vector, where the 0th element is quantity, the 1st fitness and the 2nd appearence
   std::map<int,std::vector<float> > varietyData;
@@ -67,8 +66,10 @@ void DomesticUnity::computeDUpunctuations(void){
   for(uint i = 0; i < m_indexOwenedPatches.size(); ++i){
     int patchNumber = m_indexOwenedPatches[i];
     int varNumber = m_grid[patchNumber].variety.varietyNumber;
-    if(varietyData.count(varNumber) == 0)
-      varietyData[varNumber] = std::vector<float>(3,0);
+    if(varietyData.count(varNumber) == 0){
+      varietyData[varNumber] = std::vector<float>(4,0);
+      varietyData[varNumber][3] = patchNumber;
+    }
     ++varietyData[varNumber][0];
     varietyData[varNumber][1] += m_grid[patchNumber].fitness;
     varietyData[varNumber][2] += m_grid[patchNumber].variety.appearence;
@@ -97,6 +98,7 @@ void DomesticUnity::fillvarietyOwened(std::map<int,std::vector<float> >* variety
     DUvariety newVar;
     newVar.number = itr->first;
     newVar.quantity = itr->second[0];
+    newVar.varietyData = m_grid[(int) itr->second[3]].giveVarietyData();
     if(newVar.number == -1){ // if there is no variety punctuation is zero
       newVar.punctuation = 0;
       newVar.fitness_punctuation = 0;
@@ -108,8 +110,7 @@ void DomesticUnity::fillvarietyOwened(std::map<int,std::vector<float> >* variety
     varietyOwened.push_back(newVar);
     if(newVar.punctuation > bestVarPunctuation){
       bestVarPunctuation = newVar.punctuation;
-      bestVarietyNumber = newVar.number;
-      m_bestVarietyIdx = varietyOwened.size() - 1;
+      bestVarietyIdx = varietyOwened.size() - 1;
     }
     if(newVar.punctuation < worstVarPunctuation){
       worstVarPunctuation = newVar.punctuation;
@@ -139,46 +140,37 @@ void DomesticUnity::evaluateProduction(void){
   }
 
   float extpunctuationDifference = bestDUpunctuation - punctuation;
-  float intpunctuationDifference = varietyOwened[m_bestVarietyIdx].punctuation - varietyOwened[m_worstVarietyIdx].punctuation;
+  float intpunctuationDifference = varietyOwened[bestVarietyIdx].punctuation - varietyOwened[m_worstVarietyIdx].punctuation;
+  DUvariety duVarietyExt= m_domesticUnity[bestDUindex].varietyOwened[bestVarietyIdx];
   if(extpunctuationDifference > m_duParameter.outsideTradeLimit && extpunctuationDifference > 0
-      && m_domesticUnity[bestDUindex].bestVarietyNumber != varietyOwened[m_worstVarietyIdx].number){
-    int varNumber = m_domesticUnity[bestDUindex].bestVarietyNumber;
-    changeProduction(varNumber, bestDUindex);
+      && duVarietyExt.number != varietyOwened[m_worstVarietyIdx].number){
+    changeProduction(duVarietyExt.varietyData);
     if(varietyOwened[m_worstVarietyIdx].quantity == 1)
       updateWorstVar(varietyOwened[m_worstVarietyIdx].number);
   }
   if(intpunctuationDifference > m_duParameter.insideTradeLimit &&
-      bestVarietyNumber != varietyOwened[m_worstVarietyIdx].number){
-    changeProduction(bestVarietyNumber, -1);
+      varietyOwened[bestVarietyIdx].number != varietyOwened[m_worstVarietyIdx].number){
+    changeProduction(varietyOwened[bestVarietyIdx].varietyData);
   }
   if(uniFLOAT(rand64) < m_duParameter.probabilityNewVar){
     int newPlace = m_indexOwenedPatches[uniIntPlace(rand64)];
     m_grid[newPlace].setRandomVariety();
-    if(findVariety(bestVarietyNumber) == -1) // If bestVariety no longer exists update
-      updateBestVar(bestVarietyNumber);
   }
   if(uniFLOAT(rand64) < m_duParameter.probabilityDeath){
     int newPlace = m_indexOwenedPatches[uniIntPlace(rand64)];
     m_grid[newPlace].killVariety();
-    if(findVariety(bestVarietyNumber) == -1) // If bestVariety no longer exists update
-      updateBestVar(bestVarietyNumber);
   }
 }
 
-// Takes one place (between the owened patches) where the worst variety exists and replace it with var
-void DomesticUnity::changeProduction(int newVar, int duIdx){
+// Takes one place (between the owened patches) where the worst variety exists
+// and replace it with varietyData
+void DomesticUnity::changeProduction(VarietyData varietyData){
   int worstVarietyPlace = findVariety(varietyOwened[m_worstVarietyIdx].number);
-  int bestVarietyPlace;
-  if(duIdx == -1)
-    bestVarietyPlace = findVariety(newVar);
-  else
-    bestVarietyPlace = m_domesticUnity[duIdx].findVariety(newVar);
-  if(worstVarietyPlace == -1 || bestVarietyPlace == -1){
-    cout << "ERROR in DomesticUnity::findVariety. Variety not found, best=" << newVar << "bestPlace=" << bestVarietyPlace << ", worst=" << varietyOwened[m_worstVarietyIdx].number << "worstPlace" << worstVarietyPlace << ". DUidx=" << duIdx << endl;
+  if(worstVarietyPlace == -1){
+    cout << "ERROR in DomesticUnity::findVariety. Variety to be removed not found, worst=" << varietyOwened[m_worstVarietyIdx].number << " worstPlace" << worstVarietyPlace << endl;
     exit(-1);
   }
-  VarietyData data = m_grid[bestVarietyPlace].giveVarietyData();
-  m_grid[worstVarietyPlace].setVariety(data);
+  m_grid[worstVarietyPlace].setVariety(varietyData);
 }
 
 // Find one place (between the owened patches) where the given variety exists. If it does not find return -1
@@ -187,18 +179,6 @@ int DomesticUnity::findVariety(int var){
     if(m_grid[i].variety.varietyNumber == var)
       return i;
   return -1;
-}
-
-// Receive the actual bestVariety and update the best variety, so that it is not the received value
-void DomesticUnity::updateBestVar(int oldBestVar){
-  float bestVarPunctuation = -1;
-  for(uint i = 0; i < varietyOwened.size(); ++i){
-    if(varietyOwened[i].punctuation > bestVarPunctuation && varietyOwened[i].number != oldBestVar && findVariety(varietyOwened[i].number) != -1){
-      bestVarPunctuation = varietyOwened[i].punctuation;
-      bestVarietyNumber = varietyOwened[i].number;
-      m_bestVarietyIdx = i;
-    }
-  }
 }
 
 // Receive the actual worstVariety and update the worst variety, so that it is not the received value
