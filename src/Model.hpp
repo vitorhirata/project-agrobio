@@ -140,7 +140,7 @@ void Model::iterate(void){
     DU_list[i] = i;
   std::random_shuffle(DU_list.begin(),DU_list.end());
   for(auto i : DU_list)
-    domesticUnity[i].evaluateProduction();
+    domesticUnity[i].iterateDU();
 }
 
 #endif
