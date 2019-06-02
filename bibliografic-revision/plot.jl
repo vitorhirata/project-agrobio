@@ -3,6 +3,7 @@ using DataFrames
 using Colors
 using CSV
 using StatsBase
+using GLM
 import Cairo, Fontconfig
 
 function plotAll()
@@ -28,15 +29,13 @@ function plotGeraneralData(df)
   dfClean = dropmissing(dfClean)
 
   dfMandioca = dfClean[dfClean[:Especie] .== "Mandioca", :]
-  plotComunidadexDU(dfMandioca, "mandioca", [23*1.3cm, 10*1.3cm])
+  plotComunidadexDU(dfMandioca, "mandioca", [23*1.3cm, 10*1.3cm], true)
 
   dfMilho = dfClean[dfClean[:Especie] .== "Milho", :]
-  plotComunidadexDU(dfMilho, "milho", [19*1.3cm, 10*1.3cm])
+  plotComunidadexDU(dfMilho, "milho", [19*1.3cm, 10*1.3cm], true)
 
   dfBatata = dfClean[dfClean[:Especie] .== "Batata", :]
-  plotComunidadexDU(dfBatata, "batata", [17*1.3cm, 10*1.3cm])
-
-
+  plotComunidadexDU(dfBatata, "batata", [17*1.3cm, 10*1.3cm], false)
 
   img = PNG("plot/todos.png", 17*1.3cm, 10*1.3cm)
   p=plot(dfClean, x=:NmedioUD, y=:Ncomunidade, color=:Especie, Geom.point,
@@ -47,12 +46,27 @@ function plotGeraneralData(df)
 
 end
 
-function plotComunidadexDU(df, str, size)
+function plotComunidadexDU(df, str, size, runRegression)
   img = PNG("plot/$(str).png", size[1], size[2])
-  p=plot(df, x=:NmedioUD, y=:Ncomunidade, color=:Fonte, Geom.point,
-    Guide.xlabel("N Var Médio por UD"), Guide.ylabel("N Var Comunidade"),
-    Guide.colorkey(title="Fonte"), Guide.title("Agrobiodiversidade de $(str)"),
-    Theme(plot_padding=[30pt, 60pt, 10pt, 10pt]));
+  if runRegression
+    ols = lm(@formula(Ncomunidade ~ 0 + NmedioUD), df)
+    f(x) = coef(ols)[1]*x
+    p=plot(layer(df, x=:NmedioUD, y=:Ncomunidade, color=:Fonte, Geom.point),
+      layer(f, 0, 1.1*maximum(df[:NmedioUD])),
+      Guide.xlabel("N Var Médio por UD"),
+      Guide.ylabel("N Var Comunidade"),
+      Guide.colorkey(title="Fonte"),
+      Guide.title("Agrobiodiversidade de $(str)"),
+      Theme(plot_padding=[30pt, 60pt, 10pt, 10pt]));
+      println("Printing fit result for $(str)")
+      println(coeftable(ols))
+  else
+    p=plot(df, x=:NmedioUD, y=:Ncomunidade, color=:Fonte, Geom.point,
+      Guide.xlabel("N Var Médio por UD"), Guide.ylabel("N Var Comunidade"),
+      Guide.colorkey(title="Fonte"),
+      Guide.title("Agrobiodiversidade de $(str)"),
+      Theme(plot_padding=[30pt, 60pt, 10pt, 10pt]));
+  end
   draw(img, p)
 end
 
