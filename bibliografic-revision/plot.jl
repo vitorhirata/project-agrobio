@@ -53,7 +53,7 @@ function plotGeraneralData(df)
         Guide.ylabel("N Var Comunidade"),
         Guide.colorkey(title="Especie"),
         Guide.title("Agrobiodiversidade"),
-        Theme(point_size=2.5pt));
+        Theme(point_size=0.6mm, highlight_width=0.0mm));
   draw(img, p)
 
 end
@@ -69,7 +69,8 @@ function plotComunidadexDU(df, str, size, runRegression)
       Guide.ylabel("N Var Comunidade"),
       Guide.colorkey(title="Fonte"),
       Guide.title("Agrobiodiversidade de $(str)"),
-      Theme(plot_padding=[30pt, 60pt, 10pt, 10pt]));
+      Theme(plot_padding=[30pt, 60pt, 10pt, 10pt],
+        point_size=0.6mm, highlight_width=0.0mm));
       println("Printing fit result for $(str)")
       println(coeftable(ols))
   else
@@ -77,7 +78,8 @@ function plotComunidadexDU(df, str, size, runRegression)
       Guide.xlabel("N Var Médio por UD"), Guide.ylabel("N Var Comunidade"),
       Guide.colorkey(title="Fonte"),
       Guide.title("Agrobiodiversidade de $(str)"),
-      Theme(plot_padding=[30pt, 60pt, 10pt, 10pt]));
+      Theme(plot_padding=[30pt, 60pt, 10pt, 10pt],
+        point_size=0.6mm, highlight_width=0.0mm));
   end
   draw(img, p)
 end
