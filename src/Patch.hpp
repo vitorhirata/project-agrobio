@@ -45,6 +45,7 @@ void Patch::setRandomVariety(void){
 // Kill the variety in the patch
 void Patch::killVariety(void){
   variety.killVariety();
+  fitness = 0;
 }
 
 // Substitute actual variety by variety with the received data
