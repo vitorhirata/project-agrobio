@@ -37,11 +37,23 @@ function plotGeraneralData(df)
   dfBatata = dfClean[dfClean[:Especie] .== "Batata", :]
   plotComunidadexDU(dfBatata, "batata", [17*1.3cm, 10*1.3cm], false)
 
+  ols1 = lm(@formula(Ncomunidade ~ 0 + NmedioUD),
+             dfClean[dfClean[:Especie] .== "Mandioca", :])
+  ols2 = lm(@formula(Ncomunidade ~ 0 + NmedioUD),
+             dfClean[dfClean[:Especie] .== "Milho", :])
+  f1(x) = coef(ols1)[1]*x
+  f2(x) = coef(ols2)[1]*x
   img = PNG("plot/todos.png", 17*1.3cm, 10*1.3cm)
-  p=plot(dfClean, x=:NmedioUD, y=:Ncomunidade, color=:Especie, Geom.point,
-    Guide.xlabel("N Var Médio por UD"), Guide.ylabel("N Var Comunidade"),
-    Guide.colorkey(title="Especie"), Guide.title("Agrobiodiversidade"),
-    Theme(point_size=2.5pt));
+  p=plot(layer(dfClean, x=:NmedioUD, y=:Ncomunidade,
+                  color=:Especie, Geom.point),
+        layer(f1, 0, maximum(dfClean[:NmedioUD])),
+        layer(f2, 0, maximum(dfClean[:NmedioUD]),
+                  Theme(default_color="hotpink1")),
+        Guide.xlabel("N Var Médio por UD"),
+        Guide.ylabel("N Var Comunidade"),
+        Guide.colorkey(title="Especie"),
+        Guide.title("Agrobiodiversidade"),
+        Theme(point_size=2.5pt));
   draw(img, p)
 
 end
