@@ -41,12 +41,7 @@ function plotHandler(input_file)
 end
 
 function plotStandard(df, output_file)
-    p = plot(df, x=:meanDU, y=:nVar, Geom.line,
-                 Guide.ylabel("Numero de Variedades"),
-                 Guide.xlabel("Numero Medio de Variedades por UD"))
-    draw(SVG(output_file, 15cm, 10cm), p)
-    println("Image $(output_file) successfully generated.")
-    p2 =plot(layer(df, x=:time, y=:nVar, Geom.line,
+    p =plot(layer(df, x=:time, y=:nVar, Geom.line,
                        Theme(default_color=colorant"green")),
             layer(df, x=:time, y=:meanDU, Geom.line,
                       Theme(default_color=colorant"red")),
@@ -54,8 +49,13 @@ function plotStandard(df, output_file)
                                  "Número Médio de Variedades por UD"],
                                  ["green", "red"]),
                       Guide.ylabel(""), Guide.xlabel("Tempo"))
+    draw(SVG(output_file, 20cm, 10cm), p)
+    println("Image $(output_file) successfully generated.")
+    p2 = plot(df, x=:meanDU, y=:nVar, Geom.line,
+                 Guide.ylabel("Numero de Variedades"),
+                 Guide.xlabel("Numero Medio de Variedades por UD"))
     output_file2 = output_file[1:end-4] * "2.svg"
-    draw(SVG(output_file2, 20cm, 10cm), p2)
+    draw(SVG(output_file2, 15cm, 10cm), p2)
     println("Image $(output_file2) successfully generated.")
 end
 
@@ -77,25 +77,18 @@ end
 
 function plotVarParam(df, output_file)
     param = string(output_file[end-4])
-    p = plot(df, x=:meanDU, y=:nVar, color=:param, Geom.line,
-                 Scale.color_discrete(), Guide.colorkey(title=param),
-                 Guide.xlabel("Numero Medio de Variedades por UD"),
-                 Guide.ylabel("Numero de Variedades"))
-    draw(SVG(output_file, 15cm, 10cm), p)
-    println("Image $(output_file) successfully generated.")
-    p2 = plot(df, x=:time, y=:nVar, color=:param, Geom.line,
+    p = plot(df, x=:time, y=:nVar, color=:param, Geom.line,
                   Scale.color_discrete(), Guide.colorkey(title=param),
                   Guide.xlabel("Tempo"), Guide.ylabel("Numero de Variedades"))
-    output_file2 = output_file[1:end-4] * "2.svg"
-    draw(SVG(output_file2, 15cm, 10cm), p2)
-    println("Image $(output_file2) successfully generated.")
-    p3 = plot(df, x=:time, y=:meanDU, color=:param, Geom.line,
+    draw(SVG(output_file, 15cm, 10cm), p)
+    println("Image $(output_file) successfully generated.")
+    p2 = plot(df, x=:time, y=:meanDU, color=:param, Geom.line,
                   Scale.color_discrete(), Guide.colorkey(title=param),
                   Guide.xlabel("Time"),
                   Guide.ylabel("Numero Medio de Variedades por UD"))
-    output_file3 = output_file[1:end-4] * "3.svg"
-    draw(SVG(output_file3, 15cm, 10cm), p3)
-    println("Image $(output_file3) successfully generated.")
+    output_file2 = output_file[1:end-4] * "2.svg"
+    draw(SVG(output_file2, 15cm, 10cm), p2)
+    println("Image $(output_file2) successfully generated.")
 end
 
 function plotduDistribution(df, output_file)
