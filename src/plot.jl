@@ -89,6 +89,16 @@ function plotVarParam(df, output_file)
     output_file2 = output_file[1:end-4] * "2.svg"
     draw(SVG(output_file2, 15cm, 10cm), p2)
     println("Image $(output_file2) successfully generated.")
+    if param == "m"
+      maxTime = maximum(df[:time])
+      df2 = df[df[:time] .== maxTime, :]
+      p3 = plot(df2, x=:meanDU, y=:nVar, Geom.point,
+                   Guide.xlabel("Numero Medio de Variedades por UD"),
+                   Guide.ylabel("Numero de Variedades"))
+      output_file3 = output_file[1:end-4] * "3.svg"
+      draw(SVG(output_file3, 15cm, 10cm), p3)
+      println("Image $(output_file3) successfully generated.")
+    end
 end
 
 function plotduDistribution(df, output_file)
