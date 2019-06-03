@@ -35,11 +35,11 @@ struct Parameter{
   , kWT(4)
   , betaWT(0.2)
   , probabilyConnectionER(0.15)
-  , outsideTradeLimit(0.04)
-  , insideTradeLimit(0.02)
+  , outsideTradeLimit(0.02)
+  , insideTradeLimit(0.05)
   , alpha(0.5)
-  , probabilityNewVar(0.0005)
-  , probabilityDeath(0.01) {}
+  , probabilityNewVar(0.005)
+  , probabilityDeath(0.07) {}
 };
 
 struct Result{
