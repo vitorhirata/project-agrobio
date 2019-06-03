@@ -4,6 +4,8 @@ using Colors
 using CSV
 using StatsBase
 using GLM
+using Bootstrap
+using Statistics
 import Cairo, Fontconfig
 
 function plotAll()
@@ -12,6 +14,7 @@ function plotAll()
   plotAllHistogram(df)
   plotAllBoxplot(df2, df3)
   plotGeneral(df)
+  plotBootstrap(df)
 end
 
 function loadData()
@@ -168,4 +171,37 @@ function plotBoxplot(df1, str, df2=nothing, size=[20*1.3cm,14*1.3cm])
       Theme(plot_padding=[20pt, 40pt, 10pt, 10pt]))
     draw(img, p)
   end
+end
+
+function plotBootstrap(df)
+  dfMandioca = df[df[:Especie] .== "Mandioca", :]
+  dfMandiocaDU = dfMandioca[[:NmedioUD]]
+  dfMandiocaDU = dropmissing(dfMandiocaDU)
+  dfMandiocaCom = dfMandioca[[:Ncomunidade]]
+  dfMandiocaCom = dropmissing(dfMandiocaCom)
+  n_boot = 10000
+  bsMandiocaDU = bootstrap(mean, dfMandiocaDU[:NmedioUD], BasicSampling(n_boot))
+  bsMandiocaCom = bootstrap(mean, dfMandiocaCom[:Ncomunidade], BasicSampling(n_boot))
+
+  img = PNG("plot/mandioca_bs_du.png", 20*1.3cm,14*1.3cm)
+  p = plot(x=bsMandiocaDU.t1[1], Geom.histogram(density=true, bincount=30))
+  draw(img, p)
+  img2 = PNG("plot/mandioca_bs_com.png", 20*1.3cm,14*1.3cm)
+  p2 = plot(x=bsMandiocaCom.t1[1], Geom.histogram(density=true, bincount=30))
+  draw(img2, p2)
+
+  dfMilho = df[df[:Especie] .== "Milho", :]
+  dfMilhoDU = dfMilho[[:NmedioUD]]
+  dfMilhoDU = dropmissing(dfMilhoDU)
+  dfMilhoCom = dfMilho[[:Ncomunidade]]
+  dfMilhoCom = dropmissing(dfMilhoCom)
+  n_boot = 10000
+  bsMilhoDU = bootstrap(mean, dfMilhoDU[:NmedioUD], BasicSampling(n_boot))
+  bsMilhoCom = bootstrap(mean, dfMilhoCom[:Ncomunidade], BasicSampling(n_boot))
+  img3 = PNG("plot/milho_bs_du.png", 20*1.3cm,14*1.3cm)
+  p3 = plot(x=bsMilhoDU.t1[1], Geom.histogram(density=true, bincount=30))
+  draw(img3, p3)
+  img4 = PNG("plot/milho_bs_com.png", 20*1.3cm,14*1.3cm)
+  p4 = plot(x=bsMilhoCom.t1[1], Geom.histogram(density=true, bincount=30))
+  draw(img4, p4)
 end
