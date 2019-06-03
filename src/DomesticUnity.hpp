@@ -151,7 +151,8 @@ void DomesticUnity::iterateDU(void){
   float extpunctuationDifference = bestDUpunctuation - punctuation;
   float intpunctuationDifference = varietyOwened[bestVarietyIdx].punctuation
     - varietyOwened[m_worstVarietyIdx].punctuation;
-  int extBestVarietyIdx = m_domesticUnity[bestDUindex].bestVarietyIdx;
+  int extBestVarietyIdx = floor(uniFLOAT(rand64) *
+    m_domesticUnity[bestDUindex].varietyOwened.size());
   DUvariety duVarietyExt =
     m_domesticUnity[bestDUindex].varietyOwened[extBestVarietyIdx];
   if(extpunctuationDifference > m_duParameter.outsideTradeLimit
