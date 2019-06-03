@@ -15,9 +15,27 @@ function argumentParse(input_file)
   return mode, output_file
 end
 
+function loadDf(input_file)
+  try
+    df = CSV.File(input_file, delim = "; ", header=4) |> DataFrame
+    if size(df)[1] == 0
+      println("ERROR: $(input_file) contain an empty file")
+      return -1
+    else
+      return df
+    end
+  catch
+    println("ERROR: input_file '$(input_file)' does not exist")
+    return -1
+  end
+end
+
 function plotHandler(input_file)
   mode, output_file = argumentParse(input_file)
-  df = CSV.File(input_file, delim = "; ", header=4) |> DataFrame
+  df = loadDf(input_file)
+  if df == -1
+    return
+  end
 
   if mode == "standard"
     plotStandard(df, output_file)
