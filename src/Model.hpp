@@ -35,7 +35,9 @@ Model::~Model(){
 
 // Create ambient, passing the parameters using inside it
 void Model::setAmbient(void){
-  ambient = new Ambient(m_parameter.latticeSize, m_parameter.numberHabitat, m_parameter.numberResources, m_parameter.numberInitialVariety);
+  ambient = new Ambient(m_parameter.latticeSize, m_parameter.numberHabitat,
+      m_parameter.numberResources, m_parameter.numberInitialVariety,
+      m_parameter.numberInitialVarietyDU);
 }
 
 // Create DomesticUnity array, set indexLinkedDUs, indexOwenedsPatches and pass it to initialize each DomesticUnity
