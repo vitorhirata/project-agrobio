@@ -48,6 +48,15 @@ void Network::createRandomNetwork(){
         indexLinkedDUs[j].push_back(i);
       }
   }
+  for(int i = 0; i < m_numberDomesticUnity; ++i){
+    if(indexLinkedDUs[i].empty()){
+      int j = floor(uniFLOAT(rand64) * m_numberDomesticUnity);
+      while(i == j)
+        j = floor(uniFLOAT(rand64) * m_numberDomesticUnity);
+      indexLinkedDUs[i].push_back(j);
+      indexLinkedDUs[j].push_back(i);
+    }
+  }
 }
 
 // Create indexLinkedDUs based on a small-world network (Watts–Strogatz Model)
