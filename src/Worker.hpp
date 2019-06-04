@@ -108,6 +108,14 @@ namespace worker{
           parameter.numberHabitat = paramValue;
           break;
         case 'v':
+          if(paramValue > parameter.numberInitialVariety){
+            cout << "ERROR: the number of initial variety per DU should be ";
+            cout << "smaller than total number of initial variety." << endl;
+            exit(-1);
+          }
+          parameter.numberInitialVarietyDU = paramValue;
+          break;
+        case 'V':
           parameter.numberInitialVariety = paramValue;
           break;
         case 'a':
@@ -180,7 +188,10 @@ namespace worker{
         paramList = std::vector<float> {1, 2, 4, 8, 15, 25, 35, 49, 1000, 2401};
         break;
       case 'v':
-        paramList = std::vector<float> {5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100};
+        paramList = std::vector<float> {1, 2, 3, 4, 5, 10, 15};
+        break;
+      case 'V':
+        paramList = std::vector<float> {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100};
         break;
       case 'a':
         paramList = std::vector<float> {0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0};
@@ -221,6 +232,14 @@ namespace worker{
           parameter.numberHabitat = paramValue;
           break;
         case 'v':
+          if(paramValue > parameter.numberInitialVariety){
+            cout << "ERROR: the number of initial variety per DU should be ";
+            cout << "smaller than total number of initial variety." << endl;
+            exit(-1);
+          }
+          parameter.numberInitialVarietyDU = paramValue;
+          break;
+        case 'V':
           parameter.numberInitialVariety = paramValue;
           break;
         case 'a':
