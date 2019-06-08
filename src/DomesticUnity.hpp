@@ -18,7 +18,7 @@ private:
   std::vector<int> m_indexOwenedPatches;
   int m_worstVarietyIdx;
   float m_DUpreference;
-  void changeProduction(VarietyData varietyData);
+  void changeProduction(VarietyData varietyData, int varNumber = -10);
   int findVariety(int var);
   float computePunctuation(float varFitness, float varAppererence);
   void updateWorstVar(int oldWorstVar);
@@ -155,16 +155,16 @@ void DomesticUnity::iterateDU(void){
     m_domesticUnity[bestDUindex].varietyOwened.size());
   DUvariety duVarietyExt =
     m_domesticUnity[bestDUindex].varietyOwened[extBestVarietyIdx];
-  if(extpunctuationDifference > m_duParameter.outsideTradeLimit
-      && duVarietyExt.number != varietyOwened[m_worstVarietyIdx].number){
+  if(extpunctuationDifference > m_duParameter.outsideTradeLimit){
     changeProduction(duVarietyExt.varietyData);
-    if(varietyOwened[m_worstVarietyIdx].quantity == 1)
+    if(findVariety(varietyOwened[m_worstVarietyIdx].number) == -1)
       updateWorstVar(varietyOwened[m_worstVarietyIdx].number);
   }
   if(intpunctuationDifference > m_duParameter.insideTradeLimit &&
       varietyOwened[bestVarietyIdx].number !=
       varietyOwened[m_worstVarietyIdx].number){
-    changeProduction(varietyOwened[bestVarietyIdx].varietyData);
+    changeProduction(varietyOwened[bestVarietyIdx].varietyData,
+       varietyOwened[m_worstVarietyIdx].number);
   }
   if(uniFLOAT(rand64) < m_duParameter.probabilityNewVar){
     int newPlace = m_indexOwenedPatches[uniIntPlace(rand64)];
@@ -176,15 +176,20 @@ void DomesticUnity::iterateDU(void){
   }
 }
 
-// Takes one place (between the owened patches) where the worst variety exists
-// and replace it with varietyData
-void DomesticUnity::changeProduction(VarietyData varietyData){
-  int worstVarietyPlace = findVariety(varietyOwened[m_worstVarietyIdx].number);
-  if(worstVarietyPlace == -1){
-    cout << "ERROR: VARIETY TO BE REMOVED NOT FOUND." << endl;
-    exit(-1);
+// If varNumber is specified remove one of it and replace it with varietyData
+// If it is not remove one random variety and replace it with varietyData
+void DomesticUnity::changeProduction(VarietyData varietyData, int varNumber){
+  int varietyRemovePlace;
+  if(varNumber == -10)
+    varietyRemovePlace = m_indexOwenedPatches[uniIntPlace(rand64)];
+  else{
+    varietyRemovePlace = findVariety(varNumber);
+    if(varietyRemovePlace == -1){
+      cout << "ERROR: VARIETY TO BE REMOVED NOT FOUND." << endl;
+      exit(-1);
+    }
   }
-  m_grid[worstVarietyPlace].setVariety(varietyData);
+  m_grid[varietyRemovePlace].setVariety(varietyData);
 }
 
 // Find one place (between the owened patches) where the given variety exists.
