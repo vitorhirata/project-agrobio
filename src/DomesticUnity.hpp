@@ -17,6 +17,7 @@ private:
   float computePunctuation(float varFitness, float varAppererence);
   void updateWorstVar(int oldWorstVar);
   void fillvarietyOwened(std::map<int,std::vector<float> >* varietyData);
+  int computeBestDU(float * bestDUpunctuation);
 public:
   std::vector<DUvariety> varietyOwened;
   float punctuation;
@@ -140,24 +141,17 @@ float DomesticUnity::computePunctuation(float varFitness,
 // than m_duParameter.insideTradeLimit it makes
 // the same thing but with best variety of the own DU.
 void DomesticUnity::iterateDU(void){
-  float bestDUpunctuation = -1;
-  int bestDUindex;
-
-  for(uint i = 0; i < m_indexLinkedDU.size(); ++i){
-    if(m_domesticUnity[m_indexLinkedDU[i]].punctuation > bestDUpunctuation){
-      bestDUindex = m_indexLinkedDU[i];
-      bestDUpunctuation = m_domesticUnity[bestDUindex].punctuation;
-    }
-  }
+  float bestDUpunctuation;
+  int bestDUindex = computeBestDU(&bestDUpunctuation);
 
   float extpunctuationDifference = bestDUpunctuation - punctuation;
   float intpunctuationDifference = varietyOwened[bestVarietyIdx].punctuation
     - varietyOwened[m_worstVarietyIdx].punctuation;
-  int extBestVarietyIdx = floor(uniFLOAT(rand64) *
-    m_domesticUnity[bestDUindex].varietyOwened.size());
-  DUvariety duVarietyExt =
-    m_domesticUnity[bestDUindex].varietyOwened[extBestVarietyIdx];
   if(extpunctuationDifference > m_duParameter.outsideTradeLimit){
+    int extBestVarietyIdx = floor(uniFLOAT(rand64) *
+      m_domesticUnity[bestDUindex].varietyOwened.size());
+    DUvariety duVarietyExt =
+      m_domesticUnity[bestDUindex].varietyOwened[extBestVarietyIdx];
     changeProduction(duVarietyExt.varietyData);
     if(findVariety(varietyOwened[m_worstVarietyIdx].number) == -1)
       updateWorstVar(varietyOwened[m_worstVarietyIdx].number);
@@ -192,6 +186,20 @@ void DomesticUnity::changeProduction(VarietyData varietyData, int varNumber){
     }
   }
   m_grid[varietyRemovePlace].setVariety(varietyData);
+}
+
+// Calculate the idx of the connected domestic unity that has better
+// punctuation, also calculates bestDUpunctuation
+int DomesticUnity::computeBestDU(float * bestDUpunctuation){
+  int bestDUindex = 0;
+  *bestDUpunctuation = -1;
+  for(uint i = 0; i < m_indexLinkedDU.size(); ++i){
+    if(m_domesticUnity[m_indexLinkedDU[i]].punctuation > *bestDUpunctuation){
+      bestDUindex = m_indexLinkedDU[i];
+      *bestDUpunctuation = m_domesticUnity[bestDUindex].punctuation;
+    }
+  }
+  return bestDUindex;
 }
 
 // Find one place (between the owened patches) where the given variety exists.
