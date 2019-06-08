@@ -141,7 +141,7 @@ void DomesticUnity::iterateDU(void){
     changeProduction(varietyOwened[majorDeltaIdx].varietyData,
         varietyOwened[minorDeltaIdx].number);
   }
-  if(numberVarietyOwened() != varietyOwened.size())
+  if(findVariety(-1) >= 0)
     changeProduction(varietyOwened[majorDeltaIdx].varietyData,-1);
   if(extpunctuationDifference > m_duParameter.outsideTradeLimit){
     int extBestVarietyIdx = floor(uniFLOAT(rand64) *
