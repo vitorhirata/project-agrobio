@@ -8,21 +8,19 @@ private:
   DomesticUnity* m_domesticUnity;
   Patch* m_grid;
   DUParameter m_duParameter;
+  float m_DUpreference;
   std::vector<int> m_indexLinkedDU;
   std::vector<int> m_indexOwenedPatches;
-  int m_worstVarietyIdx;
-  float m_DUpreference;
   void changeProduction(VarietyData varietyData, int varNumber = -10);
   int findVariety(int var);
   float computePunctuation(float varFitness, float varAppererence);
-  void updateWorstVar(int oldWorstVar);
   void fillvarietyOwened(std::map<int,std::vector<float> >* varietyData);
   int computeBestDU(float * bestDUpunctuation);
+  float computeDeltaSum(int * minorDeltaIdx, int * majorDeltaIdx);
 public:
-  std::vector<DUvariety> varietyOwened;
   float punctuation;
   float fitness_punctuation;
-  int bestVarietyIdx;
+  std::vector<DUvariety> varietyOwened;
   int numberVarietyOwened(void);
   void initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
       std::vector<int> t_indexLinkedDU, std::vector<int> t_indexOwenedPatches,
@@ -60,8 +58,7 @@ void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
         m_indexOwenedPatches.size()-1));
 }
 
-// Iterate over the Oweneds Patches, colect varieties and set varietyOwened,
-// m_worstVarietyIdx and bestVarietyIdx
+// Iterate over the Oweneds Patches, colect varieties and set varietyOwened
 void DomesticUnity::computeDUpunctuations(void){
   // Map the variety in a vector, where the 0th element is quantity,
   // the 1st fitness and the 2nd appearence
@@ -97,8 +94,6 @@ void DomesticUnity::computeDUpunctuations(void){
 void DomesticUnity::fillvarietyOwened(std::map<int,
     std::vector<float> >* varietyData){
   varietyOwened.clear();
-  float bestVarPunctuation = -100.0;
-  float worstVarPunctuation = 100.0;
   map<int, std::vector<float> >::iterator itr;
   for(itr = varietyData->begin(); itr != varietyData->end(); ++itr){
     DUvariety newVar;
@@ -115,14 +110,6 @@ void DomesticUnity::fillvarietyOwened(std::map<int,
       newVar.fitness_punctuation = itr->second[1] / itr->second[0];
     }
     varietyOwened.push_back(newVar);
-    if(newVar.punctuation > bestVarPunctuation){
-      bestVarPunctuation = newVar.punctuation;
-      bestVarietyIdx = varietyOwened.size() - 1;
-    }
-    if(newVar.punctuation < worstVarPunctuation){
-      worstVarPunctuation = newVar.punctuation;
-      m_worstVarietyIdx = varietyOwened.size() - 1;
-    }
   }
 }
 
@@ -135,32 +122,33 @@ float DomesticUnity::computePunctuation(float varFitness,
     (1 - m_duParameter.alpha) * appearencePunc;
 }
 
-// Find the DU with best punctuation, if the difference is larger than
-// m_duParameter.outsideTradeLimit it takes this DU best
-// variety and replace for the DU worst variety. If the difference is larger
-// than m_duParameter.insideTradeLimit it makes
-// the same thing but with best variety of the own DU.
+// Iterate the domestic unity. Changes cultivated variety if
+// deltaSum > 'i',
+// exist a null variety,
+// extpunctuationDifference > 'o',
+// or with a probability 'p' a new variety is created,
+// and with a probability 'd' a variety is killed
 void DomesticUnity::iterateDU(void){
   float bestDUpunctuation;
   int bestDUindex = computeBestDU(&bestDUpunctuation);
-
   float extpunctuationDifference = bestDUpunctuation - punctuation;
-  float intpunctuationDifference = varietyOwened[bestVarietyIdx].punctuation
-    - varietyOwened[m_worstVarietyIdx].punctuation;
+
+  int majorDeltaIdx;
+  int minorDeltaIdx;
+  float deltaSum = computeDeltaSum(&minorDeltaIdx, &majorDeltaIdx);
+
+  if(deltaSum > m_duParameter.insideTradeLimit){
+    changeProduction(varietyOwened[majorDeltaIdx].varietyData,
+        varietyOwened[minorDeltaIdx].number);
+  }
+  if(numberVarietyOwened() != varietyOwened.size())
+    changeProduction(varietyOwened[majorDeltaIdx].varietyData,-1);
   if(extpunctuationDifference > m_duParameter.outsideTradeLimit){
     int extBestVarietyIdx = floor(uniFLOAT(rand64) *
       m_domesticUnity[bestDUindex].varietyOwened.size());
     DUvariety duVarietyExt =
       m_domesticUnity[bestDUindex].varietyOwened[extBestVarietyIdx];
     changeProduction(duVarietyExt.varietyData);
-    if(findVariety(varietyOwened[m_worstVarietyIdx].number) == -1)
-      updateWorstVar(varietyOwened[m_worstVarietyIdx].number);
-  }
-  if(intpunctuationDifference > m_duParameter.insideTradeLimit &&
-      varietyOwened[bestVarietyIdx].number !=
-      varietyOwened[m_worstVarietyIdx].number){
-    changeProduction(varietyOwened[bestVarietyIdx].varietyData,
-       varietyOwened[m_worstVarietyIdx].number);
   }
   if(uniFLOAT(rand64) < m_duParameter.probabilityNewVar){
     int newPlace = m_indexOwenedPatches[uniIntPlace(rand64)];
@@ -202,6 +190,34 @@ int DomesticUnity::computeBestDU(float * bestDUpunctuation){
   return bestDUindex;
 }
 
+// Calculate the difference between intented number of variety and real number
+// of variety. Return that index of the variaty that has major and minor
+// differences.
+float DomesticUnity::computeDeltaSum(int * minorDeltaIdx, int * majorDeltaIdx){
+  float minorDelta = -10;
+  float majorDelta = -10;
+  float deltaSum = 0;
+  float totalPunctuation = punctuation * varietyOwened.size();
+  *minorDeltaIdx = -10;
+  *majorDeltaIdx = -10;
+
+  for(uint i = 0; i < varietyOwened.size(); ++i){
+    float temp = varietyOwened[i].punctuation / totalPunctuation -
+      varietyOwened[i].quantity / 49.0;
+    deltaSum += abs(temp);
+    if(temp > majorDelta){
+      majorDelta = temp;
+      *majorDeltaIdx = i;
+    }
+    if(temp < - minorDelta){
+      minorDelta = - temp;
+      *minorDeltaIdx = i;
+    }
+  }
+  deltaSum /= varietyOwened.size();
+  return deltaSum;
+}
+
 // Find one place (between the owened patches) where the given variety exists.
 // If it does not find return -1
 int DomesticUnity::findVariety(int var){
@@ -209,19 +225,6 @@ int DomesticUnity::findVariety(int var){
     if(m_grid[i].variety.varietyNumber == var)
       return i;
   return -1;
-}
-
-// Receive the actual worstVariety and update the worst variety, so that it is
-// not the received value
-void DomesticUnity::updateWorstVar(int oldWorstVar){
-  float worstVarPunctuation = 100;
-  for(uint i = 0; i < varietyOwened.size(); ++i){
-    if(varietyOwened[i].punctuation < worstVarPunctuation &&
-        varietyOwened[i].number != oldWorstVar){
-      worstVarPunctuation = varietyOwened[i].punctuation;
-      m_worstVarietyIdx = i;
-    }
-  }
 }
 
 // Return the number of variety owened by the DU, excluding empty patches.
