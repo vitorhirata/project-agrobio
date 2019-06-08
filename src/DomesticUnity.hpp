@@ -4,13 +4,7 @@
 // DomesticUnity class. It is where the decision making takes place.
 class DomesticUnity{
 private:
-  struct DUvariety{
-    int number;
-    int quantity;
-    float punctuation;
-    float fitness_punctuation;
-    VarietyData varietyData;
-  };
+  struct DUvariety;
   DomesticUnity* m_domesticUnity;
   Patch* m_grid;
   DUParameter m_duParameter;
@@ -34,6 +28,14 @@ public:
       DUParameter t_duParameter);
   void computeDUpunctuations(void);
   void iterateDU(void);
+};
+
+struct DomesticUnity::DUvariety{
+  int number;
+  int quantity;
+  float punctuation;
+  float fitness_punctuation;
+  VarietyData varietyData;
 };
 
 // Initialize DomesticUnity parameters (have to test member initialize list)
