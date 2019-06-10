@@ -9,7 +9,6 @@ private:
   Patch* m_grid;
   DUParameter m_duParameter;
   float m_DUpreference;
-  std::vector<int> m_indexLinkedDU;
   std::vector<int> m_indexOwenedPatches;
   void changeProduction(VarietyData varietyData, int varNumber = -10);
   int findVariety(int var);
@@ -21,6 +20,7 @@ public:
   float punctuation;
   float fitness_punctuation;
   std::vector<DUvariety> varietyOwened;
+  std::vector<int> indexLinkedDU;
   int numberVarietyOwened(void);
   void initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
       std::vector<int> t_indexLinkedDU, std::vector<int> t_indexOwenedPatches,
@@ -43,7 +43,7 @@ void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
     DUParameter t_duParameter){
   m_domesticUnity = t_domesticUnity;
   m_grid = t_grid;
-  m_indexLinkedDU = t_indexLinkedDU;
+  indexLinkedDU = t_indexLinkedDU;
   m_indexOwenedPatches = t_indexOwenedPatches;
   m_duParameter.outsideTradeLimit = t_duParameter.outsideTradeLimit;
   m_duParameter.insideTradeLimit = t_duParameter.insideTradeLimit;
@@ -181,9 +181,9 @@ void DomesticUnity::changeProduction(VarietyData varietyData, int varNumber){
 int DomesticUnity::computeBestDU(float * bestDUpunctuation){
   int bestDUindex = 0;
   *bestDUpunctuation = -1;
-  for(uint i = 0; i < m_indexLinkedDU.size(); ++i){
-    if(m_domesticUnity[m_indexLinkedDU[i]].punctuation > *bestDUpunctuation){
-      bestDUindex = m_indexLinkedDU[i];
+  for(uint i = 0; i < indexLinkedDU.size(); ++i){
+    if(m_domesticUnity[indexLinkedDU[i]].punctuation > *bestDUpunctuation){
+      bestDUindex = indexLinkedDU[i];
       *bestDUpunctuation = m_domesticUnity[bestDUindex].punctuation;
     }
   }
