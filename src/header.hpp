@@ -36,6 +36,7 @@ namespace metrics{
   std::vector<float> computePunctuationAverage(DomesticUnity* domesticUnity, const int t_numberDomesticUnity);
   std::vector<float> computeFitnessProfile(Patch* t_grid, const int t_latticeSize);
   std::vector<float> computeAppearenceProfile(Patch* t_grid, const int t_latticeSize);
+  float computeCorrelation(DomesticUnity* domesticUnity, int numberDU);
   void printState(int t, Patch* grid, const int t_latticeSize);
   void floatToRGB(int n, int* R, int* G, int* B);
   void printParameters(fstream& arquivo, Parameter parameter);

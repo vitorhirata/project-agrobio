@@ -94,6 +94,30 @@ namespace metrics{
     return fitnessFrequency;
   }
 
+  float computeCorrelation(DomesticUnity* domesticUnity, int numberDU){
+    std::vector<int> degreeDU(numberDU);
+    std::vector<int> varietyDU(numberDU);
+    for(uint i = 0; i < numberDU; ++i){
+      degreeDU[i] = domesticUnity[i].indexLinkedDU.size();
+      varietyDU[i] = domesticUnity[i].varietyOwened.size();
+    }
+    float averageDegree = accumulate(degreeDU.begin(), degreeDU.end(), 0.0) /
+      degreeDU.size();
+    float averageVariety = accumulate(varietyDU.begin(), varietyDU.end(), 0.0) /
+      varietyDU.size();
+    float correlationNumerator = 0;
+    float correlationDenominator1 = 0;
+    float correlationDenominator2 = 0;
+    for(uint i = 0; i < numberDU; ++i){
+      correlationNumerator += ((degreeDU[i]-averageDegree) *
+          (varietyDU[i]-averageVariety));
+      correlationDenominator1 += ((degreeDU[i]-averageDegree) * (degreeDU[i]-averageDegree));
+      correlationDenominator2 += ((varietyDU[i]-averageVariety) * (varietyDU[i]-averageVariety));
+    }
+    float correlation = correlationNumerator / (sqrt(correlationDenominator1)*sqrt(correlationDenominator2));
+    return correlation;
+  }
+
   void printParameters(fstream& arquivo, Parameter parameter){
     arquivo << "### PARAMETERS VALUE ###" << endl;
     arquivo << "### LATTICESIZE = " << parameter.latticeSize << ", NVARIETY = " << parameter.numberInitialVariety;
