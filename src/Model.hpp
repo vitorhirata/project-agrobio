@@ -17,7 +17,8 @@ public:
   Result runFixedPoint(void);
 };
 
-// Model constructor, receive model parameters, initialize then, and call for each class initialization.
+// Model constructor, receive model parameters, initialize then, and call for
+// each class initialization.
 Model::Model(Parameter t_parameter)
   : m_parameter(t_parameter)
 {
@@ -40,30 +41,37 @@ void Model::setAmbient(void){
       m_parameter.numberInitialVarietyDU);
 }
 
-// Create DomesticUnity array, set indexLinkedDUs, indexOwenedsPatches and pass it to initialize each DomesticUnity
+// Create DomesticUnity array, set indexLinkedDUs, indexOwenedsPatches and
+// pass it to initialize each DomesticUnity
 void Model::setDomesticUnity(void){
   DUParameter duParameter(m_parameter);
   domesticUnity =  new DomesticUnity [m_parameter.numberDomesticUnity];
 
-  Network network(m_parameter.networkType, m_parameter.mSF, m_parameter.kWT, m_parameter.betaWT, m_parameter.probabilyConnectionER, m_parameter.numberDomesticUnity);
+  Network network(m_parameter.networkType, m_parameter.mSF, m_parameter.kWT,
+      m_parameter.betaWT, m_parameter.probabilyConnectionER,
+      m_parameter.numberDomesticUnity);
 
   // Set indexOwenedsPatches
-  std::vector<std::vector<int> > indexOwenedsPatches(m_parameter.numberDomesticUnity);
-  int indexDU, sizeDU = m_parameter.latticeSize/sqrt(m_parameter.numberDomesticUnity);
+  std::vector<std::vector<int> > indexOwenedsPatches(
+      m_parameter.numberDomesticUnity);
+  int indexDU, sizeDU = m_parameter.latticeSize /
+    sqrt(m_parameter.numberDomesticUnity);
   for(int lin = 0; lin < m_parameter.latticeSize; ++lin){
     for(int col = 0; col < m_parameter.latticeSize; ++col){
       indexDU = (lin/sizeDU)*sizeDU + col/sizeDU;
-      indexOwenedsPatches[indexDU].push_back(lin*m_parameter.latticeSize + col);
+      indexOwenedsPatches[indexDU].push_back(lin*m_parameter.latticeSize+col);
     }
   }
 
   // Pass the parameters to actualy initialize each domesticUnity
   for(int i = 0; i < m_parameter.numberDomesticUnity; ++i){
-    domesticUnity[i].initializeDU(domesticUnity, ambient->grid, network.indexLinkedDUs[i], indexOwenedsPatches[i], duParameter);
+    domesticUnity[i].initializeDU(domesticUnity, ambient->grid,
+        network.indexLinkedDUs[i], indexOwenedsPatches[i], duParameter);
   }
 }
 
-// Run standard version of the model. Gives as output a vector with the number of variety at each timeInterval
+// Run standard version of the model. Gives as output a vector with the
+// number of variety at each timeInterval
 Result Model::runStandard(void){
   Result result(0, 0, 0);
   result.numberVariety.push_back(ambient->countSpecie());
@@ -72,21 +80,29 @@ Result Model::runStandard(void){
     iterate();
     if (t % m_parameter.timeInterval == 0){
       result.numberVariety.push_back(ambient->countSpecie());
-      result.meanVarietyDU.push_back(metrics::computeVarietyMeanProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize));
-      std::vector<float> tempPunctuation = metrics::computePunctuationAverage(domesticUnity, m_parameter.numberDomesticUnity);
+      result.meanVarietyDU.push_back(metrics::computeVarietyMeanProfile(
+            domesticUnity, m_parameter.numberDomesticUnity,
+            m_parameter.latticeSize));
+      std::vector<float> tempPunctuation = metrics::computePunctuationAverage(
+          domesticUnity, m_parameter.numberDomesticUnity);
       result.totalPunctuation.push_back(tempPunctuation[0]);
       result.fitnessPunctuation.push_back(tempPunctuation[1]);
     }
   }
   ambient->computeAllFitness();
-  result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
-  result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, m_parameter.latticeSize);
-  result.duDistribution = metrics::computeDUprofile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
-  result.varietyDistribution = metrics::computeVarietyProfile(domesticUnity, m_parameter.numberDomesticUnity);
+  result.fitnessFrequency = metrics::computeFitnessProfile(
+      ambient->grid, m_parameter.latticeSize);
+  result.appearenceFrequency = metrics::computeAppearenceProfile(
+      ambient->grid, m_parameter.latticeSize);
+  result.duDistribution = metrics::computeDUprofile(
+      domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
+  result.varietyDistribution = metrics::computeVarietyProfile(
+      domesticUnity, m_parameter.numberDomesticUnity);
   return result;
 }
 
-// Run the model giving as output the final number of varieties and both histograms
+// Run the model giving as output the final number of varieties and both
+// histograms
 Result Model::runFixedPoint(void){
   Result result(0, 0, 0);
   for(int t = 0; t < m_parameter.maxTime; ++t)
@@ -94,15 +110,22 @@ Result Model::runFixedPoint(void){
 
   ambient->computeAllFitness();
   result.numberVariety.push_back(ambient->countSpecie());
-  result.meanVarietyDU.push_back(metrics::computeVarietyMeanProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize));
-  result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
-  result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, m_parameter.latticeSize);
-  result.duDistribution = metrics::computeDUprofile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
-  result.varietyDistribution = metrics::computeVarietyProfile(domesticUnity, m_parameter.numberDomesticUnity);
+  result.meanVarietyDU.push_back(metrics::computeVarietyMeanProfile(
+        domesticUnity, m_parameter.numberDomesticUnity,
+        m_parameter.latticeSize));
+  result.fitnessFrequency = metrics::computeFitnessProfile(
+      ambient->grid, m_parameter.latticeSize);
+  result.appearenceFrequency = metrics::computeAppearenceProfile(
+      ambient->grid, m_parameter.latticeSize);
+  result.duDistribution = metrics::computeDUprofile(
+      domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
+  result.varietyDistribution = metrics::computeVarietyProfile(
+      domesticUnity, m_parameter.numberDomesticUnity);
   return result;
 }
 
-// Run the model plotting each time image of the simulation. Gives as output a vector with the number of variety at each timeInterval
+// Run the model plotting each time image of the simulation. Gives as output
+// a vector with the number of variety at each timeInterval
 Result Model::runPlot(void){
   Result result(0, 0, 0);
   result.numberVariety.push_back(ambient->countSpecie());
@@ -115,22 +138,30 @@ Result Model::runPlot(void){
     if (t % m_parameter.timeInterval == 0){
       result.numberVariety.push_back(ambient->countSpecie());
       metrics::printState(t+1, ambient->grid, m_parameter.latticeSize);
-      result.meanVarietyDU.push_back(metrics::computeVarietyMeanProfile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize));
-      std::vector<float> tempPunctuation = metrics::computePunctuationAverage(domesticUnity, m_parameter.numberDomesticUnity);
+      result.meanVarietyDU.push_back(metrics::computeVarietyMeanProfile(
+            domesticUnity, m_parameter.numberDomesticUnity,
+            m_parameter.latticeSize));
+      std::vector<float> tempPunctuation = metrics::computePunctuationAverage(
+          domesticUnity, m_parameter.numberDomesticUnity);
       result.totalPunctuation.push_back(tempPunctuation[0]);
       result.fitnessPunctuation.push_back(tempPunctuation[1]);
     }
   }
 
   ambient->computeAllFitness();
-  result.fitnessFrequency = metrics::computeFitnessProfile(ambient->grid, m_parameter.latticeSize);
-  result.appearenceFrequency = metrics::computeAppearenceProfile(ambient->grid, m_parameter.latticeSize);
-  result.duDistribution = metrics::computeDUprofile(domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
-  result.varietyDistribution = metrics::computeVarietyProfile(domesticUnity, m_parameter.numberDomesticUnity);
+  result.fitnessFrequency = metrics::computeFitnessProfile(
+      ambient->grid, m_parameter.latticeSize);
+  result.appearenceFrequency = metrics::computeAppearenceProfile(
+      ambient->grid, m_parameter.latticeSize);
+  result.duDistribution = metrics::computeDUprofile(
+      domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
+  result.varietyDistribution = metrics::computeVarietyProfile(
+      domesticUnity, m_parameter.numberDomesticUnity);
   return result;
 }
 
-// Run one interation of the model, computing the fitness of ambient, computing DU punctuations and evaluating it's production
+// Run one interation of the model, computing the fitness of ambient,
+// computing DU punctuations and evaluating it's production
 void Model::iterate(void){
   ambient->computeAllFitness();
   for(int i = 0; i < m_parameter.numberDomesticUnity; ++i)
