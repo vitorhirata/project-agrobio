@@ -30,12 +30,18 @@ class Network;
 class Model;
 namespace metrics{
   void sumResults(Result* result, Result* resultTemp);
-  float computeVarietyMeanProfile(DomesticUnity* domesticUnity, const int t_numberDomesticUnity, const int t_DUsize);
-  std::vector<float> computeDUprofile(DomesticUnity* domesticUnity, const int t_numberDomesticUnity, const int t_DUsize);
-  std::vector<float> computeVarietyProfile(DomesticUnity* domesticUnity, const int t_numberDomesticUnity);
-  std::vector<float> computePunctuationAverage(DomesticUnity* domesticUnity, const int t_numberDomesticUnity);
-  std::vector<float> computeFitnessProfile(Patch* t_grid, const int t_latticeSize);
-  std::vector<float> computeAppearenceProfile(Patch* t_grid, const int t_latticeSize);
+  float computeVarietyMeanProfile(DomesticUnity* domesticUnity,
+      const int t_numberDomesticUnity, const int t_DUsize);
+  std::vector<float> computeDUprofile(DomesticUnity* domesticUnity,
+      const int t_numberDomesticUnity, const int t_DUsize);
+  std::vector<float> computeVarietyProfile(
+      DomesticUnity* domesticUnity, const int t_numberDomesticUnity);
+  std::vector<float> computePunctuationAverage(DomesticUnity* domesticUnity,
+      const int t_numberDomesticUnity);
+  std::vector<float> computeFitnessProfile(
+      Patch* t_grid, const int t_latticeSize);
+  std::vector<float> computeAppearenceProfile(
+      Patch* t_grid, const int t_latticeSize);
   float computeCorrelation(DomesticUnity* domesticUnity, int numberDU);
   void printState(int t, Patch* grid, const int t_latticeSize);
   void floatToRGB(int n, int* R, int* G, int* B);
@@ -46,7 +52,8 @@ namespace worker{
   void Run_plot(void);
   void Run_varParamFixedPoints(char param);
   void Run_varParam(char param, std::vector<float> paramList);
-  fstream openFile(std::string fileName, std::string varNames, Parameter parameter);
+  fstream openFile(
+      std::string fileName, std::string varNames, Parameter parameter);
 }
 
 #include "Structs.hpp"

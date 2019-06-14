@@ -13,13 +13,16 @@ private:
   void createSFNetwork(void);
   std::vector<float> computeCumulativeDistribution();
 public:
-  Network(int t_networkType, int t_mSF, int t_kWT, float t_betaWT, float t_probabilyConnectionER, int t_numberDomesticUnity);
+  Network(int t_networkType, int t_mSF, int t_kWT, float t_betaWT,
+      float t_probabilyConnectionER, int t_numberDomesticUnity);
   std::vector<std::vector<int> > indexLinkedDUs;
   void printNetwork(void);
 };
 
-// Network constructor. initialize parameters, create network according to t_networkType
-  Network::Network(int t_networkType, int t_mSF, int t_kWT, float t_betaWT, float t_probabilyConnectionER, int t_numberDomesticUnity)
+// Network constructor. initialize parameters, create network according to
+// t_networkType
+  Network::Network(int t_networkType, int t_mSF, int t_kWT, float t_betaWT,
+      float t_probabilyConnectionER, int t_numberDomesticUnity)
   : m_numberDomesticUnity(t_numberDomesticUnity)
   , m_mSF(t_mSF)
   , m_kWT(t_kWT)
@@ -93,7 +96,8 @@ void Network::createWTNetwork(){
   for(int i = 0; i < removedLinks; ++i){
     int newDU1 = uniIntDU(rand64);
     int newDU2 = uniIntDU(rand64);
-    while(newDU2 == newDU1 || matrix[newDU1*m_numberDomesticUnity+newDU2] == 1 || matrix[newDU2*m_numberDomesticUnity+newDU1] == 1)
+    while(newDU2 == newDU1 || matrix[newDU1*m_numberDomesticUnity+newDU2] == 1
+        || matrix[newDU2*m_numberDomesticUnity+newDU1] == 1)
       newDU2 = uniIntDU(rand64);
     matrix[newDU1*m_numberDomesticUnity+newDU2] = 1;
   }
@@ -101,8 +105,11 @@ void Network::createWTNetwork(){
   // Sum transpose
   for(int lin = 0; lin < m_numberDomesticUnity; ++lin){
     for(int col = lin + 1; col < m_numberDomesticUnity; ++col){
-      matrix[lin*m_numberDomesticUnity+col] = matrix[lin*m_numberDomesticUnity+col] + matrix[col*m_numberDomesticUnity+lin];
-      matrix[col*m_numberDomesticUnity+lin] = matrix[lin*m_numberDomesticUnity+col];
+      matrix[lin*m_numberDomesticUnity+col] =
+        matrix[lin*m_numberDomesticUnity+col] +
+        matrix[col*m_numberDomesticUnity+lin];
+      matrix[col*m_numberDomesticUnity+lin] =
+        matrix[lin*m_numberDomesticUnity+col];
     }
   }
 

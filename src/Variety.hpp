@@ -34,7 +34,8 @@ void Variety::setVariety(VarietyData t_data){
   varietyNumber = computeVarietyNumber();
 }
 
-// Compute the number of the variety, according to the data contained in the variety
+// Compute the number of the variety, according to the data contained in
+// the variety
 int Variety::computeVarietyNumber(void){
   int varNumber = 0;
   float step = 0.2;

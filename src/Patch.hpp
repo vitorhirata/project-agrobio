@@ -1,7 +1,8 @@
 #ifndef PATCH_H
 #define PATCH_H
 
-// Each patch equivales to one produceble site, and contain up to one plantation an the resources present in the soil.
+// Each patch equivales to one produceble site, and contain up to one
+// plantation an the resources present in the soil.
 class Patch{
 private:
   std::vector<float> m_resource;
@@ -17,15 +18,16 @@ public:
   void killVariety(void);
 };
 
-// Initialize the patch, setting up the resources and variety according to received values
+// Initialize the patch, setting up the resources and variety according to
+// received values
 void Patch::initializePatch(std::vector<float> t_resource, VarietyData t_data){
   setLocalResource(t_resource);
   setVariety(t_data);
 }
 
 
-// Compute the fitness, using the Monod Equation, considering variety K and the resources available. Store this value
-// in fitness.
+// Compute the fitness, using the Monod Equation, considering variety K and
+// the resources available. Store this valuel in fitness.
 void Patch::computeLocalFitness(void){
   if(variety.varietyNumber == -1)
     fitness = 0;

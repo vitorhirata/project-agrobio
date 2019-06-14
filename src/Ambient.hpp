@@ -7,8 +7,10 @@ private:
   const int m_latticeSize;
   void setPatch(int numberResources, int nResourceDistribution,
       int numberInitialVariety, int numberInitialVarietyDU);
-  std::vector<VarietyData> defineInitialVarieties(int numberResources, int numberInitialVariety);
-  std::vector<std::vector<int> > defineDUindex(std::uniform_int_distribution<long> uniIntSP, int numberVarDU);
+  std::vector<VarietyData> defineInitialVarieties(
+      int numberResources, int numberInitialVariety);
+  std::vector<std::vector<int> > defineDUindex(
+      std::uniform_int_distribution<long> uniIntSP, int numberVarDU);
   int computeDUnumber(int place);
 public:
   Patch* grid;
@@ -21,7 +23,8 @@ public:
   void runAdversity(void);
 };
 
-// Ambient constructor. initialize parameters, create grid set it's varieties and resources
+// Ambient constructor. initialize parameters, create grid set it's varieties
+// and resources
   Ambient::Ambient(int t_latticeSize, int t_nResourceDistribution,
       int t_numberResources, int t_numberInitialVariety,
       int t_numberInitialVarietyDU)
@@ -38,15 +41,19 @@ Ambient::~Ambient(){
   grid = nullptr;
 }
 
-// Set the resources along each Patch. 3 options based on the nResourceDistribution, if it is 1 the same resource
-// is using in the hole grid, if it is m_latticeSize^2 each Patch have different resources, and if it is a multiple
-// of m_latticeSize a division is made to allocate the resource equally. Raises erros if none of that options is true.
+// Set the resources along each Patch. 3 options based on the
+// nResourceDistribution, if it is 1 the same resource is using in the hole
+// grid, if it is m_latticeSize^2 each Patch have different resources, and if
+// it is a multiple of m_latticeSize a division is made to allocate the
+// resource equally. Raises erros if none of that options is true.
 void Ambient::setPatch(int numberResources, int nResourceDistribution,
     int numberInitialVariety, int numberInitialVarietyDU){
-  std::vector<VarietyData> varietyAvailable = defineInitialVarieties(numberResources, numberInitialVariety);
+  std::vector<VarietyData> varietyAvailable = defineInitialVarieties(
+      numberResources, numberInitialVariety);
   std::uniform_int_distribution<long> uniIntSP(0,numberInitialVariety-1);
   std::uniform_int_distribution<long> uniIntSPdu(0,numberInitialVarietyDU-1);
-  std::vector<std::vector<int> > indexVarietyDU = defineDUindex(uniIntSP, numberInitialVarietyDU);
+  std::vector<std::vector<int> > indexVarietyDU = defineDUindex(
+      uniIntSP, numberInitialVarietyDU);
 
   if(nResourceDistribution == m_latticeSize*m_latticeSize){
     std::vector<float> resources(numberResources);
@@ -81,8 +88,10 @@ void Ambient::setPatch(int numberResources, int nResourceDistribution,
     for(int lin = 0; lin < m_latticeSize; ++lin){
       for(int col = 0; col < m_latticeSize; ++col){
         int idxRes = (lin / sizeV) * nResourceDistribution / 2 + col / sizeH;
-        int idxVar = indexVarietyDU[computeDUnumber(lin*m_latticeSize+col)][uniIntSPdu(rand64)];
-        grid[lin*m_latticeSize+col].initializePatch(resources[idxRes], varietyAvailable[idxVar]);
+        int idxVar = indexVarietyDU[
+          computeDUnumber(lin*m_latticeSize+col)][uniIntSPdu(rand64)];
+        grid[lin*m_latticeSize+col].initializePatch(
+            resources[idxRes], varietyAvailable[idxVar]);
       }
     }
   }
@@ -107,13 +116,15 @@ int Ambient::computeDUnumber(int place){
   return sizeDU * (lin / sizeDU) + col / sizeDU;
 }
 
-std::vector<VarietyData> Ambient::defineInitialVarieties(int numberResources, int numberInitialVariety){
+std::vector<VarietyData> Ambient::defineInitialVarieties(int numberResources,
+    int numberInitialVariety){
   std::vector<VarietyData> varietyAvailable (numberInitialVariety);
 
   for(int i = 0; i < numberInitialVariety; ++i){
     for(int j = 0; j < numberResources; ++j){
       varietyAvailable[i].halfSaturation.push_back(gauss(rand64));
-      while(!(varietyAvailable[i].halfSaturation[j] > 0 && varietyAvailable[i].halfSaturation[j] < 1))
+      while(!(varietyAvailable[i].halfSaturation[j] > 0 &&
+            varietyAvailable[i].halfSaturation[j] < 1))
         varietyAvailable[i].halfSaturation[j] = gauss(rand64);
     }
     varietyAvailable[i].appearence = uniFLOAT(rand64);
@@ -128,7 +139,8 @@ void Ambient::computeAllFitness(void){
   }
 }
 
-// Count the number of different varieties in the grid, return a int to that number
+// Count the number of different varieties in the grid, return a int to
+// that number
 int Ambient::countSpecie(void){
   std::map<int,bool> varietyAvailability;
   for(int i = 0; i < m_latticeSize*m_latticeSize; ++i){

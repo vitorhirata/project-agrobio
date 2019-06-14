@@ -1,20 +1,43 @@
 namespace metrics{
 
   void sumResults(Result* result, Result* resultTemp){
-    std::transform((*result).numberVariety.begin(), (*result).numberVariety.end(), (*resultTemp).numberVariety.begin(), (*result).numberVariety.begin(), std::plus<float>());
-    std::transform((*result).meanVarietyDU.begin(), (*result).meanVarietyDU.end(), (*resultTemp).meanVarietyDU.begin(), (*result).meanVarietyDU.begin(), std::plus<float>());
+    std::transform((*result).numberVariety.begin(),
+        (*result).numberVariety.end(), (*resultTemp).numberVariety.begin(),
+        (*result).numberVariety.begin(), std::plus<float>());
+    std::transform((*result).meanVarietyDU.begin(),
+        (*result).meanVarietyDU.end(), (*resultTemp).meanVarietyDU.begin(),
+        (*result).meanVarietyDU.begin(), std::plus<float>());
     if(!(*resultTemp).totalPunctuation.empty()){
-    std::transform((*result).totalPunctuation.begin(), (*result).totalPunctuation.end(), (*resultTemp).totalPunctuation.begin(), (*result).totalPunctuation.begin(), std::plus<float>());
-    std::transform((*result).fitnessPunctuation.begin(), (*result).fitnessPunctuation.end(), (*resultTemp).fitnessPunctuation.begin(), (*result).fitnessPunctuation.begin(), std::plus<float>());
+    std::transform((*result).totalPunctuation.begin(),
+        (*result).totalPunctuation.end(),
+        (*resultTemp).totalPunctuation.begin(),
+        (*result).totalPunctuation.begin(), std::plus<float>());
+    std::transform((*result).fitnessPunctuation.begin(),
+        (*result).fitnessPunctuation.end(),
+        (*resultTemp).fitnessPunctuation.begin(),
+        (*result).fitnessPunctuation.begin(), std::plus<float>());
     }
-    std::transform((*result).varietyDistribution.begin(), (*result).varietyDistribution.end(), (*resultTemp).varietyDistribution.begin(), (*result).varietyDistribution.begin(), std::plus<float>());
-    std::transform((*result).fitnessFrequency.begin(), (*result).fitnessFrequency.end(), (*resultTemp).fitnessFrequency.begin(), (*result).fitnessFrequency.begin(), std::plus<float>());
-    std::transform((*result).appearenceFrequency.begin(), (*result).appearenceFrequency.end(), (*resultTemp).appearenceFrequency.begin(), (*result).appearenceFrequency.begin(), std::plus<float>());
-    std::transform((*result).duDistribution.begin(), (*result).duDistribution.end(), (*resultTemp).duDistribution.begin(), (*result).duDistribution.begin(), std::plus<float>());
+    std::transform((*result).varietyDistribution.begin(),
+        (*result).varietyDistribution.end(),
+        (*resultTemp).varietyDistribution.begin(),
+        (*result).varietyDistribution.begin(), std::plus<float>());
+    std::transform((*result).fitnessFrequency.begin(),
+        (*result).fitnessFrequency.end(),
+        (*resultTemp).fitnessFrequency.begin(),
+        (*result).fitnessFrequency.begin(), std::plus<float>());
+    std::transform((*result).appearenceFrequency.begin(),
+        (*result).appearenceFrequency.end(),
+        (*resultTemp).appearenceFrequency.begin(),
+        (*result).appearenceFrequency.begin(), std::plus<float>());
+    std::transform((*result).duDistribution.begin(),
+        (*result).duDistribution.end(), (*resultTemp).duDistribution.begin(),
+        (*result).duDistribution.begin(), std::plus<float>());
   }
 
-  // Return the frequency of the number of varieties owened by the Domestic Unities
-  std::vector<float> computeDUprofile(DomesticUnity* domesticUnity, const int t_numberDomesticUnity, const int t_DUsize){
+  // Return the frequency of the number of varieties owened by the
+  // Domestic Unities
+  std::vector<float> computeDUprofile(DomesticUnity* domesticUnity,
+      const int t_numberDomesticUnity, const int t_DUsize){
     std::vector<float> duDistribution(t_DUsize, 0);
     for(int i = 0; i < t_numberDomesticUnity; ++i){
       int num = domesticUnity[i].numberVarietyOwened();;
@@ -24,7 +47,8 @@ namespace metrics{
   }
 
   // Return the frequency of the number of DU cultivating each variety
-  std::vector<float> computeVarietyProfile(DomesticUnity* domesticUnity, const int t_numberDomesticUnity){
+  std::vector<float> computeVarietyProfile(
+      DomesticUnity* domesticUnity, const int t_numberDomesticUnity){
     std::map<int,int> numberDU;
     for(int i = 0; i < t_numberDomesticUnity; ++i){
       for(auto var : domesticUnity[i].varietyOwened){
@@ -44,7 +68,8 @@ namespace metrics{
   }
 
   // Return the average punctuation of Domestic Unities
-  std::vector<float> computePunctuationAverage(DomesticUnity* domesticUnity, const int t_numberDomesticUnity){
+  std::vector<float> computePunctuationAverage(
+      DomesticUnity* domesticUnity, const int t_numberDomesticUnity){
     std::vector<float> punctuationAverage(2, 0);
     for(int i = 0; i < t_numberDomesticUnity; ++i){
       punctuationAverage[0] += domesticUnity[i].punctuation;
@@ -56,7 +81,8 @@ namespace metrics{
   }
 
   // Return the mean number of varieties owened by the Domestic Unities
-  float computeVarietyMeanProfile(DomesticUnity* domesticUnity, const int t_numberDomesticUnity, const int t_DUsize){
+  float computeVarietyMeanProfile(DomesticUnity* domesticUnity,
+      const int t_numberDomesticUnity, const int t_DUsize){
     std::vector<float> varietyDistribution(t_DUsize, 0);
     for(int i = 0; i < t_numberDomesticUnity; ++i){
       int num = domesticUnity[i].numberVarietyOwened();
@@ -70,7 +96,8 @@ namespace metrics{
   }
 
   // Return the frequency of each range of appearence. The range size is 0.05
-  std::vector<float> computeAppearenceProfile(Patch* t_grid, const int t_latticeSize){
+  std::vector<float> computeAppearenceProfile(
+      Patch* t_grid, const int t_latticeSize){
     float step = 0.05;
     std::vector<float> varFrequency(round(1 / step), 0);
     for(int i = 0; i < t_latticeSize*t_latticeSize; ++i){
@@ -81,7 +108,8 @@ namespace metrics{
   }
 
   // Return the frequency of each range of fitness. The range size is 0.05
-  std::vector<float> computeFitnessProfile(Patch* t_grid, const int t_latticeSize){
+  std::vector<float> computeFitnessProfile(
+      Patch* t_grid, const int t_latticeSize){
     float step = 0.05;
     std::vector<float> fitnessFrequency(round(1 / step), 0);
     for(int i = 0; i < t_latticeSize*t_latticeSize; ++i){
@@ -103,7 +131,7 @@ namespace metrics{
     }
     float averageDegree = accumulate(degreeDU.begin(), degreeDU.end(), 0.0) /
       degreeDU.size();
-    float averageVariety = accumulate(varietyDU.begin(), varietyDU.end(), 0.0) /
+    float averageVariety = accumulate(varietyDU.begin(), varietyDU.end(),0.0) /
       varietyDU.size();
     float correlationNumerator = 0;
     float correlationDenominator1 = 0;
@@ -111,23 +139,36 @@ namespace metrics{
     for(uint i = 0; i < numberDU; ++i){
       correlationNumerator += ((degreeDU[i]-averageDegree) *
           (varietyDU[i]-averageVariety));
-      correlationDenominator1 += ((degreeDU[i]-averageDegree) * (degreeDU[i]-averageDegree));
-      correlationDenominator2 += ((varietyDU[i]-averageVariety) * (varietyDU[i]-averageVariety));
+      correlationDenominator1 += ((degreeDU[i]-averageDegree) *
+          (degreeDU[i]-averageDegree));
+      correlationDenominator2 += ((varietyDU[i]-averageVariety) *
+          (varietyDU[i]-averageVariety));
     }
-    float correlation = correlationNumerator / (sqrt(correlationDenominator1)*sqrt(correlationDenominator2));
+    float correlation = correlationNumerator / (sqrt(correlationDenominator1)*
+        sqrt(correlationDenominator2));
     return correlation;
   }
 
   void printParameters(fstream& arquivo, Parameter parameter){
     arquivo << "### PARAMETERS VALUE ###" << endl;
-    arquivo << "### LATTICESIZE = " << parameter.latticeSize << ", NVARIETY = " << parameter.numberInitialVariety;
-    arquivo << ", NRESOURCE = " << parameter.numberResources << ", NRESOURCEDIST = " << parameter.numberHabitat;
-    arquivo << ", NETWORKTYPE = " << parameter.networkType << ", PROBABILITYCONNECTION = " << parameter.probabilyConnectionER ;
-    arquivo << ", KWT = " << parameter.kWT << ", BETAWT = " << parameter.betaWT << ", MSF = " << parameter.mSF ;
-    arquivo << ", OUTSIDETRADELIMIT = " << parameter.outsideTradeLimit << ", INSIDETRADELIMIT = " << parameter.insideTradeLimit;
-    arquivo << ", ALPHA = " << parameter.alpha << ", NDOMESTICUNITY = " << parameter.numberDomesticUnity;
-    arquivo << ", PROBABILITYNEWVAR = " << parameter.probabilityNewVar << ", PROBABILITYDEATH = " << parameter.probabilityDeath;
-    arquivo << ", MAXTIME = " << parameter.maxTime << ", TIMEINTERVAL = " << parameter.timeInterval << ", NRUN = " << parameter.nRun << " ###" << endl << endl;
+    arquivo << "### LATTICESIZE = " << parameter.latticeSize;
+    arquivo << ", NVARIETY = " << parameter.numberInitialVariety;
+    arquivo << ", NRESOURCE = " << parameter.numberResources;
+    arquivo << ", NRESOURCEDIST = " << parameter.numberHabitat;
+    arquivo << ", NETWORKTYPE = " << parameter.networkType;
+    arquivo << ", PROBABILITYCONNECTION = " << parameter.probabilyConnectionER;
+    arquivo << ", KWT = " << parameter.kWT;
+    arquivo << ", BETAWT = " << parameter.betaWT;
+    arquivo << ", MSF = " << parameter.mSF;
+    arquivo << ", OUTSIDETRADELIMIT = " << parameter.outsideTradeLimit;
+    arquivo << ", INSIDETRADELIMIT = " << parameter.insideTradeLimit;
+    arquivo << ", ALPHA = " << parameter.alpha;
+    arquivo << ", NDOMESTICUNITY = " << parameter.numberDomesticUnity;
+    arquivo << ", PROBABILITYNEWVAR = " << parameter.probabilityNewVar;
+    arquivo << ", PROBABILITYDEATH = " << parameter.probabilityDeath;
+    arquivo << ", MAXTIME = " << parameter.maxTime;
+    arquivo << ", TIMEINTERVAL = " << parameter.timeInterval;
+    arquivo << ", NRUN = " << parameter.nRun << " ###" << endl << endl;
   }
 
   void printState(int t, Patch* grid, const int t_latticeSize){

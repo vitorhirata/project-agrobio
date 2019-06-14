@@ -3,7 +3,9 @@
 int main(int argc, char *argv[]){
 
   if (argc == 1){
-    cout << "ERROR: Number of input argument invalid. Enter the kind of model you want to run on executing this program." << endl;
+    cout << "ERROR: Number of input argument invalid. ";
+    cout << "Enter the kind of model you want to run on executing this ";
+    cout << "program." << endl;
     exit(-1);
   }
   switch (argv[1][0]) {
@@ -22,10 +24,15 @@ int main(int argc, char *argv[]){
     case 'v':{
       char param;
       if (argc < 4) {
-        cout << "ERROR: Number of input argument invalid. 'v' mode must have the parameter that will vary and the values it will assume" << endl;
+        cout << "ERROR: Number of input argument invalid. 'v' mode must ";
+        cout << "have the parameter that will vary and the values it will ";
+        cout << "assume" << endl;
         exit(-1);
       }
-      if (argv[2][0] == 'o' || argv[2][0] == 'i' || argv[2][0] == 'L' || argv[2][0] == 'r' || argv[2][0] == 'v' || argv[2][0] == 'V' || argv[2][0] == 'a' || argv[2][0] == 'n' || argv[2][0] == 'p' || argv[2][0] == 'b' || argv[2][0] == 'R' || argv[2][0] == 'd')
+      if (argv[2][0] == 'o' || argv[2][0] == 'i' || argv[2][0] == 'L' ||
+          argv[2][0] == 'r' || argv[2][0] == 'v' || argv[2][0] == 'V' ||
+          argv[2][0] == 'a' || argv[2][0] == 'n' || argv[2][0] == 'p' ||
+          argv[2][0] == 'b' || argv[2][0] == 'R' || argv[2][0] == 'd')
         param = argv[2][0];
       else{
         cout << "ERROR: Invalid parameter variation." << endl;
@@ -38,36 +45,44 @@ int main(int argc, char *argv[]){
         temp = atof(argv[pos]);
         param_list.push_back(temp);
       }
-      cout << "Running variation model, with variable " << param << ". " << endl;
+      cout << "Running variation model, with variable ";
+      cout << param << ". " << endl;
       worker::Run_varParam(param, param_list);
       break;
     }
     case 'f':{
       char param;
       if (argc != 3) {
-        cout << "ERROR: Number of input argument invalid. 'f' mode must have only the parameter that will vary" << endl;
+        cout << "ERROR: Number of input argument invalid. ";
+        cout << "'f' mode must have only the parameter that will vary" << endl;
         exit(-1);
       }
-      if (argv[2][0] == 'o' || argv[2][0] == 'i' || argv[2][0] == 'L' || argv[2][0] == 'r' || argv[2][0] == 'v' || argv[2][0] == 'V' || argv[2][0] == 'a' || argv[2][0] == 'n' || argv[2][0] == 'p' || argv[2][0] == 'b' || argv[2][0] == 'R' || argv[2][0] == 'd')
+      if (argv[2][0] == 'o' || argv[2][0] == 'i' || argv[2][0] == 'L' ||
+          argv[2][0] == 'r' || argv[2][0] == 'v' || argv[2][0] == 'V' ||
+          argv[2][0] == 'a' || argv[2][0] == 'n' || argv[2][0] == 'p' ||
+          argv[2][0] == 'b' || argv[2][0] == 'R' || argv[2][0] == 'd')
         param = argv[2][0];
       else{
         cout << "ERROR: Invalid parameter variation." << endl;
         exit(-1);
       }
 
-      cout << "Running variation model fixed points, with variable " << param << ". " << endl;
+      cout << "Running variation model fixed points, with variable ";
+      cout << param << ". " << endl;
       worker::Run_varParamFixedPoints(param);
       break;
     }
     case 'm':{
       if (argc != 3){
-        cout << "ERROR: Number of input argument invalid. 'm' mode must have only the parameter the number of runs" << endl;
+        cout << "ERROR: Number of input argument invalid. 'm' mode must ";
+        cout << "have only the parameter the number of runs" << endl;
         exit(-1);
       }
       int numRun = std::stoi(argv[2]);
       std::vector<float> param_list(numRun);
       std::iota(param_list.begin(), param_list.end(), 0);
-      cout << "Running multiple run model, with " << numRun << " runs." << endl;
+      cout << "Running multiple run model, with ";
+      cout << numRun << " runs." << endl;
       worker::Run_varParam('m', param_list);
       break;
     }
