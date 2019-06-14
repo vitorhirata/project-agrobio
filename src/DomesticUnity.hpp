@@ -156,6 +156,8 @@ void DomesticUnity::iterateDU(void){
   }
   if(uniFLOAT(rand64) < m_duParameter.probabilityDeath){
     int newPlace = m_indexOwenedPatches[uniIntPlace(rand64)];
+    while(uniFLOAT(rand64) < 1 - m_grid[newPlace].fitness)
+      newPlace = m_indexOwenedPatches[uniIntPlace(rand64)];
     m_grid[newPlace].killVariety();
   }
 }
