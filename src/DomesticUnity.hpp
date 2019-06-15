@@ -16,6 +16,7 @@ private:
   void fillvarietyOwened(std::map<int,std::vector<float> >* varietyData);
   int computeBestDU(float * bestDUpunctuation);
   float computeDeltaSum(int * minorDeltaIdx, int * majorDeltaIdx);
+  float renormalizationFunction(float x);
 public:
   float punctuation;
   float fitness_punctuation;
@@ -192,6 +193,11 @@ int DomesticUnity::computeBestDU(float * bestDUpunctuation){
   return bestDUindex;
 }
 
+// Logistic function that takes [0,1] -> [0,1]
+float DomesticUnity::renormalizationFunction(float x){
+  return (15*x)/sqrt(1+(30*x)*(30*x))+0.5;
+}
+
 // Calculate the difference between intented number of variety and real number
 // of variety. Return that index of the variaty that has major and minor
 // differences.
@@ -199,12 +205,19 @@ float DomesticUnity::computeDeltaSum(int * minorDeltaIdx, int * majorDeltaIdx){
   float minorDelta = -10;
   float majorDelta = -10;
   float deltaSum = 0;
-  float totalPunctuation = punctuation * varietyOwened.size();
+  float totalPunctuationNorm = 0;
+  float totalPunctuationClean = punctuation * varietyOwened.size();
   *minorDeltaIdx = -10;
   *majorDeltaIdx = -10;
 
   for(uint i = 0; i < varietyOwened.size(); ++i){
-    float temp = varietyOwened[i].punctuation / totalPunctuation -
+    totalPunctuationNorm += renormalizationFunction(
+        varietyOwened[i].punctuation - totalPunctuationClean);
+  }
+
+  for(uint i = 0; i < varietyOwened.size(); ++i){
+    float temp = renormalizationFunction(varietyOwened[i].punctuation -
+      totalPunctuationClean) / totalPunctuationNorm -
       varietyOwened[i].quantity / 49.0;
     deltaSum += abs(temp);
     if(temp > majorDelta){
