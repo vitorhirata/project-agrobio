@@ -136,7 +136,8 @@ void DomesticUnity::iterateDU(void){
   int minorDeltaIdx;
   float deltaSum = computeDeltaSum(&minorDeltaIdx, &majorDeltaIdx);
 
-  if(deltaSum > m_duParameter.insideTradeLimit){
+  if(deltaSum > m_duParameter.insideTradeLimit &&
+      minorDeltaIdx != majorDeltaIdx){
     changeProduction(varietyOwened[majorDeltaIdx].varietyData,
         varietyOwened[minorDeltaIdx].number);
   }
@@ -212,7 +213,7 @@ float DomesticUnity::computeDeltaSum(int * minorDeltaIdx, int * majorDeltaIdx){
   for(uint i = 0; i < varietyOwened.size(); ++i){
     float temp = renormalizationFunction(varietyOwened[i].punctuation -
       averagePunctuation) / totalPunctuationNorm -
-      varietyOwened[i].quantity / 49.0;
+      (float) varietyOwened[i].quantity / m_indexOwenedPatches.size();
     deltaSum += abs(temp);
     if(temp > majorDelta){
       majorDelta = temp;
