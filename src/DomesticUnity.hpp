@@ -206,18 +206,20 @@ float DomesticUnity::computeDeltaSum(int * minorDeltaIdx, int * majorDeltaIdx){
   float majorDelta = -10;
   float deltaSum = 0;
   float totalPunctuationNorm = 0;
-  float totalPunctuationClean = punctuation * varietyOwened.size();
+  float averagePunctuation = 0;
   *minorDeltaIdx = -10;
   *majorDeltaIdx = -10;
-
+  for(uint i = 0; i < varietyOwened.size(); ++i)
+    averagePunctuation += varietyOwened[i].punctuation;
+  averagePunctuation /= varietyOwened.size();
   for(uint i = 0; i < varietyOwened.size(); ++i){
     totalPunctuationNorm += renormalizationFunction(
-        varietyOwened[i].punctuation - totalPunctuationClean);
+        varietyOwened[i].punctuation - averagePunctuation);
   }
 
   for(uint i = 0; i < varietyOwened.size(); ++i){
     float temp = renormalizationFunction(varietyOwened[i].punctuation -
-      totalPunctuationClean) / totalPunctuationNorm -
+      averagePunctuation) / totalPunctuationNorm -
       varietyOwened[i].quantity / 49.0;
     deltaSum += abs(temp);
     if(temp > majorDelta){
