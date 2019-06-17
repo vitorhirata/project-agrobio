@@ -50,7 +50,6 @@ void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
   m_duParameter.insideTradeLimit = t_duParameter.insideTradeLimit;
   m_duParameter.alpha = t_duParameter.alpha;
   m_duParameter.probabilityNewVar = t_duParameter.probabilityNewVar;
-  m_duParameter.probabilityDeath = t_duParameter.probabilityDeath;
   m_DUpreference = gauss(rand64);
   while(!(m_DUpreference > 0 && m_DUpreference < 1))
     m_DUpreference = gauss(rand64);
@@ -127,8 +126,7 @@ float DomesticUnity::computePunctuation(float varFitness,
 // deltaSum > 'i',
 // exist a null variety,
 // extpunctuationDifference > 'o',
-// or with a probability 'p' a new variety is created,
-// and with a probability 'd' a variety is killed
+// or with a probability 'p' a new variety is created
 void DomesticUnity::iterateDU(void){
   float bestDUpunctuation;
   int bestDUindex = computeBestDU(&bestDUpunctuation);
@@ -142,7 +140,7 @@ void DomesticUnity::iterateDU(void){
     changeProduction(varietyOwened[majorDeltaIdx].varietyData,
         varietyOwened[minorDeltaIdx].number);
   }
-  if(findVariety(-1) >= 0)
+  while(findVariety(-1) >= 0)
     changeProduction(varietyOwened[majorDeltaIdx].varietyData,-1);
   if(extpunctuationDifference > m_duParameter.outsideTradeLimit){
     int extBestVarietyIdx = floor(uniFLOAT(rand64) *
@@ -154,12 +152,6 @@ void DomesticUnity::iterateDU(void){
   if(uniFLOAT(rand64) < m_duParameter.probabilityNewVar){
     int newPlace = m_indexOwenedPatches[uniIntPlace(rand64)];
     m_grid[newPlace].setRandomVariety();
-  }
-  if(uniFLOAT(rand64) < m_duParameter.probabilityDeath){
-    int newPlace = m_indexOwenedPatches[uniIntPlace(rand64)];
-    while(uniFLOAT(rand64) < 1 - m_grid[newPlace].fitness)
-      newPlace = m_indexOwenedPatches[uniIntPlace(rand64)];
-    m_grid[newPlace].killVariety();
   }
 }
 
@@ -226,7 +218,7 @@ float DomesticUnity::computeDeltaSum(int * minorDeltaIdx, int * majorDeltaIdx){
       majorDelta = temp;
       *majorDeltaIdx = i;
     }
-    if(temp < - minorDelta){
+    if(temp < - minorDelta && varietyOwened[i].number != -1){
       minorDelta = - temp;
       *minorDeltaIdx = i;
     }

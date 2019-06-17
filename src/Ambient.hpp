@@ -12,6 +12,7 @@ private:
   std::vector<std::vector<int> > defineDUindex(
       std::uniform_int_distribution<long> uniIntSP, int numberVarDU);
   int computeDUnumber(int place);
+  float computeDeathProbability(float x);
 public:
   Patch* grid;
   Ambient(int t_latticeSize, int t_nResourceDistribution,
@@ -21,6 +22,7 @@ public:
   void computeAllFitness(void);
   int countSpecie(void);
   void runAdversity(void);
+  void runDeath(void);
 };
 
 // Ambient constructor. initialize parameters, create grid set it's varieties
@@ -178,4 +180,14 @@ void Ambient::runAdversity(void){
   }
 }
 
+void Ambient::runDeath(void){
+  for(int i = 0; i < m_latticeSize*m_latticeSize; ++i){
+    if(uniFLOAT(rand64) < computeDeathProbability(grid[i].fitness))
+      grid[i].killVariety();
+  }
+}
+
+float Ambient::computeDeathProbability(float x){
+  return 0.6-1.5*x;
+}
 #endif

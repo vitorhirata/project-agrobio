@@ -164,6 +164,7 @@ Result Model::runPlot(void){
 // computing DU punctuations and evaluating it's production
 void Model::iterate(void){
   ambient->computeAllFitness();
+  ambient->runDeath();
   for(int i = 0; i < m_parameter.numberDomesticUnity; ++i)
     domesticUnity[i].computeDUpunctuations();
 

@@ -76,13 +76,11 @@ struct DUParameter{
   float probabilityNewVar;
   float outsideTradeLimit;
   float insideTradeLimit;
-  float probabilityDeath;
   DUParameter(){}
   DUParameter(Parameter parameter)
   : alpha(parameter.alpha)
   , probabilityNewVar(parameter.probabilityNewVar)
   , outsideTradeLimit(parameter.outsideTradeLimit)
-  , insideTradeLimit(parameter.insideTradeLimit)
-  , probabilityDeath(parameter.probabilityDeath) {}
+  , insideTradeLimit(parameter.insideTradeLimit) {}
 };
 #endif
