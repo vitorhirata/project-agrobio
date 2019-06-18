@@ -89,7 +89,6 @@ Result Model::runStandard(void){
       result.fitnessPunctuation.push_back(tempPunctuation[1]);
     }
   }
-  ambient->computeAllFitness();
   result.fitnessFrequency = metrics::computeFitnessProfile(
       ambient->grid, m_parameter.latticeSize);
   result.appearenceFrequency = metrics::computeAppearenceProfile(
@@ -108,7 +107,6 @@ Result Model::runFixedPoint(void){
   for(int t = 0; t < m_parameter.maxTime; ++t)
     iterate();
 
-  ambient->computeAllFitness();
   result.numberVariety.push_back(ambient->countSpecie());
   result.meanVarietyDU.push_back(metrics::computeVarietyMeanProfile(
         domesticUnity, m_parameter.numberDomesticUnity,
@@ -148,7 +146,6 @@ Result Model::runPlot(void){
     }
   }
 
-  ambient->computeAllFitness();
   result.fitnessFrequency = metrics::computeFitnessProfile(
       ambient->grid, m_parameter.latticeSize);
   result.appearenceFrequency = metrics::computeAppearenceProfile(
@@ -163,7 +160,6 @@ Result Model::runPlot(void){
 // Run one interation of the model, computing the fitness of ambient,
 // computing DU punctuations and evaluating it's production
 void Model::iterate(void){
-  ambient->computeAllFitness();
   ambient->runDeath();
   for(int i = 0; i < m_parameter.numberDomesticUnity; ++i)
     domesticUnity[i].computeDUpunctuations();

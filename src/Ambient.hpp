@@ -19,7 +19,6 @@ public:
       int t_numberResources, int t_numberInitialVariety,
       int t_numberInitialVarietyDU);
   ~Ambient();
-  void computeAllFitness(void);
   int countSpecie(void);
   void runAdversity(void);
   void runDeath(void);
@@ -132,13 +131,6 @@ std::vector<VarietyData> Ambient::defineInitialVarieties(int numberResources,
     varietyAvailable[i].appearence = uniFLOAT(rand64);
   }
   return varietyAvailable;
-}
-
-// Compute fitness for all Patch
-void Ambient::computeAllFitness(void){
-  for(int i = 0; i < m_latticeSize*m_latticeSize; ++i){
-    grid[i].computeLocalFitness();
-  }
 }
 
 // Count the number of different varieties in the grid, return a int to
