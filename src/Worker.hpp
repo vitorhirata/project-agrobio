@@ -188,6 +188,9 @@ namespace worker{
         case 'R':
           parameter.numberResources = paramValue;
           break;
+        case 's':
+          parameter.selectionStrength = paramValue;
+          break;
         case 'd':
           parameter.probabilityDeath = paramValue;
       }
@@ -293,6 +296,9 @@ namespace worker{
       case 'R':
         paramList = std::vector<float> {1, 3, 5, 7, 10};
         break;
+      case 's':
+        paramList = std::vector<float> {1, 8, 15, 30, 50, 100};
+        break;
       case 'd':
         paramList = std::vector<float> {0.001, 0.005, 0.01, 0.025, 0.05};
     }
@@ -342,6 +348,9 @@ namespace worker{
           break;
         case 'R':
           parameter.numberResources = paramValue;
+          break;
+        case 's':
+          parameter.selectionStrength = paramValue;
           break;
         case 'd':
           parameter.probabilityDeath = paramValue;

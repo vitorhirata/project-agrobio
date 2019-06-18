@@ -48,6 +48,7 @@ void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
   m_indexOwenedPatches = t_indexOwenedPatches;
   m_duParameter.outsideTradeLimit = t_duParameter.outsideTradeLimit;
   m_duParameter.insideTradeLimit = t_duParameter.insideTradeLimit;
+  m_duParameter.selectionStrength = t_duParameter.selectionStrength;
   m_duParameter.alpha = t_duParameter.alpha;
   m_duParameter.probabilityNewVar = t_duParameter.probabilityNewVar;
   m_DUpreference = gauss(rand64);
@@ -188,7 +189,8 @@ int DomesticUnity::computeBestDU(float * bestDUpunctuation){
 
 // Logistic function that takes [0,1] -> [0,1]
 float DomesticUnity::renormalizationFunction(float x){
-  return (15*x)/sqrt(1+(30*x)*(30*x))+0.5;
+  return (m_duParameter.selectionStrength*x) /
+    sqrt(1+pow(2 * m_duParameter.selectionStrength * x, 2)) + 0.5;
 }
 
 // Calculate the difference between intented number of variety and real number

@@ -153,6 +153,7 @@ namespace metrics{
     arquivo << "### PARAMETERS VALUE ###" << endl;
     arquivo << "### LATTICESIZE = " << parameter.latticeSize;
     arquivo << ", NVARIETY = " << parameter.numberInitialVariety;
+    arquivo << ", NVARIETYDU = " << parameter.numberInitialVarietyDU;
     arquivo << ", NRESOURCE = " << parameter.numberResources;
     arquivo << ", NRESOURCEDIST = " << parameter.numberHabitat;
     arquivo << ", NETWORKTYPE = " << parameter.networkType;
@@ -162,6 +163,7 @@ namespace metrics{
     arquivo << ", MSF = " << parameter.mSF;
     arquivo << ", OUTSIDETRADELIMIT = " << parameter.outsideTradeLimit;
     arquivo << ", INSIDETRADELIMIT = " << parameter.insideTradeLimit;
+    arquivo << ", SELECTIONSTRENGTH = " << parameter.selectionStrength;
     arquivo << ", ALPHA = " << parameter.alpha;
     arquivo << ", NDOMESTICUNITY = " << parameter.numberDomesticUnity;
     arquivo << ", PROBABILITYNEWVAR = " << parameter.probabilityNewVar;
