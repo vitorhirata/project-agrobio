@@ -192,10 +192,6 @@ namespace worker{
           parameter.selectionStrength = paramValue;
           break;
         case 'd':
-          if(paramValue < 10){
-            cout << "ERROR: d must be smaller than 10." << endl;
-            exit(-1);
-          }
           parameter.deathStrength = paramValue;
       }
       clock_t tStart = clock();
@@ -357,10 +353,6 @@ namespace worker{
           parameter.selectionStrength = paramValue;
           break;
         case 'd':
-          if(paramValue < 10){
-            cout << "ERROR: d must be smaller than 10." << endl;
-            exit(-1);
-          }
           parameter.deathStrength = paramValue;
       }
       clock_t tStart = clock();
