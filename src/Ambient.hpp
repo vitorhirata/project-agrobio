@@ -5,6 +5,7 @@
 class Ambient{
 private:
   const int m_latticeSize;
+  const float m_deathStrength;
   void setPatch(int numberResources, int nResourceDistribution,
       int numberInitialVariety, int numberInitialVarietyDU);
   std::vector<VarietyData> defineInitialVarieties(
@@ -17,7 +18,7 @@ public:
   Patch* grid;
   Ambient(int t_latticeSize, int t_nResourceDistribution,
       int t_numberResources, int t_numberInitialVariety,
-      int t_numberInitialVarietyDU);
+      int t_numberInitialVarietyDU, float t_deathStrength);
   ~Ambient();
   int countSpecie(void);
   void runAdversity(void);
@@ -28,8 +29,9 @@ public:
 // and resources
   Ambient::Ambient(int t_latticeSize, int t_nResourceDistribution,
       int t_numberResources, int t_numberInitialVariety,
-      int t_numberInitialVarietyDU)
+      int t_numberInitialVarietyDU, float t_deathStrength)
   : m_latticeSize(t_latticeSize)
+  , m_deathStrength(t_deathStrength)
 {
   grid = new Patch [m_latticeSize*m_latticeSize];
   setPatch(t_numberResources, t_nResourceDistribution,
@@ -180,6 +182,6 @@ void Ambient::runDeath(void){
 }
 
 float Ambient::computeDeathProbability(float x){
-  return 0.6-1.5*x;
+  return 1/(m_deathStrength*(x+0.05));
 }
 #endif

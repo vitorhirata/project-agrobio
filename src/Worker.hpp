@@ -192,7 +192,11 @@ namespace worker{
           parameter.selectionStrength = paramValue;
           break;
         case 'd':
-          parameter.probabilityDeath = paramValue;
+          if(paramValue < 10){
+            cout << "ERROR: d must be smaller than 10." << endl;
+            exit(-1);
+          }
+          parameter.deathStrength = paramValue;
       }
       clock_t tStart = clock();
       Result result(parameter.maxTime/parameter.timeInterval,
@@ -300,7 +304,7 @@ namespace worker{
         paramList = std::vector<float> {1, 8, 15, 30, 50, 100};
         break;
       case 'd':
-        paramList = std::vector<float> {0.001, 0.005, 0.01, 0.025, 0.05};
+        paramList = std::vector<float> {10, 18, 30, 50, 100};
     }
 
     for(auto paramValue : paramList){
@@ -353,7 +357,11 @@ namespace worker{
           parameter.selectionStrength = paramValue;
           break;
         case 'd':
-          parameter.probabilityDeath = paramValue;
+          if(paramValue < 10){
+            cout << "ERROR: d must be smaller than 10." << endl;
+            exit(-1);
+          }
+          parameter.deathStrength = paramValue;
       }
       clock_t tStart = clock();
       Result result(1, round(1 / 0.05), parameter.latticeSize);
