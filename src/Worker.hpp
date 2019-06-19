@@ -52,7 +52,7 @@ namespace worker{
       histogramFile << result.appearenceFrequency[i] / parameter.nRun << endl;
     }
     for(int i = 0; i < parameter.numberDomesticUnity; ++i){
-      duDistFile << i+1 << "; " << result.duDistribution[i] / parameter.nRun;
+      duDistFile << i << "; " << result.duDistribution[i] / parameter.nRun;
       duDistFile << endl;
       varietyDistFile << i+1 << "; ";
       varietyDistFile << result.varietyDistribution[i] / parameter.nRun;
@@ -112,7 +112,7 @@ namespace worker{
       histogramFile << "; " << result.appearenceFrequency[i] << endl;
     }
     for(int i = 0; i < parameter.numberDomesticUnity; ++i){
-      duDistFile << i+1 << "; " << result.duDistribution[i] << endl;
+      duDistFile << i << "; " << result.duDistribution[i] << endl;
       varietyDistFile << i+1 << "; " << result.varietyDistribution[i] << endl;
     }
     histogramFile.close();
@@ -221,7 +221,7 @@ namespace worker{
         histogramFile << "; " << paramValue << endl;
       }
       for(int i = 0; i < parameter.numberDomesticUnity; ++i){
-        duDistFile << i+1 << "; ";
+        duDistFile << i << "; ";
         duDistFile << result.duDistribution[i] / parameter.nRun << "; ";
         duDistFile << paramValue << endl;
         varietyDistFile << i+1 << "; ";
@@ -385,7 +385,7 @@ namespace worker{
         histogramFile << "; " << paramValue << endl;
       }
       for(int i = 0; i < parameter.numberDomesticUnity; ++i){
-        duDistFile << i+1 << "; ";
+        duDistFile << i << "; ";
         duDistFile << result.duDistribution[i] / parameter.nRun << "; ";
         duDistFile << paramValue << endl;
         varietyDistFile << i+1 << "; ";

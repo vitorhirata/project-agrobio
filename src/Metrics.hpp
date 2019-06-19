@@ -41,7 +41,7 @@ namespace metrics{
     std::vector<float> duDistribution(t_DUsize, 0);
     for(int i = 0; i < t_numberDomesticUnity; ++i){
       int num = domesticUnity[i].numberVarietyOwened();;
-      duDistribution[num-1] += 1.0 / t_numberDomesticUnity;
+      duDistribution[num] += 1.0 / t_numberDomesticUnity;
     }
     return duDistribution;
   }
