@@ -15,7 +15,7 @@ private:
   float computePunctuation(float varFitness, float varAppererence);
   void fillvarietyOwened(std::map<int,std::vector<float> >* varietyData);
   int computeBestDU(float * bestDUpunctuation);
-  float computeDeltaSum(int * minorDeltaIdx, int * majorDeltaIdx);
+  float computeMaxDelta(int * minorDeltaIdx, int * majorDeltaIdx);
   float renormalizationFunction(float x);
 public:
   float punctuation;
@@ -124,7 +124,7 @@ float DomesticUnity::computePunctuation(float varFitness,
 }
 
 // Iterate the domestic unity. Changes cultivated variety if
-// deltaSum > 'i',
+// max(majorDelta, minorDelta) > 'i',
 // exist a null variety,
 // extpunctuationDifference > 'o',
 // or with a probability 'p' a new variety is created
@@ -135,9 +135,9 @@ void DomesticUnity::iterateDU(void){
 
   int majorDeltaIdx;
   int minorDeltaIdx;
-  float deltaSum = computeDeltaSum(&minorDeltaIdx, &majorDeltaIdx);
+  float maxDelta = computeMaxDelta(&minorDeltaIdx, &majorDeltaIdx);
 
-  if(deltaSum > m_duParameter.insideTradeLimit &&
+  if(maxDelta > m_duParameter.insideTradeLimit &&
       minorDeltaIdx != majorDeltaIdx){
     changeProduction(varietyOwened[majorDeltaIdx].varietyData,
         varietyOwened[minorDeltaIdx].number);
@@ -196,10 +196,9 @@ float DomesticUnity::renormalizationFunction(float x){
 // Calculate the difference between intented number of variety and real number
 // of variety. Return that index of the variaty that has major and minor
 // differences.
-float DomesticUnity::computeDeltaSum(int * minorDeltaIdx, int * majorDeltaIdx){
+float DomesticUnity::computeMaxDelta(int * minorDeltaIdx, int * majorDeltaIdx){
   float minorDelta = -10;
   float majorDelta = -10;
-  float deltaSum = 0;
   float totalPunctuationNorm = 0;
   float averagePunctuation = 0;
   *minorDeltaIdx = -10;
@@ -216,7 +215,6 @@ float DomesticUnity::computeDeltaSum(int * minorDeltaIdx, int * majorDeltaIdx){
     float temp = renormalizationFunction(varietyOwened[i].punctuation -
       averagePunctuation) / totalPunctuationNorm -
       (float) varietyOwened[i].quantity / m_indexOwenedPatches.size();
-    deltaSum += abs(temp);
     if(temp > majorDelta){
       majorDelta = temp;
       *majorDeltaIdx = i;
@@ -226,8 +224,7 @@ float DomesticUnity::computeDeltaSum(int * minorDeltaIdx, int * majorDeltaIdx){
       *minorDeltaIdx = i;
     }
   }
-  deltaSum /= varietyOwened.size();
-  return deltaSum;
+  return std::max(majorDelta,minorDelta);
 }
 
 // Find one place (between the owened patches) where the given variety exists.
