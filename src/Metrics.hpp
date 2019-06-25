@@ -38,7 +38,7 @@ namespace metrics{
   // Domestic Unities
   std::vector<float> computeDUprofile(DomesticUnity* domesticUnity,
       const int t_numberDomesticUnity, const int t_DUsize){
-    std::vector<float> duDistribution(t_DUsize, 0);
+    std::vector<float> duDistribution(t_DUsize + 1, 0);
     for(int i = 0; i < t_numberDomesticUnity; ++i){
       int num = domesticUnity[i].numberVarietyOwened();;
       duDistribution[num] += 1.0 / t_numberDomesticUnity;

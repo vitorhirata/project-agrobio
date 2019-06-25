@@ -89,6 +89,10 @@ Result Model::runStandard(void){
       result.fitnessPunctuation.push_back(tempPunctuation[1]);
     }
   }
+  std::vector<float> tempPunctuation = metrics::computePunctuationAverage(
+      domesticUnity, m_parameter.numberDomesticUnity);
+  result.totalPunctuation.push_back(tempPunctuation[0]);
+  result.fitnessPunctuation.push_back(tempPunctuation[1]);
   result.fitnessFrequency = metrics::computeFitnessProfile(
       ambient->grid, m_parameter.latticeSize);
   result.appearenceFrequency = metrics::computeAppearenceProfile(
@@ -111,6 +115,10 @@ Result Model::runFixedPoint(void){
   result.meanVarietyDU.push_back(metrics::computeVarietyMeanProfile(
         domesticUnity, m_parameter.numberDomesticUnity,
         m_parameter.latticeSize));
+  std::vector<float> tempPunctuation = metrics::computePunctuationAverage(
+      domesticUnity, m_parameter.numberDomesticUnity);
+  result.totalPunctuation.push_back(tempPunctuation[0]);
+  result.fitnessPunctuation.push_back(tempPunctuation[1]);
   result.fitnessFrequency = metrics::computeFitnessProfile(
       ambient->grid, m_parameter.latticeSize);
   result.appearenceFrequency = metrics::computeAppearenceProfile(

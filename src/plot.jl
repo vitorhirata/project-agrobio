@@ -39,8 +39,6 @@ function plotHandler(input_file)
 
   if mode == "standard"
     plotStandard(df, output_file)
-  elseif mode == "punctuation"
-    plotPunctuation(df, output_file)
   elseif mode == "varParam"
     plotVarParam(df, output_file)
   elseif mode == "duDistribution"
@@ -75,10 +73,7 @@ function plotStandard(df, output_file)
     output_file2 = output_file[1:end-4] * "2.svg"
     draw(SVG(output_file2, 15cm, 10cm), p2)
     println("Image $(output_file2) successfully generated.")
-end
-
-function plotPunctuation(df, output_file)
-    p = plot(layer(df, x=:time, y=:totalPunctuation, Geom.line,
+    p3 = plot(layer(df, x=:time, y=:totalPunctuation, Geom.line,
                        Theme(default_color=colorant"blue")),
             layer(df, x=:time, y=:fitnessPunctuation, Geom.line,
                       Theme(default_color=colorant"red")),
@@ -89,8 +84,9 @@ function plotPunctuation(df, output_file)
                             ["blue", "red", "green"]),
                 Coord.cartesian(ymin=0, ymax=1),
                 Guide.ylabel("Pontuação"), Guide.xlabel("Tempo"))
-    draw(SVG(output_file, 20cm, 10cm), p)
-    println("Image $(output_file) successfully generated.")
+    output_file3 = output_file[1:end-4] * "3.svg"
+    draw(SVG(output_file3, 20cm, 10cm), p3)
+    println("Image $(output_file3) successfully generated.")
 end
 
 function plotVarParam(df, output_file)
