@@ -108,7 +108,8 @@ void DomesticUnity::fillvarietyOwened(std::map<int,
     else{
       newVar.punctuation = computePunctuation(itr->second[1] / itr->second[0],
           itr->second[2] / itr->second[0]);
-      newVar.fitness_punctuation = itr->second[1] / itr->second[0];
+      newVar.fitness_punctuation = m_duParameter.alpha *
+        itr->second[1] / itr->second[0];
     }
     varietyOwened.push_back(newVar);
   }
