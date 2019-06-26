@@ -182,6 +182,6 @@ void Ambient::runDeath(void){
 }
 
 float Ambient::computeDeathProbability(float x){
-  return 1/(m_deathStrength*(x+0.05));
+  return m_deathStrength/(x+0.05);
 }
 #endif

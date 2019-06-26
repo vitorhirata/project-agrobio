@@ -43,7 +43,7 @@ struct Parameter{
   , selectionStrength(15)
   , alpha(0.5)
   , probabilityNewVar(0.001)
-  , deathStrength(18) {}
+  , deathStrength(0.05) {}
 };
 
 struct Result{
