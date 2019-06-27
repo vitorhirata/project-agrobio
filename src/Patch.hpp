@@ -16,6 +16,7 @@ public:
   VarietyData giveVarietyData(void);
   void setRandomVariety(void);
   void killVariety(void);
+  void updateResource(float factor);
 };
 
 // Initialize the patch, setting up the resources and variety according to
@@ -69,6 +70,10 @@ VarietyData Patch::giveVarietyData(void){
 // Set the resource as t_resource
 void Patch::setLocalResource(std::vector<float> t_resource){
   m_resource = t_resource;
+}
+
+void Patch::updateResource(float factor){
+  m_resource[0] *= factor;
 }
 
 #endif

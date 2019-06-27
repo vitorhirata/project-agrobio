@@ -23,6 +23,8 @@ public:
   int countSpecie(void);
   void runAdversity(void);
   void runDeath(void);
+  void runResourceShock(void);
+  void runResourceRecover(void);
 };
 
 // Ambient constructor. initialize parameters, create grid set it's varieties
@@ -184,4 +186,15 @@ void Ambient::runDeath(void){
 float Ambient::computeDeathProbability(float x){
   return m_deathStrength/(x+0.05);
 }
+
+void Ambient::runResourceShock(void){
+  for(int i = 0; i < m_latticeSize*m_latticeSize; ++i)
+    grid[i].updateResource(0.01);
+}
+
+void Ambient::runResourceRecover(void){
+  for(int i = 0; i < m_latticeSize*m_latticeSize; ++i)
+    grid[i].updateResource(100);
+}
+
 #endif

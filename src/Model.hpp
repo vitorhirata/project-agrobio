@@ -146,8 +146,10 @@ Result Model::runPlot(void){
   metrics::printState(0, ambient->grid, m_parameter.latticeSize);
 
   for(int t = 0; t < m_parameter.maxTime; ++t){
-    if(t == 1000)
-      ambient->runAdversity();
+    if(t == 1000){
+      ambient->runResourceShock();
+      //ambient->runAdversity();
+    }
     iterate();
     if (t % m_parameter.timeInterval == 0){
       result.numberVariety.push_back(ambient->countSpecie());
@@ -163,6 +165,8 @@ Result Model::runPlot(void){
             domesticUnity, m_parameter.numberDomesticUnity));
 
     }
+    if(t == 1050)
+      ambient->runResourceRecover();
   }
 
   result.fitnessFrequency = metrics::computeFitnessProfile(
