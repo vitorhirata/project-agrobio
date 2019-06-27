@@ -21,6 +21,7 @@ public:
       int t_numberInitialVarietyDU, float t_deathStrength);
   ~Ambient();
   int countSpecie(void);
+  void runAdversity(void);
   void runDeath(void);
 };
 
@@ -145,6 +146,32 @@ int Ambient::countSpecie(void){
   if(varietyAvailability.count(-1))
     return varietyAvailability.size() - 1;
   return varietyAvailability.size();
+}
+
+void Ambient::runAdversity(void){
+  std::map<int,int> numberVariety;
+  for(int i = 0; i < m_latticeSize*m_latticeSize; ++i){
+    int varNumber = grid[i].variety.varietyNumber;
+    if(numberVariety.count(varNumber) > 0)
+      ++numberVariety[varNumber];
+    else
+      numberVariety[varNumber] = 1;
+  }
+
+  float majorNumberDU = -10;
+  int majorVariety = -1;
+  for(auto i : numberVariety){
+    if(i.second > majorNumberDU){
+      majorNumberDU = i.second;
+      majorVariety = i.first;
+    }
+  }
+
+  for(int i = 0; i < m_latticeSize*m_latticeSize; ++i){
+    int varNumber = grid[i].variety.varietyNumber;
+    if(varNumber == majorVariety)
+      grid[i].killVariety();
+  }
 }
 
 void Ambient::runDeath(void){
