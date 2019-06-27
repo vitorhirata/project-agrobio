@@ -45,6 +45,8 @@ function plotHandler(input_file)
     plotduDistribution(df, output_file)
   elseif mode == "varietyDistribution"
     plotVarietyDistribution(df, output_file)
+  elseif mode == "varietyQuantity"
+    plotVarietyQuantity(df, output_file)
   elseif mode == "histogramFitness"
     plotHistogramFitness(df, output_file)
   elseif mode == "histogramFitnessVar"
@@ -87,6 +89,11 @@ function plotStandard(df, output_file)
     output_file3 = output_file[1:end-4] * "3.svg"
     draw(SVG(output_file3, 20cm, 10cm), p3)
     println("Image $(output_file3) successfully generated.")
+    p4 = plot(df, x=:time, y=:maxVarQuant, Geom.line,
+                Guide.ylabel("Área média da variedade dominante (%)"), Guide.xlabel("Tempo"))
+    output_file4 = output_file[1:end-4] * "4.svg"
+    draw(SVG(output_file4, 20cm, 10cm), p4)
+    println("Image $(output_file4) successfully generated.")
 end
 
 function plotVarParam(df, output_file)
@@ -103,16 +110,23 @@ function plotVarParam(df, output_file)
     output_file2 = output_file[1:end-4] * "2.svg"
     draw(SVG(output_file2, 15cm, 10cm), p2)
     println("Image $(output_file2) successfully generated.")
+    p3 = plot(df, x=:time, y=:maxVarQuant, color=:param, Geom.line,
+                  Scale.color_discrete(), Guide.colorkey(title=param),
+                  Guide.ylabel("Área média da variedade dominante (%)"),
+                  Guide.xlabel("Tempo"))
+    output_file3 = output_file[1:end-4] * "3.svg"
+    draw(SVG(output_file3, 20cm, 10cm), p3)
+    println("Image $(output_file3) successfully generated.")
     if param == "m"
       maxTime = maximum(df[:time])
       df2 = df[df[:time] .== maxTime, :]
-      p3 = plot(df2, x=:meanDU, y=:nVar, Geom.point,
+      p4 = plot(df2, x=:meanDU, y=:nVar, Geom.point,
                   Guide.xlabel("Numero Medio de Variedades por UD"),
                   Guide.ylabel("Numero de Variedades"),
                   Coord.cartesian(xmin=0, ymin=0))
-      output_file3 = output_file[1:end-4] * "3.svg"
-      draw(SVG(output_file3, 15cm, 10cm), p3)
-      println("Image $(output_file3) successfully generated.")
+      output_file4 = output_file[1:end-4] * "4.svg"
+      draw(SVG(output_file4, 15cm, 10cm), p4)
+      println("Image $(output_file4) successfully generated.")
     end
 end
 
@@ -149,6 +163,26 @@ function plotVarietyDistribution(df, output_file)
                   Guide.ylabel("Porcentagem de Variedades"),
                   Guide.xlabel("Número de Unidades Domésticas"),
                   Coord.cartesian(xmin=0, xmax=49))
+      draw(SVG(output_file, 15cm, 10cm), p)
+      println("Image $(output_file) successfully generated.")
+    end
+end
+
+function plotVarietyQuantity(df, output_file)
+    param = string(output_file[end-4])
+    if length(split(output_file, "_")) == 2
+      p = plot(df, x=:quantity, y=:frequency, Geom.bar,
+                  Guide.ylabel("Porcentagem de Variedades"),
+                  Guide.xlabel("Porcentagem da área total ocupada"),
+                  Scale.x_log10)
+      draw(SVG(output_file, 15cm, 10cm), p)
+      println("Image $(output_file) successfully generated.")
+    elseif length(split(output_file, "_")) == 3
+      p = plot(df, x=:quantity, y=:frequency, color=:param, Geom.line,
+                  Scale.color_discrete(),Guide.colorkey(title=param),
+                  Guide.ylabel("Porcentagem de Variedades"),
+                  Guide.xlabel("Porcentagem da área total ocupada"),
+                  Scale.x_log10)
       draw(SVG(output_file, 15cm, 10cm), p)
       println("Image $(output_file) successfully generated.")
     end

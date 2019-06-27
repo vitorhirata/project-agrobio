@@ -21,6 +21,14 @@ namespace metrics{
         (*result).varietyDistribution.end(),
         (*resultTemp).varietyDistribution.begin(),
         (*result).varietyDistribution.begin(), std::plus<float>());
+    std::transform((*result).varietyQuantity.begin(),
+        (*result).varietyQuantity.end(),
+        (*resultTemp).varietyQuantity.begin(),
+        (*result).varietyQuantity.begin(), std::plus<float>());
+    std::transform((*result).varietyQuantityDU.begin(),
+        (*result).varietyQuantityDU.end(),
+        (*resultTemp).varietyQuantityDU.begin(),
+        (*result).varietyQuantityDU.begin(), std::plus<float>());
     std::transform((*result).fitnessFrequency.begin(),
         (*result).fitnessFrequency.end(),
         (*resultTemp).fitnessFrequency.begin(),
@@ -66,6 +74,49 @@ namespace metrics{
 
     return varietyProfile;
   }
+
+  // Return the frequency of the area cultivated by each variety
+  std::vector<float> computeVarietyQuantity(DomesticUnity* domesticUnity,
+      const int t_numberDomesticUnity, const int t_latticeSize){
+    std::map<int,int> numberDU;
+    for(int i = 0; i < t_numberDomesticUnity; ++i){
+      for(auto var : domesticUnity[i].varietyOwened){
+        if(numberDU.count(var.number) > 0)
+          numberDU[var.number] += var.quantity;
+        else
+          numberDU[var.number] = var.quantity;
+      }
+    }
+    if(numberDU.count(-1) > 0)
+      numberDU.erase(-1);
+    float step = 0.2;
+    float size = floor(log10(t_latticeSize * t_latticeSize)/step) + 1;
+    std::vector<float> varietyProfile(size, 0);
+    for(auto i : numberDU){
+      int idx = floor(log10(i.second) / step);
+      varietyProfile[idx] += 1.0 / numberDU.size();
+    }
+
+    return varietyProfile;
+  }
+
+  // Return the average area cultivated by the most present variety of each DU
+  float computeVarietyQuantityDU(DomesticUnity* domesticUnity,
+      const int t_numberDomesticUnity){
+    std::vector<int> quantityBestVarDU(t_numberDomesticUnity, -1);
+    for(int i = 0; i < t_numberDomesticUnity; ++i){
+      for(auto var : domesticUnity[i].varietyOwened){
+        if(var.quantity > quantityBestVarDU[i])
+          quantityBestVarDU[i] = var.quantity;
+      }
+    }
+    float averageMaxQuantity = 0;
+    for(int i = 0; i < t_numberDomesticUnity; ++i)
+      averageMaxQuantity += quantityBestVarDU[i];
+    averageMaxQuantity /= t_numberDomesticUnity;
+    return averageMaxQuantity;
+  }
+
 
   // Return the average punctuation of Domestic Unities
   std::vector<float> computePunctuationAverage(

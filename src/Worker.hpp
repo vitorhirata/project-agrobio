@@ -2,8 +2,8 @@ namespace worker{
   void Run_standard(void){
     Parameter parameter;
     Result result(parameter.maxTime/parameter.timeInterval,
-        round(1 / 0.05), parameter.latticeSize);
-    Result resultTemp(0, 0, 0);
+        round(1 / 0.05), parameter.latticeSize, 17);
+    Result resultTemp(0, 0, 0, 0);
 
     clock_t tStart = clock();
     for(int run = 0; run < parameter.nRun; ++run){
@@ -14,8 +14,10 @@ namespace worker{
     time_t now = time(NULL);
     std::string timestr = to_string(now);
 
+    int duSize = parameter.latticeSize / sqrt(parameter.numberDomesticUnity);
+    duSize = duSize * duSize;
     std::string header ("time; nVar; meanDU; totalPunctuation; ");
-    header.append("fitnessPunctuation; appearencePunctuation");
+    header.append("fitnessPunctuation; appearencePunctuation; maxVarQuant");
     fstream timeFile = worker::openFile(
         "test/" + timestr + "_standard.csv", header, parameter);
     for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i){
@@ -25,7 +27,9 @@ namespace worker{
       timeFile << result.totalPunctuation[i] / parameter.nRun << "; ";
       timeFile << result.fitnessPunctuation[i] / parameter.nRun << "; ";
       timeFile << (result.totalPunctuation[i]-
-          result.fitnessPunctuation[i]) / parameter.nRun << endl;
+          result.fitnessPunctuation[i]) / parameter.nRun << "; ";
+      timeFile << result.varietyQuantityDU[i] /
+        (duSize * parameter.nRun) << endl;
     }
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     timeFile.close();
@@ -39,14 +43,16 @@ namespace worker{
     fstream varietyDistFile = worker::openFile(
         "test/" + timestr + "_varietyDistribution.csv",  "value; varDist",
         parameter);
+    fstream varietyQuantFile = worker::openFile(
+        "test/" + timestr + "_varietyQuantity.csv",
+        "quantity; frequency", parameter);
     for(int i = 0; i < round(1 / 0.05); ++i){
       histogramFile << i*0.05 + 0.025 << "; ";
       histogramFile << result.fitnessFrequency[i] / parameter.nRun << "; ";
       histogramFile << result.appearenceFrequency[i] / parameter.nRun << endl;
     }
 
-    int duSize = parameter.latticeSize / sqrt(parameter.numberDomesticUnity);
-    for(int i = 0; i <= duSize * duSize; ++i){
+    for(int i = 0; i <= duSize; ++i){
       duDistFile << i << "; " << result.duDistribution[i] / parameter.nRun;
       duDistFile << endl;
     }
@@ -55,24 +61,32 @@ namespace worker{
       varietyDistFile << result.varietyDistribution[i] / parameter.nRun;
       varietyDistFile << endl;
     }
+    for(int i = 0; i < result.varietyQuantity.size(); ++i){
+      varietyQuantFile << (pow(10,i * 0.2)) / pow(parameter.latticeSize,2);
+      varietyQuantFile << "; ";
+      varietyQuantFile << result.varietyQuantity[i] / parameter.nRun<< endl;
+    }
 
     histogramFile.close();
     duDistFile.close();
     varietyDistFile.close();
+    varietyQuantFile.close();
   }
 
   void Run_plot(void){
     Parameter parameter;
     Model model(parameter);
-    Result result(0, 0, 0);
+    Result result(0, 0, 0, 0);
     clock_t tStart = clock();
     result = model.runPlot();
 
     time_t now = time(NULL);
     std::string timestr = to_string(now);
 
+    int duSize = parameter.latticeSize / sqrt(parameter.numberDomesticUnity);
+    duSize = duSize * duSize;
     std::string header ("time; nVar; meanDU; totalPunctuation; ");
-    header.append("fitnessPunctuation; appearencePunctuation");
+    header.append("fitnessPunctuation; appearencePunctuation; maxVarQuant");
     fstream timeFile = worker::openFile(
         "test/plot/" + timestr + "_standard.csv", header,
         parameter);
@@ -82,8 +96,8 @@ namespace worker{
       timeFile << result.meanVarietyDU[i] << "; ";
       timeFile << result.totalPunctuation[i] << "; ";
       timeFile << result.fitnessPunctuation[i] << "; ";
-      timeFile << result.totalPunctuation[i] -
-        result.fitnessPunctuation[i] << endl;
+      timeFile << result.totalPunctuation[i] - result.fitnessPunctuation[i];
+      timeFile << "; " << result.varietyQuantityDU[i] / duSize << endl;
     }
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     timeFile.close();
@@ -97,19 +111,26 @@ namespace worker{
     fstream varietyDistFile = worker::openFile(
         "test/plot/" + timestr + "_varietyDistribution.csv",
         "value; varDist", parameter);
+    fstream varietyQuantFile = worker::openFile(
+        "test/plot/" + timestr + "_varietyQuantity.csv",
+        "quantity; frequency", parameter);
     for(int i = 0; i < round(1 / 0.05); ++i){
       histogramFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i];
       histogramFile << "; " << result.appearenceFrequency[i] << endl;
     }
-    int duSize = parameter.latticeSize / sqrt(parameter.numberDomesticUnity);
-    for(int i = 0; i <= duSize * duSize; ++i)
+    for(int i = 0; i <= duSize; ++i)
       duDistFile << i << "; " << result.duDistribution[i] << endl;
     for(int i = 0; i < parameter.numberDomesticUnity; ++i)
       varietyDistFile << i+1 << "; " << result.varietyDistribution[i] << endl;
+    for(int i = 0; i < result.varietyQuantity.size(); ++i){
+      varietyQuantFile << (pow(10,i * 0.2)) / pow(parameter.latticeSize,2);
+      varietyQuantFile << "; " << result.varietyQuantity[i] << endl;
+    }
 
     histogramFile.close();
     duDistFile.close();
     varietyDistFile.close();
+    varietyQuantFile.close();
   }
 
 
@@ -122,7 +143,8 @@ namespace worker{
     std::string timestr = to_string(now);
 
     std::string header ("time; nVar; meanDU; totalPunctuation; ");
-    header.append("fitnessPunctuation; appearencePunctuation; param");
+    header.append("fitnessPunctuation; appearencePunctuation; ");
+    header.append("maxVarQuant; param");
     fstream timeFile = worker::openFile(
         "test/" + timestr + "_varParam_" + param + ".csv",
         header, parameter);
@@ -135,6 +157,9 @@ namespace worker{
     fstream varietyDistFile = worker::openFile(
         "test/" + timestr + "_varietyDistribution_" + param + ".csv",
         "value; varDist; param", parameter);
+    fstream varietyQuantFile = worker::openFile(
+        "test/" + timestr + "_varietyQuantity_" + param + ".csv",
+        "quantity; frequency; param", parameter);
 
     for(auto paramValue : paramList){
       switch (param){
@@ -190,14 +215,16 @@ namespace worker{
       }
       clock_t tStart = clock();
       Result result(parameter.maxTime/parameter.timeInterval,
-          round(1 / 0.05), parameter.latticeSize);
-      Result resultTemp(0, 0, 0);
+          round(1 / 0.05), parameter.latticeSize, 17);
+      Result resultTemp(0, 0, 0, 0);
       for(int run = 0; run < parameter.nRun; ++run){
         Model model(parameter);
         resultTemp = model.runStandard();
         metrics::sumResults(&result, &resultTemp);
       }
 
+      int duSize = parameter.latticeSize / sqrt(parameter.numberDomesticUnity);
+      duSize = duSize * duSize;
       for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i){
         timeFile << i * parameter.timeInterval << "; ";
         timeFile << (float) result.numberVariety[i] / parameter.nRun << "; ";
@@ -206,6 +233,8 @@ namespace worker{
         timeFile << result.fitnessPunctuation[i] / parameter.nRun << "; ";
         timeFile << (result.totalPunctuation[i]-
           result.fitnessPunctuation[i]) / parameter.nRun << "; ";
+        timeFile << result.varietyQuantityDU[i] /
+          (duSize * parameter.nRun) << "; ";
         timeFile << paramValue << endl;
       }
       for(int i = 0; i < round(1 / 0.05); ++i){
@@ -214,8 +243,7 @@ namespace worker{
         histogramFile << result.appearenceFrequency[i] / parameter.nRun;
         histogramFile << "; " << paramValue << endl;
       }
-      int duSize = parameter.latticeSize / sqrt(parameter.numberDomesticUnity);
-      for(int i = 0; i <= duSize * duSize; ++i){
+      for(int i = 0; i <= duSize; ++i){
         duDistFile << i << "; ";
         duDistFile << result.duDistribution[i] / parameter.nRun << "; ";
         duDistFile << paramValue << endl;
@@ -225,6 +253,12 @@ namespace worker{
         varietyDistFile << result.varietyDistribution[i] / parameter.nRun;
         varietyDistFile << "; " << paramValue << endl;
       }
+      for(int i = 0; i < result.varietyQuantity.size(); ++i){
+        varietyQuantFile << (pow(10,i * 0.2)) / pow(parameter.latticeSize,2);
+        varietyQuantFile << "; ";
+        varietyQuantFile << result.varietyQuantity[i] / parameter.nRun;
+        varietyQuantFile << "; " << paramValue << endl;
+      }
 
       cout << "Time taken: "<< (double)(clock()-tStart)/CLOCKS_PER_SEC << endl;
     }
@@ -232,6 +266,7 @@ namespace worker{
     histogramFile.close();
     duDistFile.close();
     varietyDistFile.close();
+    varietyQuantFile.close();
   }
 
   void Run_varParamFixedPoints(char param){
@@ -241,7 +276,7 @@ namespace worker{
     std::string timestr = to_string(now);
 
     std::string header ("param; nVar; meanDU; totalPunctuation; ");
-    header.append("fitnessPunctuation; appearencePunctuation");
+    header.append("fitnessPunctuation; appearencePunctuation; maxVarQuant");
     fstream mainFile = worker::openFile(
         "test/" + timestr + "_varParamFixedPoints_" + param + ".csv",
         header, parameter);
@@ -254,6 +289,9 @@ namespace worker{
     fstream varietyDistFile = worker::openFile(
         "test/" + timestr + "_varietyDistribution_" + param + ".csv",
         "value; varDist; param", parameter);
+    fstream varietyQuantFile = worker::openFile(
+        "test/" + timestr + "_varietyQuantity_" + param + ".csv",
+        "quantity; frequency; param", parameter);
 
     std::vector<float> paramList;
     switch (param){
@@ -358,8 +396,8 @@ namespace worker{
           parameter.deathStrength = paramValue;
       }
       clock_t tStart = clock();
-      Result result(1, round(1 / 0.05), parameter.latticeSize);
-      Result resultTemp(0, 0, 0);
+      Result result(1, round(1 / 0.05), parameter.latticeSize, 17);
+      Result resultTemp(0, 0, 0, 0);
       result.numberVariety[0];
       resultTemp.numberVariety.push_back(0);
 
@@ -369,21 +407,24 @@ namespace worker{
         metrics::sumResults(&result, &resultTemp);
       }
 
+      int duSize = parameter.latticeSize / sqrt(parameter.numberDomesticUnity);
+      duSize = duSize * duSize;
       mainFile << paramValue << "; ";
       mainFile << (float) result.numberVariety[0] / parameter.nRun << "; ";
       mainFile << (float) result.meanVarietyDU[0] / parameter.nRun << "; ";
       mainFile << result.totalPunctuation[0] / parameter.nRun << "; ";
       mainFile << result.fitnessPunctuation[0] / parameter.nRun << "; ";
       mainFile << (result.totalPunctuation[0]-
-            result.fitnessPunctuation[0]) / parameter.nRun << endl;
+            result.fitnessPunctuation[0]) / parameter.nRun << "; ";
+      mainFile << result.varietyQuantityDU[0] /
+        (duSize * parameter.nRun) << endl;
       for(int i = 0; i < round(1 / 0.05); ++i){
         histogramFile << i*0.05 + 0.025 << "; ";
         histogramFile << result.fitnessFrequency[i] / parameter.nRun << "; ";
         histogramFile << result.appearenceFrequency[i] / parameter.nRun;
         histogramFile << "; " << paramValue << endl;
       }
-      int duSize = parameter.latticeSize / sqrt(parameter.numberDomesticUnity);
-      for(int i = 0; i <= duSize * duSize; ++i){
+      for(int i = 0; i <= duSize; ++i){
         duDistFile << i << "; ";
         duDistFile << result.duDistribution[i] / parameter.nRun << "; ";
         duDistFile << paramValue << endl;
@@ -393,6 +434,12 @@ namespace worker{
         varietyDistFile << result.varietyDistribution[i] / parameter.nRun;
         varietyDistFile << "; " << paramValue << endl;
       }
+      for(int i = 0; i < result.varietyQuantity.size(); ++i){
+        varietyQuantFile << (pow(10,i * 0.2)) / pow(parameter.latticeSize,2);
+        varietyQuantFile << "; ";
+        varietyQuantFile << result.varietyQuantity[i] / parameter.nRun;
+        varietyQuantFile << "; " << paramValue << endl;
+      }
 
       cout << "Time taken: "<< (double)(clock()-tStart)/CLOCKS_PER_SEC << endl;
     }
@@ -401,6 +448,7 @@ namespace worker{
     histogramFile.close();
     duDistFile.close();
     varietyDistFile.close();
+    varietyQuantFile.close();
   }
 
   fstream openFile(

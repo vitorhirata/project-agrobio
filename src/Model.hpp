@@ -73,7 +73,7 @@ void Model::setDomesticUnity(void){
 // Run standard version of the model. Gives as output a vector with the
 // number of variety at each timeInterval
 Result Model::runStandard(void){
-  Result result(0, 0, 0);
+  Result result(0, 0, 0, 0);
   result.numberVariety.push_back(ambient->countSpecie());
 
   for(int t = 0; t < m_parameter.maxTime; ++t){
@@ -87,6 +87,8 @@ Result Model::runStandard(void){
           domesticUnity, m_parameter.numberDomesticUnity);
       result.totalPunctuation.push_back(tempPunctuation[0]);
       result.fitnessPunctuation.push_back(tempPunctuation[1]);
+      result.varietyQuantityDU.push_back(metrics::computeVarietyQuantityDU(
+            domesticUnity, m_parameter.numberDomesticUnity));
     }
   }
   std::vector<float> tempPunctuation = metrics::computePunctuationAverage(
@@ -101,13 +103,15 @@ Result Model::runStandard(void){
       domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
   result.varietyDistribution = metrics::computeVarietyProfile(
       domesticUnity, m_parameter.numberDomesticUnity);
+  result.varietyQuantity = metrics::computeVarietyQuantity(
+      domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
   return result;
 }
 
 // Run the model giving as output the final number of varieties and both
 // histograms
 Result Model::runFixedPoint(void){
-  Result result(0, 0, 0);
+  Result result(0, 0, 0, 0);
   for(int t = 0; t < m_parameter.maxTime; ++t)
     iterate();
 
@@ -119,6 +123,8 @@ Result Model::runFixedPoint(void){
       domesticUnity, m_parameter.numberDomesticUnity);
   result.totalPunctuation.push_back(tempPunctuation[0]);
   result.fitnessPunctuation.push_back(tempPunctuation[1]);
+  result.varietyQuantityDU.push_back(metrics::computeVarietyQuantityDU(
+        domesticUnity, m_parameter.numberDomesticUnity));
   result.fitnessFrequency = metrics::computeFitnessProfile(
       ambient->grid, m_parameter.latticeSize);
   result.appearenceFrequency = metrics::computeAppearenceProfile(
@@ -127,13 +133,15 @@ Result Model::runFixedPoint(void){
       domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
   result.varietyDistribution = metrics::computeVarietyProfile(
       domesticUnity, m_parameter.numberDomesticUnity);
+  result.varietyQuantity = metrics::computeVarietyQuantity(
+      domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
   return result;
 }
 
 // Run the model plotting each time image of the simulation. Gives as output
 // a vector with the number of variety at each timeInterval
 Result Model::runPlot(void){
-  Result result(0, 0, 0);
+  Result result(0, 0, 0, 0);
   result.numberVariety.push_back(ambient->countSpecie());
   metrics::printState(0, ambient->grid, m_parameter.latticeSize);
 
@@ -151,6 +159,9 @@ Result Model::runPlot(void){
           domesticUnity, m_parameter.numberDomesticUnity);
       result.totalPunctuation.push_back(tempPunctuation[0]);
       result.fitnessPunctuation.push_back(tempPunctuation[1]);
+      result.varietyQuantityDU.push_back(metrics::computeVarietyQuantityDU(
+            domesticUnity, m_parameter.numberDomesticUnity));
+
     }
   }
 
@@ -162,6 +173,8 @@ Result Model::runPlot(void){
       domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
   result.varietyDistribution = metrics::computeVarietyProfile(
       domesticUnity, m_parameter.numberDomesticUnity);
+  result.varietyQuantity = metrics::computeVarietyQuantity(
+      domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
   return result;
 }
 
