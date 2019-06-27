@@ -28,7 +28,7 @@ namespace worker{
       timeFile << result.fitnessPunctuation[i] / parameter.nRun << "; ";
       timeFile << (result.totalPunctuation[i]-
           result.fitnessPunctuation[i]) / parameter.nRun << "; ";
-      timeFile << result.varietyQuantityDU[i] /
+      timeFile << 100 * result.varietyQuantityDU[i] /
         (duSize * parameter.nRun) << endl;
     }
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
@@ -48,23 +48,24 @@ namespace worker{
         "quantity; frequency", parameter);
     for(int i = 0; i < round(1 / 0.05); ++i){
       histogramFile << i*0.05 + 0.025 << "; ";
-      histogramFile << result.fitnessFrequency[i] / parameter.nRun << "; ";
-      histogramFile << result.appearenceFrequency[i] / parameter.nRun << endl;
+      histogramFile << 100*result.fitnessFrequency[i] / parameter.nRun << "; ";
+      histogramFile << 100*result.appearenceFrequency[i] / parameter.nRun;
+      histogramFile << endl;
     }
 
     for(int i = 0; i <= duSize; ++i){
-      duDistFile << i << "; " << result.duDistribution[i] / parameter.nRun;
+      duDistFile << i << "; " << 100*result.duDistribution[i] / parameter.nRun;
       duDistFile << endl;
     }
     for(int i = 0; i < parameter.numberDomesticUnity; ++i){
       varietyDistFile << i + 1 << "; ";
-      varietyDistFile << result.varietyDistribution[i] / parameter.nRun;
+      varietyDistFile << 100 * result.varietyDistribution[i] / parameter.nRun;
       varietyDistFile << endl;
     }
     for(int i = 0; i < result.varietyQuantity.size(); ++i){
-      varietyQuantFile << (pow(10,i * 0.2)) / pow(parameter.latticeSize,2);
+      varietyQuantFile << 100*(pow(10,i * 0.2)) / pow(parameter.latticeSize,2);
       varietyQuantFile << "; ";
-      varietyQuantFile << result.varietyQuantity[i] / parameter.nRun<< endl;
+      varietyQuantFile << 100*result.varietyQuantity[i]/parameter.nRun<< endl;
     }
 
     histogramFile.close();
@@ -97,7 +98,7 @@ namespace worker{
       timeFile << result.totalPunctuation[i] << "; ";
       timeFile << result.fitnessPunctuation[i] << "; ";
       timeFile << result.totalPunctuation[i] - result.fitnessPunctuation[i];
-      timeFile << "; " << result.varietyQuantityDU[i] / duSize << endl;
+      timeFile << "; " << 100 * result.varietyQuantityDU[i] / duSize << endl;
     }
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     timeFile.close();
@@ -115,16 +116,18 @@ namespace worker{
         "test/plot/" + timestr + "_varietyQuantity.csv",
         "quantity; frequency", parameter);
     for(int i = 0; i < round(1 / 0.05); ++i){
-      histogramFile << i*0.05 + 0.025 << "; " << result.fitnessFrequency[i];
-      histogramFile << "; " << result.appearenceFrequency[i] << endl;
+      histogramFile << i*0.05+0.025 << "; " << 100*result.fitnessFrequency[i];
+      histogramFile << "; " << 100 * result.appearenceFrequency[i] << endl;
     }
     for(int i = 0; i <= duSize; ++i)
-      duDistFile << i << "; " << result.duDistribution[i] << endl;
-    for(int i = 0; i < parameter.numberDomesticUnity; ++i)
-      varietyDistFile << i+1 << "; " << result.varietyDistribution[i] << endl;
+      duDistFile << i << "; " << 100 * result.duDistribution[i] << endl;
+    for(int i = 0; i < parameter.numberDomesticUnity; ++i){
+      varietyDistFile << i+1 << "; ";
+      varietyDistFile << 100 * result.varietyDistribution[i] << endl;
+    }
     for(int i = 0; i < result.varietyQuantity.size(); ++i){
-      varietyQuantFile << (pow(10,i * 0.2)) / pow(parameter.latticeSize,2);
-      varietyQuantFile << "; " << result.varietyQuantity[i] << endl;
+      varietyQuantFile << 100*(pow(10,i * 0.2)) / pow(parameter.latticeSize,2);
+      varietyQuantFile << "; " << 100 * result.varietyQuantity[i] << endl;
     }
 
     histogramFile.close();
@@ -233,30 +236,31 @@ namespace worker{
         timeFile << result.fitnessPunctuation[i] / parameter.nRun << "; ";
         timeFile << (result.totalPunctuation[i]-
           result.fitnessPunctuation[i]) / parameter.nRun << "; ";
-        timeFile << result.varietyQuantityDU[i] /
+        timeFile << 100 * result.varietyQuantityDU[i] /
           (duSize * parameter.nRun) << "; ";
         timeFile << paramValue << endl;
       }
       for(int i = 0; i < round(1 / 0.05); ++i){
         histogramFile << i*0.05 + 0.025 << "; ";
-        histogramFile << result.fitnessFrequency[i] / parameter.nRun << "; ";
-        histogramFile << result.appearenceFrequency[i] / parameter.nRun;
+        histogramFile << 100 * result.fitnessFrequency[i] / parameter.nRun;
+        histogramFile << "; ";
+        histogramFile << 100 * result.appearenceFrequency[i] / parameter.nRun;
         histogramFile << "; " << paramValue << endl;
       }
       for(int i = 0; i <= duSize; ++i){
         duDistFile << i << "; ";
-        duDistFile << result.duDistribution[i] / parameter.nRun << "; ";
+        duDistFile << 100 * result.duDistribution[i] / parameter.nRun << "; ";
         duDistFile << paramValue << endl;
       }
       for(int i = 0; i < parameter.numberDomesticUnity; ++i){
         varietyDistFile << i+1 << "; ";
-        varietyDistFile << result.varietyDistribution[i] / parameter.nRun;
+        varietyDistFile << 100*result.varietyDistribution[i] / parameter.nRun;
         varietyDistFile << "; " << paramValue << endl;
       }
       for(int i = 0; i < result.varietyQuantity.size(); ++i){
-        varietyQuantFile << (pow(10,i * 0.2)) / pow(parameter.latticeSize,2);
+        varietyQuantFile << 100*(pow(10,i*0.2)) / pow(parameter.latticeSize,2);
         varietyQuantFile << "; ";
-        varietyQuantFile << result.varietyQuantity[i] / parameter.nRun;
+        varietyQuantFile << 100 * result.varietyQuantity[i] / parameter.nRun;
         varietyQuantFile << "; " << paramValue << endl;
       }
 
@@ -416,28 +420,29 @@ namespace worker{
       mainFile << result.fitnessPunctuation[0] / parameter.nRun << "; ";
       mainFile << (result.totalPunctuation[0]-
             result.fitnessPunctuation[0]) / parameter.nRun << "; ";
-      mainFile << result.varietyQuantityDU[0] /
+      mainFile << 100 * result.varietyQuantityDU[0] /
         (duSize * parameter.nRun) << endl;
       for(int i = 0; i < round(1 / 0.05); ++i){
         histogramFile << i*0.05 + 0.025 << "; ";
-        histogramFile << result.fitnessFrequency[i] / parameter.nRun << "; ";
-        histogramFile << result.appearenceFrequency[i] / parameter.nRun;
+        histogramFile << 100 * result.fitnessFrequency[i] / parameter.nRun;
+        histogramFile << "; ";
+        histogramFile << 100 * result.appearenceFrequency[i] / parameter.nRun;
         histogramFile << "; " << paramValue << endl;
       }
       for(int i = 0; i <= duSize; ++i){
         duDistFile << i << "; ";
-        duDistFile << result.duDistribution[i] / parameter.nRun << "; ";
+        duDistFile << 100 * result.duDistribution[i] / parameter.nRun << "; ";
         duDistFile << paramValue << endl;
       }
       for(int i = 0; i < parameter.numberDomesticUnity; ++i){
         varietyDistFile << i+1 << "; ";
-        varietyDistFile << result.varietyDistribution[i] / parameter.nRun;
+        varietyDistFile << 100*result.varietyDistribution[i] / parameter.nRun;
         varietyDistFile << "; " << paramValue << endl;
       }
       for(int i = 0; i < result.varietyQuantity.size(); ++i){
-        varietyQuantFile << (pow(10,i * 0.2)) / pow(parameter.latticeSize,2);
+        varietyQuantFile << 100*(pow(10,i*0.2)) / pow(parameter.latticeSize,2);
         varietyQuantFile << "; ";
-        varietyQuantFile << result.varietyQuantity[i] / parameter.nRun;
+        varietyQuantFile << 100 * result.varietyQuantity[i] / parameter.nRun;
         varietyQuantFile << "; " << paramValue << endl;
       }
 

@@ -115,7 +115,7 @@ function plotVarParam(df, output_file)
                   Guide.ylabel("Área média da variedade dominante (%)"),
                   Guide.xlabel("Tempo"))
     output_file3 = output_file[1:end-4] * "3.svg"
-    draw(SVG(output_file3, 20cm, 10cm), p3)
+    draw(SVG(output_file3, 15cm, 10cm), p3)
     println("Image $(output_file3) successfully generated.")
     if param == "m"
       maxTime = maximum(df[:time])
@@ -134,14 +134,14 @@ function plotduDistribution(df, output_file)
     param = string(output_file[end-4])
     if length(split(output_file, "_")) == 2
       p = plot(df, x=:value, y=:duDist, Geom.bar,
-                  Guide.ylabel("Frequencia"),
+                  Guide.ylabel("Porcentagem (%)"),
                   Guide.xlabel("Numero Medio de Variedades por UD"))
       draw(SVG(output_file, 15cm, 10cm), p)
       println("Image $(output_file) successfully generated.")
     elseif length(split(output_file, "_")) == 3
       p = plot(df, x=:value, y=:duDist, color=:param, Geom.line,
                    Scale.color_discrete(),Guide.colorkey(title=param),
-                   Guide.ylabel("Frequencia"),
+                   Guide.ylabel("Porcentagem (%)"),
                    Guide.xlabel("Numero Medio de Variedades por UD"))
       draw(SVG(output_file, 15cm, 10cm), p)
       println("Image $(output_file) successfully generated.")
@@ -152,7 +152,7 @@ function plotVarietyDistribution(df, output_file)
     param = string(output_file[end-4])
     if length(split(output_file, "_")) == 2
       p = plot(df, x=:value, y=:varDist, Geom.bar,
-                  Guide.ylabel("Porcentagem de Variedades"),
+                  Guide.ylabel("Porcentagem de Variedades (%)"),
                   Guide.xlabel("Número de Unidades Domésticas"),
                   Coord.cartesian(xmin=0, xmax=49))
       draw(SVG(output_file, 15cm, 10cm), p)
@@ -160,7 +160,7 @@ function plotVarietyDistribution(df, output_file)
     elseif length(split(output_file, "_")) == 3
       p = plot(df, x=:value, y=:varDist, color=:param, Geom.line,
                    Scale.color_discrete(),Guide.colorkey(title=param),
-                  Guide.ylabel("Porcentagem de Variedades"),
+                  Guide.ylabel("Porcentagem de Variedades (%)"),
                   Guide.xlabel("Número de Unidades Domésticas"),
                   Coord.cartesian(xmin=0, xmax=49))
       draw(SVG(output_file, 15cm, 10cm), p)
@@ -172,16 +172,16 @@ function plotVarietyQuantity(df, output_file)
     param = string(output_file[end-4])
     if length(split(output_file, "_")) == 2
       p = plot(df, x=:quantity, y=:frequency, Geom.bar,
-                  Guide.ylabel("Porcentagem de Variedades"),
-                  Guide.xlabel("Porcentagem da área total ocupada"),
+                  Guide.ylabel("Porcentagem de Variedades (%)"),
+                  Guide.xlabel("Porcentagem da área total ocupada (%)"),
                   Scale.x_log10)
       draw(SVG(output_file, 15cm, 10cm), p)
       println("Image $(output_file) successfully generated.")
     elseif length(split(output_file, "_")) == 3
       p = plot(df, x=:quantity, y=:frequency, color=:param, Geom.line,
                   Scale.color_discrete(),Guide.colorkey(title=param),
-                  Guide.ylabel("Porcentagem de Variedades"),
-                  Guide.xlabel("Porcentagem da área total ocupada"),
+                  Guide.ylabel("Porcentagem de Variedades (%)"),
+                  Guide.xlabel("Porcentagem da área total ocupada (%)"),
                   Scale.x_log10)
       draw(SVG(output_file, 15cm, 10cm), p)
       println("Image $(output_file) successfully generated.")
@@ -204,13 +204,13 @@ function plotHistogramFitnessVar(df, output_file)
     p = plot(df, x=:value, y=:fitness, color=:param, Geom.line,
                  Scale.color_discrete(), Guide.colorkey(title=param),
                  Scale.y_continuous(minvalue=0, maxvalue=0.2),
-                 Guide.ylabel("Frequencia"), Guide.xlabel("Fitness"))
+                 Guide.ylabel("Porcentagem (%)"), Guide.xlabel("Fitness"))
     draw(SVG(output_file, 15cm, 10cm), p)
     println("Image $(output_file) successfully generated.")
     p2 = plot(df, x=:value, y=:appearence, color=:param, Geom.line,
                   Scale.color_discrete(), Guide.colorkey(title=param),
                   Scale.y_continuous(minvalue=0, maxvalue=0.1),
-                  Guide.ylabel("Frequencia"), Guide.xlabel("Appearence"))
+                  Guide.ylabel("Porcentagem (%)"), Guide.xlabel("Appearence"))
     output_file2 = output_file[1:end-4] * "2.svg"
     draw(SVG(output_file2, 15cm, 10cm), p2)
     println("Image $(output_file2) successfully generated.")
