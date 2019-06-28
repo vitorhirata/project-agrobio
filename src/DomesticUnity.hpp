@@ -131,7 +131,7 @@ float DomesticUnity::computePunctuation(float varFitness,
 // or with a probability 'p' a new variety is created
 void DomesticUnity::iterateDU(void){
   float bestDUpunctuation;
-  int bestDUindex = computeBestDU(&bestDUpunctuation);
+  int bestDUidx = computeBestDU(&bestDUpunctuation);
   float extpunctuationDifference = bestDUpunctuation - punctuation;
 
   int majorDeltaIdx;
@@ -146,11 +146,11 @@ void DomesticUnity::iterateDU(void){
   while(findVariety(-1) >= 0)
     changeProduction(varietyOwened[majorDeltaIdx].varietyData,-1);
   if(extpunctuationDifference > m_duParameter.outsideTradeLimit){
-    int extBestVarietyIdx = floor(uniFLOAT(rand64) *
-      m_domesticUnity[bestDUindex].varietyOwened.size());
-    DUvariety duVarietyExt =
-      m_domesticUnity[bestDUindex].varietyOwened[extBestVarietyIdx];
-    changeProduction(duVarietyExt.varietyData);
+    std::vector<DUvariety>* duVec = &m_domesticUnity[bestDUidx].varietyOwened;
+    int extBestVarietyIdx = floor(uniFLOAT(rand64) * duVec->size());
+    while(duVec->at(extBestVarietyIdx).number == -1)
+      extBestVarietyIdx = floor(uniFLOAT(rand64) * duVec->size());
+    changeProduction(duVec->at(extBestVarietyIdx).varietyData);
   }
   if(uniFLOAT(rand64) < m_duParameter.probabilityNewVar){
     int newPlace = m_indexOwenedPatches[uniIntPlace(rand64)];
