@@ -7,7 +7,6 @@ namespace metrics{
     std::transform((*result).meanVarietyDU.begin(),
         (*result).meanVarietyDU.end(), (*resultTemp).meanVarietyDU.begin(),
         (*result).meanVarietyDU.begin(), std::plus<float>());
-    if(!(*resultTemp).totalPunctuation.empty()){
     std::transform((*result).totalPunctuation.begin(),
         (*result).totalPunctuation.end(),
         (*resultTemp).totalPunctuation.begin(),
@@ -16,7 +15,6 @@ namespace metrics{
         (*result).fitnessPunctuation.end(),
         (*resultTemp).fitnessPunctuation.begin(),
         (*result).fitnessPunctuation.begin(), std::plus<float>());
-    }
     std::transform((*result).varietyDistribution.begin(),
         (*result).varietyDistribution.end(),
         (*resultTemp).varietyDistribution.begin(),
