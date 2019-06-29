@@ -25,6 +25,7 @@ void Variety::setRandomVariety(void){
 
 void Variety::killVariety(void){
   varietyNumber = -1;
+  appearence = -1;
 }
 
 // Set variety to a new one, according to the received value

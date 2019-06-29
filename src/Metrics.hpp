@@ -104,7 +104,7 @@ namespace metrics{
     std::vector<int> quantityBestVarDU(t_numberDomesticUnity, -1);
     for(int i = 0; i < t_numberDomesticUnity; ++i){
       for(auto var : domesticUnity[i].varietyOwened){
-        if(var.quantity > quantityBestVarDU[i])
+        if(var.quantity > quantityBestVarDU[i] && var.number != -1)
           quantityBestVarDU[i] = var.quantity;
       }
     }
@@ -150,8 +150,10 @@ namespace metrics{
     float step = 0.05;
     std::vector<float> varFrequency(round(1 / step), 0);
     for(int i = 0; i < t_latticeSize*t_latticeSize; ++i){
-      int idx = floor(t_grid[i].variety.appearence / step);
-      varFrequency[idx] += 1.0 / (t_latticeSize*t_latticeSize);
+      if(t_grid[i].variety.appearence != -1){
+        int idx = floor(t_grid[i].variety.appearence / step);
+        varFrequency[idx] += 1.0 / (t_latticeSize*t_latticeSize);
+      }
     }
     return varFrequency;
   }
@@ -162,11 +164,13 @@ namespace metrics{
     float step = 0.05;
     std::vector<float> fitnessFrequency(round(1 / step), 0);
     for(int i = 0; i < t_latticeSize*t_latticeSize; ++i){
-      float position = step;
-      while(position < t_grid[i].fitness)
-        position += step;
-      int tick = round((position - step) / step);
-      fitnessFrequency[tick] += (1.0 / (t_latticeSize * t_latticeSize));
+      if(t_grid[i].fitness != 0){
+        float position = step;
+        while(position < t_grid[i].fitness)
+          position += step;
+        int tick = round((position - step) / step);
+        fitnessFrequency[tick] += (1.0 / (t_latticeSize * t_latticeSize));
+      }
     }
     return fitnessFrequency;
   }
