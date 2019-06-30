@@ -51,9 +51,9 @@ void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
   m_duParameter.selectionStrength = t_duParameter.selectionStrength;
   m_duParameter.alpha = t_duParameter.alpha;
   m_duParameter.probabilityNewVar = t_duParameter.probabilityNewVar;
-  m_DUpreference = gauss(rand64);
+  m_DUpreference = gaussPref(rand64);
   while(!(m_DUpreference > 0 && m_DUpreference < 1))
-    m_DUpreference = gauss(rand64);
+    m_DUpreference = gaussPref(rand64);
   varietyOwened = std::vector<DUvariety>(m_indexOwenedPatches.size());
   uniIntPlace.param(std::uniform_int_distribution<long>::param_type(0,
         m_indexOwenedPatches.size()-1));
