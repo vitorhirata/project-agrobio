@@ -60,16 +60,22 @@ void Ambient::setPatch(int numberResources, int nResourceDistribution,
   if(nResourceDistribution == m_latticeSize*m_latticeSize){
     std::vector<float> resources(numberResources);
     for(int i = 0; i < m_latticeSize*m_latticeSize; ++i){
-      for(int j = 0; j < numberResources; ++j)
-        resources[j] = uniFLOAT(rand64);
+      for(int j = 0; j < numberResources; ++j){
+        resources[j] = gaussRes(rand64);
+        while(resources[j] < 0 || resources[j] > 1)
+          resources[j] = gaussRes(rand64);
+      }
       int varietyIdx = indexVarietyDU[computeDUnumber(i)][uniIntSPdu(rand64)];
       grid[i].initializePatch(resources, varietyAvailable[varietyIdx]);
     }
   }
   else if(nResourceDistribution == 1){
     std::vector<float> resources(numberResources);
-    for(int i = 0; i < numberResources; ++i)
-      resources[i] = uniFLOAT(rand64);
+    for(int i = 0; i < numberResources; ++i){
+      resources[i] = gaussRes(rand64);
+      while(resources[i] < 0 || resources[i] > 1)
+        resources[i] = gaussRes(rand64);
+    }
 
     for(int i = 0; i < m_latticeSize*m_latticeSize; ++i){
       int varietyIdx = indexVarietyDU[computeDUnumber(i)][uniIntSPdu(rand64)];
@@ -80,8 +86,11 @@ void Ambient::setPatch(int numberResources, int nResourceDistribution,
     std::vector<vector<float>> resources;
     for(int i = 0; i < nResourceDistribution; ++i){
       std::vector<float> temp(numberResources);
-      for(int j = 0; j < numberResources; ++j)
-        temp[j] = uniFLOAT(rand64);
+      for(int j = 0; j < numberResources; ++j){
+        temp[j] = gaussRes(rand64);
+        while(temp[j] < 0 || temp[j] > 1)
+          temp[j] = gaussRes(rand64);
+      }
       resources.push_back(temp);
     }
 
