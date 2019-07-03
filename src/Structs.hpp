@@ -52,6 +52,8 @@ struct Result{
   std::vector<float> totalPunctuation;
   std::vector<float> fitnessPunctuation;
   std::vector<float> fitnessFrequency;
+  std::vector<float> simpson;
+  std::vector<float> shannon;
   std::vector<float> appearenceFrequency;
   std::vector<float> varietyDistribution;
   std::vector<float> varietyQuantity;
@@ -63,6 +65,8 @@ struct Result{
   , meanVarietyDU(timeSize, 0)
   , totalPunctuation(timeSize, 0)
   , fitnessPunctuation(timeSize, 0)
+  , simpson(timeSize, 0)
+  , shannon(timeSize, 0)
   , fitnessFrequency(histogramSize, 0)
   , appearenceFrequency(histogramSize, 0)
   , varietyDistribution(DUsize, 0)

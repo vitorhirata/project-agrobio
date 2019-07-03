@@ -89,6 +89,10 @@ Result Model::runStandard(void){
       result.fitnessPunctuation.push_back(tempPunctuation[1]);
       result.varietyQuantityDU.push_back(metrics::computeVarietyQuantityDU(
             domesticUnity, m_parameter.numberDomesticUnity));
+      result.simpson.push_back(metrics::computeSimpson(domesticUnity,
+            m_parameter.numberDomesticUnity, m_parameter.latticeSize));
+      result.shannon.push_back(metrics::computeShannon(domesticUnity,
+            m_parameter.numberDomesticUnity, m_parameter.latticeSize));
     }
   }
   std::vector<float> tempPunctuation = metrics::computePunctuationAverage(
@@ -123,6 +127,10 @@ Result Model::runFixedPoint(void){
       domesticUnity, m_parameter.numberDomesticUnity);
   result.totalPunctuation.push_back(tempPunctuation[0]);
   result.fitnessPunctuation.push_back(tempPunctuation[1]);
+  result.simpson.push_back(metrics::computeSimpson(domesticUnity,
+        m_parameter.numberDomesticUnity, m_parameter.latticeSize));
+  result.shannon.push_back(metrics::computeShannon(domesticUnity,
+        m_parameter.numberDomesticUnity, m_parameter.latticeSize));
   result.varietyQuantityDU.push_back(metrics::computeVarietyQuantityDU(
         domesticUnity, m_parameter.numberDomesticUnity));
   result.fitnessFrequency = metrics::computeFitnessProfile(
@@ -159,10 +167,12 @@ Result Model::runPlot(void){
       result.fitnessPunctuation.push_back(tempPunctuation[1]);
       result.varietyQuantityDU.push_back(metrics::computeVarietyQuantityDU(
             domesticUnity, m_parameter.numberDomesticUnity));
-
+      result.simpson.push_back(metrics::computeSimpson(domesticUnity,
+            m_parameter.numberDomesticUnity, m_parameter.latticeSize));
+      result.shannon.push_back(metrics::computeShannon(domesticUnity,
+            m_parameter.numberDomesticUnity, m_parameter.latticeSize));
     }
   }
-
   result.fitnessFrequency = metrics::computeFitnessProfile(
       ambient->grid, m_parameter.latticeSize);
   result.appearenceFrequency = metrics::computeAppearenceProfile(

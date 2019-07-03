@@ -42,6 +42,10 @@ namespace metrics{
       const int t_numberDomesticUnity, const int t_latticeSize);
   float computeVarietyQuantityDU(DomesticUnity* domesticUnity,
       const int t_numberDomesticUnity);
+  float computeShannon(DomesticUnity* domesticUnity,
+      const int t_numberDomesticUnity, const int t_latticeSize);
+  float computeSimpson(DomesticUnity* domesticUnity,
+      const int t_numberDomesticUnity, const int t_latticeSize);
   std::vector<float> computePunctuationAverage(DomesticUnity* domesticUnity,
       const int t_numberDomesticUnity);
   std::vector<float> computeFitnessProfile(

@@ -15,6 +15,14 @@ namespace metrics{
         (*result).fitnessPunctuation.end(),
         (*resultTemp).fitnessPunctuation.begin(),
         (*result).fitnessPunctuation.begin(), std::plus<float>());
+    std::transform((*result).simpson.begin(),
+        (*result).simpson.end(),
+        (*resultTemp).simpson.begin(),
+        (*result).simpson.begin(), std::plus<float>());
+    std::transform((*result).shannon.begin(),
+        (*result).shannon.end(),
+        (*resultTemp).shannon.begin(),
+        (*result).shannon.begin(), std::plus<float>());
     std::transform((*result).varietyDistribution.begin(),
         (*result).varietyDistribution.end(),
         (*resultTemp).varietyDistribution.begin(),
@@ -115,6 +123,53 @@ namespace metrics{
     return averageMaxQuantity;
   }
 
+  // Return the Simpson diversity index for the community
+  float computeSimpson(DomesticUnity* domesticUnity,
+      const int t_numberDomesticUnity, const int t_latticeSize){
+    std::map<int,int> numberDU;
+    for(int i = 0; i < t_numberDomesticUnity; ++i){
+      for(auto var : domesticUnity[i].varietyOwened){
+        if(numberDU.count(var.number) > 0)
+          numberDU[var.number] += var.quantity;
+        else
+          numberDU[var.number] = var.quantity;
+      }
+    }
+    float totalArea = t_latticeSize * t_latticeSize;
+    if(numberDU.count(-1) > 0){
+      totalArea -= numberDU[-1];
+      numberDU.erase(-1);
+    }
+    float simpson = 0;
+    for(auto i : numberDU)
+      simpson += ((i.second / totalArea) * (i.second / totalArea));
+
+    return (1 - simpson);
+  }
+
+  // Return the Shannon diversity index for the community
+  float computeShannon(DomesticUnity* domesticUnity,
+      const int t_numberDomesticUnity, const int t_latticeSize){
+    std::map<int,int> numberDU;
+    for(int i = 0; i < t_numberDomesticUnity; ++i){
+      for(auto var : domesticUnity[i].varietyOwened){
+        if(numberDU.count(var.number) > 0)
+          numberDU[var.number] += var.quantity;
+        else
+          numberDU[var.number] = var.quantity;
+      }
+    }
+    float totalArea = t_latticeSize * t_latticeSize;
+    if(numberDU.count(-1) > 0){
+      totalArea -= numberDU[-1];
+      numberDU.erase(-1);
+    }
+    float shannon = 0;
+    for(auto i : numberDU)
+      shannon += (-1 * (i.second / totalArea) * log(i.second / totalArea));
+    shannon /= log(numberDU.size());
+    return shannon;
+  }
 
   // Return the average punctuation of Domestic Unities
   std::vector<float> computePunctuationAverage(

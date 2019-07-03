@@ -94,6 +94,16 @@ function plotStandard(df, output_file)
     output_file4 = output_file[1:end-4] * "4.svg"
     draw(SVG(output_file4, 20cm, 10cm), p4)
     println("Image $(output_file4) successfully generated.")
+    p5 = plot(layer(df, x=:time, y=:simpson, Geom.line,
+                        Theme(default_color=colorant"blue")),
+               layer(df, x=:time, y=:shannon, Geom.line,
+                        Theme(default_color=colorant"red")),
+              Guide.manual_color_key("",["Indice Simpson", "Shannon evenness"],
+                            ["blue", "red"]),
+                Guide.ylabel("Valor da Métrica"), Guide.xlabel("Tempo"))
+    output_file5 = output_file[1:end-4] * "5.svg"
+    draw(SVG(output_file5, 20cm, 10cm), p5)
+    println("Image $(output_file5) successfully generated.")
 end
 
 function plotVarParam(df, output_file)
