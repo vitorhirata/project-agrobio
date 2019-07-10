@@ -1,4 +1,4 @@
-using DataFrames, Colors, CSV, Gadfly
+using DataFrames, Colors, CSV, Gadfly, Printf
 
 # Plot all csv files in the $folder. Assumes julia is in src/
 function plotAll(folder = "test")
@@ -189,7 +189,8 @@ function plotVarietyQuantity(df, output_file)
       p = plot(df, x=:quantity, y=:frequency, Geom.bar,
                   Guide.ylabel("Porcentagem de Variedades (%)"),
                   Guide.xlabel("Porcentagem da área total ocupada (%)"),
-                  Scale.x_log10)
+                  Scale.x_log10(labels=d-> @sprintf("%.1f",10^d)),
+                  Guide.xticks(ticks=[-1, 0, 0.7, 1, 1.699, 2]))
       draw(SVG(output_file, 15cm, 10cm), p)
       println("Image $(output_file) successfully generated.")
     elseif length(split(output_file, "_")) == 3
@@ -197,7 +198,8 @@ function plotVarietyQuantity(df, output_file)
                   Scale.color_discrete(),Guide.colorkey(title=param),
                   Guide.ylabel("Porcentagem de Variedades (%)"),
                   Guide.xlabel("Porcentagem da área total ocupada (%)"),
-                  Scale.x_log10)
+                  Scale.x_log10(labels=d-> @sprintf("%.1f",10^d)),
+                  Guide.xticks(ticks=[-1, 0, 0.7, 1, 1.699, 2]))
       draw(SVG(output_file, 15cm, 10cm), p)
       println("Image $(output_file) successfully generated.")
     end
