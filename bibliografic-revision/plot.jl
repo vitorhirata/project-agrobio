@@ -153,9 +153,10 @@ function plotBoxplot(df1, str, df2=nothing, size=[20*1.3cm,14*1.3cm])
   outputFile = "plot/$(str)_ud_var.png"
   img = PNG(outputFile, size[1], size[2])
   sort!(df1, [order(:Data)])
+  df1[:NUD]= 100 * df1[:NUD]
   p = plot(df1, x=:Fonte, y=:NUD, Geom.boxplot(suppress_outliers=true),
-    Guide.xlabel("Fonte"), Guide.ylabel("Porcentagem UD"),
-    Guide.title("Porcentagem de UDs cultivando cada variedade: $(str)"),
+    Guide.xlabel("Fonte"), Guide.ylabel("Porcentagem UDs (%)"),
+    Guide.title("Presença da Variedade nas UDs: $(str)"),
     Theme(plot_padding=[20pt, 60pt, 10pt, 10pt]))
   draw(img, p)
 
