@@ -172,4 +172,38 @@ function plotBoxplot(df1, str, df2=nothing, size=[20*1.3cm,14*1.3cm])
   end
 end
 
+function plotIndex()
+  df = CSV.File("csv/index.csv", delim = ";", decimal=',') |> DataFrame
 
+  dfMandioca = df[df[:Specie] .== "Mandioca", :]
+
+  dfMandiocaUD = dfMandioca[dfMandioca[:Scale] .== "UD", :]
+  p=plot(dfMandiocaUD, xgroup=:Indice, x=:Article, y=:Value, color=:Indice,
+    Geom.subplot_grid(Geom.bar(position=:dodge), free_x_axis=true),
+    Theme(bar_spacing = 2mm),
+    Guide.colorkey(title="Índice"))
+  draw(PNG("plot/mandiocaIdxUD.png", 25cm, 15cm), p)
+
+  dfMandiocaCom = dfMandioca[dfMandioca[:Scale] .== "Comunidade", :]
+  p=plot(dfMandiocaCom, xgroup=:Indice, x=:Article, y=:Value, color=:Indice,
+    Geom.subplot_grid(Geom.bar(position=:dodge), free_x_axis=true),
+    Theme(bar_spacing = 2mm),
+    Guide.colorkey(title="Índice"))
+  draw(PNG("plot/mandiocaIdxCom.png", 30cm, 15cm), p)
+
+
+  dfMilho = df[df[:Specie] .== "Milho", :]
+
+  dfMilhoUD = dfMilho[dfMilho[:Scale] .== "UD", :]
+  p=plot(dfMilhoUD, xgroup=:Indice, x=:Article, y=:Value, color=:Indice,
+    Geom.subplot_grid(Geom.bar(position=:dodge), free_x_axis=true),
+    Theme(bar_spacing = 5mm),
+    Guide.colorkey(title="Índice"))
+  draw(PNG("plot/milhoIdxUD.png", 15cm, 15cm), p)
+
+  dfMilhoCom = dfMilho[dfMilho[:Scale] .== "Comunidade", :]
+    p=plot(dfMilhoCom, x=:Article, y=:Value, color=:Indice, Geom.bar,
+    Theme(bar_spacing = 5mm),
+    Guide.colorkey(title="Índice"))
+  draw(PNG("plot/milhoIdxCom.png", 8cm, 10cm), p)
+end

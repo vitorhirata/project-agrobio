@@ -1,0 +1,62 @@
+Article;Value;Indice;Scale;Specie
+Jarvis et al. (2008). Aguayatia Valley ;0,27;Simpson;UD;Mandioca
+Jarvis et al. (2008). Ucayali Valley ;0,3;Simpson;UD;Mandioca
+Jarvis et al. (2008). Pichis-Pachitea ;0,41;Simpson;UD;Mandioca
+Pereira (2008). São João do Ipecaçu;0,14;Simpson;UD;Mandioca
+Pereira (2008). Nova Olinda;0,29;Simpson;UD;Mandioca
+Pereira (2008). Aiucá;0,3;Simpson;UD;Mandioca
+Pereira (2008). Boa Esperança;0,4;Simpson;UD;Mandioca
+Pereira (2008). Vila Alencar;0,42;Simpson;UD;Mandioca
+Pereira (2008). Monte Sinai;0,45;Simpson;UD;Mandioca
+Pereira (2008). Nova Samaria;0,54;Simpson;UD;Mandioca
+Pereira (2008). São Paulo do Coraci;0,54;Simpson;UD;Mandioca
+Pereira (2008). Boa Vista do Calafate;0,58;Simpson;UD;Mandioca
+Pereira (2008). Jarauá;0,63;Simpson;UD;Mandioca
+Pereira (2008). Marirana;0,67;Simpson;UD;Mandioca
+Pereira (2008). Nova Colômbia;0,74;Simpson;UD;Mandioca
+Pereira (2008). São João do Ipecaçu;0,2;Shannon;UD;Mandioca
+Pereira (2008). Nova Olinda;0,47;Shannon;UD;Mandioca
+Pereira (2008). Aiucá;0,49;Shannon;UD;Mandioca
+Pereira (2008). Boa Esperança;0,62;Shannon;UD;Mandioca
+Pereira (2008). Vila Alencar;0,62;Shannon;UD;Mandioca
+Pereira (2008). Monte Sinai;0,68;Shannon;UD;Mandioca
+Pereira (2008). São Paulo do Coraci;0,86;Shannon;UD;Mandioca
+Pereira (2008). Boa Vista do Calafate;0,91;Shannon;UD;Mandioca
+Pereira (2008). Jarauá;1,05;Shannon;UD;Mandioca
+Pereira (2008). Nova Samaria;1,16;Shannon;UD;Mandioca
+Pereira (2008). Marirana;1,25;Shannon;UD;Mandioca
+Pereira (2008). Nova Colômbia;1,4;Shannon;UD;Mandioca
+Jarvis et al. (2008). Aguayatia Valley;0,94;Simpson;Comunidade;Mandioca
+Jarvis et al. (2008). Ucayali Valley;0,96;Simpson;Comunidade;Mandioca
+Jarvis et al. (2008). Pichis-Pachitea;0,97;Simpson;Comunidade;Mandioca
+Lima el al. (2012). 2003. Vila Alencar;0,49;Simpson;Comunidade;Mandioca
+Lima el al. (2012). 2003. Barroso;0,64;Simpson;Comunidade;Mandioca
+Lima el al. (2012). 2003. São Paulo do Coraci;0,65;Simpson;Comunidade;Mandioca
+Lima el al. (2012). 2003. Monte Sinai;0,69;Simpson;Comunidade;Mandioca
+Lima el al. (2012). 2003. Maguari;0,69;Simpson;Comunidade;Mandioca
+Lima el al. (2012). 2010. São João do Ipecaçu;0,75;Simpson;Comunidade;Mandioca
+Lima el al. (2012). 2003. Boa Esperança;0,77;Simpson;Comunidade;Mandioca
+Lima el al. (2012). 2010. Matusalém;0,78;Simpson;Comunidade;Mandioca
+Lima el al. (2012). 2010. Boa Esperança;0,8;Simpson;Comunidade;Mandioca
+Lima el al. (2012). 2010. Nogueira;0,8;Simpson;Comunidade;Mandioca
+Lima el al. (2012). 2010. Calafate;0,8;Simpson;Comunidade;Mandioca
+Lima el al. (2012). 2003. Aiucá;0,81;Simpson;Comunidade;Mandioca
+Lima el al. (2012). 2003. São João do Ipecaçu;0,83;Simpson;Comunidade;Mandioca
+Lima el al. (2012). 2003. Jarauá;0,84;Simpson;Comunidade;Mandioca
+Lima el al. (2012). 2010. Jarauá;0,85;Simpson;Comunidade;Mandioca
+Lima el al. (2012). 2003. Nova Olinda;0,88;Simpson;Comunidade;Mandioca
+Lima el al. (2012). 2010. Vila Alencar;0,89;Simpson;Comunidade;Mandioca
+Lima el al. (2012). 2003. Calafate;0,91;Simpson;Comunidade;Mandioca
+Elias et al. (2000);0,63;Shannon Evenness;Comunidade;Mandioca
+Ramos et al. (2011). Facão;0,7594;Shannon Evenness;Comunidade;Mandioca
+Ramos et al. (2011). Porto Limão;0,8583;Shannon Evenness;Comunidade;Mandioca
+Ramos et al. (2011). Porto Limão;0,28;Berger-Parker;Comunidade;Mandioca
+Ramos et al. (2011). Facão;0,31;Berger-Parker;Comunidade;Mandioca
+Isakson (2011);0,457;Simpson;UD;Milho
+Isakson (2011);0,739;Shannon;UD;Milho
+Jarvis et al. (2008). Sahcaba;0,16;Simpson;UD;Milho
+Jarvis et al. (2008). Ichmul;0,25;Simpson;UD;Milho
+Jarvis et al. (2008). Yaxcaba;0,31;Simpson;UD;Milho
+Jarvis et al. (2008). Sahcaba;0,43;Simpson;Comunidade;Milho
+Jarvis et al. (2008). Ichmul;0,48;Simpson;Comunidade;Milho
+Jarvis et al. (2008). Yaxcaba;0,69;Simpson;Comunidade;Milho
