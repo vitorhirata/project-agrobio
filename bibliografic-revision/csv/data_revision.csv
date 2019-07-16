@@ -1,30 +1,4 @@
 Especie;Fonte;Local;Lat;Long;Etnia;Comunidade;Ninformantes;Data;Ncomunidade;NmedioUD;DesvioNMedioUD;NminUD;NmaxUD
-Batata;Brush (1995);Tulumayos (Andes Peruano);-13.502663; -71.989332;null;null;null;1992;null;12,8;null;null;null
-Batata;Brush (1995);Huánuco (Andes Peruano);-10.758227; -75.709376;null;null;null;1992;null;9,6;null;null;null
-Batata;Brush e Taylor (1992);Paucartambo (Andes Peruano);-10.758227; -75.709377;População Tradicional – mestizos;10-12 Vilas;81;1985;227;10,1;7,8;1;31
-Batata;Brush e Taylor (1992);Tulumayos (Andes Peruano);-13.502663; -71.989332;Indígena – Quechua;10-12 Vilas;71;1985;297;9,7;5;1;26
-Batata;Brush et al. (1981);Peru Central (Andes Peruano);-11.823649; -75.086026;null;Mantaro Valley;10;1979;null;14,3;8,1;5;30
-Batata;de Haan et al. (2009);Peru Central (Andes Peruano);-12.407024; -74.774516;Indígena – Quechua e Aymara;Villa Hermosa;16;2004;null;32,0;24,7;2;95
-Batata;de Haan et al. (2009);Peru Central (Andes Peruano);-12.407024; -74.774516;Indígena – Quechua e Aymara;Pucara;15;2004;null;16,6;16,9;1;59
-Batata;de Haan et al. (2009);Sul Peru (Andes Peruano);-12.407024; -74.774516;Indígena – Quechua e Aymara;Allato;15;2004;null;14;20,3;1;107
-Batata;de Haan et al. (2009);Sul Peru (Andes Peruano);-12.407024; -74.774516;Indígena – Quechua e Aymara;Pongos Grande;15;2004;null;13,7;11,8;1;42
-Batata;de Haan et al. (2009);Peru Central (Andes Peruano);-12.407024; -74.774516;Indígena – Quechua e Aymara;Dos de Mayo;15;2004;null;9,8;10,0;1;61
-Batata;de Haan et al. (2009);Norte Peru (Andes Peruano);-12.407024; -74.774516;Indígena – Quechua e Aymara;Tupac Amaru;16;2004;null;9,0;9,7;1;46
-Batata;de Haan et al. (2009);Sudeste Peru (Andes Peruano);-12.407024; -74.774516;Indígena – Quechua e Aymara;Libertadores;15;2004;null;8,3;6,7;1;29
-Batata;de Haan et al. (2009);Norte Peru (Andes Peruano);-12.407024; -74.774516;Indígena – Quechua e Aymara;Huayta Corral;15;2004;null;3,2;3,8;1;26
-Batata;Jackson et al. (1980);Puno, Southern Peru;-14.470214; -69.518267;Indígena – Quechua;Cuyo-Cuyo;2;1978;25;16,5;2,1;15;18
-Batata;Meldrum et al. (2018);Norte do Altiplano Boliviano;-16.204214; -68.463644;Indígena – Aymara;Coromata Media;28;2011;null;6;null;null;70
-Batata;Meldrum et al. (2018);Norte do Altiplano Boliviano;-16.204214; -68.463644;Indígena – Aymara;Cachilaya;28;2011;null;5;null;null;110
-Batata;Meldrum et al. (2018);Norte do Altiplano Boliviano;-16.204214; -68.463644;Indígena – Aymara;Corqueamaya;19;2011;null;4;null;null;10
-Batata;Meldrum et al. (2018);Norte do Altiplano Boliviano;-16.204214; -68.463644;Indígena – Aymara;Rosapata;25;2011;null;4;null;null;5
-Batata;Meldrum et al. (2018);Norte do Altiplano Boliviano;-16.784550; -68.937140;Indígena – Aymara;Pucamaya;23;2011;null;4;null;null;7
-Batata;Meldrum et al. (2018);Norte do Altiplano Boliviano;-16.784550; -68.937140;Indígena – Aymara;Suriquina;24;2011;null;3;null;null;8
-Batata;Meldrum et al. (2018);Norte do Altiplano Boliviano;-17.056268; -68.726039;Indígena – Aymara;Erbenkalla;15;2011;null;3;null;null;5
-Batata;Meldrum et al. (2018);Norte do Altiplano Boliviano;-17.056268; -68.726039;Indígena – Aymara;Antaquira;31;2011;null;3;null;null;11
-Batata;Quiroz et al. (1990);Paucartambo, Cuzco (Andes Peruano);-13.355899; -71.667510;null;Colquepata, Sipascancha Alia, Mollomarca, Carpapampa e Moqopata Alia;10;1987;100;17,1;9,9;8;43
-Batata;Tamaquiza et al. (2017);Quero and Ambato cantons (Ecuador);-1.431599; -78.622336;null;Puñachisag;29;2015;12;null;null;null;null
-Batata;Tamaquiza et al. (2017);Quero and Ambato cantons (Ecuador);-1.313235; -78.702575;null;Apatug;34;2015;8;null;null;null;null
-Batata;Winter et al. (2005);San Miguel Province (Cajamarca, norte Peru);-6.846995; -78.769753;null;13 Comunidades;486;1999;50;3,1;1,6;1;10
 Mandioca;Boster (1984);Norte Peru Central (Amazônia peruana);-4.490647; -78.150373;Indígena – Jivaros;Aguaruna Jívaro;74;1977;null;null;null;null;null
 Mandioca;Cavechia et al. (2014);Paraty, RJ;-23.332471; -44.648067;População Tradiciona – Caiçara;6 Comunidades: Praia do Sono (3), Ilha do Araújo (4), Praia Grande, Ponta Negra e Trindade (7), e Barra Grande (18);46;2010;33;null;null;null;null
 Mandioca;Cavechia et al. (2014);Imbituba, SC;-28.222021; -48.672280;Caiçara;5 Comunidades: Arroio (2), Aguada (4), Barranceira (6), Ribanceira (10), e Divinéia (15);37;2009;26;null;null;null;null
@@ -123,6 +97,32 @@ Mandioca;Ramos et al. (2011);Cáceres (Sudoeste Mato Grosso);-16.166337; -57.598
 Mandioca;Ramos et al. (2011);Cáceres (Sudoeste Mato Grosso);-16.166337; -57.598884;null;Porto Limão;5;2008;7;3,1;null;1;7
 Mandioca;Salick et al. (1997);Vale Rio Palcazu (Amazonia Peruana);-9.936017; -75.229638;Indígena – Amuesha;16 Comunidades Amuesha;27;1986;null;5,9;null;1;53
 Mandioca;Seixas (2008);Vale do Juruá (AC);-7.705480; -72.550012;População Tradicional – Caboclos;Croá;19;2007;18;2,95;2,12;0;9
+Batata;Brush (1995);Tulumayos (Andes Peruano);-13.502663; -71.989332;null;null;null;1992;null;12,8;null;null;null
+Batata;Brush (1995);Huánuco (Andes Peruano);-10.758227; -75.709376;null;null;null;1992;null;9,6;null;null;null
+Batata;Brush e Taylor (1992);Paucartambo (Andes Peruano);-10.758227; -75.709377;População Tradicional – mestizos;10-12 Vilas;81;1985;227;10,1;7,8;1;31
+Batata;Brush e Taylor (1992);Tulumayos (Andes Peruano);-13.502663; -71.989332;Indígena – Quechua;10-12 Vilas;71;1985;297;9,7;5;1;26
+Batata;Brush et al. (1981);Peru Central (Andes Peruano);-11.823649; -75.086026;null;Mantaro Valley;10;1979;null;14,3;8,1;5;30
+Batata;de Haan et al. (2009);Peru Central (Andes Peruano);-12.407024; -74.774516;Indígena – Quechua e Aymara;Villa Hermosa;16;2004;null;32,0;24,7;2;95
+Batata;de Haan et al. (2009);Peru Central (Andes Peruano);-12.407024; -74.774516;Indígena – Quechua e Aymara;Pucara;15;2004;null;16,6;16,9;1;59
+Batata;de Haan et al. (2009);Sul Peru (Andes Peruano);-12.407024; -74.774516;Indígena – Quechua e Aymara;Allato;15;2004;null;14;20,3;1;107
+Batata;de Haan et al. (2009);Sul Peru (Andes Peruano);-12.407024; -74.774516;Indígena – Quechua e Aymara;Pongos Grande;15;2004;null;13,7;11,8;1;42
+Batata;de Haan et al. (2009);Peru Central (Andes Peruano);-12.407024; -74.774516;Indígena – Quechua e Aymara;Dos de Mayo;15;2004;null;9,8;10,0;1;61
+Batata;de Haan et al. (2009);Norte Peru (Andes Peruano);-12.407024; -74.774516;Indígena – Quechua e Aymara;Tupac Amaru;16;2004;null;9,0;9,7;1;46
+Batata;de Haan et al. (2009);Sudeste Peru (Andes Peruano);-12.407024; -74.774516;Indígena – Quechua e Aymara;Libertadores;15;2004;null;8,3;6,7;1;29
+Batata;de Haan et al. (2009);Norte Peru (Andes Peruano);-12.407024; -74.774516;Indígena – Quechua e Aymara;Huayta Corral;15;2004;null;3,2;3,8;1;26
+Batata;Jackson et al. (1980);Puno, Southern Peru;-14.470214; -69.518267;Indígena – Quechua;Cuyo-Cuyo;2;1978;25;16,5;2,1;15;18
+Batata;Meldrum et al. (2018);Norte do Altiplano Boliviano;-16.204214; -68.463644;Indígena – Aymara;Coromata Media;28;2011;null;6;null;null;70
+Batata;Meldrum et al. (2018);Norte do Altiplano Boliviano;-16.204214; -68.463644;Indígena – Aymara;Cachilaya;28;2011;null;5;null;null;110
+Batata;Meldrum et al. (2018);Norte do Altiplano Boliviano;-16.204214; -68.463644;Indígena – Aymara;Corqueamaya;19;2011;null;4;null;null;10
+Batata;Meldrum et al. (2018);Norte do Altiplano Boliviano;-16.204214; -68.463644;Indígena – Aymara;Rosapata;25;2011;null;4;null;null;5
+Batata;Meldrum et al. (2018);Norte do Altiplano Boliviano;-16.784550; -68.937140;Indígena – Aymara;Pucamaya;23;2011;null;4;null;null;7
+Batata;Meldrum et al. (2018);Norte do Altiplano Boliviano;-16.784550; -68.937140;Indígena – Aymara;Suriquina;24;2011;null;3;null;null;8
+Batata;Meldrum et al. (2018);Norte do Altiplano Boliviano;-17.056268; -68.726039;Indígena – Aymara;Erbenkalla;15;2011;null;3;null;null;5
+Batata;Meldrum et al. (2018);Norte do Altiplano Boliviano;-17.056268; -68.726039;Indígena – Aymara;Antaquira;31;2011;null;3;null;null;11
+Batata;Quiroz et al. (1990);Paucartambo, Cuzco (Andes Peruano);-13.355899; -71.667510;null;Colquepata, Sipascancha Alia, Mollomarca, Carpapampa e Moqopata Alia;10;1987;100;17,1;9,9;8;43
+Batata;Tamaquiza et al. (2017);Quero and Ambato cantons (Ecuador);-1.431599; -78.622336;null;Puñachisag;29;2015;12;null;null;null;null
+Batata;Tamaquiza et al. (2017);Quero and Ambato cantons (Ecuador);-1.313235; -78.702575;null;Apatug;34;2015;8;null;null;null;null
+Batata;Winter et al. (2005);San Miguel Province (Cajamarca, norte Peru);-6.846995; -78.769753;null;13 Comunidades;486;1999;50;3,1;1,6;1;10
 Milho;Aragon-Cuevas et al. (2004) 1;Oaxaca;17.073738; -96.726808;null;26 localidades;null;1999;null;1,9;null;null;null
 Milho;Arias et al. (2004) 1;Yaxcaba, Yucatan;20.547662; -88.827142;null;null;null;1998;15;null;null;null;null
 Milho;Bellon (2004) 1;Oaxaca, Central Valleys;17.073738; -96.726808;null;null;null;1977;null;1,6;null;null;null

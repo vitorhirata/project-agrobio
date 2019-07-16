@@ -13,6 +13,7 @@ function plotAll()
   plotAllHistogram(df)
   plotAllBoxplot(df2, df3)
   plotGeneral(df)
+  #plotIndex()
 end
 
 function loadData()
@@ -45,16 +46,13 @@ function plotGeraneralData(df)
   f1(x) = coef(ols1)[1]*x
   f2(x) = coef(ols2)[1]*x
   img = PNG("plot/todos.png", 17*1.3cm, 10*1.3cm)
-  p=plot(layer(dfClean, x=:NmedioUD, y=:Ncomunidade,
-                  color=:Especie, Geom.point),
-        layer(f1, 0, maximum(dfClean[:NmedioUD])),
-        layer(f2, 0, maximum(dfClean[:NmedioUD]),
-                  Theme(default_color="hotpink1")),
-        Guide.xlabel("N Var Médio por UD"),
-        Guide.ylabel("N Var Comunidade"),
-        Guide.colorkey(title="Especie"),
-        Guide.title("Agrobiodiversidade"),
-        Theme(point_size=0.6mm, highlight_width=0.0mm));
+  p=plot(dfClean, x=:NmedioUD, y=:Ncomunidade,
+          color=:Especie, Geom.point,
+          Guide.xlabel("Riqueza de variedades média por UD"),
+          Guide.ylabel("Riqueza de variedades na Comunidade"),
+          Guide.colorkey(title="Especie"),
+          Guide.title("Agrobiodiversidade: dados para três espécies"),
+          Theme(point_size=0.6mm, highlight_width=0.0mm));
   draw(img, p)
 
 end
@@ -66,8 +64,8 @@ function plotComunidadexDU(df, str, size, runRegression)
     f(x) = coef(ols)[1]*x
     p=plot(layer(df, x=:NmedioUD, y=:Ncomunidade, color=:Fonte, Geom.point),
       layer(f, 0, 1.1*maximum(df[:NmedioUD])),
-      Guide.xlabel("N Var Médio por UD"),
-      Guide.ylabel("N Var Comunidade"),
+      Guide.xlabel("Riqueza de variedades média por UD"),
+      Guide.ylabel("Riqueza de variedades na Comunidade"),
       Guide.colorkey(title="Fonte"),
       Guide.title("Agrobiodiversidade de $(str)"),
       Theme(plot_padding=[30pt, 60pt, 10pt, 10pt],
@@ -76,7 +74,8 @@ function plotComunidadexDU(df, str, size, runRegression)
       println(coeftable(ols))
   else
     p=plot(df, x=:NmedioUD, y=:Ncomunidade, color=:Fonte, Geom.point,
-      Guide.xlabel("N Var Médio por UD"), Guide.ylabel("N Var Comunidade"),
+      Guide.xlabel("Riqueza de variedades média por UD"),
+      Guide.ylabel("Riqueza de variedades na Comunidade"),
       Guide.colorkey(title="Fonte"),
       Guide.title("Agrobiodiversidade de $(str)"),
       Theme(plot_padding=[30pt, 60pt, 10pt, 10pt],
@@ -90,14 +89,16 @@ function plotGeneral(df)
   dfUD = dropmissing(dfUD)
   img = PNG("plot/todosUD.png", 15*1.3cm, 10*1.3cm)
   p=plot(dfUD, x=:Especie, y=:NmedioUD, Geom.boxplot,
-    Guide.xlabel("Espécie"), Guide.ylabel("N Var Médio por UD"));
+    Guide.xlabel("Espécie"),
+    Guide.ylabel("Riqueza de variedades média por UD"));
   draw(img, p)
 
   dfComunidade = df[[:Especie, :Ncomunidade]]
   dfComunidade = dropmissing(dfComunidade)
   img = PNG("plot/todosComunidade.png", 15*1.3cm, 10*1.3cm)
   p=plot(dfComunidade, x=:Especie, y=:Ncomunidade, Geom.boxplot,
-    Guide.xlabel("Espécie"), Guide.ylabel("N Var Comunidade"));
+    Guide.xlabel("Espécie"),
+    Guide.ylabel("Riqueza de variedades na Comunidade"));
   draw(img, p)
 
 end
@@ -122,14 +123,16 @@ function plotHistogram(df, str, binNumber)
 
   img1 = PNG("plot/$(str)Comunidade.png", 15*1.3cm, 10*1.3cm)
   p1=plot(x=array1, Geom.histogram(bincount=binNumber[1], density=true),
-    Guide.xlabel("N Variedades na Comunidade"), Guide.ylabel("Frequencia"),
-    Guide.title("Histograma Variedades na Comunidade: $(str). N = $(size(array1)[1])"))
+    Guide.xlabel("Riqueza de variedades na Comunidade"),
+    Guide.ylabel("Frequencia"),
+    Guide.title("Riqueza de Variedades na Comunidade: $(str). N = $(size(array1)[1])"))
   draw(img1, p1)
 
   img2 = PNG("plot/$(str)UD.png", 15*1.3cm, 10*1.3cm)
   p2=plot(x=array2, Geom.histogram(bincount=binNumber[2], density=true),
-    Guide.xlabel("N Variedades Medio na UD"), Guide.ylabel("Frequencia"),
-    Guide.title("Histograma Média Variedades por Unidade Domestica: $(str). N = $(size(array2)[1])."),
+    Guide.xlabel("Riqueza de variedades média por UD"),
+    Guide.ylabel("Frequencia"),
+    Guide.title("Riqueza Média de variedades por Unidade Domestica: $(str). N = $(size(array2)[1])."),
     Theme(plot_padding=[50pt, 90pt, 10pt, 10pt]))
   draw(img2, p2)
 
@@ -164,9 +167,10 @@ function plotBoxplot(df1, str, df2=nothing, size=[20*1.3cm,14*1.3cm])
     outputFile = "plot/$(str)_var_ud.png"
     img = PNG(outputFile, size[1], size[2])
     sort!(df2, [order(:Data)])
-    p = plot(df2, x=:Fonte, y=:Nvariedades, Geom.boxplot(suppress_outliers=true),
-      Guide.xlabel("Fonte"), Guide.ylabel("Número de Variedades"),
-      Guide.title("Número de Variedades por UD: $(str)"),
+    p = plot(df2, x=:Fonte, y=:Nvariedades,
+      Geom.boxplot(suppress_outliers=true),
+      Guide.xlabel("Fonte"), Guide.ylabel("Riqueza de Variedades na UD"),
+      Guide.title("Riqueza de Variedades por UD: $(str)"),
       Theme(plot_padding=[20pt, 40pt, 10pt, 10pt]))
     draw(img, p)
   end
@@ -181,6 +185,7 @@ function plotIndex()
   p=plot(dfMandiocaUD, xgroup=:Indice, x=:Article, y=:Value, color=:Indice,
     Geom.subplot_grid(Geom.bar(position=:dodge), free_x_axis=true),
     Theme(bar_spacing = 2mm),
+    Guide.ylabel("Valor do Índice"),
     Guide.colorkey(title="Índice"))
   draw(PNG("plot/mandiocaIdxUD.png", 25cm, 15cm), p)
 
@@ -188,6 +193,7 @@ function plotIndex()
   p=plot(dfMandiocaCom, xgroup=:Indice, x=:Article, y=:Value, color=:Indice,
     Geom.subplot_grid(Geom.bar(position=:dodge), free_x_axis=true),
     Theme(bar_spacing = 2mm),
+    Guide.ylabel("Valor do Índice"),
     Guide.colorkey(title="Índice"))
   draw(PNG("plot/mandiocaIdxCom.png", 30cm, 15cm), p)
 
@@ -198,12 +204,15 @@ function plotIndex()
   p=plot(dfMilhoUD, xgroup=:Indice, x=:Article, y=:Value, color=:Indice,
     Geom.subplot_grid(Geom.bar(position=:dodge), free_x_axis=true),
     Theme(bar_spacing = 5mm),
+    Guide.ylabel("Valor do Índice"),
     Guide.colorkey(title="Índice"))
   draw(PNG("plot/milhoIdxUD.png", 15cm, 15cm), p)
 
   dfMilhoCom = dfMilho[dfMilho[:Scale] .== "Comunidade", :]
     p=plot(dfMilhoCom, x=:Article, y=:Value, color=:Indice, Geom.bar,
     Theme(bar_spacing = 5mm),
+    Guide.ylabel("Valor do Índice"),
+    Guide.xlabel(""),
     Guide.colorkey(title="Índice"))
   draw(PNG("plot/milhoIdxCom.png", 8cm, 10cm), p)
 end
