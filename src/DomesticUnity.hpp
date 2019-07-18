@@ -28,6 +28,8 @@ public:
       DUParameter t_duParameter);
   void computeDUpunctuations(void);
   void iterateDU(void);
+  float computeSimpsonDU(void);
+  float computeShannonDU(void);
 };
 
 struct DomesticUnity::DUvariety{
@@ -245,4 +247,26 @@ int DomesticUnity::numberVarietyOwened(void){
   }
   return varietyOwened.size();
 }
+
+float DomesticUnity::computeSimpsonDU(void){
+  float simpson = 0;
+  for(auto i : varietyOwened){
+    if(i.number != -1)
+      simpson += pow((float) i.quantity / m_indexOwenedPatches.size(), 2);
+  }
+  return simpson;
+}
+
+float DomesticUnity::computeShannonDU(void){
+  float shannon = 0;
+  for(auto i : varietyOwened){
+    if(i.number != -1){
+      shannon += (-1 * ((float) i.quantity / m_indexOwenedPatches.size()) *
+          log((float) i.quantity / m_indexOwenedPatches.size()));
+    }
+  }
+  shannon /= log(numberVarietyOwened());
+  return shannon;
+}
+
 #endif

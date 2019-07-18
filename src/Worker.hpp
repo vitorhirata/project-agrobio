@@ -17,8 +17,9 @@ namespace worker{
     int duSize = parameter.latticeSize / sqrt(parameter.numberDomesticUnity);
     duSize = duSize * duSize;
     std::string header ("time; nVar; meanDU; totalPunctuation; ");
-    header.append("fitnessPunctuation; appearencePunctuation; maxVarQuant; ");
-    header.append("simpson; shannon");
+    header.append("fitnessPunctuation; appearencePunctuation; bergerDU; ");
+    header.append("simpsonCommunity; shannonCommunity; ");
+    header.append("simpsonDU; shannonDU");
     fstream timeFile = worker::openFile(
         "test/" + timestr + "_standard.csv", header, parameter);
     for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i){
@@ -29,11 +30,12 @@ namespace worker{
       timeFile << result.fitnessPunctuation[i] / parameter.nRun << "; ";
       timeFile << (result.totalPunctuation[i]-
           result.fitnessPunctuation[i]) / parameter.nRun << "; ";
-      timeFile << 100 * result.varietyQuantityDU[i] /
+      timeFile << result.bergerParkerDU[i] /
         (duSize * parameter.nRun) << "; ";
-    header.append("simpson; shannon");
-      timeFile << result.simpson[i] / parameter.nRun << "; ";
-      timeFile << result.shannon[i] / parameter.nRun << endl;
+      timeFile << result.simpsonCommunity[i] / parameter.nRun << "; ";
+      timeFile << result.shannonCommunity[i] / parameter.nRun << "; ";
+      timeFile << result.simpsonDU[i] / parameter.nRun << "; ";
+      timeFile << result.shannonDU[i] / parameter.nRun << endl;
     }
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     timeFile.close();
@@ -91,7 +93,7 @@ namespace worker{
     int duSize = parameter.latticeSize / sqrt(parameter.numberDomesticUnity);
     duSize = duSize * duSize;
     std::string header ("time; nVar; meanDU; totalPunctuation; ");
-    header.append("fitnessPunctuation; appearencePunctuation; maxVarQuant; ");
+    header.append("fitnessPunctuation; appearencePunctuation; bergerDU; ");
     header.append("simpson; shannon");
     fstream timeFile = worker::openFile(
         "test/plot/" + timestr + "_standard.csv", header,
@@ -103,9 +105,11 @@ namespace worker{
       timeFile << result.totalPunctuation[i] << "; ";
       timeFile << result.fitnessPunctuation[i] << "; ";
       timeFile << result.totalPunctuation[i] - result.fitnessPunctuation[i];
-      timeFile << "; " << 100 * result.varietyQuantityDU[i] / duSize << "; ";
-      timeFile << result.simpson[i] << "; ";
-      timeFile << result.shannon[i] << endl;
+      timeFile << "; " << result.bergerParkerDU[i] / duSize << "; ";
+      timeFile << result.simpsonCommunity[i] << "; ";
+      timeFile << result.shannonCommunity[i] << "; ";
+      timeFile << result.simpsonDU[i] << "; ";
+      timeFile << result.shannonDU[i] << endl;
     }
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     timeFile.close();
@@ -154,7 +158,7 @@ namespace worker{
 
     std::string header ("time; nVar; meanDU; totalPunctuation; ");
     header.append("fitnessPunctuation; appearencePunctuation; ");
-    header.append("maxVarQuant; simpson; shannon; param");
+    header.append("bergerDU; simpson; shannon; param");
     fstream timeFile = worker::openFile(
         "test/" + timestr + "_varParam_" + param + ".csv",
         header, parameter);
@@ -243,10 +247,12 @@ namespace worker{
         timeFile << result.fitnessPunctuation[i] / parameter.nRun << "; ";
         timeFile << (result.totalPunctuation[i]-
           result.fitnessPunctuation[i]) / parameter.nRun << "; ";
-        timeFile << 100 * result.varietyQuantityDU[i] /
+        timeFile << result.bergerParkerDU[i] /
           (duSize * parameter.nRun) << "; ";
-      timeFile << result.simpson[i] / parameter.nRun << "; ";
-      timeFile << result.shannon[i] / parameter.nRun << "; ";
+        timeFile << result.simpsonCommunity[i] / parameter.nRun << "; ";
+        timeFile << result.shannonCommunity[i] / parameter.nRun << "; ";
+        timeFile << result.simpsonDU[i] / parameter.nRun << "; ";
+        timeFile << result.shannonDU[i] / parameter.nRun << "; ";
         timeFile << paramValue << endl;
       }
       for(int i = 0; i < round(1 / 0.05); ++i){
@@ -289,7 +295,7 @@ namespace worker{
     std::string timestr = to_string(now);
 
     std::string header ("param; nVar; meanDU; totalPunctuation; ");
-    header.append("fitnessPunctuation; appearencePunctuation; maxVarQuant; ");
+    header.append("fitnessPunctuation; appearencePunctuation; bergerDU; ");
     header.append("simpson; shannon");
     fstream mainFile = worker::openFile(
         "test/" + timestr + "_varParamFixedPoints_" + param + ".csv",
@@ -430,10 +436,12 @@ namespace worker{
       mainFile << result.fitnessPunctuation[0] / parameter.nRun << "; ";
       mainFile << (result.totalPunctuation[0]-
             result.fitnessPunctuation[0]) / parameter.nRun << "; ";
-      mainFile << 100 * result.varietyQuantityDU[0] /
+      mainFile << result.bergerParkerDU[0] /
         (duSize * parameter.nRun) << "; ";
-      mainFile << result.simpson[0] / parameter.nRun << "; ";
-      mainFile << result.shannon[0] / parameter.nRun << endl;
+      mainFile << result.simpsonCommunity[0] / parameter.nRun << "; ";
+      mainFile << result.shannonCommunity[0] / parameter.nRun << "; ";
+      mainFile << result.simpsonDU[0] / parameter.nRun << "; ";
+      mainFile << result.shannonDU[0] / parameter.nRun << endl;
       for(int i = 0; i < round(1 / 0.05); ++i){
         histogramFile << i*0.05 + 0.025 << "; ";
         histogramFile << 100 * result.fitnessFrequency[i] / parameter.nRun;

@@ -9,6 +9,8 @@ private:
   void setAmbient(void);
   void setDomesticUnity(void);
   void iterate(void);
+  float computeAverageSimpson(void);
+  float computeAverageShannon(void);
 public:
   Model(Parameter t_parameter);
   ~Model();
@@ -87,12 +89,14 @@ Result Model::runStandard(void){
           domesticUnity, m_parameter.numberDomesticUnity);
       result.totalPunctuation.push_back(tempPunctuation[0]);
       result.fitnessPunctuation.push_back(tempPunctuation[1]);
-      result.varietyQuantityDU.push_back(metrics::computeVarietyQuantityDU(
+      result.bergerParkerDU.push_back(metrics::computeVarietyQuantityDU(
             domesticUnity, m_parameter.numberDomesticUnity));
-      result.simpson.push_back(metrics::computeSimpson(domesticUnity,
+      result.simpsonCommunity.push_back(metrics::computeSimpson(domesticUnity,
             m_parameter.numberDomesticUnity, m_parameter.latticeSize));
-      result.shannon.push_back(metrics::computeShannon(domesticUnity,
+      result.shannonCommunity.push_back(metrics::computeShannon(domesticUnity,
             m_parameter.numberDomesticUnity, m_parameter.latticeSize));
+      result.simpsonDU.push_back(computeAverageSimpson());
+      result.shannonDU.push_back(computeAverageShannon());
     }
   }
   std::vector<float> tempPunctuation = metrics::computePunctuationAverage(
@@ -127,11 +131,13 @@ Result Model::runFixedPoint(void){
       domesticUnity, m_parameter.numberDomesticUnity);
   result.totalPunctuation.push_back(tempPunctuation[0]);
   result.fitnessPunctuation.push_back(tempPunctuation[1]);
-  result.simpson.push_back(metrics::computeSimpson(domesticUnity,
+  result.simpsonCommunity.push_back(metrics::computeSimpson(domesticUnity,
         m_parameter.numberDomesticUnity, m_parameter.latticeSize));
-  result.shannon.push_back(metrics::computeShannon(domesticUnity,
+  result.shannonCommunity.push_back(metrics::computeShannon(domesticUnity,
         m_parameter.numberDomesticUnity, m_parameter.latticeSize));
-  result.varietyQuantityDU.push_back(metrics::computeVarietyQuantityDU(
+  result.simpsonDU.push_back(computeAverageSimpson());
+  result.shannonDU.push_back(computeAverageShannon());
+  result.bergerParkerDU.push_back(metrics::computeVarietyQuantityDU(
         domesticUnity, m_parameter.numberDomesticUnity));
   result.fitnessFrequency = metrics::computeFitnessProfile(
       ambient->grid, m_parameter.latticeSize);
@@ -165,12 +171,14 @@ Result Model::runPlot(void){
           domesticUnity, m_parameter.numberDomesticUnity);
       result.totalPunctuation.push_back(tempPunctuation[0]);
       result.fitnessPunctuation.push_back(tempPunctuation[1]);
-      result.varietyQuantityDU.push_back(metrics::computeVarietyQuantityDU(
+      result.bergerParkerDU.push_back(metrics::computeVarietyQuantityDU(
             domesticUnity, m_parameter.numberDomesticUnity));
-      result.simpson.push_back(metrics::computeSimpson(domesticUnity,
+      result.simpsonCommunity.push_back(metrics::computeSimpson(domesticUnity,
             m_parameter.numberDomesticUnity, m_parameter.latticeSize));
-      result.shannon.push_back(metrics::computeShannon(domesticUnity,
+      result.shannonCommunity.push_back(metrics::computeShannon(domesticUnity,
             m_parameter.numberDomesticUnity, m_parameter.latticeSize));
+      result.simpsonDU.push_back(computeAverageSimpson());
+      result.shannonDU.push_back(computeAverageShannon());
     }
   }
   result.fitnessFrequency = metrics::computeFitnessProfile(
@@ -200,6 +208,22 @@ void Model::iterate(void){
   std::random_shuffle(DU_list.begin(),DU_list.end());
   for(auto i : DU_list)
     domesticUnity[i].iterateDU();
+}
+
+float Model::computeAverageSimpson(void){
+  float simpson = 0;
+  for(int i = 0; i < m_parameter.numberDomesticUnity; ++i)
+    simpson += domesticUnity[i].computeSimpsonDU();
+  simpson /= m_parameter.numberDomesticUnity;
+  return simpson;
+}
+
+float Model::computeAverageShannon(void){
+  float shannon = 0;
+  for(int i = 0; i < m_parameter.numberDomesticUnity; ++i)
+    shannon += domesticUnity[i].computeShannonDU();
+  shannon /= m_parameter.numberDomesticUnity;
+  return shannon;
 }
 
 #endif

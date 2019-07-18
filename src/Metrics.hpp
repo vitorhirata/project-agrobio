@@ -15,14 +15,22 @@ namespace metrics{
         (*result).fitnessPunctuation.end(),
         (*resultTemp).fitnessPunctuation.begin(),
         (*result).fitnessPunctuation.begin(), std::plus<float>());
-    std::transform((*result).simpson.begin(),
-        (*result).simpson.end(),
-        (*resultTemp).simpson.begin(),
-        (*result).simpson.begin(), std::plus<float>());
-    std::transform((*result).shannon.begin(),
-        (*result).shannon.end(),
-        (*resultTemp).shannon.begin(),
-        (*result).shannon.begin(), std::plus<float>());
+    std::transform((*result).simpsonCommunity.begin(),
+        (*result).simpsonCommunity.end(),
+        (*resultTemp).simpsonCommunity.begin(),
+        (*result).simpsonCommunity.begin(), std::plus<float>());
+    std::transform((*result).shannonCommunity.begin(),
+        (*result).shannonCommunity.end(),
+        (*resultTemp).shannonCommunity.begin(),
+        (*result).shannonCommunity.begin(), std::plus<float>());
+    std::transform((*result).simpsonDU.begin(),
+        (*result).simpsonDU.end(),
+        (*resultTemp).simpsonDU.begin(),
+        (*result).simpsonDU.begin(), std::plus<float>());
+    std::transform((*result).shannonDU.begin(),
+        (*result).shannonDU.end(),
+        (*resultTemp).shannonDU.begin(),
+        (*result).shannonDU.begin(), std::plus<float>());
     std::transform((*result).varietyDistribution.begin(),
         (*result).varietyDistribution.end(),
         (*resultTemp).varietyDistribution.begin(),
@@ -31,10 +39,10 @@ namespace metrics{
         (*result).varietyQuantity.end(),
         (*resultTemp).varietyQuantity.begin(),
         (*result).varietyQuantity.begin(), std::plus<float>());
-    std::transform((*result).varietyQuantityDU.begin(),
-        (*result).varietyQuantityDU.end(),
-        (*resultTemp).varietyQuantityDU.begin(),
-        (*result).varietyQuantityDU.begin(), std::plus<float>());
+    std::transform((*result).bergerParkerDU.begin(),
+        (*result).bergerParkerDU.end(),
+        (*resultTemp).bergerParkerDU.begin(),
+        (*result).bergerParkerDU.begin(), std::plus<float>());
     std::transform((*result).fitnessFrequency.begin(),
         (*result).fitnessFrequency.end(),
         (*resultTemp).fitnessFrequency.begin(),

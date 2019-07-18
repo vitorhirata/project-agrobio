@@ -91,23 +91,27 @@ function plotStandard(df, output_file)
     output_file3 = output_file[1:end-4] * "3.svg"
     draw(SVG(output_file3, 20cm, 10cm), p3)
     println("Image $(output_file3) successfully generated.")
-    p4 = plot(df, x=:time, y=:maxVarQuant, Geom.line,
-                Guide.ylabel("Área média da variedade dominante (%)"),
-                Guide.xlabel("Tempo"))
+    p4 = plot(layer(df, x=:time, y=:simpsonCommunity, Geom.line,
+                        Theme(default_color=colorant"blue")),
+               layer(df, x=:time, y=:shannonCommunity, Geom.line,
+                        Theme(default_color=colorant"red")),
+               layer(df, x=:time, y=:simpsonDU, Geom.line,
+                        Theme(default_color=colorant"green")),
+               layer(df, x=:time, y=:bergerDU, Geom.line,
+                        Theme(default_color=colorant"orange")),
+               layer(df, x=:time, y=:shannonDU, Geom.line,
+                        Theme(default_color=colorant"purple")),
+               Guide.manual_color_key("Índice",["Simpson Comunidade",
+                                         "Shannon evenness Comunidade",
+                                         "Berger-Parker UD",
+                                         "Simpson UD",
+                                         "Shannon evenness UD"],
+                                        ["blue", "red",
+                                         "green", "orange", "purple"]),
+                Guide.ylabel("Valor da Métrica"), Guide.xlabel("Tempo"))
     output_file4 = output_file[1:end-4] * "4.svg"
     draw(SVG(output_file4, 20cm, 10cm), p4)
     println("Image $(output_file4) successfully generated.")
-    p5 = plot(layer(df, x=:time, y=:simpson, Geom.line,
-                        Theme(default_color=colorant"blue")),
-               layer(df, x=:time, y=:shannon, Geom.line,
-                        Theme(default_color=colorant"red")),
-              Guide.manual_color_key("",["Indice Simpson",
-                                         "Shannon evenness"],
-                                        ["blue", "red"]),
-                Guide.ylabel("Valor da Métrica"), Guide.xlabel("Tempo"))
-    output_file5 = output_file[1:end-4] * "5.svg"
-    draw(SVG(output_file5, 20cm, 10cm), p5)
-    println("Image $(output_file5) successfully generated.")
 end
 
 function plotVarParam(df, output_file)
@@ -125,7 +129,7 @@ function plotVarParam(df, output_file)
     output_file2 = output_file[1:end-4] * "2.svg"
     draw(SVG(output_file2, 15cm, 10cm), p2)
     println("Image $(output_file2) successfully generated.")
-    p3 = plot(df, x=:time, y=:maxVarQuant, color=:param, Geom.line,
+    p3 = plot(df, x=:time, y=:bergerDU, color=:param, Geom.line,
                   Scale.color_discrete(), Guide.colorkey(title=param),
                   Guide.ylabel("Área média da variedade dominante (%)"),
                   Guide.xlabel("Tempo"))
