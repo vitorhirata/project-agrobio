@@ -94,7 +94,8 @@ namespace worker{
     duSize = duSize * duSize;
     std::string header ("time; nVar; meanDU; totalPunctuation; ");
     header.append("fitnessPunctuation; appearencePunctuation; bergerDU; ");
-    header.append("simpson; shannon");
+    header.append("simpson; shannon; ");
+    header.append("simpsonDU; shannonDU");
     fstream timeFile = worker::openFile(
         "test/plot/" + timestr + "_standard.csv", header,
         parameter);
@@ -158,7 +159,8 @@ namespace worker{
 
     std::string header ("time; nVar; meanDU; totalPunctuation; ");
     header.append("fitnessPunctuation; appearencePunctuation; ");
-    header.append("bergerDU; simpson; shannon; param");
+    header.append("bergerDU; simpson; shannon; ");
+    header.append("simpsonDU; shannonDU; param");
     fstream timeFile = worker::openFile(
         "test/" + timestr + "_varParam_" + param + ".csv",
         header, parameter);
@@ -296,7 +298,8 @@ namespace worker{
 
     std::string header ("param; nVar; meanDU; totalPunctuation; ");
     header.append("fitnessPunctuation; appearencePunctuation; bergerDU; ");
-    header.append("simpson; shannon");
+    header.append("simpson; shannon; ");
+    header.append("simpsonDU; shannonDU");
     fstream mainFile = worker::openFile(
         "test/" + timestr + "_varParamFixedPoints_" + param + ".csv",
         header, parameter);
