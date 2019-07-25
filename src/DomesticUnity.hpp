@@ -120,8 +120,8 @@ void DomesticUnity::fillvarietyOwened(std::map<int,
 // Compute the punctuation based on the fitness appearence and alpha
 float DomesticUnity::computePunctuation(float varFitness,
     float varAppererence){
-  float appearencePunc = 1 - std::min(abs(varAppererence - m_DUpreference),
-      1 - abs(varAppererence - m_DUpreference));
+  float appearencePunc = 1 - 2 *  std::min(abs(varAppererence -
+        m_DUpreference), 1 - abs(varAppererence - m_DUpreference));
   return m_duParameter.alpha * varFitness +
     (1 - m_duParameter.alpha) * appearencePunc;
 }
