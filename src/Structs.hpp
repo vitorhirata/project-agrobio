@@ -22,7 +22,7 @@ struct Parameter{
   int selectionStrength;
   float alpha;
   float probabilityNewVar;
-  float deathStrength;
+  float deathProbability;
   Parameter()
   : latticeSize(49)
   , numberInitialVariety(10)
@@ -43,7 +43,7 @@ struct Parameter{
   , selectionStrength(15)
   , alpha(0.5)
   , probabilityNewVar(0.001)
-  , deathStrength(0.05) {}
+  , deathProbability(0.15) {}
 };
 
 struct Result{

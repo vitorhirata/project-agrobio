@@ -227,7 +227,7 @@ namespace worker{
           parameter.selectionStrength = paramValue;
           break;
         case 'd':
-          parameter.deathStrength = paramValue;
+          parameter.deathProbability = paramValue;
       }
       clock_t tStart = clock();
       Result result(parameter.maxTime/parameter.timeInterval,
@@ -416,7 +416,7 @@ namespace worker{
           parameter.selectionStrength = paramValue;
           break;
         case 'd':
-          parameter.deathStrength = paramValue;
+          parameter.deathProbability = paramValue;
       }
       clock_t tStart = clock();
       Result result(1, round(1 / 0.05), parameter.latticeSize, 17);

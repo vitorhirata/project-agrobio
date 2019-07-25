@@ -5,7 +5,7 @@
 class Ambient{
 private:
   const int m_latticeSize;
-  const float m_deathStrength;
+  const float m_deathProbability;
   void setPatch(int numberResources, int nResourceDistribution,
       int numberInitialVariety, int numberInitialVarietyDU);
   std::vector<VarietyData> defineInitialVarieties(
@@ -13,12 +13,11 @@ private:
   std::vector<std::vector<int> > defineDUindex(
       std::uniform_int_distribution<long> uniIntSP, int numberVarDU);
   int computeDUnumber(int place);
-  float computeDeathProbability(float x);
 public:
   Patch* grid;
   Ambient(int t_latticeSize, int t_nResourceDistribution,
       int t_numberResources, int t_numberInitialVariety,
-      int t_numberInitialVarietyDU, float t_deathStrength);
+      int t_numberInitialVarietyDU, float t_deathProbability);
   ~Ambient();
   int countSpecie(void);
   void runDeath(void);
@@ -28,9 +27,9 @@ public:
 // and resources
   Ambient::Ambient(int t_latticeSize, int t_nResourceDistribution,
       int t_numberResources, int t_numberInitialVariety,
-      int t_numberInitialVarietyDU, float t_deathStrength)
+      int t_numberInitialVarietyDU, float t_deathProbability)
   : m_latticeSize(t_latticeSize)
-  , m_deathStrength(t_deathStrength)
+  , m_deathProbability(t_deathProbability)
 {
   grid = new Patch [m_latticeSize*m_latticeSize];
   setPatch(t_numberResources, t_nResourceDistribution,
@@ -158,12 +157,9 @@ int Ambient::countSpecie(void){
 
 void Ambient::runDeath(void){
   for(int i = 0; i < m_latticeSize*m_latticeSize; ++i){
-    if(uniFLOAT(rand64) < computeDeathProbability(grid[i].fitness))
+    if(uniFLOAT(rand64) < m_deathProbability)
       grid[i].killVariety();
   }
 }
 
-float Ambient::computeDeathProbability(float x){
-  return m_deathStrength/(x+0.05);
-}
 #endif
