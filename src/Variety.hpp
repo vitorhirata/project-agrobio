@@ -16,7 +16,7 @@ public:
 void Variety::setRandomVariety(void){
   for(uint i = 0; i < halfSaturation.size(); ++i){
     halfSaturation[i] = gaussK(rand64);
-    while(!(halfSaturation[i] > 0))
+    while(halfSaturation[i] < 0 || halfSaturation[i] > 1)
       halfSaturation[i] = gaussK(rand64);
   }
   appearence = uniFLOAT(rand64);
