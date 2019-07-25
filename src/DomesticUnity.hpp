@@ -208,10 +208,12 @@ float DomesticUnity::computeMaxDelta(int * minorDeltaIdx, int * majorDeltaIdx){
   *majorDeltaIdx = -10;
   for(uint i = 0; i < varietyOwened.size(); ++i)
     averagePunctuation += varietyOwened[i].punctuation;
-  averagePunctuation /= varietyOwened.size();
+  averagePunctuation /= numberVarietyOwened();
   for(uint i = 0; i < varietyOwened.size(); ++i){
-    totalPunctuationNorm += renormalizationFunction(
-        varietyOwened[i].punctuation - averagePunctuation);
+    if(varietyOwened[i].number != -1){
+      totalPunctuationNorm += renormalizationFunction(
+          varietyOwened[i].punctuation - averagePunctuation);
+    }
   }
 
   for(uint i = 0; i < varietyOwened.size(); ++i){
