@@ -137,7 +137,10 @@ std::vector<VarietyData> Ambient::defineInitialVarieties(int numberResources,
           varietyAvailable[i].halfSaturation[j] > 1)
         varietyAvailable[i].halfSaturation[j] = gaussK(rand64);
     }
-    varietyAvailable[i].appearence = uniFLOAT(rand64);
+    varietyAvailable[i].appearence = gaussA(rand64);
+      while(varietyAvailable[i].appearence < 0 ||
+          varietyAvailable[i].appearence > 1)
+        varietyAvailable[i].appearence = gaussA(rand64);
   }
   return varietyAvailable;
 }

@@ -19,7 +19,9 @@ void Variety::setRandomVariety(void){
     while(halfSaturation[i] < 0 || halfSaturation[i] > 1)
       halfSaturation[i] = gaussK(rand64);
   }
-  appearence = uniFLOAT(rand64);
+  appearence = gaussA(rand64);
+  while(appearence < 0 || appearence  > 1)
+    appearence = gaussA(rand64);
   varietyNumber = computeVarietyNumber();
 }
 
