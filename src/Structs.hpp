@@ -28,22 +28,22 @@ struct Parameter{
   , numberInitialVariety(10)
   , numberInitialVarietyDU(5)
   , numberResources(3)
-  , numberHabitat(4)
+  , numberHabitat(1)
   , maxTime(5000)
   , timeInterval(50)
   , numberDomesticUnity(49)
-  , nRun(75)
+  , nRun(200)
   , networkType(1)
   , mSF(2)
   , kWT(4)
   , betaWT(0.2)
   , probabilyConnectionER(0.15)
-  , outsideTradeLimit(0.02)
+  , outsideTradeLimit(0.01)
   , insideTradeLimit(0)
   , selectionStrength(15)
-  , alpha(0.5)
-  , probabilityNewVar(0.001)
-  , deathProbability(0.15) {}
+  , alpha(0.6)
+  , probabilityNewVar(0.003)
+  , deathProbability(0.16) {}
 };
 
 struct Result{

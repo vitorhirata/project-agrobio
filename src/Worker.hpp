@@ -94,7 +94,7 @@ namespace worker{
     duSize = duSize * duSize;
     std::string header ("time; nVar; meanDU; totalPunctuation; ");
     header.append("fitnessPunctuation; appearencePunctuation; bergerDU; ");
-    header.append("simpson; shannon; ");
+    header.append("simpsonCommunity; shannonCommunity; ");
     header.append("simpsonDU; shannonDU");
     fstream timeFile = worker::openFile(
         "test/plot/" + timestr + "_standard.csv", header,
@@ -320,7 +320,7 @@ namespace worker{
     switch (param){
       case 'o':
         paramList = std::vector<float> {
-          0, 0.005, 0.0075, 0.01, 0.02, 0.035, 0.05, 0.075, 0.1, 1};
+          0, 0.005, 0.0075, 0.01, 0.02, 0.03, 0.05, 0.08, 0.1, 1};
         break;
       case 'i':
         paramList = std::vector<float> {
@@ -350,11 +350,11 @@ namespace worker{
         break;
       case 'p':
         paramList = std::vector<float> {
-          0, 0.0001, 0.0005, 0.001, 0.0025, 0.005, 0.01};
+          0, 0.0001, 0.0005, 0.001, 0.003, 0.005, 0.007, 0.01, 0.05};
         break;
       case 'b':
         paramList = std::vector<float> {
-          0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9};
+          0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0};
         break;
       case 'R':
         paramList = std::vector<float> {1, 3, 5, 7, 10};
@@ -363,7 +363,8 @@ namespace worker{
         paramList = std::vector<float> {1, 3, 5, 10, 15, 20, 30, 50, 100};
         break;
       case 'd':
-        paramList = std::vector<float> {5, 10, 18, 30, 50, 75, 100};
+        paramList = std::vector<float> {0, 0.01, 0.05, 0.1, 0.16, 0.2, 0.3,
+          0.4, 0.5};
     }
 
     for(auto paramValue : paramList){
