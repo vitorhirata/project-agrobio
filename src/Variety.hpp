@@ -3,7 +3,7 @@
 
 class Variety{
 public:
-  float appearence;
+  float quality;
   std::vector<float> halfSaturation;
   int varietyNumber;
   int computeVarietyNumber(void);
@@ -19,21 +19,21 @@ void Variety::setRandomVariety(void){
     while(halfSaturation[i] < 0 || halfSaturation[i] > 1)
       halfSaturation[i] = gaussK(rand64);
   }
-  appearence = gaussA(rand64);
-  while(appearence < 0 || appearence  > 1)
-    appearence = gaussA(rand64);
+  quality = gaussQ(rand64);
+  while(quality < 0 || quality  > 1)
+    quality = gaussQ(rand64);
   varietyNumber = computeVarietyNumber();
 }
 
 void Variety::killVariety(void){
   varietyNumber = -1;
-  appearence = -1;
+  quality = -1;
 }
 
 // Set variety to a new one, according to the received value
 void Variety::setVariety(VarietyData t_data){
   halfSaturation = t_data.halfSaturation;
-  appearence = t_data.appearence;
+  quality = t_data.quality;
   varietyNumber = computeVarietyNumber();
 }
 
@@ -50,7 +50,7 @@ int Variety::computeVarietyNumber(void){
     varNumber += actualScale * temp;
     actualScale *= scale;
   }
-  varNumber += floor(appearence / (step * step));
+  varNumber += floor(quality / (step * step));
 
   return varNumber;
 }

@@ -11,10 +11,10 @@ namespace metrics{
         (*result).totalPunctuation.end(),
         (*resultTemp).totalPunctuation.begin(),
         (*result).totalPunctuation.begin(), std::plus<float>());
-    std::transform((*result).fitnessPunctuation.begin(),
-        (*result).fitnessPunctuation.end(),
-        (*resultTemp).fitnessPunctuation.begin(),
-        (*result).fitnessPunctuation.begin(), std::plus<float>());
+    std::transform((*result).productivityPunctuation.begin(),
+        (*result).productivityPunctuation.end(),
+        (*resultTemp).productivityPunctuation.begin(),
+        (*result).productivityPunctuation.begin(), std::plus<float>());
     std::transform((*result).simpsonCommunity.begin(),
         (*result).simpsonCommunity.end(),
         (*resultTemp).simpsonCommunity.begin(),
@@ -43,14 +43,14 @@ namespace metrics{
         (*result).bergerParkerDU.end(),
         (*resultTemp).bergerParkerDU.begin(),
         (*result).bergerParkerDU.begin(), std::plus<float>());
-    std::transform((*result).fitnessFrequency.begin(),
-        (*result).fitnessFrequency.end(),
-        (*resultTemp).fitnessFrequency.begin(),
-        (*result).fitnessFrequency.begin(), std::plus<float>());
-    std::transform((*result).appearenceFrequency.begin(),
-        (*result).appearenceFrequency.end(),
-        (*resultTemp).appearenceFrequency.begin(),
-        (*result).appearenceFrequency.begin(), std::plus<float>());
+    std::transform((*result).productivityFrequency.begin(),
+        (*result).productivityFrequency.end(),
+        (*resultTemp).productivityFrequency.begin(),
+        (*result).productivityFrequency.begin(), std::plus<float>());
+    std::transform((*result).qualityFrequency.begin(),
+        (*result).qualityFrequency.end(),
+        (*resultTemp).qualityFrequency.begin(),
+        (*result).qualityFrequency.begin(), std::plus<float>());
     std::transform((*result).duDistribution.begin(),
         (*result).duDistribution.end(), (*resultTemp).duDistribution.begin(),
         (*result).duDistribution.begin(), std::plus<float>());
@@ -115,7 +115,7 @@ namespace metrics{
   }
 
   // Return the average area cultivated by the most present variety of each DU
-  float computeVarietyQuantityDU(DomesticUnity* domesticUnity,
+  float computeBergerParkerDU(DomesticUnity* domesticUnity,
       const int t_numberDomesticUnity){
     std::vector<int> quantityBestVarDU(t_numberDomesticUnity, -1);
     for(int i = 0; i < t_numberDomesticUnity; ++i){
@@ -187,7 +187,7 @@ namespace metrics{
     std::vector<float> punctuationAverage(2, 0);
     for(int i = 0; i < t_numberDomesticUnity; ++i){
       punctuationAverage[0] += domesticUnity[i].punctuation;
-      punctuationAverage[1] += domesticUnity[i].fitness_punctuation;
+      punctuationAverage[1] += domesticUnity[i].productivity_punctuation;
     }
     punctuationAverage[0] /= t_numberDomesticUnity;
     punctuationAverage[1] /= t_numberDomesticUnity;
@@ -209,35 +209,35 @@ namespace metrics{
     return mean;
   }
 
-  // Return the frequency of each range of appearence. The range size is 0.05
-  std::vector<float> computeAppearenceProfile(
+  // Return the frequency of each range of quality. The range size is 0.05
+  std::vector<float> computeQualityProfile(
       Patch* t_grid, const int t_latticeSize){
     float step = 0.05;
     std::vector<float> varFrequency(round(1 / step), 0);
     for(int i = 0; i < t_latticeSize*t_latticeSize; ++i){
-      if(t_grid[i].variety.appearence != -1){
-        int idx = floor(t_grid[i].variety.appearence / step);
+      if(t_grid[i].variety.quality != -1){
+        int idx = floor(t_grid[i].variety.quality / step);
         varFrequency[idx] += 1.0 / (t_latticeSize*t_latticeSize);
       }
     }
     return varFrequency;
   }
 
-  // Return the frequency of each range of fitness. The range size is 0.05
-  std::vector<float> computeFitnessProfile(
+  // Return the frequency of each range of productivity. The range size is 0.05
+  std::vector<float> computeProductivityProfile(
       Patch* t_grid, const int t_latticeSize){
     float step = 0.05;
-    std::vector<float> fitnessFrequency(round(1 / step), 0);
+    std::vector<float> productivityFrequency(round(1 / step), 0);
     for(int i = 0; i < t_latticeSize*t_latticeSize; ++i){
-      if(t_grid[i].fitness != 0){
+      if(t_grid[i].productivity != 0){
         float position = step;
-        while(position < t_grid[i].fitness)
+        while(position < t_grid[i].productivity)
           position += step;
         int tick = round((position - step) / step);
-        fitnessFrequency[tick] += (1.0 / (t_latticeSize * t_latticeSize));
+        productivityFrequency[tick] += (1.0 / (t_latticeSize * t_latticeSize));
       }
     }
-    return fitnessFrequency;
+    return productivityFrequency;
   }
 
   float computeCorrelation(DomesticUnity* domesticUnity, int numberDU){

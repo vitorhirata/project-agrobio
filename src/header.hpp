@@ -19,7 +19,7 @@ static std::uniform_int_distribution<long> uniIntPlace(0,49-1);
 static std::normal_distribution<double> gaussPref(0.5,0.1);
 static std::normal_distribution<double> gaussRes(0.6,0.2);
 static std::normal_distribution<double> gaussK(0.5,0.15);
-static std::normal_distribution<double> gaussA(0.5,0.15);
+static std::normal_distribution<double> gaussQ(0.5,0.15);
 
 /* Builted class and functions */
 struct VarietyData;
@@ -41,7 +41,7 @@ namespace metrics{
       DomesticUnity* domesticUnity, const int t_numberDomesticUnity);
   std::vector<float> computeVarietyQuantity(DomesticUnity* domesticUnity,
       const int t_numberDomesticUnity, const int t_latticeSize);
-  float computeVarietyQuantityDU(DomesticUnity* domesticUnity,
+  float computeBergerParkerDU(DomesticUnity* domesticUnity,
       const int t_numberDomesticUnity);
   float computeShannon(DomesticUnity* domesticUnity,
       const int t_numberDomesticUnity, const int t_latticeSize);
@@ -49,9 +49,9 @@ namespace metrics{
       const int t_numberDomesticUnity, const int t_latticeSize);
   std::vector<float> computePunctuationAverage(DomesticUnity* domesticUnity,
       const int t_numberDomesticUnity);
-  std::vector<float> computeFitnessProfile(
+  std::vector<float> computeProductivityProfile(
       Patch* t_grid, const int t_latticeSize);
-  std::vector<float> computeAppearenceProfile(
+  std::vector<float> computeQualityProfile(
       Patch* t_grid, const int t_latticeSize);
   float computeCorrelation(DomesticUnity* domesticUnity, int numberDU);
   void printState(int t, Patch* grid, const int t_latticeSize);

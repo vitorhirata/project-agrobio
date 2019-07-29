@@ -48,14 +48,14 @@ struct Result{
   std::vector<int> numberVariety;
   std::vector<float> meanVarietyDU;
   std::vector<float> totalPunctuation;
-  std::vector<float> fitnessPunctuation;
-  std::vector<float> fitnessFrequency;
+  std::vector<float> productivityPunctuation;
+  std::vector<float> productivityFrequency;
   std::vector<float> simpsonCommunity;
   std::vector<float> shannonCommunity;
   std::vector<float> simpsonDU;
   std::vector<float> shannonDU;
   std::vector<float> bergerParkerDU;
-  std::vector<float> appearenceFrequency;
+  std::vector<float> qualityFrequency;
   std::vector<float> varietyDistribution;
   std::vector<float> varietyQuantity;
   std::vector<float> duDistribution;
@@ -64,14 +64,14 @@ struct Result{
   : numberVariety(timeSize, 0)
   , meanVarietyDU(timeSize, 0)
   , totalPunctuation(timeSize, 0)
-  , fitnessPunctuation(timeSize, 0)
+  , productivityPunctuation(timeSize, 0)
   , simpsonCommunity(timeSize, 0)
   , shannonCommunity(timeSize, 0)
   , simpsonDU(timeSize, 0)
   , shannonDU(timeSize, 0)
   , bergerParkerDU(timeSize, 0)
-  , fitnessFrequency(histogramSize, 0)
-  , appearenceFrequency(histogramSize, 0)
+  , productivityFrequency(histogramSize, 0)
+  , qualityFrequency(histogramSize, 0)
   , varietyDistribution(DUsize, 0)
   , varietyQuantity(varQuantSize, 0)
   , duDistribution(DUsize, 0) {}
@@ -80,7 +80,7 @@ struct Result{
 // Variety struct contain all the proprieties of each variety
 struct VarietyData{
   std::vector<float> halfSaturation;
-  float appearence;
+  float quality;
 };
 
 struct DUParameter{

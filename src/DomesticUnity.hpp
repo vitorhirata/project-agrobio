@@ -12,14 +12,14 @@ private:
   std::vector<int> m_indexOwenedPatches;
   void changeProduction(VarietyData varietyData, int varNumber = -10);
   int findVariety(int var);
-  float computePunctuation(float varFitness, float varAppererence);
+  float computePunctuation(float varProductivity, float varQuality);
   void fillvarietyOwened(std::map<int,std::vector<float> >* varietyData);
   int computeBestDU(float * bestDUpunctuation);
   void computeDeltas(int * minorDeltaIdx, int * majorDeltaIdx);
   float renormalizationFunction(float x);
 public:
   float punctuation;
-  float fitness_punctuation;
+  float productivity_punctuation;
   std::vector<DUvariety> varietyOwened;
   std::vector<int> indexLinkedDU;
   int numberVarietyOwened(void);
@@ -36,7 +36,7 @@ struct DomesticUnity::DUvariety{
   int number;
   int quantity;
   float punctuation;
-  float fitness_punctuation;
+  float productivity_punctuation;
   VarietyData varietyData;
 };
 
@@ -63,7 +63,7 @@ void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
 // Iterate over the Oweneds Patches, colect varieties and set varietyOwened
 void DomesticUnity::computeDUpunctuations(void){
   // Map the variety in a vector, where the 0th element is quantity,
-  // the 1st fitness and the 2nd appearence
+  // the 1st productivity and the 2nd quality
   std::map<int,std::vector<float> > varietyData;
 
   // Fill the map
@@ -75,21 +75,21 @@ void DomesticUnity::computeDUpunctuations(void){
       varietyData[varNumber][3] = patchNumber;
     }
     ++varietyData[varNumber][0];
-    varietyData[varNumber][1] += m_grid[patchNumber].fitness;
-    varietyData[varNumber][2] += m_grid[patchNumber].variety.appearence;
+    varietyData[varNumber][1] += m_grid[patchNumber].productivity;
+    varietyData[varNumber][2] += m_grid[patchNumber].variety.quality;
   }
 
   fillvarietyOwened(&varietyData);
 
   //Set DU punctuation
   float puncTemp = 0;
-  float fitnessPuncTemp = 0;
+  float productivityPuncTemp = 0;
   for(auto i : varietyOwened){
     puncTemp += (i.punctuation * i.quantity);
-    fitnessPuncTemp += (i.fitness_punctuation * i.quantity);
+    productivityPuncTemp += (i.productivity_punctuation * i.quantity);
   }
   punctuation = puncTemp / m_indexOwenedPatches.size();
-  fitness_punctuation = fitnessPuncTemp / m_indexOwenedPatches.size();
+  productivity_punctuation = productivityPuncTemp / m_indexOwenedPatches.size();
 }
 
 // Fill the varietyOwened vector with the data provided by the input map
@@ -104,25 +104,25 @@ void DomesticUnity::fillvarietyOwened(std::map<int,
     newVar.varietyData = m_grid[(int) itr->second[3]].giveVarietyData();
     if(newVar.number == -1){ // if there is no variety punctuation is zero
       newVar.punctuation = 0;
-      newVar.fitness_punctuation = 0;
+      newVar.productivity_punctuation = 0;
     }
     else{
       newVar.punctuation = computePunctuation(itr->second[1] / itr->second[0],
           itr->second[2] / itr->second[0]);
-      newVar.fitness_punctuation = m_duParameter.alpha *
+      newVar.productivity_punctuation = m_duParameter.alpha *
         itr->second[1] / itr->second[0];
     }
     varietyOwened.push_back(newVar);
   }
 }
 
-// Compute the punctuation based on the fitness appearence and alpha
-float DomesticUnity::computePunctuation(float varFitness,
-    float varAppererence){
-  float appearencePunc = 1 - 2 *  std::min(abs(varAppererence -
-        m_DUpreference), 1 - abs(varAppererence - m_DUpreference));
-  return m_duParameter.alpha * varFitness +
-    (1 - m_duParameter.alpha) * appearencePunc;
+// Compute the punctuation based on the productivity, quality and alpha
+float DomesticUnity::computePunctuation(float varProductivity,
+    float varQuality){
+  float culturalPunc = 1 - 2 *  std::min(abs(varQuality -
+        m_DUpreference), 1 - abs(varQuality - m_DUpreference));
+  return m_duParameter.alpha * varProductivity +
+    (1 - m_duParameter.alpha) * culturalPunc;
 }
 
 // Iterate the domestic unity. Changes cultivated variety if

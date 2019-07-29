@@ -88,8 +88,8 @@ Result Model::runStandard(void){
       std::vector<float> tempPunctuation = metrics::computePunctuationAverage(
           domesticUnity, m_parameter.numberDomesticUnity);
       result.totalPunctuation.push_back(tempPunctuation[0]);
-      result.fitnessPunctuation.push_back(tempPunctuation[1]);
-      result.bergerParkerDU.push_back(metrics::computeVarietyQuantityDU(
+      result.productivityPunctuation.push_back(tempPunctuation[1]);
+      result.bergerParkerDU.push_back(metrics::computeBergerParkerDU(
             domesticUnity, m_parameter.numberDomesticUnity));
       result.simpsonCommunity.push_back(metrics::computeSimpson(domesticUnity,
             m_parameter.numberDomesticUnity, m_parameter.latticeSize));
@@ -102,10 +102,10 @@ Result Model::runStandard(void){
   std::vector<float> tempPunctuation = metrics::computePunctuationAverage(
       domesticUnity, m_parameter.numberDomesticUnity);
   result.totalPunctuation.push_back(tempPunctuation[0]);
-  result.fitnessPunctuation.push_back(tempPunctuation[1]);
-  result.fitnessFrequency = metrics::computeFitnessProfile(
+  result.productivityPunctuation.push_back(tempPunctuation[1]);
+  result.productivityFrequency = metrics::computeProductivityProfile(
       ambient->grid, m_parameter.latticeSize);
-  result.appearenceFrequency = metrics::computeAppearenceProfile(
+  result.qualityFrequency = metrics::computeQualityProfile(
       ambient->grid, m_parameter.latticeSize);
   result.duDistribution = metrics::computeDUprofile(
       domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
@@ -130,18 +130,18 @@ Result Model::runFixedPoint(void){
   std::vector<float> tempPunctuation = metrics::computePunctuationAverage(
       domesticUnity, m_parameter.numberDomesticUnity);
   result.totalPunctuation.push_back(tempPunctuation[0]);
-  result.fitnessPunctuation.push_back(tempPunctuation[1]);
+  result.productivityPunctuation.push_back(tempPunctuation[1]);
   result.simpsonCommunity.push_back(metrics::computeSimpson(domesticUnity,
         m_parameter.numberDomesticUnity, m_parameter.latticeSize));
   result.shannonCommunity.push_back(metrics::computeShannon(domesticUnity,
         m_parameter.numberDomesticUnity, m_parameter.latticeSize));
   result.simpsonDU.push_back(computeAverageSimpson());
   result.shannonDU.push_back(computeAverageShannon());
-  result.bergerParkerDU.push_back(metrics::computeVarietyQuantityDU(
+  result.bergerParkerDU.push_back(metrics::computeBergerParkerDU(
         domesticUnity, m_parameter.numberDomesticUnity));
-  result.fitnessFrequency = metrics::computeFitnessProfile(
+  result.productivityFrequency = metrics::computeProductivityProfile(
       ambient->grid, m_parameter.latticeSize);
-  result.appearenceFrequency = metrics::computeAppearenceProfile(
+  result.qualityFrequency = metrics::computeQualityProfile(
       ambient->grid, m_parameter.latticeSize);
   result.duDistribution = metrics::computeDUprofile(
       domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
@@ -170,8 +170,8 @@ Result Model::runPlot(void){
       std::vector<float> tempPunctuation = metrics::computePunctuationAverage(
           domesticUnity, m_parameter.numberDomesticUnity);
       result.totalPunctuation.push_back(tempPunctuation[0]);
-      result.fitnessPunctuation.push_back(tempPunctuation[1]);
-      result.bergerParkerDU.push_back(metrics::computeVarietyQuantityDU(
+      result.productivityPunctuation.push_back(tempPunctuation[1]);
+      result.bergerParkerDU.push_back(metrics::computeBergerParkerDU(
             domesticUnity, m_parameter.numberDomesticUnity));
       result.simpsonCommunity.push_back(metrics::computeSimpson(domesticUnity,
             m_parameter.numberDomesticUnity, m_parameter.latticeSize));
@@ -181,9 +181,9 @@ Result Model::runPlot(void){
       result.shannonDU.push_back(computeAverageShannon());
     }
   }
-  result.fitnessFrequency = metrics::computeFitnessProfile(
+  result.productivityFrequency = metrics::computeProductivityProfile(
       ambient->grid, m_parameter.latticeSize);
-  result.appearenceFrequency = metrics::computeAppearenceProfile(
+  result.qualityFrequency = metrics::computeQualityProfile(
       ambient->grid, m_parameter.latticeSize);
   result.duDistribution = metrics::computeDUprofile(
       domesticUnity, m_parameter.numberDomesticUnity, m_parameter.latticeSize);
@@ -194,8 +194,8 @@ Result Model::runPlot(void){
   return result;
 }
 
-// Run one interation of the model, computing the fitness of ambient,
-// computing DU punctuations and evaluating it's production
+// Run one interation of the model, computing DU punctuations and evaluating
+// it's production
 void Model::iterate(void){
   ambient->runDeath();
   for(int i = 0; i < m_parameter.numberDomesticUnity; ++i)
