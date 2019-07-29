@@ -15,7 +15,7 @@ private:
   float computePunctuation(float varFitness, float varAppererence);
   void fillvarietyOwened(std::map<int,std::vector<float> >* varietyData);
   int computeBestDU(float * bestDUpunctuation);
-  float computeMaxDelta(int * minorDeltaIdx, int * majorDeltaIdx);
+  void computeDeltas(int * minorDeltaIdx, int * majorDeltaIdx);
   float renormalizationFunction(float x);
 public:
   float punctuation;
@@ -49,7 +49,6 @@ void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
   indexLinkedDU = t_indexLinkedDU;
   m_indexOwenedPatches = t_indexOwenedPatches;
   m_duParameter.outsideTradeLimit = t_duParameter.outsideTradeLimit;
-  m_duParameter.insideTradeLimit = t_duParameter.insideTradeLimit;
   m_duParameter.selectionStrength = t_duParameter.selectionStrength;
   m_duParameter.alpha = t_duParameter.alpha;
   m_duParameter.probabilityNewVar = t_duParameter.probabilityNewVar;
@@ -138,10 +137,9 @@ void DomesticUnity::iterateDU(void){
 
   int majorDeltaIdx;
   int minorDeltaIdx;
-  float maxDelta = computeMaxDelta(&minorDeltaIdx, &majorDeltaIdx);
+  computeDeltas(&minorDeltaIdx, &majorDeltaIdx);
 
-  if(maxDelta > m_duParameter.insideTradeLimit &&
-      minorDeltaIdx != majorDeltaIdx){
+  if(minorDeltaIdx != majorDeltaIdx){
     changeProduction(varietyOwened[majorDeltaIdx].varietyData,
         varietyOwened[minorDeltaIdx].number);
   }
@@ -197,9 +195,8 @@ float DomesticUnity::renormalizationFunction(float x){
 }
 
 // Calculate the difference between intented number of variety and real number
-// of variety. Return that index of the variaty that has major and minor
-// differences.
-float DomesticUnity::computeMaxDelta(int * minorDeltaIdx, int * majorDeltaIdx){
+// of variety.
+void DomesticUnity::computeDeltas(int * minorDeltaIdx, int * majorDeltaIdx){
   float minorDelta = -10;
   float majorDelta = -10;
   float totalPunctuationNorm = 0;
@@ -229,7 +226,6 @@ float DomesticUnity::computeMaxDelta(int * minorDeltaIdx, int * majorDeltaIdx){
       *minorDeltaIdx = i;
     }
   }
-  return std::max(majorDelta,minorDelta);
 }
 
 // Find one place (between the owened patches) where the given variety exists.

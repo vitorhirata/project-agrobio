@@ -18,7 +18,6 @@ struct Parameter{
   float betaWT;
   float probabilyConnectionER; // Probability of connection
   float outsideTradeLimit;
-  float insideTradeLimit;
   int selectionStrength;
   float alpha;
   float probabilityNewVar;
@@ -39,7 +38,6 @@ struct Parameter{
   , betaWT(0.2)
   , probabilyConnectionER(0.15)
   , outsideTradeLimit(0.01)
-  , insideTradeLimit(0)
   , selectionStrength(15)
   , alpha(0.6)
   , probabilityNewVar(0.003)
@@ -89,14 +87,12 @@ struct DUParameter{
   float alpha;
   float probabilityNewVar;
   float outsideTradeLimit;
-  float insideTradeLimit;
   int selectionStrength;
   DUParameter(){}
   DUParameter(Parameter parameter)
   : alpha(parameter.alpha)
   , probabilityNewVar(parameter.probabilityNewVar)
   , outsideTradeLimit(parameter.outsideTradeLimit)
-  , insideTradeLimit(parameter.insideTradeLimit)
   , selectionStrength(parameter.selectionStrength) {}
 };
 #endif

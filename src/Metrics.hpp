@@ -280,7 +280,6 @@ namespace metrics{
     arquivo << ", BETAWT = " << parameter.betaWT;
     arquivo << ", MSF = " << parameter.mSF;
     arquivo << ", OUTSIDETRADELIMIT = " << parameter.outsideTradeLimit;
-    arquivo << ", INSIDETRADELIMIT = " << parameter.insideTradeLimit;
     arquivo << ", SELECTIONSTRENGTH = " << parameter.selectionStrength;
     arquivo << ", ALPHA = " << parameter.alpha;
     arquivo << ", NDOMESTICUNITY = " << parameter.numberDomesticUnity;

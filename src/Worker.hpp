@@ -182,9 +182,6 @@ namespace worker{
         case 'o':
           parameter.outsideTradeLimit = paramValue;
           break;
-        case 'i':
-          parameter.insideTradeLimit = paramValue;
-          break;
         case 'L':
           if(round(sqrt(paramValue)) * round(sqrt(paramValue)) != paramValue){
             cout << "ERROR: the latticeSize should be a perfect square.";
@@ -322,10 +319,6 @@ namespace worker{
         paramList = std::vector<float> {
           0, 0.005, 0.0075, 0.01, 0.02, 0.03, 0.05, 0.08, 0.1, 1};
         break;
-      case 'i':
-        paramList = std::vector<float> {
-          0, 0.005, 0.0075, 0.01, 0.02, 0.05, 0.075, 0.1, 1};
-        break;
       case 'L':
         paramList = std::vector<float> {25, 36, 49, 64};
         break;
@@ -371,9 +364,6 @@ namespace worker{
       switch (param){
         case 'o':
           parameter.outsideTradeLimit = paramValue;
-          break;
-        case 'i':
-          parameter.insideTradeLimit = paramValue;
           break;
         case 'L':
           if (round(sqrt(paramValue)) * round(sqrt(paramValue)) != paramValue){
