@@ -1,4 +1,5 @@
-using DataFrames, Colors, CSV, Gadfly, Printf
+using DataFrames, Colors, CSV, Gadfly, Printf, StatsBase, GLM
+
 
 # Plot all csv files in the $folder. Assumes julia is in src/
 function plotAll(folder = "test")
@@ -139,7 +140,13 @@ function plotVarParam(df, output_file)
     if param == "m"
       maxTime = maximum(df[:time])
       df2 = df[df[:time] .== maxTime, :]
-      p4 = plot(df2, x=:meanDU, y=:nVar, Geom.point,
+      ols = lm(@formula(nVar ~ 0 + meanDU), df2)
+      f(x) = coef(ols)[1]*x
+      println("Printing fit result for varParam_m")
+      println(coeftable(ols))
+      p4 = plot(layer(df2, x=:meanDU, y=:nVar, Geom.point,
+                  Theme(point_size=0.6mm, highlight_width=0.0mm)),
+                 layer(f,0,8, Theme(default_color="black")),
                   Guide.xlabel("Numero Medio de Variedades por UD"),
                   Guide.ylabel("Numero de Variedades"),
                   Coord.cartesian(xmin=0, ymin=0))
