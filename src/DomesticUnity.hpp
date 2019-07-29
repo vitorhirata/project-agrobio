@@ -260,6 +260,8 @@ float DomesticUnity::computeSimpsonDU(void){
 }
 
 float DomesticUnity::computeShannonDU(void){
+  if(numberVarietyOwened() == 1)
+    return 1;
   float shannon = 0;
   for(auto i : varietyOwened){
     if(i.number != -1){

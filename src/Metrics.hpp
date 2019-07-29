@@ -172,6 +172,8 @@ namespace metrics{
       totalArea -= numberDU[-1];
       numberDU.erase(-1);
     }
+    if(numberDU.size() == 1)
+      return 1;
     float shannon = 0;
     for(auto i : numberDU)
       shannon += (-1 * (i.second / totalArea) * log(i.second / totalArea));
