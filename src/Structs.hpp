@@ -52,6 +52,7 @@ struct Result{
   std::vector<float> productivityFrequency;
   std::vector<float> simpsonCommunity;
   std::vector<float> shannonCommunity;
+  std::vector<float> bergerParkerCommunity;
   std::vector<float> simpsonDU;
   std::vector<float> shannonDU;
   std::vector<float> bergerParkerDU;
@@ -67,6 +68,7 @@ struct Result{
   , productivityPunctuation(timeSize, 0)
   , simpsonCommunity(timeSize, 0)
   , shannonCommunity(timeSize, 0)
+  , bergerParkerCommunity(timeSize, 0)
   , simpsonDU(timeSize, 0)
   , shannonDU(timeSize, 0)
   , bergerParkerDU(timeSize, 0)

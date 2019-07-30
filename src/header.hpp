@@ -41,6 +41,8 @@ namespace metrics{
       DomesticUnity* domesticUnity, const int t_numberDomesticUnity);
   std::vector<float> computeVarietyQuantity(DomesticUnity* domesticUnity,
       const int t_numberDomesticUnity, const int t_latticeSize);
+  float computeBergerParker(DomesticUnity* domesticUnity,
+      const int t_numberDomesticUnity, const int t_latticeSize);
   float computeBergerParkerDU(DomesticUnity* domesticUnity,
       const int t_numberDomesticUnity);
   float computeShannon(DomesticUnity* domesticUnity,

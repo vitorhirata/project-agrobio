@@ -89,6 +89,9 @@ Result Model::runStandard(void){
           domesticUnity, m_parameter.numberDomesticUnity);
       result.totalPunctuation.push_back(tempPunctuation[0]);
       result.productivityPunctuation.push_back(tempPunctuation[1]);
+      result.bergerParkerCommunity.push_back(metrics::computeBergerParker(
+            domesticUnity, m_parameter.numberDomesticUnity,
+            m_parameter.latticeSize));
       result.bergerParkerDU.push_back(metrics::computeBergerParkerDU(
             domesticUnity, m_parameter.numberDomesticUnity));
       result.simpsonCommunity.push_back(metrics::computeSimpson(domesticUnity,
@@ -133,6 +136,9 @@ Result Model::runFixedPoint(void){
   result.productivityPunctuation.push_back(tempPunctuation[1]);
   result.simpsonCommunity.push_back(metrics::computeSimpson(domesticUnity,
         m_parameter.numberDomesticUnity, m_parameter.latticeSize));
+  result.bergerParkerCommunity.push_back(metrics::computeBergerParker(
+            domesticUnity, m_parameter.numberDomesticUnity,
+            m_parameter.latticeSize));
   result.shannonCommunity.push_back(metrics::computeShannon(domesticUnity,
         m_parameter.numberDomesticUnity, m_parameter.latticeSize));
   result.simpsonDU.push_back(computeAverageSimpson());
@@ -171,6 +177,9 @@ Result Model::runPlot(void){
           domesticUnity, m_parameter.numberDomesticUnity);
       result.totalPunctuation.push_back(tempPunctuation[0]);
       result.productivityPunctuation.push_back(tempPunctuation[1]);
+      result.bergerParkerCommunity.push_back(metrics::computeBergerParker(
+            domesticUnity, m_parameter.numberDomesticUnity,
+            m_parameter.latticeSize));
       result.bergerParkerDU.push_back(metrics::computeBergerParkerDU(
             domesticUnity, m_parameter.numberDomesticUnity));
       result.simpsonCommunity.push_back(metrics::computeSimpson(domesticUnity,

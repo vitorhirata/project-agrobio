@@ -23,6 +23,10 @@ namespace metrics{
         (*result).shannonCommunity.end(),
         (*resultTemp).shannonCommunity.begin(),
         (*result).shannonCommunity.begin(), std::plus<float>());
+    std::transform((*result).bergerParkerCommunity.begin(),
+        (*result).bergerParkerCommunity.end(),
+        (*resultTemp).bergerParkerCommunity.begin(),
+        (*result).bergerParkerCommunity.begin(), std::plus<float>());
     std::transform((*result).simpsonDU.begin(),
         (*result).simpsonDU.end(),
         (*resultTemp).simpsonDU.begin(),
@@ -112,6 +116,29 @@ namespace metrics{
     }
 
     return varietyProfile;
+  }
+
+  // Return the frequency of the area cultivated by each variety
+  float computeBergerParker(DomesticUnity* domesticUnity,
+      const int t_numberDomesticUnity, const int t_latticeSize){
+    std::map<int,int> numberDU;
+    for(int i = 0; i < t_numberDomesticUnity; ++i){
+      for(auto var : domesticUnity[i].varietyOwened){
+        if(numberDU.count(var.number) > 0)
+          numberDU[var.number] += var.quantity;
+        else
+          numberDU[var.number] = var.quantity;
+      }
+    }
+    if(numberDU.count(-1) > 0)
+      numberDU.erase(-1);
+    float bergerParker = -1;
+    for(auto i : numberDU){
+      if(i.second > bergerParker)
+        bergerParker = i.second;
+    }
+    bergerParker /= t_latticeSize;
+    return bergerParker;
   }
 
   // Return the average area cultivated by the most present variety of each DU

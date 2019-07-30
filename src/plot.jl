@@ -92,7 +92,9 @@ function plotStandard(df, output_file)
     output_file3 = output_file[1:end-4] * "3.svg"
     draw(SVG(output_file3, 20cm, 10cm), p3)
     println("Image $(output_file3) successfully generated.")
-    p4 = plot(layer(df, x=:time, y=:simpsonCommunity, Geom.line,
+    p4 = plot(layer(df, x=:time, y=:bergerCommunity, Geom.line,
+                        Theme(default_color=colorant"brown")),
+              layer(df, x=:time, y=:simpsonCommunity, Geom.line,
                         Theme(default_color=colorant"blue")),
                layer(df, x=:time, y=:shannonCommunity, Geom.line,
                         Theme(default_color=colorant"red")),
@@ -102,12 +104,13 @@ function plotStandard(df, output_file)
                         Theme(default_color=colorant"orange")),
                layer(df, x=:time, y=:shannonDU, Geom.line,
                         Theme(default_color=colorant"purple")),
-               Guide.manual_color_key("Índice",["Simpson Comunidade",
+               Guide.manual_color_key("Índice",["Berger-Parker Comunidade",
+                                         "Simpson Comunidade",
                                          "Shannon evenness Comunidade",
                                          "Berger-Parker UD",
                                          "Simpson UD",
                                          "Shannon evenness UD"],
-                                        ["blue", "red",
+                                        ["brown", "blue", "red",
                                          "green", "orange", "purple"]),
                 Guide.ylabel("Valor da Métrica"),
                 Guide.xlabel("Anos Agrícolas"))
