@@ -182,7 +182,7 @@ namespace worker{
 
     for(auto paramValue : paramList){
       switch (param){
-        case 'o':
+        case 'T':
           parameter.outsideTradeLimit = paramValue;
           break;
         case 'L':
@@ -194,7 +194,7 @@ namespace worker{
           parameter.latticeSize = paramValue;
           parameter.numberDomesticUnity = paramValue;
           break;
-        case 'r':
+        case 'H':
           parameter.numberHabitat = paramValue;
           break;
         case 'v':
@@ -211,22 +211,22 @@ namespace worker{
         case 'a':
           parameter.alpha = paramValue;
           break;
-        case 'n':
+        case 'R':
           parameter.networkType = paramValue;
           break;
-        case 'p':
+        case 'N':
           parameter.probabilityNewVar = paramValue;
           break;
         case 'b':
           parameter.betaWT = paramValue;
           break;
-        case 'R':
+        case 'r':
           parameter.numberResources = paramValue;
           break;
-        case 's':
+        case 'S':
           parameter.selectionStrength = paramValue;
           break;
-        case 'd':
+        case 'M':
           parameter.deathProbability = paramValue;
       }
       clock_t tStart = clock();
@@ -318,14 +318,14 @@ namespace worker{
 
     std::vector<float> paramList;
     switch (param){
-      case 'o':
+      case 'T':
         paramList = std::vector<float> {
           0, 0.005, 0.0075, 0.01, 0.02, 0.03, 0.05, 0.08, 0.1, 1};
         break;
       case 'L':
         paramList = std::vector<float> {25, 36, 49, 64};
         break;
-      case 'r':
+      case 'H':
         paramList = std::vector<float> {
           1, 2, 4, 8, 15, 25, 35, 49, 1000, 2401};
         break;
@@ -341,10 +341,10 @@ namespace worker{
         paramList = std::vector<float> {
           0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0};
         break;
-      case 'n':
+      case 'R':
         paramList = std::vector<float> {0, 1, 2};
         break;
-      case 'p':
+      case 'N':
         paramList = std::vector<float> {
           0, 0.0001, 0.0005, 0.001, 0.003, 0.005, 0.007, 0.01, 0.05};
         break;
@@ -352,20 +352,20 @@ namespace worker{
         paramList = std::vector<float> {
           0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0};
         break;
-      case 'R':
+      case 'r':
         paramList = std::vector<float> {1, 3, 5, 7, 10};
         break;
-      case 's':
+      case 'S':
         paramList = std::vector<float> {1, 3, 5, 10, 15, 20, 30, 50, 100};
         break;
-      case 'd':
+      case 'M':
         paramList = std::vector<float> {0, 0.01, 0.05, 0.1, 0.16, 0.2, 0.3,
           0.4, 0.5};
     }
 
     for(auto paramValue : paramList){
       switch (param){
-        case 'o':
+        case 'T':
           parameter.outsideTradeLimit = paramValue;
           break;
         case 'L':
@@ -377,7 +377,7 @@ namespace worker{
           parameter.latticeSize = paramValue;
           parameter.numberDomesticUnity = paramValue;
           break;
-        case 'r':
+        case 'H':
           parameter.numberHabitat = paramValue;
           break;
         case 'v':
@@ -394,22 +394,22 @@ namespace worker{
         case 'a':
           parameter.alpha = paramValue;
           break;
-        case 'n':
+        case 'R':
           parameter.networkType = paramValue;
           break;
-        case 'p':
+        case 'N':
           parameter.probabilityNewVar = paramValue;
           break;
         case 'b':
           parameter.betaWT = paramValue;
           break;
-        case 'R':
+        case 'r':
           parameter.numberResources = paramValue;
           break;
-        case 's':
+        case 'S':
           parameter.selectionStrength = paramValue;
           break;
-        case 'd':
+        case 'M':
           parameter.deathProbability = paramValue;
       }
       clock_t tStart = clock();
