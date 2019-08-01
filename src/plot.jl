@@ -143,9 +143,11 @@ function plotVarParam(df, output_file)
       println(coeftable(ols))
       p3 = plot(layer(df2, x=:meanDU, y=:nVar, Geom.point,
                   Theme(point_size=0.6mm, highlight_width=0.0mm)),
-                 layer(f,0,8, Theme(default_color="black")),
-                  Guide.xlabel("Numero Medio de Variedades por UD"),
-                  Guide.ylabel("Numero de Variedades"),
+                 layer(f,0,9, Theme(default_color="black")),
+                  Guide.xlabel("Riqueza Média de Variedades por UD"),
+                  Guide.ylabel("Riqueza de Variedades na Comunidade"),
+                  Guide.yticks(ticks=[0,10,20,30,40]),
+                  Guide.xticks(ticks=[0,1,2,3,4,5,6,7,8,9]),
                   Coord.cartesian(xmin=0, ymin=0))
       output_file3 = output_file[1:end-4] * "3.svg"
       draw(SVG(output_file3, 15cm, 10cm), p3)
@@ -219,11 +221,10 @@ function plotHistogramProductivity(df, output_file)
                      Theme(default_color=Colors.RGBA(0,80,0, 0.4))),
             layer(df, x=:value, y=:quality, Geom.bar,
                       Theme(default_color=Colors.RGBA(255,0,0, 0.4))),
-            Guide.manual_color_key("",["Produtividade Média","Qualidade"],
+            Guide.manual_color_key("",["Produtividade","Qualidade"],
                                    ["green", "red"]),
             Guide.ylabel("Área ocupada (%)"),
-            Guide.xlabel("Valor"),
-                      )
+            Guide.xlabel("Valor"))
     draw(SVG(output_file, 15cm, 10cm), p)
     println("Image $(output_file) successfully generated.")
 end
@@ -254,10 +255,10 @@ function plotVarParamFixedPoints(df, output_file)
             layer(df, x=:param, y=:meanDU, Geom.line,
                       Theme(default_color=colorant"red")),
             Guide.manual_color_key("",
-                                   ["Número de Variedades",
+                                   ["Riqueza de Variedades na Comunidade",
                                     "Riqueza média de variedades por UD"],
                                    ["green", "red"]),
-            Guide.ylabel("Ponto Fixo"),
+            Guide.ylabel("Valor ao Final da Simulação"),
             Guide.xlabel(param))
     draw(SVG(output_file, 20cm, 10cm), p)
     println("Image $(output_file) successfully generated.")
