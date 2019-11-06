@@ -59,6 +59,12 @@ function plotHandler(input_file)
   end
 end
 
+#minor_label_font_size
+#major_label_font_size
+#key_title_font_size
+#key_label_font_size
+#Scale.color_continuous(minvalue=-1, maxvalue=1)
+
 function plotStandard(df, output_file)
     p =plot(layer(df, x=:time, y=:nVar, Geom.line,
                        Theme(default_color=colorant"green")),
@@ -67,6 +73,8 @@ function plotStandard(df, output_file)
                       Guide.manual_color_key("",["Riqueza na Comunidade",
                                  "Riqueza Média por UD"],
                                  ["green", "red"]),
+                  Theme(minor_label_font_size=10pt, major_label_font_size=12pt,
+                        key_title_font_size=16pt, key_label_font_size=12pt),
                       Guide.ylabel("Riqueza de Variedades"),
                       Guide.xlabel("Anos Agrícolas"))
     draw(SVG(output_file, 20cm, 10cm), p)
@@ -122,13 +130,17 @@ end
 function plotVarParam(df, output_file)
     param = string(output_file[end-4])
     p = plot(df, x=:time, y=:nVar, color=:param, Geom.line,
-                  Scale.color_discrete(), Guide.colorkey(title=param),
+                  Scale.color_discrete, Guide.colorkey(title=param),
+                  Theme(minor_label_font_size=10pt, major_label_font_size=12pt,
+                        key_title_font_size=16pt, key_label_font_size=12pt),
                   Guide.xlabel("Anos Agrícolas"),
                   Guide.ylabel("Riqueza de Variedades na Comunidade"))
     draw(SVG(output_file, 15cm, 10cm), p)
     println("Image $(output_file) successfully generated.")
     p2 = plot(df, x=:time, y=:meanDU, color=:param, Geom.line,
                   Scale.color_discrete(), Guide.colorkey(title=param),
+                  Theme(minor_label_font_size=10pt, major_label_font_size=12pt,
+                        key_title_font_size=16pt, key_label_font_size=12pt),
                   Guide.xlabel("Anos Agrícolas"),
                   Guide.ylabel("Riqueza Média de Variedades por UD"))
     output_file2 = output_file[1:end-4] * "2.svg"
@@ -144,6 +156,8 @@ function plotVarParam(df, output_file)
       p3 = plot(layer(df2, x=:meanDU, y=:nVar, Geom.point,
                   Theme(point_size=0.6mm, highlight_width=0.0mm)),
                  layer(f,0,9, Theme(default_color="black")),
+                  Theme(minor_label_font_size=10pt, major_label_font_size=12pt,
+                        key_title_font_size=16pt, key_label_font_size=12pt),
                   Guide.xlabel("Riqueza Média de Variedades por UD"),
                   Guide.ylabel("Riqueza de Variedades na Comunidade"),
                   Guide.yticks(ticks=[0,10,20,30,40]),
@@ -159,6 +173,9 @@ function plotduDistribution(df, output_file)
     param = string(output_file[end-4])
     if length(split(output_file, "_")) == 2
       p = plot(df, x=:value, y=:duDist, Geom.bar,
+                  Theme(minor_label_font_size=10pt, major_label_font_size=12pt,
+                        key_title_font_size=16pt, key_label_font_size=12pt),
+                  Coord.cartesian(xmin=0, xmax=15),
                   Guide.ylabel("Porcentagem (%)"),
                   Guide.xlabel("Riqueza de Variedades por UD"))
       draw(SVG(output_file, 15cm, 10cm), p)
@@ -177,7 +194,9 @@ function plotVarietyDistribution(df, output_file)
     param = string(output_file[end-4])
     if length(split(output_file, "_")) == 2
       p = plot(df, x=:value, y=:varDist, Geom.bar,
-                  Guide.xticks(ticks=[0.0,20,40,50,60,80,100]),
+                  Theme(minor_label_font_size=10pt, major_label_font_size=12pt,
+                        key_title_font_size=16pt, key_label_font_size=12pt),
+                  Guide.xticks(ticks=[0.0,20,40,60,80,100]),
                   Guide.ylabel("Porcentagem de Variedades (%)"),
                   Guide.xlabel("Porcentagem de Unidades Domésticas (%)"),
                   Coord.cartesian(xmin=0, xmax=100))
