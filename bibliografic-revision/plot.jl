@@ -9,10 +9,10 @@ import Cairo, Fontconfig
 
 function plotAll()
   df, df2, df3 = loadData()
-  plotGeraneralData(df)
+  #plotGeraneralData(df)
   plotAllHistogram(df)
-  plotAllBoxplot(df2, df3)
-  plotGeneral(df)
+  #plotAllBoxplot(df2, df3)
+  #plotGeneral(df)
   #plotIndex()
 end
 
@@ -48,7 +48,7 @@ function plotGeraneralData(df)
   img = PNG("plot/todos.png", 17*1.3cm, 10*1.3cm)
   p=plot(dfClean, x=:NmedioUD, y=:Ncomunidade,
           color=:Especie, Geom.point,
-          Guide.xlabel("Riqueza de variedades média por UD"),
+          Guide.xlabel("Riqueza média de variedades por UD"),
           Guide.ylabel("Riqueza de variedades na Comunidade"),
           Guide.colorkey(title="Especie"),
           Guide.title("Agrobiodiversidade: dados para três espécies"),
@@ -64,7 +64,7 @@ function plotComunidadexDU(df, str, size, runRegression)
     f(x) = coef(ols)[1]*x
     p=plot(layer(df, x=:NmedioUD, y=:Ncomunidade, color=:Fonte, Geom.point),
       layer(f, 0, 1.1*maximum(df[:NmedioUD])),
-      Guide.xlabel("Riqueza de variedades média por UD"),
+      Guide.xlabel("Riqueza média de variedades por UD"),
       Guide.ylabel("Riqueza de variedades na Comunidade"),
       Guide.colorkey(title="Fonte"),
       Guide.title("Agrobiodiversidade de $(str)"),
@@ -74,7 +74,7 @@ function plotComunidadexDU(df, str, size, runRegression)
       println(coeftable(ols))
   else
     p=plot(df, x=:NmedioUD, y=:Ncomunidade, color=:Fonte, Geom.point,
-      Guide.xlabel("Riqueza de variedades média por UD"),
+      Guide.xlabel("Riqueza média de variedades por UD"),
       Guide.ylabel("Riqueza de variedades na Comunidade"),
       Guide.colorkey(title="Fonte"),
       Guide.title("Agrobiodiversidade de $(str)"),
@@ -90,7 +90,7 @@ function plotGeneral(df)
   img = PNG("plot/todosUD.png", 15*1.3cm, 10*1.3cm)
   p=plot(dfUD, x=:Especie, y=:NmedioUD, Geom.boxplot,
     Guide.xlabel("Espécie"),
-    Guide.ylabel("Riqueza de variedades média por UD"));
+    Guide.ylabel("Riqueza média de variedades por UD"));
   draw(img, p)
 
   dfComunidade = df[[:Especie, :Ncomunidade]]
@@ -111,7 +111,7 @@ function plotAllHistogram(df)
   plotHistogram(dfMandioca, "mandioca", [30,30])
 
   dfMilho = dfClean[dfClean[:Especie] .== "Milho", :]
-  plotHistogram(dfMilho, "milho", [15,30])
+  plotHistogram(dfMilho, "milho", [15,10])
 
   dfBatata = dfClean[dfClean[:Especie] .== "Batata", :]
   plotHistogram(dfBatata, "batata", [5,5])
@@ -124,14 +124,14 @@ function plotHistogram(df, str, binNumber)
   img1 = PNG("plot/$(str)Comunidade.png", 15*1.3cm, 10*1.3cm)
   p1=plot(x=array1, Geom.histogram(bincount=binNumber[1], density=true),
     Guide.xlabel("Riqueza de variedades na Comunidade"),
-    Guide.ylabel("Frequencia"),
+    Guide.ylabel("Frequência (%)"),
     Guide.title("Riqueza de Variedades na Comunidade: $(str). N = $(size(array1)[1])"))
   draw(img1, p1)
 
   img2 = PNG("plot/$(str)UD.png", 15*1.3cm, 10*1.3cm)
   p2=plot(x=array2, Geom.histogram(bincount=binNumber[2], density=true),
-    Guide.xlabel("Riqueza de variedades média por UD"),
-    Guide.ylabel("Frequencia"),
+    Guide.xlabel("Riqueza média de variedades por UD"),
+    Guide.ylabel("Frequencia (%)"),
     Guide.title("Riqueza Média de variedades por Unidade Domestica: $(str). N = $(size(array2)[1])."),
     Theme(plot_padding=[50pt, 90pt, 10pt, 10pt]))
   draw(img2, p2)
@@ -144,24 +144,24 @@ function plotAllBoxplot(df, df2)
   dfMandioca2 = df2[df2[:Especie] .== "Mandioca", :]
   plotBoxplot(dfMandioca1, "mandioca", dfMandioca2)
 
-  dfMilho1 = df[df[:Especie] .== "Milho", :]
-  plotBoxplot(dfMilho1, "milho")
+  #dfMilho1 = df[df[:Especie] .== "Milho", :]
+  #plotBoxplot(dfMilho1, "milho")
 
-  dfBatata1 = df[df[:Especie] .== "Batata", :]
-  dfBatata2 = df2[df2[:Especie] .== "Batata", :]
-  plotBoxplot(dfBatata1, "batata", dfBatata2, [12.5*1.3cm, 7.5*1.3cm])
+  #dfBatata1 = df[df[:Especie] .== "Batata", :]
+  #dfBatata2 = df2[df2[:Especie] .== "Batata", :]
+  #plotBoxplot(dfBatata1, "batata", dfBatata2, [12.5*1.3cm, 7.5*1.3cm])
 end
 
 function plotBoxplot(df1, str, df2=nothing, size=[20*1.3cm,14*1.3cm])
   outputFile = "plot/$(str)_ud_var.png"
-  img = PNG(outputFile, size[1], size[2])
+  #img = PNG(outputFile, size[1], size[2])
   sort!(df1, [order(:Data)])
   df1[:NUD]= 100 * df1[:NUD]
-  p = plot(df1, x=:Fonte, y=:NUD, Geom.boxplot(suppress_outliers=true),
-    Guide.xlabel("Fonte"), Guide.ylabel("Porcentagem UDs (%)"),
-    Guide.title("Presença da Variedade nas UDs: $(str)"),
-    Theme(plot_padding=[20pt, 60pt, 10pt, 10pt]))
-  draw(img, p)
+  #p = plot(df1, x=:Fonte, y=:NUD, Geom.boxplot(suppress_outliers=true),
+  #  Guide.xlabel("Fonte"), Guide.ylabel("Porcentagem UDs (%)"),
+  #  Guide.title("Presença da Variedade nas UDs: $(str)"),
+  #  Theme(plot_padding=[20pt, 60pt, 10pt, 10pt]))
+  #draw(img, p)
 
   if df2 != nothing
     outputFile = "plot/$(str)_var_ud.png"
@@ -171,6 +171,7 @@ function plotBoxplot(df1, str, df2=nothing, size=[20*1.3cm,14*1.3cm])
       Geom.boxplot(suppress_outliers=true),
       Guide.xlabel("Fonte"), Guide.ylabel("Riqueza de Variedades na UD"),
       Guide.title("Riqueza de Variedades por UD: $(str)"),
+      Coord.cartesian(ymax=30),
       Theme(plot_padding=[20pt, 40pt, 10pt, 10pt]))
     draw(img, p)
   end
