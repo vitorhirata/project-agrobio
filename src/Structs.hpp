@@ -21,6 +21,8 @@ struct Parameter{
   int selectionStrength;
   float alpha;
   float probabilityNewVar;
+  float percentageNewRandomVar;
+  float crossingDeviation;
   float deathProbability;
   Parameter()
   : latticeSize(49)
@@ -31,7 +33,7 @@ struct Parameter{
   , maxTime(5000)
   , timeInterval(50)
   , numberDomesticUnity(49)
-  , nRun(200)
+  , nRun(40)
   , networkType(1)
   , mSF(2)
   , kWT(4)
@@ -41,6 +43,8 @@ struct Parameter{
   , selectionStrength(15)
   , alpha(0.6)
   , probabilityNewVar(0.003)
+  , percentageNewRandomVar(0.05)
+  , crossingDeviation(0.001)
   , deathProbability(0.16) {}
 };
 
@@ -88,12 +92,14 @@ struct VarietyData{
 struct DUParameter{
   float alpha;
   float probabilityNewVar;
+  float percentageNewRandomVar;
   float outsideTradeLimit;
   int selectionStrength;
   DUParameter(){}
   DUParameter(Parameter parameter)
   : alpha(parameter.alpha)
   , probabilityNewVar(parameter.probabilityNewVar)
+  , percentageNewRandomVar(parameter.percentageNewRandomVar)
   , outsideTradeLimit(parameter.outsideTradeLimit)
   , selectionStrength(parameter.selectionStrength) {}
 };

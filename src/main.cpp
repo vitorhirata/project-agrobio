@@ -33,7 +33,7 @@ int main(int argc, char *argv[]){
           argv[2][0] == 'H' || argv[2][0] == 'v' || argv[2][0] == 'V' ||
           argv[2][0] == 'a' || argv[2][0] == 'R' || argv[2][0] == 'N' ||
           argv[2][0] == 'b' || argv[2][0] == 'r' || argv[2][0] == 'M' ||
-          argv[2][0] == 'S')
+          argv[2][0] == 'S' || argv[2][0] == 'Q' || argv[2][0] == 'C')
         param = argv[2][0];
       else{
         cout << "ERROR: Invalid parameter variation." << endl;
@@ -62,7 +62,7 @@ int main(int argc, char *argv[]){
           argv[2][0] == 'H' || argv[2][0] == 'v' || argv[2][0] == 'V' ||
           argv[2][0] == 'a' || argv[2][0] == 'R' || argv[2][0] == 'N' ||
           argv[2][0] == 'b' || argv[2][0] == 'r' || argv[2][0] == 'M' ||
-          argv[2][0] == 'S')
+          argv[2][0] == 'S' || argv[2][0] == 'Q' || argv[2][0] == 'C')
         param = argv[2][0];
       else{
         cout << "ERROR: Invalid parameter variation." << endl;

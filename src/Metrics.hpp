@@ -311,6 +311,8 @@ namespace metrics{
     arquivo << ", ALPHA = " << parameter.alpha;
     arquivo << ", NDOMESTICUNITY = " << parameter.numberDomesticUnity;
     arquivo << ", PROBABILITYNEWVAR = " << parameter.probabilityNewVar;
+    arquivo << ", PERCENTAGENEWRANDVAR = " << parameter.percentageNewRandomVar;
+    arquivo << ", CROSSINGDEVIATION = " << parameter.crossingDeviation;
     arquivo << ", DEATHPROBABILITY = " << parameter.deathProbability;
     arquivo << ", MAXTIME = " << parameter.maxTime;
     arquivo << ", TIMEINTERVAL = " << parameter.timeInterval;

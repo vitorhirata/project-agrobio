@@ -226,6 +226,12 @@ namespace worker{
         case 'S':
           parameter.selectionStrength = paramValue;
           break;
+        case 'Q':
+          parameter.percentageNewRandomVar = paramValue;
+          break;
+        case 'C':
+          parameter.crossingDeviation = paramValue;
+          break;
         case 'M':
           parameter.deathProbability = paramValue;
       }
@@ -358,6 +364,12 @@ namespace worker{
       case 'S':
         paramList = std::vector<float> {1, 3, 5, 10, 15, 20, 30, 50, 100};
         break;
+      case 'Q':
+        paramList = std::vector<float> {0.01, 0.25, 0.05, 0.75, 0.1, 0.2, 0.3};
+        break;
+      case 'C':
+        paramList = std::vector<float> {0, 0.005, 0.01, 0.05, 0.08, 0.1};
+        break;
       case 'M':
         paramList = std::vector<float> {0, 0.01, 0.05, 0.1, 0.16, 0.2, 0.3,
           0.4, 0.5};
@@ -408,6 +420,12 @@ namespace worker{
           break;
         case 'S':
           parameter.selectionStrength = paramValue;
+          break;
+        case 'Q':
+          parameter.percentageNewRandomVar = paramValue;
+          break;
+        case 'C':
+          parameter.crossingDeviation = paramValue;
           break;
         case 'M':
           parameter.deathProbability = paramValue;

@@ -152,9 +152,18 @@ void DomesticUnity::iterateDU(void){
       extBestVarietyIdx = floor(uniFLOAT(rand64) * duVec->size());
     changeProduction(duVec->at(extBestVarietyIdx).varietyData);
   }
-  if(uniFLOAT(rand64) < m_duParameter.probabilityNewVar){
+  if(uniFLOAT(rand64) < m_duParameter.probabilityNewVar *
+      m_duParameter.percentageNewRandomVar){
     int newPlace = m_indexOwenedPatches[uniIntPlace(rand64)];
     m_grid[newPlace].setRandomVariety();
+  }
+  if(uniFLOAT(rand64) < m_duParameter.probabilityNewVar *
+      (1 - m_duParameter.percentageNewRandomVar)){
+    int newPlace = m_indexOwenedPatches[uniIntPlace(rand64)];
+    int newPlace2 = m_indexOwenedPatches[uniIntPlace(rand64)];
+    VarietyData varietyData1 = m_grid[newPlace].giveVarietyData();
+    VarietyData varietyData2 = m_grid[newPlace2].giveVarietyData();
+    m_grid[newPlace].setNewVariety(varietyData1, varietyData2);
   }
 }
 
