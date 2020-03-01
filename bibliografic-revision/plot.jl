@@ -9,11 +9,11 @@ import Cairo, Fontconfig
 
 function plotAll()
   df, df2, df3 = loadData()
-  #plotGeraneralData(df)
+  plotGeraneralData(df)
   plotAllHistogram(df)
-  #plotAllBoxplot(df2, df3)
-  #plotGeneral(df)
-  #plotIndex()
+  plotAllBoxplot(df2, df3)
+  plotGeneral(df)
+  plotIndex()
 end
 
 function loadData()
@@ -48,11 +48,13 @@ function plotGeraneralData(df)
   img = PNG("plot/todos.png", 17*1.3cm, 10*1.3cm)
   p=plot(dfClean, x=:NmedioUD, y=:Ncomunidade,
           color=:Especie, Geom.point,
+                  Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
+                        key_title_font_size=14pt, key_label_font_size=12pt,
+                        point_size=0.6mm, highlight_width=0.0mm),
           Guide.xlabel("Riqueza média de variedades por UD"),
           Guide.ylabel("Riqueza de variedades na Comunidade"),
           Guide.colorkey(title="Especie"),
-          Guide.title("Agrobiodiversidade: dados para três espécies"),
-          Theme(point_size=0.6mm, highlight_width=0.0mm));
+          Guide.title("Agrobiodiversidade: dados para três espécies"));
   draw(img, p)
 
 end
@@ -68,7 +70,9 @@ function plotComunidadexDU(df, str, size, runRegression)
       Guide.ylabel("Riqueza de variedades na Comunidade"),
       Guide.colorkey(title="Fonte"),
       Guide.title("Agrobiodiversidade de $(str)"),
-      Theme(plot_padding=[30pt, 60pt, 10pt, 10pt],
+      Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
+            key_title_font_size=14pt, key_label_font_size=12pt,
+            plot_padding=[30pt, 60pt, 10pt, 10pt],
         point_size=0.6mm, highlight_width=0.0mm));
       println("Printing fit result for $(str)")
       println(coeftable(ols))
@@ -78,7 +82,9 @@ function plotComunidadexDU(df, str, size, runRegression)
       Guide.ylabel("Riqueza de variedades na Comunidade"),
       Guide.colorkey(title="Fonte"),
       Guide.title("Agrobiodiversidade de $(str)"),
-      Theme(plot_padding=[30pt, 60pt, 10pt, 10pt],
+      Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
+            key_title_font_size=14pt, key_label_font_size=12pt,
+            plot_padding=[30pt, 60pt, 10pt, 10pt],
         point_size=0.6mm, highlight_width=0.0mm));
   end
   draw(img, p)
@@ -89,6 +95,8 @@ function plotGeneral(df)
   dfUD = dropmissing(dfUD)
   img = PNG("plot/todosUD.png", 15*1.3cm, 10*1.3cm)
   p=plot(dfUD, x=:Especie, y=:NmedioUD, Geom.boxplot,
+                  Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
+                        key_title_font_size=14pt, key_label_font_size=12pt),
     Guide.xlabel("Espécie"),
     Guide.ylabel("Riqueza média de variedades por UD"));
   draw(img, p)
@@ -97,6 +105,8 @@ function plotGeneral(df)
   dfComunidade = dropmissing(dfComunidade)
   img = PNG("plot/todosComunidade.png", 15*1.3cm, 10*1.3cm)
   p=plot(dfComunidade, x=:Especie, y=:Ncomunidade, Geom.boxplot,
+                  Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
+                        key_title_font_size=14pt, key_label_font_size=12pt),
     Guide.xlabel("Espécie"),
     Guide.ylabel("Riqueza de variedades na Comunidade"));
   draw(img, p)
@@ -123,6 +133,8 @@ function plotHistogram(df, str, binNumber)
 
   img1 = PNG("plot/$(str)Comunidade.png", 15*1.3cm, 10*1.3cm)
   p1=plot(x=array1, Geom.histogram(bincount=binNumber[1], density=true),
+                  Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
+                        key_title_font_size=14pt, key_label_font_size=12pt),
     Guide.xlabel("Riqueza de variedades na Comunidade"),
     Guide.ylabel("Frequência (%)"),
     Guide.title("Riqueza de Variedades na Comunidade: $(str). N = $(size(array1)[1])"))
@@ -133,7 +145,9 @@ function plotHistogram(df, str, binNumber)
     Guide.xlabel("Riqueza média de variedades por UD"),
     Guide.ylabel("Frequencia (%)"),
     Guide.title("Riqueza Média de variedades por Unidade Domestica: $(str). N = $(size(array2)[1])."),
-    Theme(plot_padding=[50pt, 90pt, 10pt, 10pt]))
+    Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
+                        key_title_font_size=14pt, key_label_font_size=12pt,
+          plot_padding=[50pt, 90pt, 10pt, 10pt]))
   draw(img2, p2)
 
 end
@@ -172,7 +186,9 @@ function plotBoxplot(df1, str, df2=nothing, size=[20*1.3cm,14*1.3cm])
       Guide.xlabel("Fonte"), Guide.ylabel("Riqueza de Variedades na UD"),
       Guide.title("Riqueza de Variedades por UD: $(str)"),
       Coord.cartesian(ymax=30),
-      Theme(plot_padding=[20pt, 40pt, 10pt, 10pt]))
+      Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
+                        key_title_font_size=14pt, key_label_font_size=12pt,
+            plot_padding=[20pt, 40pt, 10pt, 10pt]))
     draw(img, p)
   end
 end
@@ -185,7 +201,9 @@ function plotIndex()
   dfMandiocaUD = dfMandioca[dfMandioca[:Scale] .== "UD", :]
   p=plot(dfMandiocaUD, xgroup=:Indice, x=:Article, y=:Value, color=:Indice,
     Geom.subplot_grid(Geom.bar(position=:dodge), free_x_axis=true),
-    Theme(bar_spacing = 2mm),
+    Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
+                        key_title_font_size=14pt, key_label_font_size=12pt,
+          bar_spacing = 2mm),
     Guide.ylabel("Valor do Índice"),
     Guide.colorkey(title="Índice"))
   draw(PNG("plot/mandiocaIdxUD.png", 25cm, 15cm), p)
@@ -193,7 +211,9 @@ function plotIndex()
   dfMandiocaCom = dfMandioca[dfMandioca[:Scale] .== "Comunidade", :]
   p=plot(dfMandiocaCom, xgroup=:Indice, x=:Article, y=:Value, color=:Indice,
     Geom.subplot_grid(Geom.bar(position=:dodge), free_x_axis=true),
-    Theme(bar_spacing = 2mm),
+    Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
+                        key_title_font_size=14pt, key_label_font_size=12pt,
+          bar_spacing = 2mm),
     Guide.ylabel("Valor do Índice"),
     Guide.colorkey(title="Índice"))
   draw(PNG("plot/mandiocaIdxCom.png", 30cm, 15cm), p)
@@ -204,14 +224,18 @@ function plotIndex()
   dfMilhoUD = dfMilho[dfMilho[:Scale] .== "UD", :]
   p=plot(dfMilhoUD, xgroup=:Indice, x=:Article, y=:Value, color=:Indice,
     Geom.subplot_grid(Geom.bar(position=:dodge), free_x_axis=true),
-    Theme(bar_spacing = 5mm),
+    Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
+                        key_title_font_size=14pt, key_label_font_size=12pt,
+          bar_spacing = 5mm),
     Guide.ylabel("Valor do Índice"),
     Guide.colorkey(title="Índice"))
   draw(PNG("plot/milhoIdxUD.png", 15cm, 15cm), p)
 
   dfMilhoCom = dfMilho[dfMilho[:Scale] .== "Comunidade", :]
     p=plot(dfMilhoCom, x=:Article, y=:Value, color=:Indice, Geom.bar,
-    Theme(bar_spacing = 5mm),
+    Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
+                        key_title_font_size=14pt, key_label_font_size=12pt,
+          bar_spacing = 5mm),
     Guide.ylabel("Valor do Índice"),
     Guide.xlabel(""),
     Guide.colorkey(title="Índice"))
