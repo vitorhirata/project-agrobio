@@ -14,7 +14,6 @@ private:
   int findVariety(int var);
   float computePunctuation(float varProductivity, float varQuality);
   void fillvarietyOwened(std::map<int,std::vector<float> >* varietyData);
-  int computeBestDU(float * bestDUpunctuation);
   void computeDeltas(int * minorDeltaIdx, int * majorDeltaIdx);
   float renormalizationFunction(float x);
 public:
@@ -52,6 +51,7 @@ void DomesticUnity::initializeDU(DomesticUnity* t_domesticUnity, Patch* t_grid,
   m_duParameter.selectionStrength = t_duParameter.selectionStrength;
   m_duParameter.alpha = t_duParameter.alpha;
   m_duParameter.probabilityNewVar = t_duParameter.probabilityNewVar;
+  m_duParameter.percentageNewRandomVar = t_duParameter.percentageNewRandomVar;
   m_DUpreference = gaussPref(rand64);
   while(!(m_DUpreference > 0 && m_DUpreference < 1))
     m_DUpreference = gaussPref(rand64);
@@ -131,10 +131,6 @@ float DomesticUnity::computePunctuation(float varProductivity,
 // extpunctuationDifference > 'o',
 // or with a probability 'p' a new variety is created
 void DomesticUnity::iterateDU(void){
-  float bestDUpunctuation;
-  int bestDUidx = computeBestDU(&bestDUpunctuation);
-  float extpunctuationDifference = bestDUpunctuation - punctuation;
-
   int majorDeltaIdx;
   int minorDeltaIdx;
   computeDeltas(&minorDeltaIdx, &majorDeltaIdx);
@@ -145,12 +141,15 @@ void DomesticUnity::iterateDU(void){
   }
   while(findVariety(-1) >= 0)
     changeProduction(varietyOwened[majorDeltaIdx].varietyData,-1);
-  if(extpunctuationDifference > m_duParameter.outsideTradeLimit){
-    std::vector<DUvariety>* duVec = &m_domesticUnity[bestDUidx].varietyOwened;
-    int extBestVarietyIdx = floor(uniFLOAT(rand64) * duVec->size());
-    while(duVec->at(extBestVarietyIdx).number == -1)
-      extBestVarietyIdx = floor(uniFLOAT(rand64) * duVec->size());
-    changeProduction(duVec->at(extBestVarietyIdx).varietyData);
+  for(auto ud :indexLinkedDU){
+    if(uniFLOAT(rand64) <
+        m_domesticUnity[ud].punctuation * m_duParameter.outsideTradeLimit){
+      std::vector<DUvariety>* duVec = &m_domesticUnity[ud].varietyOwened;
+      int extBestVarietyIdx = floor(uniFLOAT(rand64) * duVec->size());
+      while(duVec->at(extBestVarietyIdx).number == -1)
+        extBestVarietyIdx = floor(uniFLOAT(rand64) * duVec->size());
+      changeProduction(duVec->at(extBestVarietyIdx).varietyData);
+    }
   }
   if(uniFLOAT(rand64) < m_duParameter.probabilityNewVar *
       m_duParameter.percentageNewRandomVar){
@@ -181,20 +180,6 @@ void DomesticUnity::changeProduction(VarietyData varietyData, int varNumber){
     }
   }
   m_grid[varietyRemovePlace].setVariety(varietyData);
-}
-
-// Calculate the idx of the connected domestic unity that has better
-// punctuation, also calculates bestDUpunctuation
-int DomesticUnity::computeBestDU(float * bestDUpunctuation){
-  int bestDUindex = 0;
-  *bestDUpunctuation = -1;
-  for(uint i = 0; i < indexLinkedDU.size(); ++i){
-    if(m_domesticUnity[indexLinkedDU[i]].punctuation > *bestDUpunctuation){
-      bestDUindex = indexLinkedDU[i];
-      *bestDUpunctuation = m_domesticUnity[bestDUindex].punctuation;
-    }
-  }
-  return bestDUindex;
 }
 
 // Logistic function that takes [0,1] -> [0,1]

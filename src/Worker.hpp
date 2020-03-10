@@ -326,7 +326,7 @@ namespace worker{
     switch (param){
       case 'T':
         paramList = std::vector<float> {
-          0, 0.005, 0.0075, 0.01, 0.02, 0.03, 0.05, 0.08, 0.1, 1};
+          0, 0.05, 0.1, 0.15, 0.20, 0.225, 0.25, 0.275, 0.3, 0.35, 0.5, 0.8, 1.0};
         break;
       case 'L':
         paramList = std::vector<float> {25, 36, 49, 64};

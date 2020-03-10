@@ -39,7 +39,7 @@ struct Parameter{
   , kWT(4)
   , betaWT(0.2)
   , probabilyConnectionER(0.15)
-  , outsideTradeLimit(0.01)
+  , outsideTradeLimit(0.15)
   , selectionStrength(15)
   , alpha(0.6)
   , probabilityNewVar(0.003)
