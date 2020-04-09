@@ -60,7 +60,7 @@ namespace worker{
       histogramFile << endl;
     }
 
-    for(int i = 0; i <= duSize; ++i){
+    for(int i = 0; i <= duSize - 1; ++i){
       duDistFile << i << "; " << 100*result.duDistribution[i] / parameter.nRun;
       duDistFile << endl;
     }
@@ -270,7 +270,7 @@ namespace worker{
         histogramFile << 100 * result.qualityFrequency[i] / parameter.nRun;
         histogramFile << "; " << paramValue << endl;
       }
-      for(int i = 0; i <= duSize; ++i){
+      for(int i = 0; i <= duSize - 1; ++i){
         duDistFile << i << "; ";
         duDistFile << 100 * result.duDistribution[i] / parameter.nRun << "; ";
         duDistFile << paramValue << endl;
@@ -464,7 +464,7 @@ namespace worker{
         histogramFile << 100 * result.qualityFrequency[i] / parameter.nRun;
         histogramFile << "; " << paramValue << endl;
       }
-      for(int i = 0; i <= duSize; ++i){
+      for(int i = 0; i <= duSize - 1; ++i){
         duDistFile << i << "; ";
         duDistFile << 100 * result.duDistribution[i] / parameter.nRun << "; ";
         duDistFile << paramValue << endl;
