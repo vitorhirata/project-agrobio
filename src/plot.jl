@@ -64,18 +64,18 @@ function plotStandard(df, output_file)
                        Theme(default_color=colorant"green")),
             layer(df, x=:time, y=:meanDU, Geom.line,
                       Theme(default_color=colorant"red")),
-                      Guide.manual_color_key("",["Riqueza na Comunidade",
-                                 "Riqueza Média por UD"],
+                      Guide.manual_color_key("",["Richness in community",
+                                 "Average richness per DU"],
                                  ["green", "red"]),
                   Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
                         key_title_font_size=14pt, key_label_font_size=12pt),
-                      Guide.ylabel("Riqueza de Variedades"),
-                      Guide.xlabel("Ciclos Agrícolas"))
+                      Guide.ylabel("Varietal richness"),
+                      Guide.xlabel("Agricultural cycle"))
     draw(SVG(output_file, 23cm, 10cm), p)
     println("Image $(output_file) successfully generated.")
     p2 = plot(df, x=:meanDU, y=:nVar, Geom.line,
-                 Guide.ylabel("Riqueza de Variedades na Comunidade"),
-                 Guide.xlabel("Riqueza Media de Variedades por UD"))
+                 Guide.ylabel("Varietal richness in community"),
+                 Guide.xlabel("Average varietal richness per DU"))
     output_file2 = output_file[1:end-4] * "2.svg"
     draw(SVG(output_file2, 20cm, 10cm), p2)
     println("Image $(output_file2) successfully generated.")
@@ -87,12 +87,12 @@ function plotStandard(df, output_file)
                          Theme(default_color=colorant"green")),
                 Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
                         key_title_font_size=14pt, key_label_font_size=12pt),
-               Guide.manual_color_key("",["Pontuação Total",
-                                          "Pontuação Produtividade",
-                                          "Pontuação Qualidade"],
+               Guide.manual_color_key("",["Total Punctuation",
+                                          "Productivity Punctuation",
+                                          "Quality Punctuation"],
                                       ["blue", "red", "green"]),
                Coord.cartesian(ymin=0, ymax=1),
-               Guide.ylabel("Pontuação"), Guide.xlabel("Ciclos Agrícolas"))
+               Guide.ylabel("Punctuation"), Guide.xlabel("Agricultural cycle"))
     output_file3 = output_file[1:end-4] * "3.svg"
     draw(SVG(output_file3, 23cm, 10cm), p3)
     println("Image $(output_file3) successfully generated.")
@@ -110,16 +110,16 @@ function plotStandard(df, output_file)
                         Theme(default_color=colorant"purple")),
                 Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
                         key_title_font_size=14pt, key_label_font_size=12pt),
-               Guide.manual_color_key("Índice",["Berger-Parker Comunidade",
-                                         "Simpson Comunidade",
-                                         "Shannon evenness Comunidade",
-                                         "Berger-Parker UD",
-                                         "Simpson UD",
-                                         "Shannon evenness UD"],
+               Guide.manual_color_key("Index",["Berger-Parker Community",
+                                         "Simpson Community",
+                                         "Shannon evenness Community",
+                                         "Berger-Parker DU",
+                                         "Simpson DU",
+                                         "Shannon evenness DU"],
                                         ["brown", "blue", "red",
                                          "green", "orange", "purple"]),
-                Guide.ylabel("Valor da Métrica"),
-                Guide.xlabel("Ciclos Agrícolas"))
+                Guide.ylabel("Value of the metric"),
+                Guide.xlabel("Agricultural cycle"))
     output_file4 = output_file[1:end-4] * "4.svg"
     draw(SVG(output_file4, 23cm, 10cm), p4)
     println("Image $(output_file4) successfully generated.")
@@ -131,16 +131,16 @@ function plotVarParam(df, output_file)
                   Scale.color_discrete, Guide.colorkey(title=param),
                   Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
                         key_title_font_size=14pt, key_label_font_size=12pt),
-                  Guide.xlabel("Ciclos Agrícolas"),
-                  Guide.ylabel("Riqueza de Variedades na Comunidade"))
+                  Guide.xlabel("Agricultural cycle"),
+                  Guide.ylabel("Varietal richness in community"))
     draw(SVG(output_file, 16cm, 12cm), p)
     println("Image $(output_file) successfully generated.")
     p2 = plot(df, x=:time, y=:meanDU, color=:param, Geom.line,
                   Scale.color_discrete(), Guide.colorkey(title=param),
                   Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
                         key_title_font_size=14pt, key_label_font_size=12pt),
-                  Guide.xlabel("Ciclos Agrícolas"),
-                  Guide.ylabel("Riqueza Média de Variedades por UD"))
+                  Guide.xlabel("Agricultural cycle"),
+                  Guide.ylabel("Average varietal richness per DU"))
     output_file2 = output_file[1:end-4] * "2.svg"
     draw(SVG(output_file2, 16cm, 12cm), p2)
     println("Image $(output_file2) successfully generated.")
@@ -156,8 +156,8 @@ function plotVarParam(df, output_file)
                  layer(f,0,9, Theme(default_color="black")),
                   Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
                         key_title_font_size=14pt, key_label_font_size=12pt),
-                  Guide.xlabel("Riqueza Média de Variedades por UD"),
-                  Guide.ylabel("Riqueza de Variedades na Comunidade"),
+                  Guide.xlabel("Average varietal richness per DU"),
+                  Guide.ylabel("Varietal richness in community"),
                   Guide.yticks(ticks=[0,10,20,30,40]),
                   Guide.xticks(ticks=[0,1,2,3,4,5,6,7,8,9]),
                   Coord.cartesian(xmin=0, ymin=0))
@@ -174,8 +174,8 @@ function plotduDistribution(df, output_file)
                   Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
                         key_title_font_size=14pt, key_label_font_size=12pt),
                   Coord.cartesian(xmin=0, xmax=15),
-                  Guide.ylabel("Porcentagem (%)"),
-                  Guide.xlabel("Riqueza de Variedades por UD"))
+                  Guide.ylabel("Percentage (%)"),
+                  Guide.xlabel("Varietal richness per DU"))
       draw(SVG(output_file, 15cm, 10cm), p)
       println("Image $(output_file) successfully generated.")
     elseif length(split(output_file, "_")) == 3
@@ -183,8 +183,8 @@ function plotduDistribution(df, output_file)
                   Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
                         key_title_font_size=14pt, key_label_font_size=12pt),
                   Scale.color_discrete(),Guide.colorkey(title=param),
-                  Guide.ylabel("Porcentagem (%)"),
-                  Guide.xlabel("Riqueza de Variedades por UD"))
+                  Guide.ylabel("Percentage (%)"),
+                  Guide.xlabel("Varietal richness per DU"))
       draw(SVG(output_file, 15cm, 10cm), p)
       println("Image $(output_file) successfully generated.")
     end
@@ -197,8 +197,8 @@ function plotVarietyDistribution(df, output_file)
                   Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
                         key_title_font_size=14pt, key_label_font_size=12pt),
                   Guide.xticks(ticks=[0.0,20,40,60,80,100]),
-                  Guide.ylabel("Porcentagem de Variedades (%)"),
-                  Guide.xlabel("Porcentagem de Unidades Domésticas (%)"),
+                  Guide.ylabel("Percentage of varieties (%)"),
+                  Guide.xlabel("Percentage of domestic unities (%)"),
                   Coord.cartesian(xmin=0, xmax=100))
       draw(SVG(output_file, 15cm, 10cm), p)
       println("Image $(output_file) successfully generated.")
@@ -208,8 +208,8 @@ function plotVarietyDistribution(df, output_file)
                   Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
                         key_title_font_size=14pt, key_label_font_size=12pt),
                   Guide.xticks(ticks=[0.0,20,40,50,60,80,100]),
-                  Guide.ylabel("Porcentagem de Variedades (%)"),
-                  Guide.xlabel("Porcentagem de Unidades Domésticas (%)"))
+                  Guide.ylabel("Percentage of varieties (%)"),
+                  Guide.xlabel("Percentage of domestic unities (%)"))
       draw(SVG(output_file, 15cm, 10cm), p)
       println("Image $(output_file) successfully generated.")
     end
@@ -221,8 +221,8 @@ function plotVarietyQuantity(df, output_file)
       p = plot(df, x=:quantity, y=:frequency, Geom.bar,
                   Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
                         key_title_font_size=14pt, key_label_font_size=12pt),
-                  Guide.ylabel("Porcentagem de Variedades (%)"),
-                  Guide.xlabel("Área Ocupada na Comunidade (%)"),
+                  Guide.ylabel("Percentage of varieties (%)"),
+                  Guide.xlabel("Occupied area in community (%)"),
                   Scale.x_log10(labels=d-> @sprintf("%.1f",10^d)),
                   Guide.xticks(ticks=[-1, 0, 0.7, 1, 1.699, 2]))
       draw(SVG(output_file, 15cm, 10cm), p)
@@ -232,8 +232,8 @@ function plotVarietyQuantity(df, output_file)
                   Scale.color_discrete(),Guide.colorkey(title=param),
                   Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
                         key_title_font_size=14pt, key_label_font_size=12pt),
-                  Guide.ylabel("Porcentagem de Variedades (%)"),
-                  Guide.xlabel("Área Ocupada na Comunidade (%)"),
+                  Guide.ylabel("Percentage of varieties (%)"),
+                  Guide.xlabel("Occupied area in community (%)"),
                   Scale.x_log10(labels=d-> @sprintf("%.1f",10^d)),
                   Guide.xticks(ticks=[-1, 0, 0.7, 1, 1.699, 2]))
       draw(SVG(output_file, 15cm, 10cm), p)
@@ -248,10 +248,10 @@ function plotHistogramProductivity(df, output_file)
                       Theme(default_color=Colors.RGBA(255,0,0, 0.4))),
             Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
                     key_title_font_size=14pt, key_label_font_size=12pt),
-            Guide.manual_color_key("",["Produtividade","Qualidade"],
+            Guide.manual_color_key("",["Productivity","Quality"],
                                    ["green", "red"]),
-            Guide.ylabel("Área ocupada (%)"),
-            Guide.xlabel("Valor"))
+            Guide.ylabel("Occupied area (%)"),
+            Guide.xlabel("Value of metric"))
     draw(SVG(output_file, 15cm, 10cm), p)
     println("Image $(output_file) successfully generated.")
 end
@@ -261,15 +261,15 @@ function plotHistogramProductivityVar(df, output_file)
     p = plot(df, x=:value, y=:productivity, color=:param, Geom.line,
                  Scale.color_discrete(), Guide.colorkey(title=param),
                  Scale.y_continuous(minvalue=0, maxvalue=0.2),
-                 Guide.ylabel("Área ocupada (%)"),
-                 Guide.xlabel("Produtividade"))
+                 Guide.ylabel("Occupied area (%)"),
+                 Guide.xlabel("Productivity"))
     draw(SVG(output_file, 15cm, 10cm), p)
     println("Image $(output_file) successfully generated.")
     p2 = plot(df, x=:value, y=:quality, color=:param, Geom.line,
                   Scale.color_discrete(), Guide.colorkey(title=param),
                   Scale.y_continuous(minvalue=0, maxvalue=0.1),
-                 Guide.ylabel("Área ocupada (%)"),
-                  Guide.xlabel("Qualidade"))
+                 Guide.ylabel("Occupied area (%)"),
+                  Guide.xlabel("Quality"))
     output_file2 = output_file[1:end-4] * "2.svg"
     draw(SVG(output_file2, 15cm, 10cm), p2)
     println("Image $(output_file2) successfully generated.")
@@ -284,10 +284,10 @@ function plotVarParamFixedPoints(df, output_file)
             Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
                     key_title_font_size=14pt, key_label_font_size=12pt),
             Guide.manual_color_key("",
-                                   ["Riqueza de Variedades na Comunidade",
-                                    "Riqueza média de variedades por UD"],
+                                   ["Varietal richness in community",
+                                    "Average varietal richness per DU"],
                                    ["green", "red"]),
-            Guide.ylabel("Valor ao Final da Simulação"),
+            Guide.ylabel("Value at the end of simulation"),
             Guide.xlabel(param))
     draw(SVG(output_file, 23cm, 10cm), p)
     println("Image $(output_file) successfully generated.")
