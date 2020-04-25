@@ -9,11 +9,14 @@ import Cairo, Fontconfig
 
 function plotAll()
   df, df2, df3 = loadData()
+  plotCassavaAndModel(df)
+#=
   plotGeraneralData(df)
   plotAllHistogram(df)
   plotAllBoxplot(df2, df3)
   plotGeneral(df)
   plotIndex()
+=#
 end
 
 function loadData()
@@ -87,6 +90,45 @@ function plotCommunityxDU(df, str, size, runRegression)
             plot_padding=[30pt, 60pt, 10pt, 10pt],
         point_size=0.6mm, highlight_width=0.0mm));
   end
+  draw(img, p)
+end
+
+function plotCassavaAndModel(df)
+  filename = "../src/test/1592969866_varParam_m.csv"
+  dfModel = CSV.File(filename, delim = "; ", header=4) |> DataFrame
+  maxTime = maximum(dfModel[:time])
+  dfModel = dfModel[dfModel[:time] .== maxTime, :]
+
+  ols = lm(@formula(nVar ~ 0 + meanDU), dfModel)
+  g(x) = coef(ols)[1]*x
+  println("Printing fit result for model")
+  println(coeftable(ols))
+
+  dfClean = df[[:Specie, :Reference, :Ncommunity, :NaverageDU]]
+  dfClean = dropmissing(dfClean)
+  dfManioc = dfClean[dfClean[:Specie] .== "Manioc", :]
+
+  ols2 = lm(@formula(Ncommunity ~ 0 + NaverageDU), dfManioc)
+  f(x) = coef(ols2)[1]*x
+  println("Printing fit result for manioc")
+  println(coeftable(ols2))
+
+  img = PNG("test/manioc.png", 15*1.3cm, 10*1.3cm)
+  p=plot(layer(f, 0, 1.1*maximum(dfManioc[:NaverageDU]),
+                  style(line_style=[:dash]), Theme(default_color="red", line_style=[:dash])),
+    layer(g, 0, 1.1*maximum(dfManioc[:NaverageDU])),
+    layer(dfManioc, x=:NaverageDU, y=:Ncommunity, Geom.point,
+      Theme(point_size=0.5mm, highlight_width=0.0mm, default_color="red")),
+    layer(dfModel, x=:meanDU, y=:nVar, Geom.point,
+      Theme(point_size=0.6mm, highlight_width=0.0mm)),
+    Guide.xlabel("Average varietal richness per HD"),
+    Guide.ylabel("Varietal richness in community"),
+    Guide.title("Agrobiodiversity of manioc"),
+    Coord.cartesian(xmin=0, ymin=0, xmax=35, ymax=100),
+    Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
+          key_title_font_size=14pt, key_label_font_size=12pt,
+          plot_padding=[30pt, 60pt, 10pt, 10pt],
+      point_size=0.6mm, highlight_width=0.0mm));
   draw(img, p)
 end
 
