@@ -138,9 +138,19 @@ void DomesticUnity::iterateDU(void){
   if(minorDeltaIdx != majorDeltaIdx){
     changeProduction(varietyOwened[majorDeltaIdx].varietyData,
         varietyOwened[minorDeltaIdx].number);
+    while(uniFLOAT(rand64) < 0.7){
+      if(findVariety(varietyOwened[minorDeltaIdx].number) >= 0){
+        changeProduction(varietyOwened[majorDeltaIdx].varietyData,
+            varietyOwened[minorDeltaIdx].number);
+      }
+      else
+        changeProduction(varietyOwened[majorDeltaIdx].varietyData);
+    }
   }
+
   while(findVariety(-1) >= 0)
     changeProduction(varietyOwened[majorDeltaIdx].varietyData,-1);
+
   for(auto ud :indexLinkedDU){
     if(uniFLOAT(rand64) <
         m_domesticUnity[ud].punctuation * m_duParameter.outsideTradeLimit){
@@ -151,11 +161,13 @@ void DomesticUnity::iterateDU(void){
       changeProduction(duVec->at(extBestVarietyIdx).varietyData);
     }
   }
+
   if(uniFLOAT(rand64) < m_duParameter.probabilityNewVar *
       m_duParameter.percentageNewRandomVar){
     int newPlace = m_indexOwenedPatches[uniIntPlace(rand64)];
     m_grid[newPlace].setRandomVariety();
   }
+
   if(uniFLOAT(rand64) < m_duParameter.probabilityNewVar *
       (1 - m_duParameter.percentageNewRandomVar)){
     int newPlace = m_indexOwenedPatches[uniIntPlace(rand64)];
