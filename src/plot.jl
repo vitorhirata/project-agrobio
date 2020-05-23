@@ -129,6 +129,9 @@ end
 
 function plotVarParam(df, output_file)
     param = string(output_file[end-4])
+    if param == "a"
+      param = "α"
+    end
     p = plot(df, x=:time, y=:nVar, color=:param, Geom.line,
                   Scale.color_discrete, Guide.colorkey(title=param),
                   Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
@@ -177,6 +180,9 @@ end
 
 function plothdDistribution(df, output_file)
     param = string(output_file[end-4])
+    if param == "a"
+      param = "α"
+    end
     if length(split(output_file, "_")) == 2
       p = plot(df, x=:value, y=:hdDist, Geom.bar,
                   Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
@@ -200,6 +206,9 @@ end
 
 function plotVarietyDistribution(df, output_file)
     param = string(output_file[end-4])
+    if param == "a"
+      param = "α"
+    end
     if length(split(output_file, "_")) == 2
       p = plot(df, x=:value, y=:varDist, Geom.bar,
                   Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
@@ -225,6 +234,9 @@ end
 
 function plotVarietyQuantity(df, output_file)
     param = string(output_file[end-4])
+    if param == "a"
+      param = "α"
+    end
     if length(split(output_file, "_")) == 2
       p = plot(df, x=:quantity, y=:frequency, Geom.bar,
                   Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
@@ -266,6 +278,9 @@ end
 
 function plotHistogramProductivityVar(df, output_file)
     param = string(output_file[end-4])
+    if param == "a"
+      param = "α"
+    end
     p = plot(df, x=:value, y=:productivity, color=:param, Geom.line,
                  Scale.color_discrete(), Guide.colorkey(title=param),
                  Scale.y_continuous(minvalue=0, maxvalue=0.2),
@@ -285,6 +300,9 @@ end
 
 function plotModelFinalStates(df, output_file)
     param = string(output_file[end-4])
+    if param == "a"
+      param = "α"
+    end
     p=plot(layer(df, x=:param, y=:nVar, Geom.line,
                      Theme(default_color=colorant"green")),
             layer(df, x=:param, y=:meanHD, Geom.line,
