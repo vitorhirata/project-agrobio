@@ -138,7 +138,7 @@ void DomesticUnity::iterateDU(void){
   if(minorDeltaIdx != majorDeltaIdx){
     changeProduction(varietyOwened[majorDeltaIdx].varietyData,
         varietyOwened[minorDeltaIdx].number);
-    while(uniFLOAT(rand64) < 0.7){
+    while(uniFLOAT(rand64) < 0.8){
       if(findVariety(varietyOwened[minorDeltaIdx].number) >= 0){
         changeProduction(varietyOwened[majorDeltaIdx].varietyData,
             varietyOwened[minorDeltaIdx].number);

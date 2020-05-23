@@ -166,7 +166,7 @@ int Ambient::countSpecie(void){
 
 void Ambient::runDeath(void){
   for(int i = 0; i < m_latticeSize*m_latticeSize; ++i){
-    if(uniFLOAT(rand64) < m_deathProbability - 0.15 * grid[i].productivity)
+    if(uniFLOAT(rand64) < m_deathProbability - 0.17 * grid[i].productivity)
       grid[i].killVariety();
   }
 }

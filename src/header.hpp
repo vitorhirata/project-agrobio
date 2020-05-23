@@ -17,7 +17,7 @@ static std::mt19937_64 rand64(rd());
 static std::uniform_real_distribution<double> uniFLOAT(0.0,1.0);
 static std::uniform_int_distribution<long> uniIntPlace(0,49-1);
 static std::normal_distribution<double> gaussPref(0.5,0.1);
-static std::normal_distribution<double> gaussRes(0.6,0.2);
+static std::normal_distribution<double> gaussRes(0.6,0.3);
 static std::normal_distribution<double> gaussK(0.5,0.15);
 static std::normal_distribution<double> gaussQ(0.5,0.15);
 
