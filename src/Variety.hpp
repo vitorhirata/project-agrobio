@@ -41,16 +41,18 @@ void Variety::setVariety(VarietyData t_data){
 // the variety
 int Variety::computeVarietyNumber(void){
   int varNumber = 0;
-  float step = 0.2;
-  int scale = 1 / step;
+  float step = 0.1;
+  int scale = pow(1 / step, 2);
   int temp;
-  int actualScale = scale*scale;
+  int currentScale = scale;
+
+  varNumber += floor(quality / (step / 2));
+
   for(auto i : halfSaturation){
     temp = floor(i / step);
-    varNumber += actualScale * temp;
-    actualScale *= scale;
+    varNumber += currentScale * temp;
+    currentScale *= scale;
   }
-  varNumber += floor(quality / (step * step));
 
   return varNumber;
 }

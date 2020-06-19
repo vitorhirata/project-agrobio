@@ -356,7 +356,7 @@ namespace metrics{
 
 
   void floatToRGB(int n, int* R, int* G, int* B){
-    float r, g, b, x = (float) n / 3500;
+    float r, g, b, x = (float) n / 10101020;
 
     if (x < 0 || x > 1){
       cout << "ERROR: INVALID VARIETY NUMBER." << endl;
