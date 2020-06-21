@@ -50,14 +50,15 @@ void Patch::computeProductivity(void){
 // Substitute actual variety by a randomly choosen variety
 void Patch::setNewVariety(VarietyData t_data1, VarietyData t_data2){
   VarietyData newVariety;
+
   for(int j = 0; j < m_resource.size(); ++j){
     newVariety.halfSaturation.push_back(
         (t_data1.halfSaturation[j] + t_data2.halfSaturation[j]) / 2 +
-        m_crossingDeviation * uniFLOAT(rand64));
+        m_crossingDeviation * (2 * uniFLOAT(rand64) - 1));
     while(newVariety.halfSaturation[j] < 0 || newVariety.halfSaturation[j] > 1)
       newVariety.halfSaturation[j] =
         (t_data1.halfSaturation[j] + t_data2.halfSaturation[j]) / 2 +
-        m_crossingDeviation * uniFLOAT(rand64);
+        m_crossingDeviation * (2 * uniFLOAT(rand64) - 1);
   }
   newVariety.quality = (t_data1.quality + t_data2.quality) / 2 +
     m_crossingDeviation * uniFLOAT(rand64);
