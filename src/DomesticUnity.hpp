@@ -221,6 +221,9 @@ void DomesticUnity::computeDeltas(int * minorDeltaIdx, int * majorDeltaIdx){
   }
 
   for(uint i = 0; i < varietyOwened.size(); ++i){
+    if(varietyOwened[i].number == -1)
+      continue;
+
     float temp = renormalizationFunction(varietyOwened[i].punctuation -
       averagePunctuation) / totalPunctuationNorm -
       (float) varietyOwened[i].quantity / m_indexOwenedPatches.size();
