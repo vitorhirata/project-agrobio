@@ -34,18 +34,18 @@ struct Parameter{
   , timeInterval(30)
   , numberDomesticUnity(49)
   , nRun(200)
-  , networkType(2)
+  , networkType(1)
   , mSF(2)
   , kWT(4)
   , betaWT(0.2)
   , probabilyConnectionER(0.15)
-  , outsideTradeLimit(0.25)
-  , selectionStrength(13)
-  , alpha(0.61)
-  , probabilityNewVar(0.1)
+  , outsideTradeLimit(0.32)
+  , selectionStrength(10)
+  , alpha(0.6)
+  , probabilityNewVar(0.06)
   , percentageNewRandomVar(0.1)
-  , crossingDeviation(0.003)
-  , deathProbability(0.23) {}
+  , crossingDeviation(0.005)
+  , deathProbability(0.2) {}
 };
 
 struct Result{
