@@ -14,28 +14,28 @@ namespace worker{
     time_t now = time(NULL);
     std::string timestr = to_string(now);
 
-    int duSize = parameter.latticeSize / sqrt(parameter.numberDomesticUnity);
-    duSize = duSize * duSize;
-    std::string header ("time; nVar; meanDU; totalPunctuation; ");
+    int hdSize = parameter.latticeSize / sqrt(parameter.numberHousehold);
+    hdSize = hdSize * hdSize;
+    std::string header ("time; nVar; meanHD; totalPunctuation; ");
     header.append("productivityPunctuation; qualityPunctuation; ");
     header.append("bergerCommunity; simpsonCommunity; shannonCommunity; ");
-    header.append("bergerDU; simpsonDU; shannonDU");
+    header.append("bergerHD; simpsonHD; shannonHD");
     fstream timeFile = worker::openFile(
         "test/" + timestr + "_standard.csv", header, parameter);
     for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i){
       timeFile << i*parameter.timeInterval << "; ";
       timeFile << (float) result.numberVariety[i] / parameter.nRun << "; ";
-      timeFile << (float) result.meanVarietyDU[i] / parameter.nRun << "; ";
+      timeFile << (float) result.meanVarietyHD[i] / parameter.nRun << "; ";
       timeFile << result.totalPunctuation[i] / parameter.nRun << "; ";
       timeFile << result.productivityPunctuation[i] / parameter.nRun << "; ";
       timeFile << (result.totalPunctuation[i]-
           result.productivityPunctuation[i]) / parameter.nRun << "; ";
-      timeFile << result.bergerParkerCommunity[i] / (duSize * parameter.nRun);
+      timeFile << result.bergerParkerCommunity[i] / (hdSize * parameter.nRun);
       timeFile << "; " << result.simpsonCommunity[i] / parameter.nRun << "; ";
       timeFile << result.shannonCommunity[i] / parameter.nRun << "; ";
-      timeFile << result.bergerParkerDU[i] / (duSize * parameter.nRun) << "; ";
-      timeFile << result.simpsonDU[i] / parameter.nRun << "; ";
-      timeFile << result.shannonDU[i] / parameter.nRun << endl;
+      timeFile << result.bergerParkerHD[i] / (hdSize * parameter.nRun) << "; ";
+      timeFile << result.simpsonHD[i] / parameter.nRun << "; ";
+      timeFile << result.shannonHD[i] / parameter.nRun << endl;
     }
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     timeFile.close();
@@ -43,9 +43,9 @@ namespace worker{
     fstream histogramFile = worker::openFile(
         "test/" + timestr +
         "_histogramProductivity.csv", "value; productivity; quality", parameter);
-    fstream duDistFile = worker::openFile(
-        "test/" + timestr + "_duDistribution.csv",
-        "value; duDist", parameter);
+    fstream hdDistFile = worker::openFile(
+        "test/" + timestr + "_hdDistribution.csv",
+        "value; hdDist", parameter);
     fstream varietyDistFile = worker::openFile(
         "test/" + timestr + "_varietyDistribution.csv",  "value; varDist",
         parameter);
@@ -60,12 +60,12 @@ namespace worker{
       histogramFile << endl;
     }
 
-    for(int i = 0; i <= duSize - 1; ++i){
-      duDistFile << i << "; " << 100*result.duDistribution[i] / parameter.nRun;
-      duDistFile << endl;
+    for(int i = 0; i <= hdSize - 1; ++i){
+      hdDistFile << i << "; " << 100*result.hdDistribution[i] / parameter.nRun;
+      hdDistFile << endl;
     }
-    for(int i = 0; i < parameter.numberDomesticUnity; ++i){
-      varietyDistFile << 100.0*(i+1.0) / parameter.numberDomesticUnity << "; ";
+    for(int i = 0; i < parameter.numberHousehold; ++i){
+      varietyDistFile << 100.0*(i+1.0) / parameter.numberHousehold << "; ";
       varietyDistFile << 100 * result.varietyDistribution[i] / parameter.nRun;
       varietyDistFile << endl;
     }
@@ -76,7 +76,7 @@ namespace worker{
     }
 
     histogramFile.close();
-    duDistFile.close();
+    hdDistFile.close();
     varietyDistFile.close();
     varietyQuantFile.close();
   }
@@ -91,28 +91,28 @@ namespace worker{
     time_t now = time(NULL);
     std::string timestr = to_string(now);
 
-    int duSize = parameter.latticeSize / sqrt(parameter.numberDomesticUnity);
-    duSize = duSize * duSize;
-    std::string header ("time; nVar; meanDU; totalPunctuation; ");
+    int hdSize = parameter.latticeSize / sqrt(parameter.numberHousehold);
+    hdSize = hdSize * hdSize;
+    std::string header ("time; nVar; meanHD; totalPunctuation; ");
     header.append("productivityPunctuation; qualityPunctuation; ");
     header.append("bergerCommunity; simpsonCommunity; shannonCommunity; ");
-    header.append("bergerDU; simpsonDU; shannonDU");
+    header.append("bergerHD; simpsonHD; shannonHD");
     fstream timeFile = worker::openFile(
         "test/plot/" + timestr + "_standard.csv", header,
         parameter);
     for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i){
       timeFile << i*parameter.timeInterval << "; ";
       timeFile << result.numberVariety[i] << "; ";
-      timeFile << result.meanVarietyDU[i] << "; ";
+      timeFile << result.meanVarietyHD[i] << "; ";
       timeFile << result.totalPunctuation[i] << "; ";
       timeFile << result.productivityPunctuation[i] << "; ";
       timeFile << result.totalPunctuation[i]-result.productivityPunctuation[i];
-      timeFile << "; " << result.bergerParkerCommunity[i] / duSize << "; ";
+      timeFile << "; " << result.bergerParkerCommunity[i] / hdSize << "; ";
       timeFile << result.simpsonCommunity[i] << "; ";
       timeFile << result.shannonCommunity[i] << "; ";
-      timeFile << result.bergerParkerDU[i] / duSize << "; ";
-      timeFile << result.simpsonDU[i] << "; ";
-      timeFile << result.shannonDU[i] << endl;
+      timeFile << result.bergerParkerHD[i] / hdSize << "; ";
+      timeFile << result.simpsonHD[i] << "; ";
+      timeFile << result.shannonHD[i] << endl;
     }
     cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
     timeFile.close();
@@ -120,8 +120,8 @@ namespace worker{
     fstream histogramFile = worker::openFile(
         "test/plot/" + timestr + "_histogramProductivity.csv",
         "value; productivity; quality", parameter);
-    fstream duDistFile = worker::openFile(
-        "test/plot/" + timestr + "_duDistribution.csv",  "value; duDist",
+    fstream hdDistFile = worker::openFile(
+        "test/plot/" + timestr + "_hdDistribution.csv",  "value; hdDist",
         parameter);
     fstream varietyDistFile = worker::openFile(
         "test/plot/" + timestr + "_varietyDistribution.csv",
@@ -134,10 +134,10 @@ namespace worker{
       histogramFile << 100*result.productivityFrequency[i] << "; ";
       histogramFile << 100 * result.qualityFrequency[i] << endl;
     }
-    for(int i = 0; i <= duSize; ++i)
-      duDistFile << i << "; " << 100 * result.duDistribution[i] << endl;
-    for(int i = 0; i < parameter.numberDomesticUnity; ++i){
-      varietyDistFile << 100 * (i+1.0) / parameter.numberDomesticUnity << "; ";
+    for(int i = 0; i <= hdSize; ++i)
+      hdDistFile << i << "; " << 100 * result.hdDistribution[i] << endl;
+    for(int i = 0; i < parameter.numberHousehold; ++i){
+      varietyDistFile << 100 * (i+1.0) / parameter.numberHousehold << "; ";
       varietyDistFile << 100 * result.varietyDistribution[i] << endl;
     }
     for(int i = 0; i < result.varietyQuantity.size(); ++i){
@@ -146,7 +146,7 @@ namespace worker{
     }
 
     histogramFile.close();
-    duDistFile.close();
+    hdDistFile.close();
     varietyDistFile.close();
     varietyQuantFile.close();
   }
@@ -160,19 +160,19 @@ namespace worker{
     time_t now = time(NULL);
     std::string timestr = to_string(now);
 
-    std::string header ("time; nVar; meanDU; totalPunctuation; ");
+    std::string header ("time; nVar; meanHD; totalPunctuation; ");
     header.append("productivityPunctuation; qualityPunctuation; ");
     header.append("bergerCommunity; simpsonCommunity; shannonCommunity; ");
-    header.append("bergerDU; simpsonDU; shannonDU; param");
+    header.append("bergerHD; simpsonHD; shannonHD; param");
     fstream timeFile = worker::openFile(
         "test/" + timestr + "_varParam_" + param + ".csv",
         header, parameter);
     fstream histogramFile = worker::openFile(
         "test/" + timestr + "_histogramProductivityVar_" + param + ".csv",
         "value; productivity; quality; param", parameter);
-    fstream duDistFile = worker::openFile(
-        "test/" + timestr + "_duDistribution_" + param + ".csv",
-        "value; duDist; param", parameter);
+    fstream hdDistFile = worker::openFile(
+        "test/" + timestr + "_hdDistribution_" + param + ".csv",
+        "value; hdDist; param", parameter);
     fstream varietyDistFile = worker::openFile(
         "test/" + timestr + "_varietyDistribution_" + param + ".csv",
         "value; varDist; param", parameter);
@@ -192,18 +192,18 @@ namespace worker{
             exit(-1);
           }
           parameter.latticeSize = paramValue;
-          parameter.numberDomesticUnity = paramValue;
+          parameter.numberHousehold = paramValue;
           break;
         case 'H':
           parameter.numberHabitat = paramValue;
           break;
         case 'v':
           if(paramValue > parameter.numberInitialVariety){
-            cout << "ERROR: the number of initial variety per DU should be ";
+            cout << "ERROR: the number of initial variety per HD should be ";
             cout << "smaller than total number of initial variety." << endl;
             exit(-1);
           }
-          parameter.numberInitialVarietyDU = paramValue;
+          parameter.numberInitialVarietyHD = paramValue;
           break;
         case 'V':
           parameter.numberInitialVariety = paramValue;
@@ -245,22 +245,22 @@ namespace worker{
         metrics::sumResults(&result, &resultTemp);
       }
 
-      int duSize = parameter.latticeSize / sqrt(parameter.numberDomesticUnity);
-      duSize = duSize * duSize;
+      int hdSize = parameter.latticeSize / sqrt(parameter.numberHousehold);
+      hdSize = hdSize * hdSize;
       for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i){
         timeFile << i * parameter.timeInterval << "; ";
         timeFile << (float) result.numberVariety[i] / parameter.nRun << "; ";
-        timeFile << (float) result.meanVarietyDU[i] / parameter.nRun<< "; ";
+        timeFile << (float) result.meanVarietyHD[i] / parameter.nRun<< "; ";
         timeFile << result.totalPunctuation[i] / parameter.nRun << "; ";
         timeFile << result.productivityPunctuation[i] / parameter.nRun << "; ";
         timeFile << (result.totalPunctuation[i]-
           result.productivityPunctuation[i]) / parameter.nRun << "; ";
-        timeFile << result.bergerParkerCommunity[i] / (duSize*parameter.nRun);
+        timeFile << result.bergerParkerCommunity[i] / (hdSize*parameter.nRun);
         timeFile << "; " << result.simpsonCommunity[i]/parameter.nRun << "; ";
         timeFile << result.shannonCommunity[i] / parameter.nRun << "; ";
-        timeFile << result.bergerParkerDU[i] / (duSize * parameter.nRun);
-        timeFile << "; " << result.simpsonDU[i] / parameter.nRun << "; ";
-        timeFile << result.shannonDU[i] / parameter.nRun << "; ";
+        timeFile << result.bergerParkerHD[i] / (hdSize * parameter.nRun);
+        timeFile << "; " << result.simpsonHD[i] / parameter.nRun << "; ";
+        timeFile << result.shannonHD[i] / parameter.nRun << "; ";
         timeFile << paramValue << endl;
       }
       for(int i = 0; i < round(1 / 0.05); ++i){
@@ -270,13 +270,13 @@ namespace worker{
         histogramFile << 100 * result.qualityFrequency[i] / parameter.nRun;
         histogramFile << "; " << paramValue << endl;
       }
-      for(int i = 0; i <= duSize - 1; ++i){
-        duDistFile << i << "; ";
-        duDistFile << 100 * result.duDistribution[i] / parameter.nRun << "; ";
-        duDistFile << paramValue << endl;
+      for(int i = 0; i <= hdSize - 1; ++i){
+        hdDistFile << i << "; ";
+        hdDistFile << 100 * result.hdDistribution[i] / parameter.nRun << "; ";
+        hdDistFile << paramValue << endl;
       }
-      for(int i = 0; i < parameter.numberDomesticUnity; ++i){
-        varietyDistFile << 100.0*(i+1) / parameter.numberDomesticUnity << "; ";
+      for(int i = 0; i < parameter.numberHousehold; ++i){
+        varietyDistFile << 100.0*(i+1) / parameter.numberHousehold << "; ";
         varietyDistFile << 100*result.varietyDistribution[i] / parameter.nRun;
         varietyDistFile << "; " << paramValue << endl;
       }
@@ -291,7 +291,7 @@ namespace worker{
     }
     timeFile.close();
     histogramFile.close();
-    duDistFile.close();
+    hdDistFile.close();
     varietyDistFile.close();
     varietyQuantFile.close();
   }
@@ -302,19 +302,19 @@ namespace worker{
     time_t now = time(NULL);
     std::string timestr = to_string(now);
 
-    std::string header ("param; nVar; meanDU; totalPunctuation; ");
+    std::string header ("param; nVar; meanHD; totalPunctuation; ");
     header.append("productivityPunctuation; qualityPunctuation; ");
     header.append("bergerCommunity; simpsonCommunity; shannonCommunity; ");
-    header.append("bergerDU; simpsonDU; shannonDU");
+    header.append("bergerHD; simpsonHD; shannonHD");
     fstream mainFile = worker::openFile(
         "test/" + timestr + "_varParamFixedPoints_" + param + ".csv",
         header, parameter);
     fstream histogramFile = worker::openFile(
         "test/" + timestr + "_histogramProductivityVar_" + param + ".csv",
         "value; productivity; quality; param", parameter);
-    fstream duDistFile = worker::openFile(
-        "test/" + timestr + "_duDistribution_" + param + ".csv",
-        "value; duDist; param", parameter);
+    fstream hdDistFile = worker::openFile(
+        "test/" + timestr + "_hdDistribution_" + param + ".csv",
+        "value; hdDist; param", parameter);
     fstream varietyDistFile = worker::openFile(
         "test/" + timestr + "_varietyDistribution_" + param + ".csv",
         "value; varDist; param", parameter);
@@ -387,18 +387,18 @@ namespace worker{
             exit(-1);
           }
           parameter.latticeSize = paramValue;
-          parameter.numberDomesticUnity = paramValue;
+          parameter.numberHousehold = paramValue;
           break;
         case 'H':
           parameter.numberHabitat = paramValue;
           break;
         case 'v':
           if(paramValue > parameter.numberInitialVariety){
-            cout << "ERROR: the number of initial variety per DU should be ";
+            cout << "ERROR: the number of initial variety per HD should be ";
             cout << "smaller than total number of initial variety." << endl;
             exit(-1);
           }
-          parameter.numberInitialVarietyDU = paramValue;
+          parameter.numberInitialVarietyHD = paramValue;
           break;
         case 'V':
           parameter.numberInitialVariety = paramValue;
@@ -442,21 +442,21 @@ namespace worker{
         metrics::sumResults(&result, &resultTemp);
       }
 
-      int duSize = parameter.latticeSize / sqrt(parameter.numberDomesticUnity);
-      duSize = duSize * duSize;
+      int hdSize = parameter.latticeSize / sqrt(parameter.numberHousehold);
+      hdSize = hdSize * hdSize;
       mainFile << paramValue << "; ";
       mainFile << (float) result.numberVariety[0] / parameter.nRun << "; ";
-      mainFile << (float) result.meanVarietyDU[0] / parameter.nRun << "; ";
+      mainFile << (float) result.meanVarietyHD[0] / parameter.nRun << "; ";
       mainFile << result.totalPunctuation[0] / parameter.nRun << "; ";
       mainFile << result.productivityPunctuation[0] / parameter.nRun << "; ";
       mainFile << (result.totalPunctuation[0]-
             result.productivityPunctuation[0]) / parameter.nRun << "; ";
-      mainFile << result.bergerParkerCommunity[0] / (duSize * parameter.nRun);
+      mainFile << result.bergerParkerCommunity[0] / (hdSize * parameter.nRun);
       mainFile << "; " << result.simpsonCommunity[0] / parameter.nRun << "; ";
       mainFile << result.shannonCommunity[0] / parameter.nRun << "; ";
-      mainFile << result.bergerParkerDU[0] / (duSize * parameter.nRun) << "; ";
-      mainFile << result.simpsonDU[0] / parameter.nRun << "; ";
-      mainFile << result.shannonDU[0] / parameter.nRun << endl;
+      mainFile << result.bergerParkerHD[0] / (hdSize * parameter.nRun) << "; ";
+      mainFile << result.simpsonHD[0] / parameter.nRun << "; ";
+      mainFile << result.shannonHD[0] / parameter.nRun << endl;
       for(int i = 0; i < round(1 / 0.05); ++i){
         histogramFile << i*0.05 + 0.025 << "; ";
         histogramFile << 100 *result.productivityFrequency[i] / parameter.nRun;
@@ -464,13 +464,13 @@ namespace worker{
         histogramFile << 100 * result.qualityFrequency[i] / parameter.nRun;
         histogramFile << "; " << paramValue << endl;
       }
-      for(int i = 0; i <= duSize - 1; ++i){
-        duDistFile << i << "; ";
-        duDistFile << 100 * result.duDistribution[i] / parameter.nRun << "; ";
-        duDistFile << paramValue << endl;
+      for(int i = 0; i <= hdSize - 1; ++i){
+        hdDistFile << i << "; ";
+        hdDistFile << 100 * result.hdDistribution[i] / parameter.nRun << "; ";
+        hdDistFile << paramValue << endl;
       }
-      for(int i = 0; i < parameter.numberDomesticUnity; ++i){
-        varietyDistFile << 100.0*(i+1) / parameter.numberDomesticUnity << "; ";
+      for(int i = 0; i < parameter.numberHousehold; ++i){
+        varietyDistFile << 100.0*(i+1) / parameter.numberHousehold << "; ";
         varietyDistFile << 100*result.varietyDistribution[i] / parameter.nRun;
         varietyDistFile << "; " << paramValue << endl;
       }
@@ -486,7 +486,7 @@ namespace worker{
 
     mainFile.close();
     histogramFile.close();
-    duDistFile.close();
+    hdDistFile.close();
     varietyDistFile.close();
     varietyQuantFile.close();
   }

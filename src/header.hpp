@@ -16,7 +16,7 @@ static std::random_device rd;
 static std::mt19937_64 rand64(rd());
 static std::uniform_real_distribution<double> uniFLOAT(0.0,1.0);
 static std::uniform_int_distribution<long> uniIntPlace(0,49-1);
-static std::uniform_int_distribution<long> uniIntChangeDuProduction(0,20-1);
+static std::uniform_int_distribution<long> uniIntChangeHdProduction(0,20-1);
 static std::normal_distribution<double> gaussPref(0.5,0.1);
 static std::normal_distribution<double> gaussRes(0.6,0.3);
 static std::normal_distribution<double> gaussK(0.5,0.15);
@@ -29,34 +29,34 @@ struct Result;
 class Variety;
 class Patch;
 class Ambient;
-class DomesticUnity;
+class Household;
 class Network;
 class Model;
 namespace metrics{
   void sumResults(Result* result, Result* resultTemp);
-  float computeVarietyMeanProfile(DomesticUnity* domesticUnity,
-      const int t_numberDomesticUnity, const int t_DUsize);
-  std::vector<float> computeDUprofile(DomesticUnity* domesticUnity,
-      const int t_numberDomesticUnity, const int t_DUsize);
+  float computeVarietyMeanProfile(Household* household,
+      const int t_numberHousehold, const int t_HDsize);
+  std::vector<float> computeHDprofile(Household* household,
+      const int t_numberHousehold, const int t_HDsize);
   std::vector<float> computeVarietyProfile(
-      DomesticUnity* domesticUnity, const int t_numberDomesticUnity);
-  std::vector<float> computeVarietyQuantity(DomesticUnity* domesticUnity,
-      const int t_numberDomesticUnity, const int t_latticeSize);
-  float computeBergerParker(DomesticUnity* domesticUnity,
-      const int t_numberDomesticUnity, const int t_latticeSize);
-  float computeBergerParkerDU(DomesticUnity* domesticUnity,
-      const int t_numberDomesticUnity);
-  float computeShannon(DomesticUnity* domesticUnity,
-      const int t_numberDomesticUnity, const int t_latticeSize);
-  float computeSimpson(DomesticUnity* domesticUnity,
-      const int t_numberDomesticUnity, const int t_latticeSize);
-  std::vector<float> computePunctuationAverage(DomesticUnity* domesticUnity,
-      const int t_numberDomesticUnity);
+      Household* household, const int t_numberHousehold);
+  std::vector<float> computeVarietyQuantity(Household* household,
+      const int t_numberHousehold, const int t_latticeSize);
+  float computeBergerParker(Household* household,
+      const int t_numberHousehold, const int t_latticeSize);
+  float computeBergerParkerHD(Household* household,
+      const int t_numberHousehold);
+  float computeShannon(Household* household,
+      const int t_numberHousehold, const int t_latticeSize);
+  float computeSimpson(Household* household,
+      const int t_numberHousehold, const int t_latticeSize);
+  std::vector<float> computePunctuationAverage(Household* household,
+      const int t_numberHousehold);
   std::vector<float> computeProductivityProfile(
       Patch* t_grid, const int t_latticeSize);
   std::vector<float> computeQualityProfile(
       Patch* t_grid, const int t_latticeSize);
-  float computeCorrelation(DomesticUnity* domesticUnity, int numberDU);
+  float computeCorrelation(Household* household, int numberHD);
   void printState(int t, Patch* grid, const int t_latticeSize);
   void floatToRGB(int n, int* R, int* G, int* B);
   void printParameters(fstream& arquivo, Parameter parameter);
@@ -74,7 +74,7 @@ namespace worker{
 #include "Variety.hpp"
 #include "Patch.hpp"
 #include "Ambient.hpp"
-#include "DomesticUnity.hpp"
+#include "Household.hpp"
 #include "Network.hpp"
 #include "Model.hpp"
 #include "Metrics.hpp"

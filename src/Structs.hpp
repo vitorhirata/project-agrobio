@@ -5,12 +5,12 @@
 struct Parameter{
   int latticeSize;
   int numberInitialVariety; // Number of species in initialization
-  int numberInitialVarietyDU; // Number of species in initialization of DU
+  int numberInitialVarietyHD; // Number of species in initialization of HD
   int numberResources; // Number of existing resources
   int numberHabitat; // Number of different resources in grid
   int maxTime; // Max time of iteration
   int timeInterval; // Interval in which metrics are counted
-  int numberDomesticUnity; // Number of domestic unities
+  int numberHousehold; // Number of households
   int nRun; // number of rounds
   int networkType;
   int mSF;
@@ -27,12 +27,12 @@ struct Parameter{
   Parameter()
   : latticeSize(49)
   , numberInitialVariety(10)
-  , numberInitialVarietyDU(5)
+  , numberInitialVarietyHD(5)
   , numberResources(3)
   , numberHabitat(1)
   , maxTime(3000)
   , timeInterval(30)
-  , numberDomesticUnity(49)
+  , numberHousehold(49)
   , nRun(200)
   , networkType(1)
   , mSF(2)
@@ -50,37 +50,37 @@ struct Parameter{
 
 struct Result{
   std::vector<int> numberVariety;
-  std::vector<float> meanVarietyDU;
+  std::vector<float> meanVarietyHD;
   std::vector<float> totalPunctuation;
   std::vector<float> productivityPunctuation;
   std::vector<float> productivityFrequency;
   std::vector<float> simpsonCommunity;
   std::vector<float> shannonCommunity;
   std::vector<float> bergerParkerCommunity;
-  std::vector<float> simpsonDU;
-  std::vector<float> shannonDU;
-  std::vector<float> bergerParkerDU;
+  std::vector<float> simpsonHD;
+  std::vector<float> shannonHD;
+  std::vector<float> bergerParkerHD;
   std::vector<float> qualityFrequency;
   std::vector<float> varietyDistribution;
   std::vector<float> varietyQuantity;
-  std::vector<float> duDistribution;
+  std::vector<float> hdDistribution;
 
-  Result(int timeSize, int histogramSize, int DUsize, int varQuantSize)
+  Result(int timeSize, int histogramSize, int HDsize, int varQuantSize)
   : numberVariety(timeSize, 0)
-  , meanVarietyDU(timeSize, 0)
+  , meanVarietyHD(timeSize, 0)
   , totalPunctuation(timeSize, 0)
   , productivityPunctuation(timeSize, 0)
   , simpsonCommunity(timeSize, 0)
   , shannonCommunity(timeSize, 0)
   , bergerParkerCommunity(timeSize, 0)
-  , simpsonDU(timeSize, 0)
-  , shannonDU(timeSize, 0)
-  , bergerParkerDU(timeSize, 0)
+  , simpsonHD(timeSize, 0)
+  , shannonHD(timeSize, 0)
+  , bergerParkerHD(timeSize, 0)
   , productivityFrequency(histogramSize, 0)
   , qualityFrequency(histogramSize, 0)
-  , varietyDistribution(DUsize, 0)
+  , varietyDistribution(HDsize, 0)
   , varietyQuantity(varQuantSize, 0)
-  , duDistribution(DUsize, 0) {}
+  , hdDistribution(HDsize, 0) {}
 };
 
 // Variety struct contain all the proprieties of each variety
@@ -89,14 +89,14 @@ struct VarietyData{
   float quality;
 };
 
-struct DUParameter{
+struct HDParameter{
   float alpha;
   float probabilityNewVar;
   float percentageNewRandomVar;
   float outsideTradeLimit;
   int selectionStrength;
-  DUParameter(){}
-  DUParameter(Parameter parameter)
+  HDParameter(){}
+  HDParameter(Parameter parameter)
   : alpha(parameter.alpha)
   , probabilityNewVar(parameter.probabilityNewVar)
   , percentageNewRandomVar(parameter.percentageNewRandomVar)

@@ -3,7 +3,7 @@
 
 class Network{
 private:
-  int m_numberDomesticUnity;
+  int m_numberHousehold;
   int m_mSF;
   int m_kWT;
   float m_betaWT;
@@ -14,21 +14,21 @@ private:
   std::vector<float> computeCumulativeDistribution();
 public:
   Network(int t_networkType, int t_mSF, int t_kWT, float t_betaWT,
-      float t_probabilyConnectionER, int t_numberDomesticUnity);
-  std::vector<std::vector<int> > indexLinkedDUs;
+      float t_probabilyConnectionER, int t_numberHousehold);
+  std::vector<std::vector<int> > indexLinkedHDs;
   void printNetwork(void);
 };
 
 // Network constructor. initialize parameters, create network according to
 // t_networkType
   Network::Network(int t_networkType, int t_mSF, int t_kWT, float t_betaWT,
-      float t_probabilyConnectionER, int t_numberDomesticUnity)
-  : m_numberDomesticUnity(t_numberDomesticUnity)
+      float t_probabilyConnectionER, int t_numberHousehold)
+  : m_numberHousehold(t_numberHousehold)
   , m_mSF(t_mSF)
   , m_kWT(t_kWT)
   , m_betaWT(t_betaWT)
   , m_probabilyConnectionER(t_probabilyConnectionER)
-  , indexLinkedDUs(t_numberDomesticUnity)
+  , indexLinkedHDs(t_numberHousehold)
 {
   if(t_networkType == 0)
     createRandomNetwork();
@@ -42,50 +42,50 @@ public:
   }
 }
 
-// Create indexLinkedDUs based on a random network (Erdos-Renyi Model)
+// Create indexLinkedHDs based on a random network (Erdos-Renyi Model)
 void Network::createRandomNetwork(){
-  for(int i = 0; i < m_numberDomesticUnity; ++i){
-    for(int j = i+1; j < m_numberDomesticUnity; ++j)
+  for(int i = 0; i < m_numberHousehold; ++i){
+    for(int j = i+1; j < m_numberHousehold; ++j)
       if(uniFLOAT(rand64) < m_probabilyConnectionER){
-        indexLinkedDUs[i].push_back(j);
-        indexLinkedDUs[j].push_back(i);
+        indexLinkedHDs[i].push_back(j);
+        indexLinkedHDs[j].push_back(i);
       }
   }
-  for(int i = 0; i < m_numberDomesticUnity; ++i){
-    if(indexLinkedDUs[i].empty()){
-      int j = floor(uniFLOAT(rand64) * m_numberDomesticUnity);
+  for(int i = 0; i < m_numberHousehold; ++i){
+    if(indexLinkedHDs[i].empty()){
+      int j = floor(uniFLOAT(rand64) * m_numberHousehold);
       while(i == j)
-        j = floor(uniFLOAT(rand64) * m_numberDomesticUnity);
-      indexLinkedDUs[i].push_back(j);
-      indexLinkedDUs[j].push_back(i);
+        j = floor(uniFLOAT(rand64) * m_numberHousehold);
+      indexLinkedHDs[i].push_back(j);
+      indexLinkedHDs[j].push_back(i);
     }
   }
 }
 
-// Create indexLinkedDUs based on a small-world network (Watts–Strogatz Model)
+// Create indexLinkedHDs based on a small-world network (Watts–Strogatz Model)
 void Network::createWTNetwork(){
 
   // Create matrix and make ring network
-  std::vector<int> matrix(m_numberDomesticUnity*m_numberDomesticUnity, 0);
-  for(int lin = 0; lin < m_numberDomesticUnity; ++lin){
+  std::vector<int> matrix(m_numberHousehold*m_numberHousehold, 0);
+  for(int lin = 0; lin < m_numberHousehold; ++lin){
     for(int addTerm = 1; addTerm < 1 + m_kWT / 2; ++addTerm){
       int colL = lin - addTerm;
       int colR = lin + addTerm;
       if(colL < 0)
-        colL = colL + m_numberDomesticUnity;
-      if(colR > m_numberDomesticUnity - 1)
-        colR = colR - m_numberDomesticUnity;
+        colL = colL + m_numberHousehold;
+      if(colR > m_numberHousehold - 1)
+        colR = colR - m_numberHousehold;
       if(colL > lin)
-        matrix[lin*m_numberDomesticUnity+colL] = 1;
+        matrix[lin*m_numberHousehold+colL] = 1;
       if(colR > lin)
-        matrix[lin*m_numberDomesticUnity+colR] = 1;
+        matrix[lin*m_numberHousehold+colR] = 1;
     }
   }
 
   // Remove links with probability betaWT
   int removedLinks = 0;
-  std::uniform_int_distribution<long> uniIntDU(0,m_numberDomesticUnity-1);
-  for(int i = 0; i < m_numberDomesticUnity*m_numberDomesticUnity; ++i){
+  std::uniform_int_distribution<long> uniIntHD(0,m_numberHousehold-1);
+  for(int i = 0; i < m_numberHousehold*m_numberHousehold; ++i){
     if(matrix[i] == 1 && uniFLOAT(rand64) < m_betaWT){
       matrix[i] = 0;
       ++removedLinks;
@@ -94,54 +94,54 @@ void Network::createWTNetwork(){
 
   // Rewire randomly
   for(int i = 0; i < removedLinks; ++i){
-    int newDU1 = uniIntDU(rand64);
-    int newDU2 = uniIntDU(rand64);
-    while(newDU2 == newDU1 || matrix[newDU1*m_numberDomesticUnity+newDU2] == 1
-        || matrix[newDU2*m_numberDomesticUnity+newDU1] == 1)
-      newDU2 = uniIntDU(rand64);
-    matrix[newDU1*m_numberDomesticUnity+newDU2] = 1;
+    int newHD1 = uniIntHD(rand64);
+    int newHD2 = uniIntHD(rand64);
+    while(newHD2 == newHD1 || matrix[newHD1*m_numberHousehold+newHD2] == 1
+        || matrix[newHD2*m_numberHousehold+newHD1] == 1)
+      newHD2 = uniIntHD(rand64);
+    matrix[newHD1*m_numberHousehold+newHD2] = 1;
   }
 
   // Sum transpose
-  for(int lin = 0; lin < m_numberDomesticUnity; ++lin){
-    for(int col = lin + 1; col < m_numberDomesticUnity; ++col){
-      matrix[lin*m_numberDomesticUnity+col] =
-        matrix[lin*m_numberDomesticUnity+col] +
-        matrix[col*m_numberDomesticUnity+lin];
-      matrix[col*m_numberDomesticUnity+lin] =
-        matrix[lin*m_numberDomesticUnity+col];
+  for(int lin = 0; lin < m_numberHousehold; ++lin){
+    for(int col = lin + 1; col < m_numberHousehold; ++col){
+      matrix[lin*m_numberHousehold+col] =
+        matrix[lin*m_numberHousehold+col] +
+        matrix[col*m_numberHousehold+lin];
+      matrix[col*m_numberHousehold+lin] =
+        matrix[lin*m_numberHousehold+col];
     }
   }
 
-  // Fill indexLinkedDUs vector of vectors
-  for(int i = 0; i < m_numberDomesticUnity; ++i){
-    for(int j = 0; j < m_numberDomesticUnity; ++j)
-      if(matrix[i*m_numberDomesticUnity+j] == 1)
-        indexLinkedDUs[i].push_back(j);
+  // Fill indexLinkedHDs vector of vectors
+  for(int i = 0; i < m_numberHousehold; ++i){
+    for(int j = 0; j < m_numberHousehold; ++j)
+      if(matrix[i*m_numberHousehold+j] == 1)
+        indexLinkedHDs[i].push_back(j);
   }
 
-  // If there is an unnconnect DU, one additional connection is made
-  for(int i = 0; i < m_numberDomesticUnity; ++i){
-    if(indexLinkedDUs[i].empty()){
-      int newDU = uniIntDU(rand64);
-      indexLinkedDUs[i].push_back(newDU);
-      indexLinkedDUs[newDU].push_back(i);
+  // If there is an unnconnect HD, one additional connection is made
+  for(int i = 0; i < m_numberHousehold; ++i){
+    if(indexLinkedHDs[i].empty()){
+      int newHD = uniIntHD(rand64);
+      indexLinkedHDs[i].push_back(newHD);
+      indexLinkedHDs[newHD].push_back(i);
     }
   }
 }
 
-// Create indexLinkedDUs based on a scale-free network (Barabasi–Albert Model)
+// Create indexLinkedHDs based on a scale-free network (Barabasi–Albert Model)
 void Network::createSFNetwork(){
   int m0 = 2;
-  int t = m_numberDomesticUnity - m0;
+  int t = m_numberHousehold - m0;
   std::vector<float> cumulative;
-  indexLinkedDUs = std::vector<std::vector<int> >(m0);
-  indexLinkedDUs[0].push_back(1);
-  indexLinkedDUs[1].push_back(0);
+  indexLinkedHDs = std::vector<std::vector<int> >(m0);
+  indexLinkedHDs[0].push_back(1);
+  indexLinkedHDs[1].push_back(0);
   int lastNode = m0;
   for(int i = 0; i < t; ++i){
     cumulative = computeCumulativeDistribution();
-    indexLinkedDUs.push_back(std::vector<int>(0));
+    indexLinkedHDs.push_back(std::vector<int>(0));
     std::vector<int> newNodes;
     for(int j = 0; j < m_mSF; ++j){
       int node = 0;
@@ -151,8 +151,8 @@ void Network::createSFNetwork(){
       if(std::find(newNodes.begin(), newNodes.end(), node) != newNodes.end())
         --j;
       else{
-        indexLinkedDUs[lastNode].push_back(node);
-        indexLinkedDUs[node].push_back(lastNode);
+        indexLinkedHDs[lastNode].push_back(node);
+        indexLinkedHDs[node].push_back(lastNode);
         newNodes.push_back(node);
       }
     }
@@ -162,20 +162,20 @@ void Network::createSFNetwork(){
 
 // Compute the cumulative vector based on the degree of the node
 std::vector<float> Network::computeCumulativeDistribution(void){
-  std::vector<float> cumulative(indexLinkedDUs.size());
-  cumulative[0] = indexLinkedDUs[0].size();
-  for(uint i = 1; i < indexLinkedDUs.size(); ++i)
-    cumulative[i] = cumulative[i-1] + indexLinkedDUs[i].size();
-  for(uint i = 0; i < indexLinkedDUs.size(); ++i)
+  std::vector<float> cumulative(indexLinkedHDs.size());
+  cumulative[0] = indexLinkedHDs[0].size();
+  for(uint i = 1; i < indexLinkedHDs.size(); ++i)
+    cumulative[i] = cumulative[i-1] + indexLinkedHDs[i].size();
+  for(uint i = 0; i < indexLinkedHDs.size(); ++i)
     cumulative[i] /= cumulative.back();
   cumulative.back() = 1.0;
   return cumulative;
 }
 
 void Network::printNetwork(void){
-  for(uint i = 0; i < indexLinkedDUs.size(); ++i){
-    cout << "DU number " << i << ": ";
-    for(auto j : indexLinkedDUs[i])
+  for(uint i = 0; i < indexLinkedHDs.size(); ++i){
+    cout << "HD number " << i << ": ";
+    for(auto j : indexLinkedHDs[i])
       cout << j << ", ";
     cout << endl;
   }

@@ -7,18 +7,18 @@ private:
   const int m_latticeSize;
   const float m_deathProbability;
   void setPatch(int numberResources, int nResourceDistribution,
-      int numberInitialVariety, int numberInitialVarietyDU,
+      int numberInitialVariety, int numberInitialVarietyHD,
       float t_crossingDeviation);
   std::vector<VarietyData> defineInitialVarieties(
       int numberResources, int numberInitialVariety);
-  std::vector<std::vector<int> > defineDUindex(
-      std::uniform_int_distribution<long> uniIntSP, int numberVarDU);
-  int computeDUnumber(int place);
+  std::vector<std::vector<int> > defineHDindex(
+      std::uniform_int_distribution<long> uniIntSP, int numberVarHD);
+  int computeHDnumber(int place);
 public:
   Patch* grid;
   Ambient(int t_latticeSize, int t_nResourceDistribution,
       int t_numberResources, int t_numberInitialVariety,
-      int t_numberInitialVarietyDU, float t_deathProbability,
+      int t_numberInitialVarietyHD, float t_deathProbability,
       float t_crossingDeviation);
   ~Ambient();
   int countSpecie(void);
@@ -29,14 +29,14 @@ public:
 // and resources
   Ambient::Ambient(int t_latticeSize, int t_nResourceDistribution,
       int t_numberResources, int t_numberInitialVariety,
-      int t_numberInitialVarietyDU, float t_deathProbability,
+      int t_numberInitialVarietyHD, float t_deathProbability,
       float t_crossingDeviation)
   : m_latticeSize(t_latticeSize)
   , m_deathProbability(t_deathProbability)
 {
   grid = new Patch [m_latticeSize*m_latticeSize];
   setPatch(t_numberResources, t_nResourceDistribution,
-      t_numberInitialVariety, t_numberInitialVarietyDU, t_crossingDeviation);
+      t_numberInitialVariety, t_numberInitialVarietyHD, t_crossingDeviation);
 }
 
 // Ambient destructor. Free grid memory and set it to nullptr
@@ -51,14 +51,14 @@ Ambient::~Ambient(){
 // it is a multiple of m_latticeSize a division is made to allocate the
 // resource equally. Raises erros if none of that options is true.
 void Ambient::setPatch(int numberResources, int nResourceDistribution,
-    int numberInitialVariety, int numberInitialVarietyDU,
+    int numberInitialVariety, int numberInitialVarietyHD,
     float t_crossingDeviation){
   std::vector<VarietyData> varietyAvailable = defineInitialVarieties(
       numberResources, numberInitialVariety);
   std::uniform_int_distribution<long> uniIntSP(0,numberInitialVariety-1);
-  std::uniform_int_distribution<long> uniIntSPdu(0,numberInitialVarietyDU-1);
-  std::vector<std::vector<int> > indexVarietyDU = defineDUindex(
-      uniIntSP, numberInitialVarietyDU);
+  std::uniform_int_distribution<long> uniIntSPhd(0,numberInitialVarietyHD-1);
+  std::vector<std::vector<int> > indexVarietyHD = defineHDindex(
+      uniIntSP, numberInitialVarietyHD);
 
   if(nResourceDistribution == m_latticeSize*m_latticeSize){
     std::vector<float> resources(numberResources);
@@ -68,7 +68,7 @@ void Ambient::setPatch(int numberResources, int nResourceDistribution,
         while(resources[j] < 0 || resources[j] > 1)
           resources[j] = gaussRes(rand64);
       }
-      int varietyIdx = indexVarietyDU[computeDUnumber(i)][uniIntSPdu(rand64)];
+      int varietyIdx = indexVarietyHD[computeHDnumber(i)][uniIntSPhd(rand64)];
       grid[i].initializePatch(resources, varietyAvailable[varietyIdx],
           t_crossingDeviation);
     }
@@ -82,7 +82,7 @@ void Ambient::setPatch(int numberResources, int nResourceDistribution,
     }
 
     for(int i = 0; i < m_latticeSize*m_latticeSize; ++i){
-      int varietyIdx = indexVarietyDU[computeDUnumber(i)][uniIntSPdu(rand64)];
+      int varietyIdx = indexVarietyHD[computeHDnumber(i)][uniIntSPhd(rand64)];
       grid[i].initializePatch(resources, varietyAvailable[varietyIdx],
           t_crossingDeviation);
     }
@@ -104,8 +104,8 @@ void Ambient::setPatch(int numberResources, int nResourceDistribution,
     for(int lin = 0; lin < m_latticeSize; ++lin){
       for(int col = 0; col < m_latticeSize; ++col){
         int idxRes = (lin / sizeV) * nResourceDistribution / 2 + col / sizeH;
-        int idxVar = indexVarietyDU[
-          computeDUnumber(lin*m_latticeSize+col)][uniIntSPdu(rand64)];
+        int idxVar = indexVarietyHD[
+          computeHDnumber(lin*m_latticeSize+col)][uniIntSPhd(rand64)];
         grid[lin*m_latticeSize+col].initializePatch(
             resources[idxRes], varietyAvailable[idxVar], t_crossingDeviation);
       }
@@ -113,23 +113,23 @@ void Ambient::setPatch(int numberResources, int nResourceDistribution,
   }
 }
 
-// Return the a vector of vector of int, containing numberVarDU random index
-std::vector<std::vector<int> > Ambient::defineDUindex(
-    std::uniform_int_distribution<long> uniIntSP, int numberVarDU){
-  std::vector<std::vector<int> > indexDU(49, std::vector<int>(numberVarDU));
+// Return the a vector of vector of int, containing numberVarHD random index
+std::vector<std::vector<int> > Ambient::defineHDindex(
+    std::uniform_int_distribution<long> uniIntSP, int numberVarHD){
+  std::vector<std::vector<int> > indexHD(49, std::vector<int>(numberVarHD));
   for(uint i = 0; i < 49; ++i)
-    for(uint j = 0; j < numberVarDU; ++j)
-      indexDU[i][j] = uniIntSP(rand64);
-  return indexDU;
+    for(uint j = 0; j < numberVarHD; ++j)
+      indexHD[i][j] = uniIntSP(rand64);
+  return indexHD;
 }
 
-// Receives on patch index and return the domestic unity that own this patch
-int Ambient::computeDUnumber(int place){
+// Receives on patch index and return the household that own this patch
+int Ambient::computeHDnumber(int place){
   int sizeGrid = 49;
-  int sizeDU = sqrt(sizeGrid);
+  int sizeHD = sqrt(sizeGrid);
   int lin = place / sizeGrid;
   int col = place % sizeGrid;
-  return sizeDU * (lin / sizeDU) + col / sizeDU;
+  return sizeHD * (lin / sizeHD) + col / sizeHD;
 }
 
 std::vector<VarietyData> Ambient::defineInitialVarieties(int numberResources,

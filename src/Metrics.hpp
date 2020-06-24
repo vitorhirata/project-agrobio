@@ -4,9 +4,9 @@ namespace metrics{
     std::transform((*result).numberVariety.begin(),
         (*result).numberVariety.end(), (*resultTemp).numberVariety.begin(),
         (*result).numberVariety.begin(), std::plus<float>());
-    std::transform((*result).meanVarietyDU.begin(),
-        (*result).meanVarietyDU.end(), (*resultTemp).meanVarietyDU.begin(),
-        (*result).meanVarietyDU.begin(), std::plus<float>());
+    std::transform((*result).meanVarietyHD.begin(),
+        (*result).meanVarietyHD.end(), (*resultTemp).meanVarietyHD.begin(),
+        (*result).meanVarietyHD.begin(), std::plus<float>());
     std::transform((*result).totalPunctuation.begin(),
         (*result).totalPunctuation.end(),
         (*resultTemp).totalPunctuation.begin(),
@@ -27,14 +27,14 @@ namespace metrics{
         (*result).bergerParkerCommunity.end(),
         (*resultTemp).bergerParkerCommunity.begin(),
         (*result).bergerParkerCommunity.begin(), std::plus<float>());
-    std::transform((*result).simpsonDU.begin(),
-        (*result).simpsonDU.end(),
-        (*resultTemp).simpsonDU.begin(),
-        (*result).simpsonDU.begin(), std::plus<float>());
-    std::transform((*result).shannonDU.begin(),
-        (*result).shannonDU.end(),
-        (*resultTemp).shannonDU.begin(),
-        (*result).shannonDU.begin(), std::plus<float>());
+    std::transform((*result).simpsonHD.begin(),
+        (*result).simpsonHD.end(),
+        (*resultTemp).simpsonHD.begin(),
+        (*result).simpsonHD.begin(), std::plus<float>());
+    std::transform((*result).shannonHD.begin(),
+        (*result).shannonHD.end(),
+        (*resultTemp).shannonHD.begin(),
+        (*result).shannonHD.begin(), std::plus<float>());
     std::transform((*result).varietyDistribution.begin(),
         (*result).varietyDistribution.end(),
         (*resultTemp).varietyDistribution.begin(),
@@ -43,10 +43,10 @@ namespace metrics{
         (*result).varietyQuantity.end(),
         (*resultTemp).varietyQuantity.begin(),
         (*result).varietyQuantity.begin(), std::plus<float>());
-    std::transform((*result).bergerParkerDU.begin(),
-        (*result).bergerParkerDU.end(),
-        (*resultTemp).bergerParkerDU.begin(),
-        (*result).bergerParkerDU.begin(), std::plus<float>());
+    std::transform((*result).bergerParkerHD.begin(),
+        (*result).bergerParkerHD.end(),
+        (*resultTemp).bergerParkerHD.begin(),
+        (*result).bergerParkerHD.begin(), std::plus<float>());
     std::transform((*result).productivityFrequency.begin(),
         (*result).productivityFrequency.end(),
         (*resultTemp).productivityFrequency.begin(),
@@ -55,85 +55,85 @@ namespace metrics{
         (*result).qualityFrequency.end(),
         (*resultTemp).qualityFrequency.begin(),
         (*result).qualityFrequency.begin(), std::plus<float>());
-    std::transform((*result).duDistribution.begin(),
-        (*result).duDistribution.end(), (*resultTemp).duDistribution.begin(),
-        (*result).duDistribution.begin(), std::plus<float>());
+    std::transform((*result).hdDistribution.begin(),
+        (*result).hdDistribution.end(), (*resultTemp).hdDistribution.begin(),
+        (*result).hdDistribution.begin(), std::plus<float>());
   }
 
   // Return the frequency of the number of varieties owened by the
-  // Domestic Unities
-  std::vector<float> computeDUprofile(DomesticUnity* domesticUnity,
-      const int t_numberDomesticUnity, const int t_DUsize){
-    std::vector<float> duDistribution(t_DUsize + 1, 0);
-    for(int i = 0; i < t_numberDomesticUnity; ++i){
-      int num = domesticUnity[i].numberVarietyOwened();;
-      duDistribution[num] += 1.0 / t_numberDomesticUnity;
+  // Households
+  std::vector<float> computeHDprofile(Household* household,
+      const int t_numberHousehold, const int t_HDsize){
+    std::vector<float> hdDistribution(t_HDsize + 1, 0);
+    for(int i = 0; i < t_numberHousehold; ++i){
+      int num = household[i].numberVarietyOwened();;
+      hdDistribution[num] += 1.0 / t_numberHousehold;
     }
-    return duDistribution;
+    return hdDistribution;
   }
 
-  // Return the frequency of the number of DU cultivating each variety
+  // Return the frequency of the number of HD cultivating each variety
   std::vector<float> computeVarietyProfile(
-      DomesticUnity* domesticUnity, const int t_numberDomesticUnity){
-    std::map<int,int> numberDU;
-    for(int i = 0; i < t_numberDomesticUnity; ++i){
-      for(auto var : domesticUnity[i].varietyOwened){
-        if(numberDU.count(var.number) > 0)
-          ++numberDU[var.number];
+      Household* household, const int t_numberHousehold){
+    std::map<int,int> numberHD;
+    for(int i = 0; i < t_numberHousehold; ++i){
+      for(auto var : household[i].varietyOwened){
+        if(numberHD.count(var.number) > 0)
+          ++numberHD[var.number];
         else
-          numberDU[var.number] = 1;
+          numberHD[var.number] = 1;
       }
     }
-    if(numberDU.count(-1) > 0)
-      numberDU.erase(-1);
-    std::vector<float> varietyProfile(t_numberDomesticUnity, 0);
-    for(auto i : numberDU)
-      varietyProfile[i.second-1] += 1.0 / numberDU.size();
+    if(numberHD.count(-1) > 0)
+      numberHD.erase(-1);
+    std::vector<float> varietyProfile(t_numberHousehold, 0);
+    for(auto i : numberHD)
+      varietyProfile[i.second-1] += 1.0 / numberHD.size();
 
     return varietyProfile;
   }
 
   // Return the frequency of the area cultivated by each variety
-  std::vector<float> computeVarietyQuantity(DomesticUnity* domesticUnity,
-      const int t_numberDomesticUnity, const int t_latticeSize){
-    std::map<int,int> numberDU;
-    for(int i = 0; i < t_numberDomesticUnity; ++i){
-      for(auto var : domesticUnity[i].varietyOwened){
-        if(numberDU.count(var.number) > 0)
-          numberDU[var.number] += var.quantity;
+  std::vector<float> computeVarietyQuantity(Household* household,
+      const int t_numberHousehold, const int t_latticeSize){
+    std::map<int,int> numberHD;
+    for(int i = 0; i < t_numberHousehold; ++i){
+      for(auto var : household[i].varietyOwened){
+        if(numberHD.count(var.number) > 0)
+          numberHD[var.number] += var.quantity;
         else
-          numberDU[var.number] = var.quantity;
+          numberHD[var.number] = var.quantity;
       }
     }
-    if(numberDU.count(-1) > 0)
-      numberDU.erase(-1);
+    if(numberHD.count(-1) > 0)
+      numberHD.erase(-1);
     float step = 0.2;
     float size = floor(log10(t_latticeSize * t_latticeSize)/step) + 1;
     std::vector<float> varietyProfile(size, 0);
-    for(auto i : numberDU){
+    for(auto i : numberHD){
       int idx = floor(log10(i.second) / step);
-      varietyProfile[idx] += 1.0 / numberDU.size();
+      varietyProfile[idx] += 1.0 / numberHD.size();
     }
 
     return varietyProfile;
   }
 
   // Return the frequency of the area cultivated by each variety
-  float computeBergerParker(DomesticUnity* domesticUnity,
-      const int t_numberDomesticUnity, const int t_latticeSize){
-    std::map<int,int> numberDU;
-    for(int i = 0; i < t_numberDomesticUnity; ++i){
-      for(auto var : domesticUnity[i].varietyOwened){
-        if(numberDU.count(var.number) > 0)
-          numberDU[var.number] += var.quantity;
+  float computeBergerParker(Household* household,
+      const int t_numberHousehold, const int t_latticeSize){
+    std::map<int,int> numberHD;
+    for(int i = 0; i < t_numberHousehold; ++i){
+      for(auto var : household[i].varietyOwened){
+        if(numberHD.count(var.number) > 0)
+          numberHD[var.number] += var.quantity;
         else
-          numberDU[var.number] = var.quantity;
+          numberHD[var.number] = var.quantity;
       }
     }
-    if(numberDU.count(-1) > 0)
-      numberDU.erase(-1);
+    if(numberHD.count(-1) > 0)
+      numberHD.erase(-1);
     float bergerParker = -1;
-    for(auto i : numberDU){
+    for(auto i : numberHD){
       if(i.second > bergerParker)
         bergerParker = i.second;
     }
@@ -141,96 +141,96 @@ namespace metrics{
     return bergerParker;
   }
 
-  // Return the average area cultivated by the most present variety of each DU
-  float computeBergerParkerDU(DomesticUnity* domesticUnity,
-      const int t_numberDomesticUnity){
-    std::vector<int> quantityBestVarDU(t_numberDomesticUnity, -1);
-    for(int i = 0; i < t_numberDomesticUnity; ++i){
-      for(auto var : domesticUnity[i].varietyOwened){
-        if(var.quantity > quantityBestVarDU[i] && var.number != -1)
-          quantityBestVarDU[i] = var.quantity;
+  // Return the average area cultivated by the most present variety of each HD
+  float computeBergerParkerHD(Household* household,
+      const int t_numberHousehold){
+    std::vector<int> quantityBestVarHD(t_numberHousehold, -1);
+    for(int i = 0; i < t_numberHousehold; ++i){
+      for(auto var : household[i].varietyOwened){
+        if(var.quantity > quantityBestVarHD[i] && var.number != -1)
+          quantityBestVarHD[i] = var.quantity;
       }
     }
     float averageMaxQuantity = 0;
-    for(int i = 0; i < t_numberDomesticUnity; ++i)
-      averageMaxQuantity += quantityBestVarDU[i];
-    averageMaxQuantity /= t_numberDomesticUnity;
+    for(int i = 0; i < t_numberHousehold; ++i)
+      averageMaxQuantity += quantityBestVarHD[i];
+    averageMaxQuantity /= t_numberHousehold;
     return averageMaxQuantity;
   }
 
   // Return the Simpson diversity index for the community
-  float computeSimpson(DomesticUnity* domesticUnity,
-      const int t_numberDomesticUnity, const int t_latticeSize){
-    std::map<int,int> numberDU;
-    for(int i = 0; i < t_numberDomesticUnity; ++i){
-      for(auto var : domesticUnity[i].varietyOwened){
-        if(numberDU.count(var.number) > 0)
-          numberDU[var.number] += var.quantity;
+  float computeSimpson(Household* household,
+      const int t_numberHousehold, const int t_latticeSize){
+    std::map<int,int> numberHD;
+    for(int i = 0; i < t_numberHousehold; ++i){
+      for(auto var : household[i].varietyOwened){
+        if(numberHD.count(var.number) > 0)
+          numberHD[var.number] += var.quantity;
         else
-          numberDU[var.number] = var.quantity;
+          numberHD[var.number] = var.quantity;
       }
     }
     float totalArea = t_latticeSize * t_latticeSize;
-    if(numberDU.count(-1) > 0){
-      totalArea -= numberDU[-1];
-      numberDU.erase(-1);
+    if(numberHD.count(-1) > 0){
+      totalArea -= numberHD[-1];
+      numberHD.erase(-1);
     }
     float simpson = 0;
-    for(auto i : numberDU)
+    for(auto i : numberHD)
       simpson += ((i.second / totalArea) * (i.second / totalArea));
 
     return (1 - simpson);
   }
 
   // Return the Shannon diversity index for the community
-  float computeShannon(DomesticUnity* domesticUnity,
-      const int t_numberDomesticUnity, const int t_latticeSize){
-    std::map<int,int> numberDU;
-    for(int i = 0; i < t_numberDomesticUnity; ++i){
-      for(auto var : domesticUnity[i].varietyOwened){
-        if(numberDU.count(var.number) > 0)
-          numberDU[var.number] += var.quantity;
+  float computeShannon(Household* household,
+      const int t_numberHousehold, const int t_latticeSize){
+    std::map<int,int> numberHD;
+    for(int i = 0; i < t_numberHousehold; ++i){
+      for(auto var : household[i].varietyOwened){
+        if(numberHD.count(var.number) > 0)
+          numberHD[var.number] += var.quantity;
         else
-          numberDU[var.number] = var.quantity;
+          numberHD[var.number] = var.quantity;
       }
     }
     float totalArea = t_latticeSize * t_latticeSize;
-    if(numberDU.count(-1) > 0){
-      totalArea -= numberDU[-1];
-      numberDU.erase(-1);
+    if(numberHD.count(-1) > 0){
+      totalArea -= numberHD[-1];
+      numberHD.erase(-1);
     }
-    if(numberDU.size() == 1)
+    if(numberHD.size() == 1)
       return 1;
     float shannon = 0;
-    for(auto i : numberDU)
+    for(auto i : numberHD)
       shannon += (-1 * (i.second / totalArea) * log(i.second / totalArea));
-    shannon /= log(numberDU.size());
+    shannon /= log(numberHD.size());
     return shannon;
   }
 
-  // Return the average punctuation of Domestic Unities
+  // Return the average punctuation of Households
   std::vector<float> computePunctuationAverage(
-      DomesticUnity* domesticUnity, const int t_numberDomesticUnity){
+      Household* household, const int t_numberHousehold){
     std::vector<float> punctuationAverage(2, 0);
-    for(int i = 0; i < t_numberDomesticUnity; ++i){
-      punctuationAverage[0] += domesticUnity[i].punctuation;
-      punctuationAverage[1] += domesticUnity[i].productivity_punctuation;
+    for(int i = 0; i < t_numberHousehold; ++i){
+      punctuationAverage[0] += household[i].punctuation;
+      punctuationAverage[1] += household[i].productivity_punctuation;
     }
-    punctuationAverage[0] /= t_numberDomesticUnity;
-    punctuationAverage[1] /= t_numberDomesticUnity;
+    punctuationAverage[0] /= t_numberHousehold;
+    punctuationAverage[1] /= t_numberHousehold;
     return punctuationAverage;
   }
 
-  // Return the mean number of varieties owened by the Domestic Unities
-  float computeVarietyMeanProfile(DomesticUnity* domesticUnity,
-      const int t_numberDomesticUnity, const int t_DUsize){
-    std::vector<float> varietyDistribution(t_DUsize, 0);
-    for(int i = 0; i < t_numberDomesticUnity; ++i){
-      int num = domesticUnity[i].numberVarietyOwened();
-      varietyDistribution[num] += 1.0 / t_numberDomesticUnity;
+  // Return the mean number of varieties owened by the Households
+  float computeVarietyMeanProfile(Household* household,
+      const int t_numberHousehold, const int t_HDsize){
+    std::vector<float> varietyDistribution(t_HDsize, 0);
+    for(int i = 0; i < t_numberHousehold; ++i){
+      int num = household[i].numberVarietyOwened();
+      varietyDistribution[num] += 1.0 / t_numberHousehold;
     }
     float mean = 0;
-    for(int i = 0; i < t_DUsize; ++i){
+    for(int i = 0; i < t_HDsize; ++i){
       mean += varietyDistribution[i] * i;
     }
     return mean;
@@ -267,27 +267,27 @@ namespace metrics{
     return productivityFrequency;
   }
 
-  float computeCorrelation(DomesticUnity* domesticUnity, int numberDU){
-    std::vector<int> degreeDU(numberDU);
-    std::vector<int> varietyDU(numberDU);
-    for(uint i = 0; i < numberDU; ++i){
-      degreeDU[i] = domesticUnity[i].indexLinkedDU.size();
-      varietyDU[i] = domesticUnity[i].varietyOwened.size();
+  float computeCorrelation(Household* household, int numberHD){
+    std::vector<int> degreeHD(numberHD);
+    std::vector<int> varietyHD(numberHD);
+    for(uint i = 0; i < numberHD; ++i){
+      degreeHD[i] = household[i].indexLinkedHD.size();
+      varietyHD[i] = household[i].varietyOwened.size();
     }
-    float averageDegree = accumulate(degreeDU.begin(), degreeDU.end(), 0.0) /
-      degreeDU.size();
-    float averageVariety = accumulate(varietyDU.begin(), varietyDU.end(),0.0) /
-      varietyDU.size();
+    float averageDegree = accumulate(degreeHD.begin(), degreeHD.end(), 0.0) /
+      degreeHD.size();
+    float averageVariety = accumulate(varietyHD.begin(), varietyHD.end(),0.0) /
+      varietyHD.size();
     float correlationNumerator = 0;
     float correlationDenominator1 = 0;
     float correlationDenominator2 = 0;
-    for(uint i = 0; i < numberDU; ++i){
-      correlationNumerator += ((degreeDU[i]-averageDegree) *
-          (varietyDU[i]-averageVariety));
-      correlationDenominator1 += ((degreeDU[i]-averageDegree) *
-          (degreeDU[i]-averageDegree));
-      correlationDenominator2 += ((varietyDU[i]-averageVariety) *
-          (varietyDU[i]-averageVariety));
+    for(uint i = 0; i < numberHD; ++i){
+      correlationNumerator += ((degreeHD[i]-averageDegree) *
+          (varietyHD[i]-averageVariety));
+      correlationDenominator1 += ((degreeHD[i]-averageDegree) *
+          (degreeHD[i]-averageDegree));
+      correlationDenominator2 += ((varietyHD[i]-averageVariety) *
+          (varietyHD[i]-averageVariety));
     }
     float correlation = correlationNumerator / (sqrt(correlationDenominator1)*
         sqrt(correlationDenominator2));
@@ -298,7 +298,7 @@ namespace metrics{
     arquivo << "### PARAMETERS VALUE ###" << endl;
     arquivo << "### LATTICESIZE = " << parameter.latticeSize;
     arquivo << ", NVARIETY = " << parameter.numberInitialVariety;
-    arquivo << ", NVARIETYDU = " << parameter.numberInitialVarietyDU;
+    arquivo << ", NVARIETYHD = " << parameter.numberInitialVarietyHD;
     arquivo << ", NRESOURCE = " << parameter.numberResources;
     arquivo << ", NRESOURCEDIST = " << parameter.numberHabitat;
     arquivo << ", NETWORKTYPE = " << parameter.networkType;
@@ -309,7 +309,7 @@ namespace metrics{
     arquivo << ", OUTSIDETRADELIMIT = " << parameter.outsideTradeLimit;
     arquivo << ", SELECTIONSTRENGTH = " << parameter.selectionStrength;
     arquivo << ", ALPHA = " << parameter.alpha;
-    arquivo << ", NDOMESTICUNITY = " << parameter.numberDomesticUnity;
+    arquivo << ", NHOUSEHOLD = " << parameter.numberHousehold;
     arquivo << ", PROBABILITYNEWVAR = " << parameter.probabilityNewVar;
     arquivo << ", PERCENTAGENEWRANDVAR = " << parameter.percentageNewRandomVar;
     arquivo << ", CROSSINGDEVIATION = " << parameter.crossingDeviation;
