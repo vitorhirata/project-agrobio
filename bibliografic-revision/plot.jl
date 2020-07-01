@@ -283,3 +283,11 @@ function plotIndex()
     Guide.colorkey(title="Index"))
   draw(PNG("plot/maizIdxCommunity.png", 8cm, 12cm), p)
 end
+
+function plotS()
+  f(x) = 0.5 + 10*x/sqrt(1+(20 * x)^2)
+  p = plot(f, -.6, .6, Guide.ylabel("s(ΔP)"), Guide.xlabel("ΔP"),
+    Theme(line_width=2pt, default_color=colorant"black",
+      minor_label_font_size=14pt, major_label_font_size=22pt))
+  draw(PNG("test/S.png", 25cm, 15cm), p)
+end
