@@ -1,0 +1,2336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     xmlns:gadfly="http://www.gadflyjl.org/ns"
+     version="1.2"
+     width="150mm" height="100mm" viewBox="0 0 150 100"
+     stroke="none"
+     fill="#000000"
+     stroke-width="0.3"
+     font-size="3.88"
+>
+<defs>
+  <marker id="arrow" markerWidth="15" markerHeight="7" refX="5" refY="3.5" orient="auto" markerUnits="strokeWidth">
+    <path d="M0,0 L15,3.5 L0,7 z" stroke="context-stroke" fill="context-stroke"/>
+  </marker>
+</defs>
+<g class="plotroot xscalable yscalable" id="img-86977355-1">
+  <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="img-86977355-2">
+    <g transform="translate(80.1,88.39)">
+      <g class="primitive">
+        <text text-anchor="middle" dy="0.6em">Quality</text>
+      </g>
+    </g>
+  </g>
+  <g class="guide xlabels" font-size="2.82" font-family="'PT Sans Caption','Helvetica Neue','Helvetica',sans-serif" fill="#6C606B" id="img-86977355-3">
+    <g transform="translate(47.86,81.71)">
+      <g class="primitive">
+        <text text-anchor="middle" dy="0.6em">0.0</text>
+      </g>
+    </g>
+    <g transform="translate(80.1,81.71)">
+      <g class="primitive">
+        <text text-anchor="middle" dy="0.6em">0.5</text>
+      </g>
+    </g>
+    <g transform="translate(112.35,81.71)">
+      <g class="primitive">
+        <text text-anchor="middle" dy="0.6em">1.0</text>
+      </g>
+    </g>
+  </g>
+  <g class="guide colorkey" id="img-86977355-4">
+    <g fill="#4C404B" font-size="2.82" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" id="img-86977355-5">
+      <g transform="translate(140.38,-44.18)" id="img-86977355-6" class="color_150">
+        <g class="primitive">
+          <text dy="0.35em">150</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,-40.56)" id="img-86977355-7" class="color_151">
+        <g class="primitive">
+          <text dy="0.35em">151</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,-36.93)" id="img-86977355-8" class="color_152">
+        <g class="primitive">
+          <text dy="0.35em">152</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,-33.3)" id="img-86977355-9" class="color_153">
+        <g class="primitive">
+          <text dy="0.35em">153</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,-29.68)" id="img-86977355-10" class="color_154">
+        <g class="primitive">
+          <text dy="0.35em">154</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,-26.05)" id="img-86977355-11" class="color_155">
+        <g class="primitive">
+          <text dy="0.35em">155</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,-22.42)" id="img-86977355-12" class="color_156">
+        <g class="primitive">
+          <text dy="0.35em">156</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,-18.8)" id="img-86977355-13" class="color_157">
+        <g class="primitive">
+          <text dy="0.35em">157</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,-15.17)" id="img-86977355-14" class="color_158">
+        <g class="primitive">
+          <text dy="0.35em">158</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,-11.54)" id="img-86977355-15" class="color_159">
+        <g class="primitive">
+          <text dy="0.35em">159</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,-7.92)" id="img-86977355-16" class="color_160">
+        <g class="primitive">
+          <text dy="0.35em">160</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,-4.29)" id="img-86977355-17" class="color_161">
+        <g class="primitive">
+          <text dy="0.35em">161</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,-0.66)" id="img-86977355-18" class="color_162">
+        <g class="primitive">
+          <text dy="0.35em">162</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,2.96)" id="img-86977355-19" class="color_163">
+        <g class="primitive">
+          <text dy="0.35em">163</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,6.59)" id="img-86977355-20" class="color_164">
+        <g class="primitive">
+          <text dy="0.35em">164</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,10.22)" id="img-86977355-21" class="color_165">
+        <g class="primitive">
+          <text dy="0.35em">165</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,13.84)" id="img-86977355-22" class="color_166">
+        <g class="primitive">
+          <text dy="0.35em">166</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,17.47)" id="img-86977355-23" class="color_167">
+        <g class="primitive">
+          <text dy="0.35em">167</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,21.1)" id="img-86977355-24" class="color_168">
+        <g class="primitive">
+          <text dy="0.35em">168</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,24.72)" id="img-86977355-25" class="color_169">
+        <g class="primitive">
+          <text dy="0.35em">169</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,28.35)" id="img-86977355-26" class="color_170">
+        <g class="primitive">
+          <text dy="0.35em">170</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,31.98)" id="img-86977355-27" class="color_171">
+        <g class="primitive">
+          <text dy="0.35em">171</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,35.6)" id="img-86977355-28" class="color_172">
+        <g class="primitive">
+          <text dy="0.35em">172</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,39.23)" id="img-86977355-29" class="color_173">
+        <g class="primitive">
+          <text dy="0.35em">173</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,42.86)" id="img-86977355-30" class="color_174">
+        <g class="primitive">
+          <text dy="0.35em">174</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,46.48)" id="img-86977355-31" class="color_175">
+        <g class="primitive">
+          <text dy="0.35em">175</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,50.11)" id="img-86977355-32" class="color_176">
+        <g class="primitive">
+          <text dy="0.35em">176</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,53.74)" id="img-86977355-33" class="color_177">
+        <g class="primitive">
+          <text dy="0.35em">177</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,57.36)" id="img-86977355-34" class="color_178">
+        <g class="primitive">
+          <text dy="0.35em">178</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,60.99)" id="img-86977355-35" class="color_179">
+        <g class="primitive">
+          <text dy="0.35em">179</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,64.62)" id="img-86977355-36" class="color_180">
+        <g class="primitive">
+          <text dy="0.35em">180</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,68.24)" id="img-86977355-37" class="color_181">
+        <g class="primitive">
+          <text dy="0.35em">181</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,71.87)" id="img-86977355-38" class="color_182">
+        <g class="primitive">
+          <text dy="0.35em">182</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,75.5)" id="img-86977355-39" class="color_183">
+        <g class="primitive">
+          <text dy="0.35em">183</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,79.12)" id="img-86977355-40" class="color_184">
+        <g class="primitive">
+          <text dy="0.35em">184</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,82.75)" id="img-86977355-41" class="color_185">
+        <g class="primitive">
+          <text dy="0.35em">185</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,86.38)" id="img-86977355-42" class="color_186">
+        <g class="primitive">
+          <text dy="0.35em">186</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,90)" id="img-86977355-43" class="color_187">
+        <g class="primitive">
+          <text dy="0.35em">187</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,93.63)" id="img-86977355-44" class="color_188">
+        <g class="primitive">
+          <text dy="0.35em">188</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,97.26)" id="img-86977355-45" class="color_189">
+        <g class="primitive">
+          <text dy="0.35em">189</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,100.88)" id="img-86977355-46" class="color_190">
+        <g class="primitive">
+          <text dy="0.35em">190</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,104.51)" id="img-86977355-47" class="color_191">
+        <g class="primitive">
+          <text dy="0.35em">191</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,108.14)" id="img-86977355-48" class="color_192">
+        <g class="primitive">
+          <text dy="0.35em">192</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,111.76)" id="img-86977355-49" class="color_193">
+        <g class="primitive">
+          <text dy="0.35em">193</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,115.39)" id="img-86977355-50" class="color_194">
+        <g class="primitive">
+          <text dy="0.35em">194</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,119.02)" id="img-86977355-51" class="color_195">
+        <g class="primitive">
+          <text dy="0.35em">195</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,122.64)" id="img-86977355-52" class="color_196">
+        <g class="primitive">
+          <text dy="0.35em">196</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,126.27)" id="img-86977355-53" class="color_197">
+        <g class="primitive">
+          <text dy="0.35em">197</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,129.9)" id="img-86977355-54" class="color_198">
+        <g class="primitive">
+          <text dy="0.35em">198</text>
+        </g>
+      </g>
+      <g transform="translate(140.38,133.52)" id="img-86977355-55" class="color_199">
+        <g class="primitive">
+          <text dy="0.35em">199</text>
+        </g>
+      </g>
+    </g>
+    <g fill-opacity="1" id="img-86977355-56">
+      <g transform="translate(138.47,-44.18)" id="img-86977355-57" fill="#EB9A28" class="color_150" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,-40.56)" id="img-86977355-58" fill="#FAA737" class="color_151" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,-36.93)" id="img-86977355-59" fill="#FF9D7C" class="color_152" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,-33.3)" id="img-86977355-60" fill="#E78543" class="color_153" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,-29.68)" id="img-86977355-61" fill="#FF93BA" class="color_154" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,-26.05)" id="img-86977355-62" fill="#D2A517" class="color_155" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,-22.42)" id="img-86977355-63" fill="#DEB345" class="color_156" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,-18.8)" id="img-86977355-64" fill="#F1C039" class="color_157" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,-15.17)" id="img-86977355-65" fill="#7ACB80" class="color_158" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,-11.54)" id="img-86977355-66" fill="#FFA858" class="color_159" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,-7.92)" id="img-86977355-67" fill="#D4CA53" class="color_160" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,-4.29)" id="img-86977355-68" fill="#C5BD2A" class="color_161" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,-0.66)" id="img-86977355-69" fill="#B6AF17" class="color_162" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,2.96)" id="img-86977355-70" fill="#FF8D3E" class="color_163" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,6.59)" id="img-86977355-71" fill="#B8D15C" class="color_164" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,10.22)" id="img-86977355-72" fill="#AAC34E" class="color_165" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,13.84)" id="img-86977355-73" fill="#98B728" class="color_166" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,17.47)" id="img-86977355-74" fill="#8FA834" class="color_167" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,21.1)" id="img-86977355-75" fill="#00D7E5" class="color_168" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,24.72)" id="img-86977355-76" fill="#F47B57" class="color_169" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,28.35)" id="img-86977355-77" fill="#00BAE5" class="color_170" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,31.98)" id="img-86977355-78" fill="#00BBC9" class="color_171" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,35.6)" id="img-86977355-79" fill="#FC94F1" class="color_172" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,39.23)" id="img-86977355-80" fill="#00B86C" class="color_173" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,42.86)" id="img-86977355-81" fill="#71AE45" class="color_174" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,46.48)" id="img-86977355-82" fill="#7FBB52" class="color_175" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,50.11)" id="img-86977355-83" fill="#8CC95F" class="color_176" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,53.74)" id="img-86977355-84" fill="#9AD76C" class="color_177" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,57.36)" id="img-86977355-85" fill="#EE77A0" class="color_178" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,60.99)" id="img-86977355-86" fill="#C09929" class="color_179" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,64.62)" id="img-86977355-87" fill="#DBA3F9" class="color_180" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,68.24)" id="img-86977355-88" fill="#FF7AAD" class="color_181" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,71.87)" id="img-86977355-89" fill="#CA7EF6" class="color_182" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,75.5)" id="img-86977355-90" fill="#FFB75A" class="color_183" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,79.12)" id="img-86977355-91" fill="#4CB25B" class="color_184" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,82.75)" id="img-86977355-92" fill="#39B27A" class="color_185" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,86.38)" id="img-86977355-93" fill="#5AC067" class="color_186" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,90)" id="img-86977355-94" fill="#54D168" class="color_187" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,93.63)" id="img-86977355-95" fill="#77DC81" class="color_188" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,97.26)" id="img-86977355-96" fill="#00C9D7" class="color_189" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,100.88)" id="img-86977355-97" fill="#A9A129" class="color_190" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,104.51)" id="img-86977355-98" fill="#FF8057" class="color_191" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,108.14)" id="img-86977355-99" fill="#FF5EA0" class="color_192" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,111.76)" id="img-86977355-100" fill="#FFAD69" class="color_193" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,115.39)" id="img-86977355-101" fill="#1AC380" class="color_194" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,119.02)" id="img-86977355-102" fill="#52A1F7" class="color_195" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,122.64)" id="img-86977355-103" fill="#DF79D4" class="color_196" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,126.27)" id="img-86977355-104" fill="#ED86E2" class="color_197" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,129.9)" id="img-86977355-105" fill="#00D0FF" class="color_198" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(138.47,133.52)" id="img-86977355-106" fill="#FF9F5C" class="color_199" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+    </g>
+    <g fill="#4C404B" font-size="2.82" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" id="img-86977355-107">
+      <g transform="translate(131.95,-44.18)" id="img-86977355-108" class="color_100">
+        <g class="primitive">
+          <text dy="0.35em">100</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,-40.56)" id="img-86977355-109" class="color_101">
+        <g class="primitive">
+          <text dy="0.35em">101</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,-36.93)" id="img-86977355-110" class="color_102">
+        <g class="primitive">
+          <text dy="0.35em">102</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,-33.3)" id="img-86977355-111" class="color_103">
+        <g class="primitive">
+          <text dy="0.35em">103</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,-29.68)" id="img-86977355-112" class="color_104">
+        <g class="primitive">
+          <text dy="0.35em">104</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,-26.05)" id="img-86977355-113" class="color_105">
+        <g class="primitive">
+          <text dy="0.35em">105</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,-22.42)" id="img-86977355-114" class="color_106">
+        <g class="primitive">
+          <text dy="0.35em">106</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,-18.8)" id="img-86977355-115" class="color_107">
+        <g class="primitive">
+          <text dy="0.35em">107</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,-15.17)" id="img-86977355-116" class="color_108">
+        <g class="primitive">
+          <text dy="0.35em">108</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,-11.54)" id="img-86977355-117" class="color_109">
+        <g class="primitive">
+          <text dy="0.35em">109</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,-7.92)" id="img-86977355-118" class="color_110">
+        <g class="primitive">
+          <text dy="0.35em">110</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,-4.29)" id="img-86977355-119" class="color_111">
+        <g class="primitive">
+          <text dy="0.35em">111</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,-0.66)" id="img-86977355-120" class="color_112">
+        <g class="primitive">
+          <text dy="0.35em">112</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,2.96)" id="img-86977355-121" class="color_113">
+        <g class="primitive">
+          <text dy="0.35em">113</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,6.59)" id="img-86977355-122" class="color_114">
+        <g class="primitive">
+          <text dy="0.35em">114</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,10.22)" id="img-86977355-123" class="color_115">
+        <g class="primitive">
+          <text dy="0.35em">115</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,13.84)" id="img-86977355-124" class="color_116">
+        <g class="primitive">
+          <text dy="0.35em">116</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,17.47)" id="img-86977355-125" class="color_117">
+        <g class="primitive">
+          <text dy="0.35em">117</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,21.1)" id="img-86977355-126" class="color_118">
+        <g class="primitive">
+          <text dy="0.35em">118</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,24.72)" id="img-86977355-127" class="color_119">
+        <g class="primitive">
+          <text dy="0.35em">119</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,28.35)" id="img-86977355-128" class="color_120">
+        <g class="primitive">
+          <text dy="0.35em">120</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,31.98)" id="img-86977355-129" class="color_121">
+        <g class="primitive">
+          <text dy="0.35em">121</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,35.6)" id="img-86977355-130" class="color_122">
+        <g class="primitive">
+          <text dy="0.35em">122</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,39.23)" id="img-86977355-131" class="color_123">
+        <g class="primitive">
+          <text dy="0.35em">123</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,42.86)" id="img-86977355-132" class="color_124">
+        <g class="primitive">
+          <text dy="0.35em">124</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,46.48)" id="img-86977355-133" class="color_125">
+        <g class="primitive">
+          <text dy="0.35em">125</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,50.11)" id="img-86977355-134" class="color_126">
+        <g class="primitive">
+          <text dy="0.35em">126</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,53.74)" id="img-86977355-135" class="color_127">
+        <g class="primitive">
+          <text dy="0.35em">127</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,57.36)" id="img-86977355-136" class="color_128">
+        <g class="primitive">
+          <text dy="0.35em">128</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,60.99)" id="img-86977355-137" class="color_129">
+        <g class="primitive">
+          <text dy="0.35em">129</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,64.62)" id="img-86977355-138" class="color_130">
+        <g class="primitive">
+          <text dy="0.35em">130</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,68.24)" id="img-86977355-139" class="color_131">
+        <g class="primitive">
+          <text dy="0.35em">131</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,71.87)" id="img-86977355-140" class="color_132">
+        <g class="primitive">
+          <text dy="0.35em">132</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,75.5)" id="img-86977355-141" class="color_133">
+        <g class="primitive">
+          <text dy="0.35em">133</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,79.12)" id="img-86977355-142" class="color_134">
+        <g class="primitive">
+          <text dy="0.35em">134</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,82.75)" id="img-86977355-143" class="color_135">
+        <g class="primitive">
+          <text dy="0.35em">135</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,86.38)" id="img-86977355-144" class="color_136">
+        <g class="primitive">
+          <text dy="0.35em">136</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,90)" id="img-86977355-145" class="color_137">
+        <g class="primitive">
+          <text dy="0.35em">137</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,93.63)" id="img-86977355-146" class="color_138">
+        <g class="primitive">
+          <text dy="0.35em">138</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,97.26)" id="img-86977355-147" class="color_139">
+        <g class="primitive">
+          <text dy="0.35em">139</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,100.88)" id="img-86977355-148" class="color_140">
+        <g class="primitive">
+          <text dy="0.35em">140</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,104.51)" id="img-86977355-149" class="color_141">
+        <g class="primitive">
+          <text dy="0.35em">141</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,108.14)" id="img-86977355-150" class="color_142">
+        <g class="primitive">
+          <text dy="0.35em">142</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,111.76)" id="img-86977355-151" class="color_143">
+        <g class="primitive">
+          <text dy="0.35em">143</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,115.39)" id="img-86977355-152" class="color_144">
+        <g class="primitive">
+          <text dy="0.35em">144</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,119.02)" id="img-86977355-153" class="color_145">
+        <g class="primitive">
+          <text dy="0.35em">145</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,122.64)" id="img-86977355-154" class="color_146">
+        <g class="primitive">
+          <text dy="0.35em">146</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,126.27)" id="img-86977355-155" class="color_147">
+        <g class="primitive">
+          <text dy="0.35em">147</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,129.9)" id="img-86977355-156" class="color_148">
+        <g class="primitive">
+          <text dy="0.35em">148</text>
+        </g>
+      </g>
+      <g transform="translate(131.95,133.52)" id="img-86977355-157" class="color_149">
+        <g class="primitive">
+          <text dy="0.35em">149</text>
+        </g>
+      </g>
+    </g>
+    <g fill-opacity="1" id="img-86977355-158">
+      <g transform="translate(130.04,-44.18)" id="img-86977355-159" fill="#59CE94" class="color_100" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,-40.56)" id="img-86977355-160" fill="#90DA5B" class="color_101" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,-36.93)" id="img-86977355-161" fill="#00C678" class="color_102" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,-33.3)" id="img-86977355-162" fill="#ABC2FF" class="color_103" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,-29.68)" id="img-86977355-163" fill="#95C76F" class="color_104" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,-26.05)" id="img-86977355-164" fill="#B4D346" class="color_105" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,-22.42)" id="img-86977355-165" fill="#FFA49C" class="color_106" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,-18.8)" id="img-86977355-166" fill="#AEC162" class="color_107" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,-15.17)" id="img-86977355-167" fill="#B9B9B9" class="color_108" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,-11.54)" id="img-86977355-168" fill="#00C2CA" class="color_109" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,-7.92)" id="img-86977355-169" fill="#FBBA6E" class="color_110" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,-4.29)" id="img-86977355-170" fill="#FF9C70" class="color_111" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,-0.66)" id="img-86977355-171" fill="#63AFFF" class="color_112" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,2.96)" id="img-86977355-172" fill="#00B0E1" class="color_113" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,6.59)" id="img-86977355-173" fill="#00E392" class="color_114" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,10.22)" id="img-86977355-174" fill="#3EDEB8" class="color_115" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,13.84)" id="img-86977355-175" fill="#00D6A5" class="color_116" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,17.47)" id="img-86977355-176" fill="#F2788A" class="color_117" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,21.1)" id="img-86977355-177" fill="#F29CE7" class="color_118" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,24.72)" id="img-86977355-178" fill="#00C7FF" class="color_119" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,28.35)" id="img-86977355-179" fill="#809AF3" class="color_120" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,31.98)" id="img-86977355-180" fill="#FFA2FF" class="color_121" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,35.6)" id="img-86977355-181" fill="#1AA2FF" class="color_122" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,39.23)" id="img-86977355-182" fill="#00D9FF" class="color_123" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,42.86)" id="img-86977355-183" fill="#FFA1B2" class="color_124" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,46.48)" id="img-86977355-184" fill="#F77EEC" class="color_125" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,50.11)" id="img-86977355-185" fill="#FF8597" class="color_126" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,53.74)" id="img-86977355-186" fill="#FF6E8F" class="color_127" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,57.36)" id="img-86977355-187" fill="#DD9F54" class="color_128" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,60.99)" id="img-86977355-188" fill="#F4AA4D" class="color_129" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,64.62)" id="img-86977355-189" fill="#E9C268" class="color_130" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,68.24)" id="img-86977355-190" fill="#CBA74E" class="color_131" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,71.87)" id="img-86977355-191" fill="#C5BB5B" class="color_132" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,75.5)" id="img-86977355-192" fill="#B7AE4E" class="color_133" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,79.12)" id="img-86977355-193" fill="#FF807A" class="color_134" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,82.75)" id="img-86977355-194" fill="#73BCFF" class="color_135" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,86.38)" id="img-86977355-195" fill="#F6924F" class="color_136" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,90)" id="img-86977355-196" fill="#00C6B6" class="color_137" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,93.63)" id="img-86977355-197" fill="#93C1FF" class="color_138" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,97.26)" id="img-86977355-198" fill="#00CFEC" class="color_139" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,100.88)" id="img-86977355-199" fill="#A0B455" class="color_140" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,104.51)" id="img-86977355-200" fill="#FF8BAA" class="color_141" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,108.14)" id="img-86977355-201" fill="#FCA46C" class="color_142" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,111.76)" id="img-86977355-202" fill="#83B3FF" class="color_143" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,115.39)" id="img-86977355-203" fill="#FF7BBB" class="color_144" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,119.02)" id="img-86977355-204" fill="#BF89DD" class="color_145" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,122.64)" id="img-86977355-205" fill="#00BAFC" class="color_146" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,126.27)" id="img-86977355-206" fill="#FF8E63" class="color_147" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,129.9)" id="img-86977355-207" fill="#FF96C9" class="color_148" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(130.04,133.52)" id="img-86977355-208" fill="#D58F33" class="color_149" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+    </g>
+    <g fill="#4C404B" font-size="2.82" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" id="img-86977355-209">
+      <g transform="translate(125.05,-44.18)" id="img-86977355-210" class="color_50">
+        <g class="primitive">
+          <text dy="0.35em">50</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,-40.56)" id="img-86977355-211" class="color_51">
+        <g class="primitive">
+          <text dy="0.35em">51</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,-36.93)" id="img-86977355-212" class="color_52">
+        <g class="primitive">
+          <text dy="0.35em">52</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,-33.3)" id="img-86977355-213" class="color_53">
+        <g class="primitive">
+          <text dy="0.35em">53</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,-29.68)" id="img-86977355-214" class="color_54">
+        <g class="primitive">
+          <text dy="0.35em">54</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,-26.05)" id="img-86977355-215" class="color_55">
+        <g class="primitive">
+          <text dy="0.35em">55</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,-22.42)" id="img-86977355-216" class="color_56">
+        <g class="primitive">
+          <text dy="0.35em">56</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,-18.8)" id="img-86977355-217" class="color_57">
+        <g class="primitive">
+          <text dy="0.35em">57</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,-15.17)" id="img-86977355-218" class="color_58">
+        <g class="primitive">
+          <text dy="0.35em">58</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,-11.54)" id="img-86977355-219" class="color_59">
+        <g class="primitive">
+          <text dy="0.35em">59</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,-7.92)" id="img-86977355-220" class="color_60">
+        <g class="primitive">
+          <text dy="0.35em">60</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,-4.29)" id="img-86977355-221" class="color_61">
+        <g class="primitive">
+          <text dy="0.35em">61</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,-0.66)" id="img-86977355-222" class="color_62">
+        <g class="primitive">
+          <text dy="0.35em">62</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,2.96)" id="img-86977355-223" class="color_63">
+        <g class="primitive">
+          <text dy="0.35em">63</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,6.59)" id="img-86977355-224" class="color_64">
+        <g class="primitive">
+          <text dy="0.35em">64</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,10.22)" id="img-86977355-225" class="color_65">
+        <g class="primitive">
+          <text dy="0.35em">65</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,13.84)" id="img-86977355-226" class="color_66">
+        <g class="primitive">
+          <text dy="0.35em">66</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,17.47)" id="img-86977355-227" class="color_67">
+        <g class="primitive">
+          <text dy="0.35em">67</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,21.1)" id="img-86977355-228" class="color_68">
+        <g class="primitive">
+          <text dy="0.35em">68</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,24.72)" id="img-86977355-229" class="color_69">
+        <g class="primitive">
+          <text dy="0.35em">69</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,28.35)" id="img-86977355-230" class="color_70">
+        <g class="primitive">
+          <text dy="0.35em">70</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,31.98)" id="img-86977355-231" class="color_71">
+        <g class="primitive">
+          <text dy="0.35em">71</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,35.6)" id="img-86977355-232" class="color_72">
+        <g class="primitive">
+          <text dy="0.35em">72</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,39.23)" id="img-86977355-233" class="color_73">
+        <g class="primitive">
+          <text dy="0.35em">73</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,42.86)" id="img-86977355-234" class="color_74">
+        <g class="primitive">
+          <text dy="0.35em">74</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,46.48)" id="img-86977355-235" class="color_75">
+        <g class="primitive">
+          <text dy="0.35em">75</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,50.11)" id="img-86977355-236" class="color_76">
+        <g class="primitive">
+          <text dy="0.35em">76</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,53.74)" id="img-86977355-237" class="color_77">
+        <g class="primitive">
+          <text dy="0.35em">77</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,57.36)" id="img-86977355-238" class="color_78">
+        <g class="primitive">
+          <text dy="0.35em">78</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,60.99)" id="img-86977355-239" class="color_79">
+        <g class="primitive">
+          <text dy="0.35em">79</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,64.62)" id="img-86977355-240" class="color_80">
+        <g class="primitive">
+          <text dy="0.35em">80</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,68.24)" id="img-86977355-241" class="color_81">
+        <g class="primitive">
+          <text dy="0.35em">81</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,71.87)" id="img-86977355-242" class="color_82">
+        <g class="primitive">
+          <text dy="0.35em">82</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,75.5)" id="img-86977355-243" class="color_83">
+        <g class="primitive">
+          <text dy="0.35em">83</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,79.12)" id="img-86977355-244" class="color_84">
+        <g class="primitive">
+          <text dy="0.35em">84</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,82.75)" id="img-86977355-245" class="color_85">
+        <g class="primitive">
+          <text dy="0.35em">85</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,86.38)" id="img-86977355-246" class="color_86">
+        <g class="primitive">
+          <text dy="0.35em">86</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,90)" id="img-86977355-247" class="color_87">
+        <g class="primitive">
+          <text dy="0.35em">87</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,93.63)" id="img-86977355-248" class="color_88">
+        <g class="primitive">
+          <text dy="0.35em">88</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,97.26)" id="img-86977355-249" class="color_89">
+        <g class="primitive">
+          <text dy="0.35em">89</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,100.88)" id="img-86977355-250" class="color_90">
+        <g class="primitive">
+          <text dy="0.35em">90</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,104.51)" id="img-86977355-251" class="color_91">
+        <g class="primitive">
+          <text dy="0.35em">91</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,108.14)" id="img-86977355-252" class="color_92">
+        <g class="primitive">
+          <text dy="0.35em">92</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,111.76)" id="img-86977355-253" class="color_93">
+        <g class="primitive">
+          <text dy="0.35em">93</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,115.39)" id="img-86977355-254" class="color_94">
+        <g class="primitive">
+          <text dy="0.35em">94</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,119.02)" id="img-86977355-255" class="color_95">
+        <g class="primitive">
+          <text dy="0.35em">95</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,122.64)" id="img-86977355-256" class="color_96">
+        <g class="primitive">
+          <text dy="0.35em">96</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,126.27)" id="img-86977355-257" class="color_97">
+        <g class="primitive">
+          <text dy="0.35em">97</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,129.9)" id="img-86977355-258" class="color_98">
+        <g class="primitive">
+          <text dy="0.35em">98</text>
+        </g>
+      </g>
+      <g transform="translate(125.05,133.52)" id="img-86977355-259" class="color_99">
+        <g class="primitive">
+          <text dy="0.35em">99</text>
+        </g>
+      </g>
+    </g>
+    <g fill-opacity="1" id="img-86977355-260">
+      <g transform="translate(123.15,-44.18)" id="img-86977355-261" fill="#F88F6F" class="color_50" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,-40.56)" id="img-86977355-262" fill="#DB8D17" class="color_51" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,-36.93)" id="img-86977355-263" fill="#A3D57C" class="color_52" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,-33.3)" id="img-86977355-264" fill="#8AAA16" class="color_53" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,-29.68)" id="img-86977355-265" fill="#E38ED9" class="color_54" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,-26.05)" id="img-86977355-266" fill="#E1B32A" class="color_55" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,-22.42)" id="img-86977355-267" fill="#FF8AC9" class="color_56" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,-18.8)" id="img-86977355-268" fill="#FF8CFA" class="color_57" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,-15.17)" id="img-86977355-269" fill="#00D0C2" class="color_58" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,-11.54)" id="img-86977355-270" fill="#FFB279" class="color_59" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,-7.92)" id="img-86977355-271" fill="#EC975F" class="color_60" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,-4.29)" id="img-86977355-272" fill="#00B3D0" class="color_61" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,-0.66)" id="img-86977355-273" fill="#FE85AD" class="color_62" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,2.96)" id="img-86977355-274" fill="#4AC087" class="color_63" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,6.59)" id="img-86977355-275" fill="#82A6FF" class="color_64" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,10.22)" id="img-86977355-276" fill="#87D98D" class="color_65" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,13.84)" id="img-86977355-277" fill="#CDB9FF" class="color_66" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,17.47)" id="img-86977355-278" fill="#A9A042" class="color_67" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,21.1)" id="img-86977355-279" fill="#EAB1FF" class="color_68" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,24.72)" id="img-86977355-280" fill="#A8A200" class="color_69" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,28.35)" id="img-86977355-281" fill="#50D1FF" class="color_70" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,31.98)" id="img-86977355-282" fill="#D4C968" class="color_71" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,35.6)" id="img-86977355-283" fill="#CFA637" class="color_72" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,39.23)" id="img-86977355-284" fill="#E49C40" class="color_73" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,42.86)" id="img-86977355-285" fill="#00C898" class="color_74" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,46.48)" id="img-86977355-286" fill="#52BDFF" class="color_75" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,50.11)" id="img-86977355-287" fill="#9CB641" class="color_76" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,53.74)" id="img-86977355-288" fill="#CD96EB" class="color_77" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,57.36)" id="img-86977355-289" fill="#BD9941" class="color_78" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,60.99)" id="img-86977355-290" fill="#EDC152" class="color_79" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,64.62)" id="img-86977355-291" fill="#ECAC61" class="color_80" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,68.24)" id="img-86977355-292" fill="#00E2ED" class="color_81" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,71.87)" id="img-86977355-293" fill="#44C25B" class="color_82" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,75.5)" id="img-86977355-294" fill="#FF7D9C" class="color_83" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,79.12)" id="img-86977355-295" fill="#5FAF66" class="color_84" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,82.75)" id="img-86977355-296" fill="#7AAB55" class="color_85" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,86.38)" id="img-86977355-297" fill="#FF88BB" class="color_86" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,90)" id="img-86977355-298" fill="#69CE74" class="color_87" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,93.63)" id="img-86977355-299" fill="#B09CFF" class="color_88" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,97.26)" id="img-86977355-300" fill="#D88BFF" class="color_89" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,100.88)" id="img-86977355-301" fill="#ABABAB" class="color_90" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,104.51)" id="img-86977355-302" fill="#EF7C75" class="color_91" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,108.14)" id="img-86977355-303" fill="#DD8953" class="color_92" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,111.76)" id="img-86977355-304" fill="#74BE40" class="color_93" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,115.39)" id="img-86977355-305" fill="#E88263" class="color_94" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,119.02)" id="img-86977355-306" fill="#FD6CA0" class="color_95" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,122.64)" id="img-86977355-307" fill="#00C19D" class="color_96" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,126.27)" id="img-86977355-308" fill="#D581CB" class="color_97" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,129.9)" id="img-86977355-309" fill="#C5BC45" class="color_98" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(123.15,133.52)" id="img-86977355-310" fill="#A391EA" class="color_99" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+    </g>
+    <g fill="#4C404B" font-size="2.82" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" id="img-86977355-311">
+      <g transform="translate(118.16,-44.18)" id="img-86977355-312" class="color_0">
+        <g class="primitive">
+          <text dy="0.35em">0</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,-40.56)" id="img-86977355-313" class="color_1">
+        <g class="primitive">
+          <text dy="0.35em">1</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,-36.93)" id="img-86977355-314" class="color_2">
+        <g class="primitive">
+          <text dy="0.35em">2</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,-33.3)" id="img-86977355-315" class="color_3">
+        <g class="primitive">
+          <text dy="0.35em">3</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,-29.68)" id="img-86977355-316" class="color_4">
+        <g class="primitive">
+          <text dy="0.35em">4</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,-26.05)" id="img-86977355-317" class="color_5">
+        <g class="primitive">
+          <text dy="0.35em">5</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,-22.42)" id="img-86977355-318" class="color_6">
+        <g class="primitive">
+          <text dy="0.35em">6</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,-18.8)" id="img-86977355-319" class="color_7">
+        <g class="primitive">
+          <text dy="0.35em">7</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,-15.17)" id="img-86977355-320" class="color_8">
+        <g class="primitive">
+          <text dy="0.35em">8</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,-11.54)" id="img-86977355-321" class="color_9">
+        <g class="primitive">
+          <text dy="0.35em">9</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,-7.92)" id="img-86977355-322" class="color_10">
+        <g class="primitive">
+          <text dy="0.35em">10</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,-4.29)" id="img-86977355-323" class="color_11">
+        <g class="primitive">
+          <text dy="0.35em">11</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,-0.66)" id="img-86977355-324" class="color_12">
+        <g class="primitive">
+          <text dy="0.35em">12</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,2.96)" id="img-86977355-325" class="color_13">
+        <g class="primitive">
+          <text dy="0.35em">13</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,6.59)" id="img-86977355-326" class="color_14">
+        <g class="primitive">
+          <text dy="0.35em">14</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,10.22)" id="img-86977355-327" class="color_15">
+        <g class="primitive">
+          <text dy="0.35em">15</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,13.84)" id="img-86977355-328" class="color_16">
+        <g class="primitive">
+          <text dy="0.35em">16</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,17.47)" id="img-86977355-329" class="color_17">
+        <g class="primitive">
+          <text dy="0.35em">17</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,21.1)" id="img-86977355-330" class="color_18">
+        <g class="primitive">
+          <text dy="0.35em">18</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,24.72)" id="img-86977355-331" class="color_19">
+        <g class="primitive">
+          <text dy="0.35em">19</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,28.35)" id="img-86977355-332" class="color_20">
+        <g class="primitive">
+          <text dy="0.35em">20</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,31.98)" id="img-86977355-333" class="color_21">
+        <g class="primitive">
+          <text dy="0.35em">21</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,35.6)" id="img-86977355-334" class="color_22">
+        <g class="primitive">
+          <text dy="0.35em">22</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,39.23)" id="img-86977355-335" class="color_23">
+        <g class="primitive">
+          <text dy="0.35em">23</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,42.86)" id="img-86977355-336" class="color_24">
+        <g class="primitive">
+          <text dy="0.35em">24</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,46.48)" id="img-86977355-337" class="color_25">
+        <g class="primitive">
+          <text dy="0.35em">25</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,50.11)" id="img-86977355-338" class="color_26">
+        <g class="primitive">
+          <text dy="0.35em">26</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,53.74)" id="img-86977355-339" class="color_27">
+        <g class="primitive">
+          <text dy="0.35em">27</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,57.36)" id="img-86977355-340" class="color_28">
+        <g class="primitive">
+          <text dy="0.35em">28</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,60.99)" id="img-86977355-341" class="color_29">
+        <g class="primitive">
+          <text dy="0.35em">29</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,64.62)" id="img-86977355-342" class="color_30">
+        <g class="primitive">
+          <text dy="0.35em">30</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,68.24)" id="img-86977355-343" class="color_31">
+        <g class="primitive">
+          <text dy="0.35em">31</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,71.87)" id="img-86977355-344" class="color_32">
+        <g class="primitive">
+          <text dy="0.35em">32</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,75.5)" id="img-86977355-345" class="color_33">
+        <g class="primitive">
+          <text dy="0.35em">33</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,79.12)" id="img-86977355-346" class="color_34">
+        <g class="primitive">
+          <text dy="0.35em">34</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,82.75)" id="img-86977355-347" class="color_35">
+        <g class="primitive">
+          <text dy="0.35em">35</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,86.38)" id="img-86977355-348" class="color_36">
+        <g class="primitive">
+          <text dy="0.35em">36</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,90)" id="img-86977355-349" class="color_37">
+        <g class="primitive">
+          <text dy="0.35em">37</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,93.63)" id="img-86977355-350" class="color_38">
+        <g class="primitive">
+          <text dy="0.35em">38</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,97.26)" id="img-86977355-351" class="color_39">
+        <g class="primitive">
+          <text dy="0.35em">39</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,100.88)" id="img-86977355-352" class="color_40">
+        <g class="primitive">
+          <text dy="0.35em">40</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,104.51)" id="img-86977355-353" class="color_41">
+        <g class="primitive">
+          <text dy="0.35em">41</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,108.14)" id="img-86977355-354" class="color_42">
+        <g class="primitive">
+          <text dy="0.35em">42</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,111.76)" id="img-86977355-355" class="color_43">
+        <g class="primitive">
+          <text dy="0.35em">43</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,115.39)" id="img-86977355-356" class="color_44">
+        <g class="primitive">
+          <text dy="0.35em">44</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,119.02)" id="img-86977355-357" class="color_45">
+        <g class="primitive">
+          <text dy="0.35em">45</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,122.64)" id="img-86977355-358" class="color_46">
+        <g class="primitive">
+          <text dy="0.35em">46</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,126.27)" id="img-86977355-359" class="color_47">
+        <g class="primitive">
+          <text dy="0.35em">47</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,129.9)" id="img-86977355-360" class="color_48">
+        <g class="primitive">
+          <text dy="0.35em">48</text>
+        </g>
+      </g>
+      <g transform="translate(118.16,133.52)" id="img-86977355-361" class="color_49">
+        <g class="primitive">
+          <text dy="0.35em">49</text>
+        </g>
+      </g>
+    </g>
+    <g fill-opacity="1" id="img-86977355-362">
+      <g transform="translate(116.25,-44.18)" id="img-86977355-363" fill="#00BFFF" class="color_0" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,-40.56)" id="img-86977355-364" fill="#D4CA3A" class="color_1" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,-36.93)" id="img-86977355-365" fill="#FF6DAE" class="color_2" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,-33.3)" id="img-86977355-366" fill="#00B78D" class="color_3" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,-29.68)" id="img-86977355-367" fill="#BEA9FF" class="color_4" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,-26.05)" id="img-86977355-368" fill="#FF6765" class="color_5" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,-22.42)" id="img-86977355-369" fill="#C6C6C6" class="color_6" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,-18.8)" id="img-86977355-370" fill="#63DF75" class="color_7" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,-15.17)" id="img-86977355-371" fill="#00E6D3" class="color_8" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,-11.54)" id="img-86977355-372" fill="#E870DD" class="color_9" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,-7.92)" id="img-86977355-373" fill="#93A649" class="color_10" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,-4.29)" id="img-86977355-374" fill="#FF9A4B" class="color_11" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,-0.66)" id="img-86977355-375" fill="#00B4BC" class="color_12" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,2.96)" id="img-86977355-376" fill="#6299FF" class="color_13" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,6.59)" id="img-86977355-377" fill="#00E4FF" class="color_14" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,10.22)" id="img-86977355-378" fill="#C39800" class="color_15" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,13.84)" id="img-86977355-379" fill="#FF93A4" class="color_16" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,17.47)" id="img-86977355-380" fill="#32B44E" class="color_17" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,21.1)" id="img-86977355-381" fill="#9E9E9E" class="color_18" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,24.72)" id="img-86977355-382" fill="#00E5B2" class="color_19" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,28.35)" id="img-86977355-383" fill="#FFA9F6" class="color_20" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,31.98)" id="img-86977355-384" fill="#FFAA89" class="color_21" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,35.6)" id="img-86977355-385" fill="#82CAFF" class="color_22" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,39.23)" id="img-86977355-386" fill="#00BBAA" class="color_23" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,42.86)" id="img-86977355-387" fill="#A08CFF" class="color_24" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,46.48)" id="img-86977355-388" fill="#00D485" class="color_25" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,50.11)" id="img-86977355-389" fill="#BCCF6F" class="color_26" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,53.74)" id="img-86977355-390" fill="#FFA0C8" class="color_27" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,57.36)" id="img-86977355-391" fill="#FF5F82" class="color_28" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,60.99)" id="img-86977355-392" fill="#C483E9" class="color_29" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,64.62)" id="img-86977355-393" fill="#FF734A" class="color_30" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,68.24)" id="img-86977355-394" fill="#82CC4D" class="color_31" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,71.87)" id="img-86977355-395" fill="#FF928B" class="color_32" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,75.5)" id="img-86977355-396" fill="#E799FF" class="color_33" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,79.12)" id="img-86977355-397" fill="#00B573" class="color_34" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,82.75)" id="img-86977355-398" fill="#DAB45B" class="color_35" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,86.38)" id="img-86977355-399" fill="#00D0D8" class="color_36" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,90)" id="img-86977355-400" fill="#CE9247" class="color_37" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,93.63)" id="img-86977355-401" fill="#6CBD73" class="color_38" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,97.26)" id="img-86977355-402" fill="#00C4E9" class="color_39" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,100.88)" id="img-86977355-403" fill="#B7AE38" class="color_40" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,104.51)" id="img-86977355-404" fill="#00B0FE" class="color_41" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,108.14)" id="img-86977355-405" fill="#66B032" class="color_42" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,111.76)" id="img-86977355-406" fill="#FFB445" class="color_43" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,115.39)" id="img-86977355-407" fill="#A6C537" class="color_44" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,119.02)" id="img-86977355-408" fill="#88B962" class="color_45" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,122.64)" id="img-86977355-409" fill="#68DCA2" class="color_46" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,126.27)" id="img-86977355-410" fill="#F08031" class="color_47" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,129.9)" id="img-86977355-411" fill="#9CB4FF" class="color_48" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+      <g transform="translate(116.25,133.52)" id="img-86977355-412" fill="#27D0AB" class="color_49" stroke="#FFFFFF">
+        <path d="M-0.91,-0.91 L 0.91 -0.91 0.91 0.91 -0.91 0.91 z" class="primitive"/>
+      </g>
+    </g>
+    <g fill="#362A35" font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" stroke="#000000" stroke-opacity="0.000" id="img-86977355-413">
+      <g transform="translate(115.35,-48)" id="img-86977355-414">
+        <g class="primitive">
+          <text dy="-0em">m</text>
+        </g>
+      </g>
+    </g>
+  </g>
+  <g clip-path="url(#img-86977355-415)">
+    <g id="img-86977355-416">
+      <g pointer-events="visible" fill="#000000" fill-opacity="0.000" stroke="#000000" stroke-opacity="0.000" class="guide background" id="img-86977355-417">
+        <g transform="translate(80.1,42.86)" id="img-86977355-418">
+          <path d="M-34.24,-37.86 L 34.24 -37.86 34.24 37.86 -34.24 37.86 z" class="primitive"/>
+        </g>
+      </g>
+      <g class="guide ygridlines xfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="img-86977355-419">
+        <g transform="translate(80.1,78.71)" id="img-86977355-420">
+          <path fill="none" d="M-34.24,0 L 34.24 0" class="primitive"/>
+        </g>
+        <g transform="translate(80.1,42.86)" id="img-86977355-421">
+          <path fill="none" d="M-34.24,0 L 34.24 0" class="primitive"/>
+        </g>
+        <g transform="translate(80.1,7)" id="img-86977355-422">
+          <path fill="none" d="M-34.24,0 L 34.24 0" class="primitive"/>
+        </g>
+      </g>
+      <g class="guide xgridlines yfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="img-86977355-423">
+        <g transform="translate(47.86,42.86)" id="img-86977355-424">
+          <path fill="none" d="M0,-37.86 L 0 37.86" class="primitive"/>
+        </g>
+        <g transform="translate(80.1,42.86)" id="img-86977355-425">
+          <path fill="none" d="M0,-37.86 L 0 37.86" class="primitive"/>
+        </g>
+        <g transform="translate(112.35,42.86)" id="img-86977355-426">
+          <path fill="none" d="M0,-37.86 L 0 37.86" class="primitive"/>
+        </g>
+      </g>
+      <g class="plotpanel" id="img-86977355-427">
+        <metadata>
+          <boundingbox value="45.8575mm 5.0mm 68.48916666666666mm 75.71499999999997mm"/>
+          <unitbox value="-0.031012960833214885 102.78881684445375 1.0620259216664298 -105.5776336889075"/>
+        </metadata>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-86977355-428">
+          <g transform="translate(80.1,75.13)" id="img-86977355-429" stroke-dasharray="none" class="color_0" stroke="#00BFFF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 2 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -6.03 -1.61 -9.47 1.61 -7.08 4.84 -16.07 8.06 -13.56 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-430" stroke-dasharray="none" class="color_1" stroke="#D4CA3A">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.56 -14.51 3.59 -11.29 3.5 -8.06 3.59 -4.84 3.59 -1.61 -33.72 1.61 -14.63 4.84 -12.48 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-431" stroke-dasharray="none" class="color_2" stroke="#FF6DAE">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.56 -8.06 -0.57 -4.84 -10.87 -1.61 -20.91 1.61 -13.23 4.84 -3.55 8.06 -1.01 11.29 3.59 14.51 3.59 17.73 3.56 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-432" stroke-dasharray="none" class="color_3" stroke="#00B78D">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.56 -4.84 -20.76 -1.61 -26.55 1.61 -8 4.84 -0.6 8.06 2.42 11.29 3.32 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-433" stroke-dasharray="none" class="color_4" stroke="#BEA9FF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.56 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 -0.57 -4.84 -9.56 -1.61 -18.4 1.61 -19.44 4.84 -0.6 8.06 -1.61 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-434" stroke-dasharray="none" class="color_5" stroke="#FF6765">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.56 -8.06 3.59 -4.84 2.24 -1.61 -14.57 1.61 -23.51 4.84 -21.5 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-435" stroke-dasharray="none" class="color_6" stroke="#C6C6C6">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.5 -17.73 3.59 -14.51 3.59 -11.29 3.05 -8.06 -0.15 -4.84 -11.08 -1.61 -15.62 1.61 -10.9 4.84 -15.41 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-436" stroke-dasharray="none" class="color_7" stroke="#63DF75">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.56 -8.06 3.59 -4.84 -3.25 -1.61 -22.79 1.61 -11.23 4.84 -7.76 8.06 -8.72 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-437" stroke-dasharray="none" class="color_8" stroke="#00E6D3">
+            <path fill="none" d="M-30.63,3.56 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.56 -8.06 3.59 -4.84 -8.57 -1.61 -16.75 1.61 -15.95 4.84 -11.2 8.06 -1.25 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-438" stroke-dasharray="none" class="color_9" stroke="#E870DD">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 3.59 -1.61 -23.39 1.61 -24.85 4.84 -9.8 8.06 0.66 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-439" stroke-dasharray="none" class="color_10" stroke="#93A649">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -10.03 -1.61 -13.29 1.61 -16.72 4.84 -16.72 8.06 3.26 11.29 3.59 14.51 3.32 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-440" stroke-dasharray="none" class="color_11" stroke="#FF9A4B">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.5 -11.29 3.59 -8.06 -0.51 -4.84 -3.67 -1.61 -10.87 1.61 -28.79 4.84 -4 8.06 -2.27 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-441" stroke-dasharray="none" class="color_12" stroke="#00B4BC">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.56 -4.84 -9.2 -1.61 -26.28 1.61 -20.31 4.84 -1.49 8.06 3.53 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-442" stroke-dasharray="none" class="color_13" stroke="#6299FF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 1.26 -4.84 -9.65 -1.61 -28.88 1.61 -19.41 4.84 3.56 8.06 3.17 11.29 3.35 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-443" stroke-dasharray="none" class="color_14" stroke="#00E4FF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.53 -8.06 3.59 -4.84 3.59 -1.61 -28.94 1.61 -18.55 4.84 -13.35 8.06 3.59 11.29 3.53 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-444" stroke-dasharray="none" class="color_15" stroke="#C39800">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 -3.76 -4.84 -8.18 -1.61 -20.88 1.61 -18.19 4.84 0.6 8.06 0.81 11.29 2.99 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-445" stroke-dasharray="none" class="color_16" stroke="#FF93A4">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.56 -11.29 3.59 -8.06 3.53 -4.84 -15.38 -1.61 -15.35 1.61 -12.54 4.84 -10.18 8.06 -0.21 11.29 3.59 14.51 3.56 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-446" stroke-dasharray="none" class="color_17" stroke="#32B44E">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.56 -4.84 3.59 -1.61 -26.46 1.61 -25.57 4.84 -8.9 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-447" stroke-dasharray="none" class="color_18" stroke="#9E9E9E">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 2.93 -1.61 -25.92 1.61 -11.71 4.84 -8.45 8.06 -10.63 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-448" stroke-dasharray="none" class="color_19" stroke="#00E5B2">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 -0.48 -4.84 -9.53 -1.61 -7.11 1.61 -9.05 4.84 -17.47 8.06 -6.48 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.5 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-449" stroke-dasharray="none" class="color_20" stroke="#FFA9F6">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 2.15 -4.84 -6.48 -1.61 -17.77 1.61 -18.94 4.84 -7.5 8.06 -1.58 11.29 3.53 14.51 3.59 17.73 3.59 20.96 3.56 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-450" stroke-dasharray="none" class="color_21" stroke="#FFAA89">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.41 -4.84 0.39 -1.61 -11.14 1.61 -13.05 4.84 -24.61 8.06 -5.2 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-451" stroke-dasharray="none" class="color_22" stroke="#82CAFF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.5 -11.29 3.59 -8.06 3.26 -4.84 -18.46 -1.61 -18.49 1.61 -18.1 4.84 -1.85 8.06 3.59 11.29 3.59 14.51 3.53 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-452" stroke-dasharray="none" class="color_23" stroke="#00BBAA">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -25.54 -1.61 -23.18 1.61 -1.67 4.84 1.35 8.06 -2.36 11.29 1.2 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-453" stroke-dasharray="none" class="color_24" stroke="#A08CFF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -9.71 -1.61 -9.32 1.61 -15.86 4.84 -21.68 8.06 2.78 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-454" stroke-dasharray="none" class="color_25" stroke="#00D485">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.23 -11.29 3.59 -8.06 3.59 -4.84 2.63 -1.61 -21.71 1.61 -13.35 4.84 -1.85 8.06 -4.93 11.29 -10.63 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-455" stroke-dasharray="none" class="color_26" stroke="#BCCF6F">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 0.24 -1.61 -35.39 1.61 -25.8 4.84 3.59 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-456" stroke-dasharray="none" class="color_27" stroke="#FFA0C8">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 0.21 -1.61 -32.2 1.61 -5.91 4.84 -6.18 8.06 -9.71 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-457" stroke-dasharray="none" class="color_28" stroke="#FF5F82">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 2.51 -1.61 -25.78 1.61 -19.74 4.84 -5.37 8.06 -5.23 11.29 3.41 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-458" stroke-dasharray="none" class="color_29" stroke="#C483E9">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.47 -17.73 3.59 -14.51 3.59 -11.29 3.29 -8.06 3.59 -4.84 -4.24 -1.61 -11.65 1.61 -18.19 4.84 -17.38 8.06 -1.91 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-459" stroke-dasharray="none" class="color_30" stroke="#FF734A">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.26 -11.29 3.5 -8.06 3.11 -4.84 3.26 -1.61 -11.29 1.61 -22.19 4.84 -17.14 8.06 -5.49 11.29 3.56 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-460" stroke-dasharray="none" class="color_31" stroke="#82CC4D">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 2.9 -11.29 3.56 -8.06 2.87 -4.84 -18.76 -1.61 -10.03 1.61 -17.77 4.84 -9.35 8.06 3.59 11.29 3.59 14.51 3.56 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-461" stroke-dasharray="none" class="color_32" stroke="#FF928B">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 3.59 -1.61 -20.31 1.61 -34.32 4.84 -5.73 8.06 3.59 11.29 3.59 14.51 2.99 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-462" stroke-dasharray="none" class="color_33" stroke="#E799FF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 2.81 -11.29 2.81 -8.06 1.76 -4.84 -2.12 -1.61 -5.17 1.61 -22.1 4.84 -22.88 8.06 1.85 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-463" stroke-dasharray="none" class="color_34" stroke="#00B573">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 1.64 -4.84 -8.99 -1.61 -19.68 1.61 -17.23 4.84 -9.26 8.06 3.32 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-464" stroke-dasharray="none" class="color_35" stroke="#DAB45B">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -12.9 -1.61 -15.98 1.61 -24.16 4.84 -4.33 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-465" stroke-dasharray="none" class="color_36" stroke="#00D0D8">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 2.96 -8.06 3.38 -4.84 3.2 -1.61 -11.17 1.61 -25.24 4.84 -13.32 8.06 -6.42 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-466" stroke-dasharray="none" class="color_37" stroke="#CE9247">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.56 -8.06 3.59 -4.84 -5.73 -1.61 -19.2 1.61 -7.53 4.84 -15.17 8.06 -6.12 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-467" stroke-dasharray="none" class="color_38" stroke="#6CBD73">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -2.93 -1.61 -27.33 1.61 -20.79 4.84 -2.39 8.06 -0.36 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-468" stroke-dasharray="none" class="color_39" stroke="#00C4E9">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 2.72 -4.84 -10.42 -1.61 -14.22 1.61 -31.48 4.84 0.24 8.06 3.59 11.29 3.02 14.51 3.53 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-469" stroke-dasharray="none" class="color_40" stroke="#B7AE38">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.53 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 -0.86 -4.84 -1.52 -1.61 -12.01 1.61 -25.03 4.84 -14.31 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-470" stroke-dasharray="none" class="color_41" stroke="#00B0FE">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -6.06 -1.61 -23.56 1.61 -23.09 4.84 -1.97 8.06 0.9 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-471" stroke-dasharray="none" class="color_42" stroke="#66B032">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 2.63 -4.84 -20.61 -1.61 -24.52 1.61 -14.45 4.84 3.59 8.06 3.59 11.29 3.59 14.51 3.17 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-472" stroke-dasharray="none" class="color_43" stroke="#FFB445">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.53 -11.29 3.59 -8.06 3.47 -4.84 2.75 -1.61 -17.41 1.61 -42.62 4.84 0.75 8.06 2.93 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-473" stroke-dasharray="none" class="color_44" stroke="#A6C537">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.47 -8.06 2.78 -4.84 0.03 -1.61 -23.95 1.61 -17.35 4.84 -14.34 8.06 2.81 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.53" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-474" stroke-dasharray="none" class="color_45" stroke="#88B962">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -21.38 -1.61 -10.78 1.61 -14.99 4.84 -10.21 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-475" stroke-dasharray="none" class="color_46" stroke="#68DCA2">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 2.78 -4.84 -14.66 -1.61 -16.96 1.61 -9.26 4.84 -2.24 8.06 -6.48 11.29 0.24 14.51 3.56 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-476" stroke-dasharray="none" class="color_47" stroke="#F08031">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.56 -11.29 3.56 -8.06 -6.3 -4.84 -3.82 -1.61 -6.42 1.61 -25.57 4.84 -10.87 8.06 2.87 11.29 3.59 14.51 3.56 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-477" stroke-dasharray="none" class="color_48" stroke="#9CB4FF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.41 -8.06 1.52 -4.84 -12.57 -1.61 -19.56 1.61 -16.49 4.84 -5.55 8.06 2.63 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-478" stroke-dasharray="none" class="color_49" stroke="#27D0AB">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.56 -11.29 3.56 -8.06 3.59 -4.84 3.59 -1.61 -23.56 1.61 -28.88 4.84 -5.37 8.06 0.87 11.29 3.23 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-479" stroke-dasharray="none" class="color_50" stroke="#F88F6F">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 2.93 -11.29 3.56 -8.06 3.59 -4.84 -2.03 -1.61 -17.14 1.61 -23.77 4.84 -13.71 8.06 3.59 11.29 3.56 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-480" stroke-dasharray="none" class="color_51" stroke="#DB8D17">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -2.6 -1.61 -21.44 1.61 -25.72 4.84 -7.59 8.06 3.59 11.29 3.59 14.51 3.56 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-481" stroke-dasharray="none" class="color_52" stroke="#A3D57C">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 2.9 -4.84 2.21 -1.61 -19.47 1.61 -34.38 4.84 -5.02 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.56 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-482" stroke-dasharray="none" class="color_53" stroke="#8AAA16">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -5.85 -1.61 -4.42 1.61 -27.81 4.84 -9.65 8.06 0.39 11.29 -2.87 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-483" stroke-dasharray="none" class="color_54" stroke="#E38ED9">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.56 -17.73 3.59 -14.51 3.59 -11.29 3.41 -8.06 1.35 -4.84 -21.35 -1.61 -12.66 1.61 -11.98 4.84 -8.84 8.06 3.56 11.29 3.59 14.51 3.53 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-484" stroke-dasharray="none" class="color_55" stroke="#E1B32A">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 2.99 -14.51 3.59 -11.29 3.14 -8.06 3.41 -4.84 -20.31 -1.61 -14.72 1.61 -8.51 4.84 -7.59 8.06 -0.89 11.29 3.05 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-485" stroke-dasharray="none" class="color_56" stroke="#FF8AC9">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 3.44 -1.61 -23.83 1.61 -40.05 4.84 3.08 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-486" stroke-dasharray="none" class="color_57" stroke="#FF8CFA">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.56 -8.06 3.59 -4.84 -6.84 -1.61 -33.66 1.61 -11.71 4.84 -5.11 8.06 3.59 11.29 3.59 14.51 3.56 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-487" stroke-dasharray="none" class="color_58" stroke="#00D0C2">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 -1.22 -4.84 -12.9 -1.61 -19.2 1.61 -21.53 4.84 3.38 8.06 2 11.29 3.5 14.51 2.96 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-488" stroke-dasharray="none" class="color_59" stroke="#FFB279">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 3.53 -1.61 -11.26 1.61 -37.36 4.84 -12.16 8.06 3.47 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-489" stroke-dasharray="none" class="color_60" stroke="#EC975F">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.29 -8.06 2 -4.84 -2.87 -1.61 -9.89 1.61 -35.21 4.84 -5.14 8.06 1.2 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-490" stroke-dasharray="none" class="color_61" stroke="#00B3D0">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.53 -4.84 3.59 -1.61 -5.82 1.61 -25.66 4.84 -29.42 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-491" stroke-dasharray="none" class="color_62" stroke="#FE85AD">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 0.96 -8.06 -5.08 -4.84 -9.11 -1.61 -20.58 1.61 -16.13 4.84 0.21 8.06 3.38 11.29 3.35 14.51 3.59 17.73 3.59 20.96 3.56 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-492" stroke-dasharray="none" class="color_63" stroke="#4AC087">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -9.23 -1.61 -15.23 1.61 -11.41 4.84 -6.51 8.06 -11.41 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-493" stroke-dasharray="none" class="color_64" stroke="#82A6FF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.56 -14.51 3.59 -11.29 3.59 -8.06 1.97 -4.84 -11.02 -1.61 -17.02 1.61 -25.27 4.84 0.75 8.06 1.67 11.29 3.56 14.51 2.36 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-494" stroke-dasharray="none" class="color_65" stroke="#87D98D">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.56 -4.84 3.59 -1.61 1.47 1.61 -38.29 4.84 -24.1 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-495" stroke-dasharray="none" class="color_66" stroke="#CDB9FF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 -6.06 -4.84 -10.09 -1.61 -21.65 1.61 -19.56 4.84 3.59 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-496" stroke-dasharray="none" class="color_67" stroke="#A9A042">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 -2.12 -4.84 -5.58 -1.61 -12.69 1.61 -36.98 4.84 3.59 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-497" stroke-dasharray="none" class="color_68" stroke="#EAB1FF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -12.04 -1.61 -11.59 1.61 -13.29 4.84 -20.43 8.06 3.56 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-498" stroke-dasharray="none" class="color_69" stroke="#A8A200">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -17.35 -1.61 -19.95 1.61 -23.65 4.84 3.59 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-499" stroke-dasharray="none" class="color_70" stroke="#50D1FF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 2.69 -4.84 -8.12 -1.61 -13.68 1.61 -8.36 4.84 -19.41 8.06 -3.31 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-500" stroke-dasharray="none" class="color_71" stroke="#D4C968">
+            <path fill="none" d="M-30.63,3.53 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.29 -11.29 3.59 -8.06 3.2 -4.84 -7.82 -1.61 -9.94 1.61 -15.59 4.84 -13.47 8.06 -6.18 11.29 3.59 14.51 3.56 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-501" stroke-dasharray="none" class="color_72" stroke="#CFA637">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 2.27 -4.84 -6.87 -1.61 -6.6 1.61 -12.75 4.84 -29.75 8.06 3.53 11.29 3.56 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-502" stroke-dasharray="none" class="color_73" stroke="#E49C40">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -8.45 -1.61 -11.83 1.61 -13.38 4.84 -9.65 8.06 -10.48 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-503" stroke-dasharray="none" class="color_74" stroke="#00C898">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 0.39 -11.29 0.54 -8.06 0.9 -4.84 -8.63 -1.61 -9.32 1.61 -19.53 4.84 -10.96 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-504" stroke-dasharray="none" class="color_75" stroke="#52BDFF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 -2.45 -8.06 -5.08 -4.84 -8.15 -1.61 -12.78 1.61 -10.69 4.84 -10.72 8.06 3.26 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-505" stroke-dasharray="none" class="color_76" stroke="#9CB641">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 2.84 -1.61 -22.07 1.61 -29.51 4.84 -8.63 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-506" stroke-dasharray="none" class="color_77" stroke="#CD96EB">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -19.02 -1.61 -27.39 1.61 -10.48 4.84 -0.48 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-507" stroke-dasharray="none" class="color_78" stroke="#BD9941">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.53 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 2.24 -4.84 -11.23 -1.61 -10.18 1.61 -28.22 4.84 -5.79 8.06 3.59 11.29 3.59 14.51 3.05 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-508" stroke-dasharray="none" class="color_79" stroke="#EDC152">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 1.91 -4.84 -2.63 -1.61 -17.92 1.61 -24.58 4.84 -10.54 8.06 3.59 11.29 3.56 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-509" stroke-dasharray="none" class="color_80" stroke="#ECAC61">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -8.48 -1.61 -54.57 1.61 2.12 4.84 3.59 8.06 3.59 11.29 3.59 14.51 3.56 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-510" stroke-dasharray="none" class="color_81" stroke="#00E2ED">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 2.99 -4.84 3.59 -1.61 -15.59 1.61 -20.82 4.84 -12.93 8.06 -7.32 11.29 3.47 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-511" stroke-dasharray="none" class="color_82" stroke="#44C25B">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 2.63 -8.06 3.56 -4.84 -5.43 -1.61 -14.84 1.61 -19.11 4.84 -16.99 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-512" stroke-dasharray="none" class="color_83" stroke="#FF7D9C">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 -10.63 -4.84 -5.79 -1.61 -21.15 1.61 -18.1 4.84 1.88 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-513" stroke-dasharray="none" class="color_84" stroke="#5FAF66">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.56 -14.51 3.59 -11.29 3.59 -8.06 -2.96 -4.84 -13.77 -1.61 -6.03 1.61 -21.03 4.84 -5.02 8.06 -1.37 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-514" stroke-dasharray="none" class="color_85" stroke="#7AAB55">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.38 -11.29 3.59 -8.06 3.59 -4.84 0.33 -1.61 -26.67 1.61 -19.56 4.84 -8.96 8.06 2.93 11.29 3.35 14.51 3.11 17.73 3.59 20.96 2.66 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-515" stroke-dasharray="none" class="color_86" stroke="#FF88BB">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.5 -8.06 2.63 -4.84 0.81 -1.61 -11.29 1.61 -18.79 4.84 -25.66 8.06 2.21 11.29 3.59 14.51 3.59 17.73 3.56 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-516" stroke-dasharray="none" class="color_87" stroke="#69CE74">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 3.59 -1.61 3.59 1.61 -32.41 4.84 -32.08 8.06 3.59 11.29 3.53 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-517" stroke-dasharray="none" class="color_88" stroke="#B09CFF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.56 -8.06 3.59 -4.84 -16.07 -1.61 -30.91 1.61 -13.92 4.84 3.59 8.06 3.56 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-518" stroke-dasharray="none" class="color_89" stroke="#D88BFF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.56 -14.51 3.59 -11.29 3.53 -8.06 0.75 -4.84 -7.47 -1.61 -19.23 1.61 -17.83 4.84 -9.89 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.56 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-519" stroke-dasharray="none" class="color_90" stroke="#ABABAB">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 2.99 -1.61 -33.9 1.61 -29.06 4.84 2.93 8.06 3.59 11.29 3.26 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-520" stroke-dasharray="none" class="color_91" stroke="#EF7C75">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.56 -8.06 3.59 -4.84 -11.35 -1.61 -28.94 1.61 -12.81 4.84 -4.24 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-521" stroke-dasharray="none" class="color_92" stroke="#DD8953">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -12.54 -1.61 -37.27 1.61 -2.33 4.84 0.48 8.06 -2.03 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.5 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-522" stroke-dasharray="none" class="color_93" stroke="#74BE40">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 2.24 -4.84 -0.06 -1.61 -23.39 1.61 -30.88 4.84 -1.64 8.06 3.59 11.29 3.53 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-523" stroke-dasharray="none" class="color_94" stroke="#E88263">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 2.6 -4.84 -1.22 -1.61 -33.15 1.61 -21.77 4.84 -0.24 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-524" stroke-dasharray="none" class="color_95" stroke="#FD6CA0">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.5 -8.06 3.59 -4.84 -11.02 -1.61 -28.85 1.61 -15.2 4.84 -1.16 8.06 3.59 11.29 3.59 14.51 2.6 17.73 3.59 20.96 3.53 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-525" stroke-dasharray="none" class="color_96" stroke="#00C19D">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 0.84 -4.84 -20.76 -1.61 -11.77 1.61 -17.23 4.84 -4.87 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-526" stroke-dasharray="none" class="color_97" stroke="#D581CB">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 0.51 -1.61 -23.42 1.61 -29.54 4.84 -4.93 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-527" stroke-dasharray="none" class="color_98" stroke="#C5BC45">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.56 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -3.7 -1.61 -17.02 1.61 -9.41 4.84 -15.62 8.06 -8 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-528" stroke-dasharray="none" class="color_99" stroke="#A391EA">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.56 -4.84 -6.69 -1.61 -29.36 1.61 -24.88 4.84 3.59 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-529" stroke-dasharray="none" class="color_100" stroke="#59CE94">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 3.59 -1.61 -6.09 1.61 -33.45 4.84 -17.17 8.06 -0.66 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-530" stroke-dasharray="none" class="color_101" stroke="#90DA5B">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 3.59 -1.61 -16.07 1.61 -31.12 4.84 -13.77 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-531" stroke-dasharray="none" class="color_102" stroke="#00C678">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 2.93 -8.06 3.59 -4.84 2.75 -1.61 -19.86 1.61 -32.38 4.84 -4.51 8.06 0.87 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-532" stroke-dasharray="none" class="color_103" stroke="#ABC2FF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 -12.13 -4.84 -2.36 -1.61 -8.3 1.61 -25.51 4.84 -5.46 8.06 3.59 11.29 3.59 14.51 3.56 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-533" stroke-dasharray="none" class="color_104" stroke="#95C76F">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 2.09 -4.84 -8.18 -1.61 -21.68 1.61 -12.6 4.84 -13.35 8.06 3.59 11.29 3.53 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-534" stroke-dasharray="none" class="color_105" stroke="#B4D346">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 3.59 -1.61 -8.6 1.61 -23.06 4.84 -29.3 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-535" stroke-dasharray="none" class="color_106" stroke="#FFA49C">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -9.83 -1.61 -25.45 1.61 -15.59 4.84 -6.48 8.06 3.59 11.29 3.59 14.51 3.56 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-536" stroke-dasharray="none" class="color_107" stroke="#AEC162">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -2.03 -1.61 -21.92 1.61 -11.68 4.84 -14.31 8.06 -3.85 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-537" stroke-dasharray="none" class="color_108" stroke="#B9B9B9">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.56 -14.51 3.59 -11.29 3.59 -8.06 3.47 -4.84 -9.2 -1.61 -23.27 1.61 -21.06 4.84 -2.39 8.06 2.27 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-538" stroke-dasharray="none" class="color_109" stroke="#00C2CA">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.53 -8.06 3.5 -4.84 -9.38 -1.61 -27.3 1.61 -17.53 4.84 -2.84 8.06 3.44 11.29 3.59 14.51 3.59 17.73 3.56 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-539" stroke-dasharray="none" class="color_110" stroke="#FBBA6E">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 -6.72 -4.84 -3.73 -1.61 -9.11 1.61 -16.25 4.84 -13.11 8.06 0.18 11.29 2.12 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-540" stroke-dasharray="none" class="color_111" stroke="#FF9C70">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -19.59 -1.61 -12.3 1.61 -13.2 4.84 -12.01 8.06 3.32 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-541" stroke-dasharray="none" class="color_112" stroke="#63AFFF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -11.98 -1.61 -35.9 1.61 -10.39 4.84 0.9 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-542" stroke-dasharray="none" class="color_113" stroke="#00B0E1">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 2.48 -4.84 -7.26 -1.61 -17.38 1.61 -11.5 4.84 -12.96 8.06 -3.58 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-543" stroke-dasharray="none" class="color_114" stroke="#00E392">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.08 -4.84 -12.36 -1.61 -27 1.61 -16.64 4.84 -0.75 8.06 3.59 11.29 3.56 14.51 3.53 17.73 3.56 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-544" stroke-dasharray="none" class="color_115" stroke="#3EDEB8">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 -9.47 -4.84 -4.57 -1.61 -6.48 1.61 -16.04 4.84 -17.23 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-545" stroke-dasharray="none" class="color_116" stroke="#00D6A5">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.56 -14.51 3.59 -11.29 3.59 -8.06 -3.4 -4.84 -15.5 -1.61 -8.36 1.61 -12.16 4.84 -8.21 8.06 0.99 11.29 0.54 14.51 3.11 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-546" stroke-dasharray="none" class="color_117" stroke="#F2788A">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.5 -11.29 3.59 -8.06 3.56 -4.84 -15.59 -1.61 -20.37 1.61 -14.4 4.84 -5.43 8.06 3.59 11.29 3.59 14.51 2.12 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-547" stroke-dasharray="none" class="color_118" stroke="#F29CE7">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -4.63 -1.61 -13.47 1.61 -22.1 4.84 -13.74 8.06 0.15 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-548" stroke-dasharray="none" class="color_119" stroke="#00C7FF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.08 -4.84 -3.22 -1.61 -18.88 1.61 -25.95 4.84 -3.22 8.06 0.18 11.29 1.41 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-549" stroke-dasharray="none" class="color_120" stroke="#809AF3">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -12.24 -1.61 -18.99 1.61 -13.68 4.84 -10.39 8.06 1.82 11.29 3.56 14.51 3.59 17.73 3.32 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-550" stroke-dasharray="none" class="color_121" stroke="#FFA2FF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -10.18 -1.61 -18.82 1.61 -12.6 4.84 -7.53 8.06 -1.85 11.29 1.97 14.51 2.39 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-551" stroke-dasharray="none" class="color_122" stroke="#1AA2FF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 -1.31 -4.84 -6.78 -1.61 -23.42 1.61 -25.75 4.84 3.59 8.06 3.59 11.29 3.47 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-552" stroke-dasharray="none" class="color_123" stroke="#00D9FF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 -3.43 -4.84 -8.69 -1.61 -22.16 1.61 -15.92 4.84 -3.58 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-553" stroke-dasharray="none" class="color_124" stroke="#FFA1B2">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -4.87 -1.61 -30.46 1.61 -8.06 4.84 -8.18 8.06 -2.21 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-554" stroke-dasharray="none" class="color_125" stroke="#F77EEC">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -7.76 -1.61 -16.1 1.61 -19.2 4.84 -6.99 8.06 -2.84 11.29 2.69 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-555" stroke-dasharray="none" class="color_126" stroke="#FF8597">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -20.61 -1.61 -29.12 1.61 -1.97 4.84 -0.24 8.06 -1.85 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-556" stroke-dasharray="none" class="color_127" stroke="#FF6E8F">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -12.39 -1.61 -19.41 1.61 -23.56 4.84 -2 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-557" stroke-dasharray="none" class="color_128" stroke="#DD9F54">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -15.62 -1.61 -24.85 1.61 -9.68 4.84 -0.06 8.06 -3.58 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-558" stroke-dasharray="none" class="color_129" stroke="#F4AA4D">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 3.59 -1.61 -33.63 1.61 -30.91 4.84 3.59 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-559" stroke-dasharray="none" class="color_130" stroke="#E9C268">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 -1.28 -4.84 -7.53 -1.61 -18.34 1.61 -30.2 4.84 3.56 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-560" stroke-dasharray="none" class="color_131" stroke="#CBA74E">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 2.9 -11.29 3.56 -8.06 3.59 -4.84 3.59 -1.61 1.49 1.61 -36.92 4.84 -24.79 8.06 3.59 11.29 3.56 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-561" stroke-dasharray="none" class="color_132" stroke="#C5BB5B">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.56 -14.51 3.59 -11.29 3.59 -8.06 3.35 -4.84 1.52 -1.61 -6.9 1.61 -33.09 4.84 -16.67 8.06 3.05 11.29 3.59 14.51 2.66 17.73 3.08 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-562" stroke-dasharray="none" class="color_133" stroke="#B7AE4E">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.14 -8.06 2.99 -4.84 -4.51 -1.61 -22.25 1.61 -14.07 4.84 -9.97 8.06 -1.94 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-563" stroke-dasharray="none" class="color_134" stroke="#FF807A">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.32 -4.84 -5.85 -1.61 -11.65 1.61 -8.21 4.84 -18.04 8.06 -9.77 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-564" stroke-dasharray="none" class="color_135" stroke="#73BCFF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 1.41 -4.84 -9.32 -1.61 -15.17 1.61 -12.57 4.84 -18.1 8.06 3.56 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-565" stroke-dasharray="none" class="color_136" stroke="#F6924F">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 -2.18 -8.06 -4.51 -4.84 -2.6 -1.61 -13.47 1.61 -20.67 4.84 -6.78 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-566" stroke-dasharray="none" class="color_137" stroke="#00C6B6">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.17 -8.06 -8.51 -4.84 -4.96 -1.61 0.06 1.61 -28.82 4.84 -11.11 8.06 3.56 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-567" stroke-dasharray="none" class="color_138" stroke="#93C1FF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.53 -8.06 -4.09 -4.84 -19.77 -1.61 -15.56 1.61 -10.45 4.84 -3.76 8.06 3.53 11.29 3.56 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-568" stroke-dasharray="none" class="color_139" stroke="#00CFEC">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 3.59 -1.61 -10.72 1.61 -32.64 4.84 -11.65 8.06 -2.33 11.29 3.59 14.51 3.59 17.73 3.56 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-569" stroke-dasharray="none" class="color_140" stroke="#A0B455">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -17.86 -1.61 -38.05 1.61 -4.99 4.84 3.59 8.06 3.59 11.29 3.56 14.51 3.56 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-570" stroke-dasharray="none" class="color_141" stroke="#FF8BAA">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.05 -8.06 3.59 -4.84 -4.54 -1.61 -14.16 1.61 -20.31 4.84 -12.42 8.06 -1.82 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-571" stroke-dasharray="none" class="color_142" stroke="#FCA46C">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.56 -8.06 3.59 -4.84 2.51 -1.61 -23.98 1.61 -28.25 4.84 -3.73 8.06 -0.24 11.29 3.53 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-572" stroke-dasharray="none" class="color_143" stroke="#83B3FF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 -5.08 -4.84 -5.05 -1.61 -11.23 1.61 -15.2 4.84 -13.35 8.06 0.18 11.29 3.59 14.51 3.11 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-573" stroke-dasharray="none" class="color_144" stroke="#FF7BBB">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -6.99 -1.61 -19.86 1.61 -21.26 4.84 -9.26 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-574" stroke-dasharray="none" class="color_145" stroke="#BF89DD">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.47 -4.84 -1.52 -1.61 -22.25 1.61 -28.58 4.84 -3.46 8.06 3.35 11.29 3.59 14.51 2.39 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-575" stroke-dasharray="none" class="color_146" stroke="#00BAFC">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.47 -8.06 -0.78 -4.84 -6.18 -1.61 -19.68 1.61 -25.09 4.84 -1.88 8.06 3.56 11.29 3.59 14.51 3.56 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-576" stroke-dasharray="none" class="color_147" stroke="#FF8E63">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 -3.82 -4.84 -4.84 -1.61 -12.27 1.61 -13.86 4.84 -18.97 8.06 3.59 11.29 3.59 14.51 3.56 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-577" stroke-dasharray="none" class="color_148" stroke="#FF96C9">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -8.18 -1.61 -26.34 1.61 -6.57 4.84 -16.13 8.06 3.53 11.29 3.59 14.51 3.59 17.73 3.53 20.96 3.59 24.18 3.56 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-578" stroke-dasharray="none" class="color_149" stroke="#D58F33">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -6.24 -1.61 -25.69 1.61 -10.12 4.84 -15.32 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-579" stroke-dasharray="none" class="color_150" stroke="#EB9A28">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 2.78 -8.06 -1.61 -4.84 -9.74 -1.61 2.66 1.61 -0.57 4.84 -28.52 8.06 -11.59 11.29 3.56 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-580" stroke-dasharray="none" class="color_151" stroke="#FAA737">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.56 -8.06 3.59 -4.84 3.56 -1.61 -19.5 1.61 -15.17 4.84 -16.4 8.06 -6.12 11.29 3.47 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-581" stroke-dasharray="none" class="color_152" stroke="#FF9D7C">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.56 -8.06 3.59 -4.84 3.59 -1.61 -25.8 1.61 -38.68 4.84 3.59 8.06 3.56 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-582" stroke-dasharray="none" class="color_153" stroke="#E78543">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 3.59 -1.61 -2.87 1.61 -46.12 4.84 -11.77 8.06 3.47 11.29 3.59 14.51 3.5 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-583" stroke-dasharray="none" class="color_154" stroke="#FF93BA">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.56 -8.06 3.59 -4.84 3.56 -1.61 -23 1.61 -21.71 4.84 -15.86 8.06 3.59 11.29 3.29 14.51 3.59 17.73 3.56 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-584" stroke-dasharray="none" class="color_155" stroke="#D2A517">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.47 -14.51 3.59 -11.29 3.56 -8.06 3.59 -4.84 -6.18 -1.61 -13.89 1.61 -17.29 4.84 -14.1 8.06 -1.04 11.29 2.45 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-585" stroke-dasharray="none" class="color_156" stroke="#DEB345">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 -6.84 -4.84 -9.8 -1.61 -10.21 1.61 -12.9 4.84 -13.98 8.06 3.53 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-586" stroke-dasharray="none" class="color_157" stroke="#F1C039">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -3.97 -1.61 -25.92 1.61 -17.41 4.84 -8.72 8.06 2.24 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-587" stroke-dasharray="none" class="color_158" stroke="#7ACB80">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 1.94 -4.84 -19.62 -1.61 -10.42 1.61 -11.05 4.84 -10.63 8.06 0.72 11.29 3.59 14.51 2.45 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-588" stroke-dasharray="none" class="color_159" stroke="#FFA858">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.56 -4.84 -9.35 -1.61 -15.38 1.61 -24.73 4.84 -7.56 8.06 3.26 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-589" stroke-dasharray="none" class="color_160" stroke="#D4CA53">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.29 -14.51 3.59 -11.29 0.27 -8.06 -5.64 -4.84 -5.52 -1.61 -13.29 1.61 -21 4.84 -4.6 8.06 3.56 11.29 3.59 14.51 3.5 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-590" stroke-dasharray="none" class="color_161" stroke="#C5BD2A">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 -7.85 -4.84 -3.19 -1.61 -8.48 1.61 -16.78 4.84 -15.5 8.06 1.61 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-591" stroke-dasharray="none" class="color_162" stroke="#B6AF17">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 0.03 -4.84 -11.23 -1.61 -7.76 1.61 -10.45 4.84 -8.84 8.06 -7.62 11.29 -0.75 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-592" stroke-dasharray="none" class="color_163" stroke="#FF8D3E">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.29 -8.06 3.59 -4.84 -5.55 -1.61 -18.99 1.61 -22.73 4.84 -9.74 8.06 3.59 11.29 3.53 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-593" stroke-dasharray="none" class="color_164" stroke="#B8D15C">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 3.59 -1.61 3.56 1.61 3.59 4.84 -68.1 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-594" stroke-dasharray="none" class="color_165" stroke="#AAC34E">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 3.59 -1.61 1.76 1.61 -30.55 4.84 -32.14 8.06 3.56 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-595" stroke-dasharray="none" class="color_166" stroke="#98B728">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -8.6 -1.61 -19.02 1.61 -7.41 4.84 -12.51 8.06 -4.63 11.29 1.97 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-596" stroke-dasharray="none" class="color_167" stroke="#8FA834">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 -5.79 -4.84 -6.18 -1.61 -7.41 1.61 -21.47 4.84 -11.68 8.06 2.33 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-597" stroke-dasharray="none" class="color_168" stroke="#00D7E5">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -18.67 -1.61 -38.83 1.61 -3.37 4.84 3.59 8.06 3.56 11.29 3.59 14.51 3.59 17.73 3.53 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-598" stroke-dasharray="none" class="color_169" stroke="#F47B57">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 3.59 -1.61 -43.49 1.61 -21.06 4.84 3.59 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-599" stroke-dasharray="none" class="color_170" stroke="#00BAE5">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 3.59 -1.61 -24.49 1.61 -36.83 4.84 0.36 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-600" stroke-dasharray="none" class="color_171" stroke="#00BBC9">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 0.6 -4.84 -12.78 -1.61 -23.15 1.61 -14.07 4.84 -3.94 8.06 3.17 11.29 3.59 14.51 3.59 17.73 3.56 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-601" stroke-dasharray="none" class="color_172" stroke="#FC94F1">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 2.24 -8.06 -0.6 -4.84 -20.01 -1.61 -11.26 1.61 -15.08 4.84 -5.46 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.56 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-602" stroke-dasharray="none" class="color_173" stroke="#00B86C">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -0.06 -1.61 -10.6 1.61 -37.42 4.84 -9.26 8.06 3.56 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-603" stroke-dasharray="none" class="color_174" stroke="#71AE45">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 0.6 -4.84 -4.96 -1.61 -20.85 1.61 -21.38 4.84 -7.05 8.06 3.59 11.29 3.59 14.51 3.44 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-604" stroke-dasharray="none" class="color_175" stroke="#7FBB52">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 -8.78 -4.84 -27.57 -1.61 -12.93 1.61 -2.6 4.84 0.75 8.06 0.93 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-605" stroke-dasharray="none" class="color_176" stroke="#8CC95F">
+            <path fill="none" d="M-30.63,3.56 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.56 -8.06 -8.03 -4.84 -19.47 -1.61 -19.77 1.61 -4.27 4.84 -1.25 8.06 2.66 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-606" stroke-dasharray="none" class="color_177" stroke="#9AD76C">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -9.86 -1.61 -26.43 1.61 -15.26 4.84 -4.57 8.06 3.05 11.29 2.87 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-607" stroke-dasharray="none" class="color_178" stroke="#EE77A0">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.56 -4.84 -4.18 -1.61 -23.18 1.61 -24.49 4.84 -2.42 8.06 0.51 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-608" stroke-dasharray="none" class="color_179" stroke="#C09929">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 -2 -8.06 0.99 -4.84 -9.38 -1.61 -18.76 1.61 -21 4.84 -0.06 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-609" stroke-dasharray="none" class="color_180" stroke="#DBA3F9">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.5 -8.06 3.2 -4.84 0.9 -1.61 -40.92 1.61 -20.04 4.84 3.59 8.06 3.17 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-610" stroke-dasharray="none" class="color_181" stroke="#FF7AAD">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -2.12 -1.61 -20.49 1.61 -37.16 4.84 2.39 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-611" stroke-dasharray="none" class="color_182" stroke="#CA7EF6">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 2.93 -8.06 0 -4.84 -17.32 -1.61 -12.54 1.61 -17.02 4.84 -6.24 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-612" stroke-dasharray="none" class="color_183" stroke="#FFB75A">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.56 -11.29 3.59 -8.06 3.59 -4.84 -18.85 -1.61 -30.23 1.61 -7.26 4.84 1.41 8.06 1.17 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-613" stroke-dasharray="none" class="color_184" stroke="#4CB25B">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.41 -4.84 2.93 -1.61 -9.8 1.61 -29.81 4.84 -13.56 8.06 -3.34 11.29 3.56 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-614" stroke-dasharray="none" class="color_185" stroke="#39B27A">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.56 -17.73 3.59 -14.51 3.59 -11.29 3.56 -8.06 3.59 -4.84 -9.5 -1.61 -29.39 1.61 -5.76 4.84 -8.57 8.06 0.48 11.29 2.6 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-615" stroke-dasharray="none" class="color_186" stroke="#5AC067">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 1.32 -4.84 -13.44 -1.61 -17.98 1.61 -21.35 4.84 -2.33 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-616" stroke-dasharray="none" class="color_187" stroke="#54D168">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 2.75 -11.29 -3.58 -8.06 -7.14 -4.84 -18.22 -1.61 -11.62 1.61 -10.69 4.84 1.91 8.06 3.59 11.29 3.56 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-617" stroke-dasharray="none" class="color_188" stroke="#77DC81">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.5 -11.29 3.59 -8.06 3.59 -4.84 3.44 -1.61 -16.61 1.61 -31.12 4.84 -12.63 8.06 3.26 11.29 3.59 14.51 3.59 17.73 3.56 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-618" stroke-dasharray="none" class="color_189" stroke="#00C9D7">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.56 -4.84 -2.06 -1.61 -23.83 1.61 -33.09 4.84 2.06 8.06 3.59 11.29 3.41 14.51 3.35 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-619" stroke-dasharray="none" class="color_190" stroke="#A9A129">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 1.88 -1.61 -38.05 1.61 -19.32 4.84 -1.85 8.06 3.59 11.29 3.56 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-620" stroke-dasharray="none" class="color_191" stroke="#FF8057">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 -5.82 -1.61 -22.7 1.61 -18.01 4.84 -10.81 8.06 3.56 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-621" stroke-dasharray="none" class="color_192" stroke="#FF5EA0">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 -5.17 -4.84 -7.26 -1.61 -20.61 1.61 -21.21 4.84 0.51 8.06 3.56 11.29 3.59 14.51 3.59 17.73 3.56 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-622" stroke-dasharray="none" class="color_193" stroke="#FFAD69">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 3.59 -1.61 -32.38 1.61 -32.17 4.84 3.59 8.06 3.59 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-623" stroke-dasharray="none" class="color_194" stroke="#1AC380">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.5 -11.29 3.59 -8.06 3.59 -4.84 -12.75 -1.61 -13.71 1.61 -6.63 4.84 -10.15 8.06 -10.45 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-624" stroke-dasharray="none" class="color_195" stroke="#52A1F7">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.53 -11.29 3.41 -8.06 -8.42 -4.84 -4.72 -1.61 -6.06 1.61 -5.11 4.84 -11.89 8.06 -13.77 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-625" stroke-dasharray="none" class="color_196" stroke="#DF79D4">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 1.64 -8.06 1.41 -4.84 -0.75 -1.61 -5.23 1.61 -8.36 4.84 -22.04 8.06 -13.26 11.29 3.59 14.51 3.56 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-626" stroke-dasharray="none" class="color_197" stroke="#ED86E2">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 3.59 -8.06 3.59 -4.84 0.6 -1.61 -26.55 1.61 -31.81 4.84 1.2 8.06 2.78 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-627" stroke-dasharray="none" class="color_198" stroke="#00D0FF">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.59 -17.73 3.59 -14.51 3.59 -11.29 1.2 -8.06 -0.15 -4.84 -4.09 -1.61 -17.71 1.61 -26.94 4.84 -2.48 8.06 3.59 11.29 3.56 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+          <g transform="translate(80.1,75.13)" id="img-86977355-628" stroke-dasharray="none" class="color_199" stroke="#FF9F5C">
+            <path fill="none" d="M-30.63,3.59 L -27.41 3.59 -24.18 3.59 -20.96 3.56 -17.73 3.59 -14.51 3.59 -11.29 3.47 -8.06 3.59 -4.84 3.59 -1.61 -21.95 1.61 -21.62 4.84 -13.17 8.06 -0.48 11.29 3.59 14.51 3.59 17.73 3.59 20.96 3.59 24.18 3.59 27.41 3.59 30.63 3.59" class="primitive"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+  <g class="guide ylabels" font-size="2.82" font-family="'PT Sans Caption','Helvetica Neue','Helvetica',sans-serif" fill="#6C606B" id="img-86977355-629">
+    <g transform="translate(44.86,78.71)" id="img-86977355-630">
+      <g class="primitive">
+        <text text-anchor="end" dy="0.35em">0</text>
+      </g>
+    </g>
+    <g transform="translate(44.86,42.86)" id="img-86977355-631">
+      <g class="primitive">
+        <text text-anchor="end" dy="0.35em">50</text>
+      </g>
+    </g>
+    <g transform="translate(44.86,7)" id="img-86977355-632">
+      <g class="primitive">
+        <text text-anchor="end" dy="0.35em">100</text>
+      </g>
+    </g>
+  </g>
+  <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="img-86977355-633">
+    <g transform="translate(36.84,42.86)" id="img-86977355-634">
+      <g class="primitive">
+        <text text-anchor="end" dy="0.35em">Occupied area (%)</text>
+      </g>
+    </g>
+  </g>
+</g>
+<defs>
+  <clipPath id="img-86977355-415">
+    <path d="M45.86,5 L 114.35 5 114.35 80.71 45.86 80.71" />
+  </clipPath>
+</defs>
+</svg>
