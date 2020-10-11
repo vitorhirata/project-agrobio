@@ -70,12 +70,12 @@ namespace worker{
       std::string fileName, std::string varNames, Parameter parameter);
 }
 
-#include "Structs.hpp"
-#include "Variety.hpp"
-#include "Patch.hpp"
-#include "Ambient.hpp"
-#include "Household.hpp"
-#include "Network.hpp"
-#include "Model.hpp"
-#include "Metrics.hpp"
+#include "model/Structs.hpp"
+#include "model/Variety.hpp"
+#include "model/Patch.hpp"
+#include "model/Ambient.hpp"
+#include "model/Household.hpp"
+#include "model/Network.hpp"
+#include "model/Model.hpp"
+#include "model/Metrics.hpp"
 #include "Worker.hpp"
