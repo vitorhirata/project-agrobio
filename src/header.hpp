@@ -23,8 +23,8 @@ static std::normal_distribution<double> gaussK(0.5,0.15);
 static std::normal_distribution<double> gaussQ(0.5,0.15);
 
 /* Builted class and functions */
+class Parameter;
 struct VarietyData;
-struct Parameter;
 struct Result;
 class Variety;
 class Patch;
@@ -70,6 +70,7 @@ namespace worker{
       std::string fileName, std::string varNames, Parameter parameter);
 }
 
+#include "model/Parameter.hpp"
 #include "model/Structs.hpp"
 #include "model/Variety.hpp"
 #include "model/Patch.hpp"
