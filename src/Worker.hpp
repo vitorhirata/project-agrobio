@@ -9,7 +9,7 @@ namespace worker{
     for(int run = 0; run < parameter.nRun; ++run){
       Model model(parameter);
       resultTemp = model.runStandard();
-      metrics::sumResults(&result, &resultTemp);
+      result.sumResult(&resultTemp);
     }
     time_t now = time(NULL);
     std::string timestr = to_string(now);
@@ -190,7 +190,7 @@ namespace worker{
       for(int run = 0; run < parameter.nRun; ++run){
         Model model(parameter);
         resultTemp = model.runStandard();
-        metrics::sumResults(&result, &resultTemp);
+        result.sumResult(&resultTemp);
       }
 
       int hdSize = parameter.latticeSize / sqrt(parameter.numberHousehold);
@@ -284,7 +284,7 @@ namespace worker{
       for(int run = 0; run < parameter.nRun; ++run){
         Model model(parameter);
         resultTemp = model.runFixedPoint();
-        metrics::sumResults(&result, &resultTemp);
+        result.sumResult(&resultTemp);
       }
 
       int hdSize = parameter.latticeSize / sqrt(parameter.numberHousehold);
