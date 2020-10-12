@@ -25,6 +25,8 @@ public:
   float crossingDeviation;
   float deathProbability;
   Parameter();
+  void set_parameter(char parameter_key, float value);
+  static std::vector<float> get_parameter_variation(char parameter_key);
 };
 
 // parameter constructor, default values
@@ -50,5 +52,113 @@ Parameter::Parameter()
   , percentageNewRandomVar(0.1)
   , crossingDeviation(0.005)
   , deathProbability(0.2) {}
+
+
+
+void Parameter::set_parameter(char parameter_key, float value){
+  switch (parameter_key){
+    case 'T':
+      outsideTradeLimit = value;
+      break;
+    case 'L':
+      if(round(sqrt(value)) * round(sqrt(value)) != value){
+        cout << "ERROR: the latticeSize should be a perfect square.";
+        cout << endl;
+        exit(-1);
+      }
+      latticeSize = value;
+      numberHousehold = value;
+      break;
+    case 'H':
+      numberHabitat = value;
+      break;
+    case 'v':
+      if(value > numberInitialVariety){
+        cout << "ERROR: the number of initial variety per HD should be ";
+        cout << "smaller than total number of initial variety." << endl;
+        exit(-1);
+      }
+      numberInitialVarietyHD = value;
+      break;
+    case 'V':
+      numberInitialVariety = value;
+      break;
+    case 'a':
+      alpha = value;
+      break;
+    case 'R':
+      networkType = value;
+      break;
+    case 'N':
+      probabilityNewVar = value;
+      break;
+    case 'b':
+      betaWT = value;
+      break;
+    case 'r':
+      numberResources = value;
+      break;
+    case 'S':
+      selectionStrength = value;
+      break;
+    case 'Q':
+      percentageNewRandomVar = value;
+      break;
+    case 'C':
+      crossingDeviation = value;
+      break;
+    case 'M':
+      deathProbability = value;
+    default:
+      cout << "ERROR: invalid character parameter key. '";
+      cout << parameter_key << "' is not a valid parameter key" << endl;
+      exit(-1);
+  }
+}
+
+std::vector<float> Parameter::get_parameter_variation(char parameter_key){
+  switch (parameter_key){
+    case 'T':
+      return std::vector<float> {
+        0, 0.05, 0.1, 0.15, 0.20, 0.225, 0.25, 0.275, 0.3, 0.35, 0.5, 0.8, 1.0};
+    case 'L':
+      return std::vector<float> {25, 36, 49, 64};
+    case 'H':
+      return std::vector<float> {
+        1, 2, 4, 8, 15, 25, 35, 49, 1000, 2401};
+    case 'v':
+      return std::vector<float> {
+        1, 2, 3, 4, 5, 10};
+    case 'V':
+      return std::vector<float> {
+        10, 15, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+    case 'a':
+      return std::vector<float> {
+        0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0};
+    case 'R':
+      return std::vector<float> {0, 1, 2};
+    case 'N':
+      return std::vector<float> {
+        0, 0.0001, 0.0005, 0.001, 0.003, 0.005, 0.007, 0.01, 0.05};
+    case 'b':
+      return std::vector<float> {
+        0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0};
+    case 'r':
+      return std::vector<float> {1, 3, 5, 7, 10};
+    case 'S':
+      return std::vector<float> {1, 3, 5, 10, 15, 20, 30, 50, 100};
+    case 'Q':
+      return std::vector<float> {0.01, 0.25, 0.05, 0.75, 0.1, 0.2, 0.3};
+    case 'C':
+      return std::vector<float> {0, 0.005, 0.01, 0.05, 0.08, 0.1};
+    case 'M':
+      return std::vector<float> {0, 0.01, 0.05, 0.1, 0.16, 0.2, 0.3,
+        0.4, 0.5};
+    default:
+      cout << "ERROR: invalid character parameter key. '";
+      cout << parameter_key << "' is not a valid parameter key" << endl;
+      exit(-1);
+  }
+}
 
 #endif

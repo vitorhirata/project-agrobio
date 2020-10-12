@@ -181,60 +181,8 @@ namespace worker{
         "quantity; frequency; param", parameter);
 
     for(auto paramValue : paramList){
-      switch (param){
-        case 'T':
-          parameter.outsideTradeLimit = paramValue;
-          break;
-        case 'L':
-          if(round(sqrt(paramValue)) * round(sqrt(paramValue)) != paramValue){
-            cout << "ERROR: the latticeSize should be a perfect square.";
-            cout << endl;
-            exit(-1);
-          }
-          parameter.latticeSize = paramValue;
-          parameter.numberHousehold = paramValue;
-          break;
-        case 'H':
-          parameter.numberHabitat = paramValue;
-          break;
-        case 'v':
-          if(paramValue > parameter.numberInitialVariety){
-            cout << "ERROR: the number of initial variety per HD should be ";
-            cout << "smaller than total number of initial variety." << endl;
-            exit(-1);
-          }
-          parameter.numberInitialVarietyHD = paramValue;
-          break;
-        case 'V':
-          parameter.numberInitialVariety = paramValue;
-          break;
-        case 'a':
-          parameter.alpha = paramValue;
-          break;
-        case 'R':
-          parameter.networkType = paramValue;
-          break;
-        case 'N':
-          parameter.probabilityNewVar = paramValue;
-          break;
-        case 'b':
-          parameter.betaWT = paramValue;
-          break;
-        case 'r':
-          parameter.numberResources = paramValue;
-          break;
-        case 'S':
-          parameter.selectionStrength = paramValue;
-          break;
-        case 'Q':
-          parameter.percentageNewRandomVar = paramValue;
-          break;
-        case 'C':
-          parameter.crossingDeviation = paramValue;
-          break;
-        case 'M':
-          parameter.deathProbability = paramValue;
-      }
+      parameter.set_parameter(param, paramValue);
+
       clock_t tStart = clock();
       Result result(parameter.maxTime/parameter.timeInterval,
           round(1 / 0.05), parameter.latticeSize, 17);
@@ -322,114 +270,11 @@ namespace worker{
         "test/" + timestr + "_varietyQuantity_" + param + ".csv",
         "quantity; frequency; param", parameter);
 
-    std::vector<float> paramList;
-    switch (param){
-      case 'T':
-        paramList = std::vector<float> {
-          0, 0.05, 0.1, 0.15, 0.20, 0.225, 0.25, 0.275, 0.3, 0.35, 0.5, 0.8, 1.0};
-        break;
-      case 'L':
-        paramList = std::vector<float> {25, 36, 49, 64};
-        break;
-      case 'H':
-        paramList = std::vector<float> {
-          1, 2, 4, 8, 15, 25, 35, 49, 1000, 2401};
-        break;
-      case 'v':
-        paramList = std::vector<float> {
-          1, 2, 3, 4, 5, 10};
-        break;
-      case 'V':
-        paramList = std::vector<float> {
-          10, 15, 20, 30, 40, 50, 60, 70, 80, 90, 100};
-        break;
-      case 'a':
-        paramList = std::vector<float> {
-          0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0};
-        break;
-      case 'R':
-        paramList = std::vector<float> {0, 1, 2};
-        break;
-      case 'N':
-        paramList = std::vector<float> {
-          0, 0.0001, 0.0005, 0.001, 0.003, 0.005, 0.007, 0.01, 0.05};
-        break;
-      case 'b':
-        paramList = std::vector<float> {
-          0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0};
-        break;
-      case 'r':
-        paramList = std::vector<float> {1, 3, 5, 7, 10};
-        break;
-      case 'S':
-        paramList = std::vector<float> {1, 3, 5, 10, 15, 20, 30, 50, 100};
-        break;
-      case 'Q':
-        paramList = std::vector<float> {0.01, 0.25, 0.05, 0.75, 0.1, 0.2, 0.3};
-        break;
-      case 'C':
-        paramList = std::vector<float> {0, 0.005, 0.01, 0.05, 0.08, 0.1};
-        break;
-      case 'M':
-        paramList = std::vector<float> {0, 0.01, 0.05, 0.1, 0.16, 0.2, 0.3,
-          0.4, 0.5};
-    }
+    std::vector<float> paramList = Parameter::get_parameter_variation(param);
 
     for(auto paramValue : paramList){
-      switch (param){
-        case 'T':
-          parameter.outsideTradeLimit = paramValue;
-          break;
-        case 'L':
-          if (round(sqrt(paramValue)) * round(sqrt(paramValue)) != paramValue){
-            cout << "ERROR: the latticeSize should be a perfect square.";
-            cout << endl;
-            exit(-1);
-          }
-          parameter.latticeSize = paramValue;
-          parameter.numberHousehold = paramValue;
-          break;
-        case 'H':
-          parameter.numberHabitat = paramValue;
-          break;
-        case 'v':
-          if(paramValue > parameter.numberInitialVariety){
-            cout << "ERROR: the number of initial variety per HD should be ";
-            cout << "smaller than total number of initial variety." << endl;
-            exit(-1);
-          }
-          parameter.numberInitialVarietyHD = paramValue;
-          break;
-        case 'V':
-          parameter.numberInitialVariety = paramValue;
-          break;
-        case 'a':
-          parameter.alpha = paramValue;
-          break;
-        case 'R':
-          parameter.networkType = paramValue;
-          break;
-        case 'N':
-          parameter.probabilityNewVar = paramValue;
-          break;
-        case 'b':
-          parameter.betaWT = paramValue;
-          break;
-        case 'r':
-          parameter.numberResources = paramValue;
-          break;
-        case 'S':
-          parameter.selectionStrength = paramValue;
-          break;
-        case 'Q':
-          parameter.percentageNewRandomVar = paramValue;
-          break;
-        case 'C':
-          parameter.crossingDeviation = paramValue;
-          break;
-        case 'M':
-          parameter.deathProbability = paramValue;
-      }
+      parameter.set_parameter(param, paramValue);
+
       clock_t tStart = clock();
       Result result(1, round(1 / 0.05), parameter.latticeSize, 17);
       Result resultTemp(0, 0, 0, 0);
