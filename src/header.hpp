@@ -25,7 +25,8 @@ static std::normal_distribution<double> gaussQ(0.5,0.15);
 /* Builted class and functions */
 class Parameter;
 struct VarietyData;
-struct Result;
+struct HDParameter;
+class Result;
 class Variety;
 class Patch;
 class Ambient;
@@ -73,6 +74,7 @@ bool is_valid_key(char parameter_key);
 
 #include "model/Parameter.hpp"
 #include "model/Structs.hpp"
+#include "model/Result.hpp"
 #include "model/Variety.hpp"
 #include "model/Patch.hpp"
 #include "model/Ambient.hpp"
