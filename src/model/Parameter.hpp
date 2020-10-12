@@ -24,6 +24,7 @@ public:
   float percentageNewRandomVar;
   float crossingDeviation;
   float deathProbability;
+  static std::vector<char> keys;
   Parameter();
   void set_parameter(char parameter_key, float value);
   static std::vector<float> get_parameter_variation(char parameter_key);
@@ -160,5 +161,8 @@ std::vector<float> Parameter::get_parameter_variation(char parameter_key){
       exit(-1);
   }
 }
+
+std::vector<char> Parameter::keys =
+  {'T', 'L', 'H', 'v', 'V', 'a', 'R', 'N', 'b', 'r', 'S', 'Q', 'C', 'M'};
 
 #endif

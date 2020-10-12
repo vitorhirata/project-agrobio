@@ -69,6 +69,7 @@ namespace worker{
   fstream openFile(
       std::string fileName, std::string varNames, Parameter parameter);
 }
+bool is_valid_key(char parameter_key);
 
 #include "model/Parameter.hpp"
 #include "model/Structs.hpp"

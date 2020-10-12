@@ -29,12 +29,9 @@ int main(int argc, char *argv[]){
         cout << "assume" << endl;
         exit(-1);
       }
-      if (argv[2][0] == 'T' || argv[2][0] == 'L' ||
-          argv[2][0] == 'H' || argv[2][0] == 'v' || argv[2][0] == 'V' ||
-          argv[2][0] == 'a' || argv[2][0] == 'R' || argv[2][0] == 'N' ||
-          argv[2][0] == 'b' || argv[2][0] == 'r' || argv[2][0] == 'M' ||
-          argv[2][0] == 'S' || argv[2][0] == 'Q' || argv[2][0] == 'C')
+      if (is_valid_key(argv[2][0])){
         param = argv[2][0];
+      }
       else{
         cout << "ERROR: Invalid parameter variation." << endl;
         exit(-1);
@@ -58,11 +55,7 @@ int main(int argc, char *argv[]){
         cout << "'f' mode must have only the parameter that will vary" << endl;
         exit(-1);
       }
-      if (argv[2][0] == 'T' || argv[2][0] == 'L' ||
-          argv[2][0] == 'H' || argv[2][0] == 'v' || argv[2][0] == 'V' ||
-          argv[2][0] == 'a' || argv[2][0] == 'R' || argv[2][0] == 'N' ||
-          argv[2][0] == 'b' || argv[2][0] == 'r' || argv[2][0] == 'M' ||
-          argv[2][0] == 'S' || argv[2][0] == 'Q' || argv[2][0] == 'C')
+      if (is_valid_key(argv[2][0]))
         param = argv[2][0];
       else{
         cout << "ERROR: Invalid parameter variation." << endl;
@@ -93,4 +86,12 @@ int main(int argc, char *argv[]){
       exit(-1);
   }
   return 0;
+}
+
+bool is_valid_key(char parameter_key){
+  return std::find(
+      Parameter::keys.begin(),
+      Parameter::keys.end(),
+      parameter_key
+  ) != Parameter::keys.end();
 }
