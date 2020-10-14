@@ -33,6 +33,7 @@ class Ambient;
 class Household;
 class Network;
 class Model;
+class ModelRunner;
 namespace metrics{
   void sumResults(Result* result, Result* resultTemp);
   float computeVarietyMeanProfile(Household* household,
@@ -61,14 +62,6 @@ namespace metrics{
   void printState(int t, Patch* grid, const int t_latticeSize);
   void floatToRGB(int n, int* R, int* G, int* B);
   void printParameters(fstream& arquivo, Parameter parameter);
-}
-namespace worker{
-  void Run_standard(void);
-  void Run_plot(void);
-  void Run_varParamFixedPoints(char param);
-  void Run_varParam(char param, std::vector<float> paramList);
-  fstream openFile(
-      std::string fileName, std::string varNames, Parameter parameter);
 }
 bool is_valid_key(char parameter_key);
 
