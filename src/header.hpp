@@ -61,7 +61,6 @@ namespace metrics{
   float computeCorrelation(Household* household, int numberHD);
   void printState(int t, Patch* grid, const int t_latticeSize);
   void floatToRGB(int n, int* R, int* G, int* B);
-  void printParameters(fstream& arquivo, Parameter parameter);
 }
 bool is_valid_key(char parameter_key);
 

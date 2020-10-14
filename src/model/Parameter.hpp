@@ -27,6 +27,7 @@ public:
   static std::vector<char> keys;
   Parameter();
   void set_parameter(char parameter_key, float value);
+  void write_to_file(fstream& arquivo);
   static std::vector<float> get_parameter_variation(char parameter_key);
 };
 
@@ -160,6 +161,31 @@ std::vector<float> Parameter::get_parameter_variation(char parameter_key){
       cout << parameter_key << "' is not a valid parameter key" << endl;
       exit(-1);
   }
+}
+
+void Parameter::write_to_file(fstream& arquivo){
+    arquivo << "### PARAMETERS VALUE ###" << endl;
+    arquivo << "### LATTICESIZE = " << latticeSize;
+    arquivo << ", NVARIETY = " << numberInitialVariety;
+    arquivo << ", NVARIETYHD = " << numberInitialVarietyHD;
+    arquivo << ", NRESOURCE = " << numberResources;
+    arquivo << ", NRESOURCEDIST = " << numberHabitat;
+    arquivo << ", NETWORKTYPE = " << networkType;
+    arquivo << ", PROBABILITYCONNECTION = " << probabilyConnectionER;
+    arquivo << ", KWT = " << kWT;
+    arquivo << ", BETAWT = " << betaWT;
+    arquivo << ", MSF = " << mSF;
+    arquivo << ", OUTSIDETRADELIMIT = " << outsideTradeLimit;
+    arquivo << ", SELECTIONSTRENGTH = " << selectionStrength;
+    arquivo << ", ALPHA = " << alpha;
+    arquivo << ", NHOUSEHOLD = " << numberHousehold;
+    arquivo << ", PROBABILITYNEWVAR = " << probabilityNewVar;
+    arquivo << ", PERCENTAGENEWRANDVAR = " << percentageNewRandomVar;
+    arquivo << ", CROSSINGDEVIATION = " << crossingDeviation;
+    arquivo << ", DEATHPROBABILITY = " << deathProbability;
+    arquivo << ", MAXTIME = " << maxTime;
+    arquivo << ", TIMEINTERVAL = " << timeInterval;
+    arquivo << ", NRUN = " << nRun << " ###" << endl << endl;
 }
 
 std::vector<char> Parameter::keys =

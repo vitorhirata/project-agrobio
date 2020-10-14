@@ -234,31 +234,6 @@ namespace metrics{
     return correlation;
   }
 
-  void printParameters(fstream& arquivo, Parameter parameter){
-    arquivo << "### PARAMETERS VALUE ###" << endl;
-    arquivo << "### LATTICESIZE = " << parameter.latticeSize;
-    arquivo << ", NVARIETY = " << parameter.numberInitialVariety;
-    arquivo << ", NVARIETYHD = " << parameter.numberInitialVarietyHD;
-    arquivo << ", NRESOURCE = " << parameter.numberResources;
-    arquivo << ", NRESOURCEDIST = " << parameter.numberHabitat;
-    arquivo << ", NETWORKTYPE = " << parameter.networkType;
-    arquivo << ", PROBABILITYCONNECTION = " << parameter.probabilyConnectionER;
-    arquivo << ", KWT = " << parameter.kWT;
-    arquivo << ", BETAWT = " << parameter.betaWT;
-    arquivo << ", MSF = " << parameter.mSF;
-    arquivo << ", OUTSIDETRADELIMIT = " << parameter.outsideTradeLimit;
-    arquivo << ", SELECTIONSTRENGTH = " << parameter.selectionStrength;
-    arquivo << ", ALPHA = " << parameter.alpha;
-    arquivo << ", NHOUSEHOLD = " << parameter.numberHousehold;
-    arquivo << ", PROBABILITYNEWVAR = " << parameter.probabilityNewVar;
-    arquivo << ", PERCENTAGENEWRANDVAR = " << parameter.percentageNewRandomVar;
-    arquivo << ", CROSSINGDEVIATION = " << parameter.crossingDeviation;
-    arquivo << ", DEATHPROBABILITY = " << parameter.deathProbability;
-    arquivo << ", MAXTIME = " << parameter.maxTime;
-    arquivo << ", TIMEINTERVAL = " << parameter.timeInterval;
-    arquivo << ", NRUN = " << parameter.nRun << " ###" << endl << endl;
-  }
-
   void printState(int t, Patch* grid, const int t_latticeSize){
     std::string name ("test/plot/standard");
     name += std::to_string(t);

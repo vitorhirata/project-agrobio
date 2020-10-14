@@ -353,7 +353,7 @@ fstream ModelRunner::open_file(
     std::string fileName, std::string varNames, Parameter parameter){
   fstream file;
   file.open(fileName,ios::out);
-  metrics::printParameters(file, parameter);
+  parameter.write_to_file(file);
   file << varNames << endl;
   return file;
 }
