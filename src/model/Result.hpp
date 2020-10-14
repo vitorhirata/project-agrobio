@@ -21,6 +21,8 @@ public:
   Result(int timeSize = 0, int histogramSize = 0, int HDsize = 0,
       int varQuantSize = 0);
   void sumResult(Result* resultToSum);
+private:
+  void sumResultElement(std::vector<float>* v1, std::vector<float>* v2);
 };
 
 // result constructor, default values
@@ -44,61 +46,28 @@ Result::Result(int timeSize, int histogramSize, int HDsize, int varQuantSize)
 void Result::sumResult(Result* resultToSum){
   std::transform(numberVariety.begin(),
       numberVariety.end(), (*resultToSum).numberVariety.begin(),
-      numberVariety.begin(), std::plus<float>());
-  std::transform(meanVarietyHD.begin(),
-      meanVarietyHD.end(), (*resultToSum).meanVarietyHD.begin(),
-      meanVarietyHD.begin(), std::plus<float>());
-  std::transform(totalPunctuation.begin(),
-      totalPunctuation.end(),
-      (*resultToSum).totalPunctuation.begin(),
-      totalPunctuation.begin(), std::plus<float>());
-  std::transform(productivityPunctuation.begin(),
-      productivityPunctuation.end(),
-      (*resultToSum).productivityPunctuation.begin(),
-      productivityPunctuation.begin(), std::plus<float>());
-  std::transform(simpsonCommunity.begin(),
-      simpsonCommunity.end(),
-      (*resultToSum).simpsonCommunity.begin(),
-      simpsonCommunity.begin(), std::plus<float>());
-  std::transform(shannonCommunity.begin(),
-      shannonCommunity.end(),
-      (*resultToSum).shannonCommunity.begin(),
-      shannonCommunity.begin(), std::plus<float>());
-  std::transform(bergerParkerCommunity.begin(),
-      bergerParkerCommunity.end(),
-      (*resultToSum).bergerParkerCommunity.begin(),
-      bergerParkerCommunity.begin(), std::plus<float>());
-  std::transform(simpsonHD.begin(),
-      simpsonHD.end(),
-      (*resultToSum).simpsonHD.begin(),
-      simpsonHD.begin(), std::plus<float>());
-  std::transform(shannonHD.begin(),
-      shannonHD.end(),
-      (*resultToSum).shannonHD.begin(),
-      shannonHD.begin(), std::plus<float>());
-  std::transform(varietyDistribution.begin(),
-      varietyDistribution.end(),
-      (*resultToSum).varietyDistribution.begin(),
-      varietyDistribution.begin(), std::plus<float>());
-  std::transform(varietyQuantity.begin(),
-      varietyQuantity.end(),
-      (*resultToSum).varietyQuantity.begin(),
-      varietyQuantity.begin(), std::plus<float>());
-  std::transform(bergerParkerHD.begin(),
-      bergerParkerHD.end(),
-      (*resultToSum).bergerParkerHD.begin(),
-      bergerParkerHD.begin(), std::plus<float>());
-  std::transform(productivityFrequency.begin(),
-      productivityFrequency.end(),
-      (*resultToSum).productivityFrequency.begin(),
-      productivityFrequency.begin(), std::plus<float>());
-  std::transform(qualityFrequency.begin(),
-      qualityFrequency.end(),
-      (*resultToSum).qualityFrequency.begin(),
-      qualityFrequency.begin(), std::plus<float>());
-  std::transform(hdDistribution.begin(),
-      hdDistribution.end(), (*resultToSum).hdDistribution.begin(),
-      hdDistribution.begin(), std::plus<float>());
+      numberVariety.begin(), std::plus<int>());
+
+  sumResultElement(&meanVarietyHD, &((*resultToSum).meanVarietyHD));
+  sumResultElement(&totalPunctuation, &((*resultToSum).totalPunctuation));
+  sumResultElement(&productivityPunctuation, &((*resultToSum).productivityPunctuation));
+  sumResultElement(&simpsonCommunity, &((*resultToSum).simpsonCommunity));
+  sumResultElement(&shannonCommunity, &((*resultToSum).shannonCommunity));
+  sumResultElement(&bergerParkerCommunity, &((*resultToSum).bergerParkerCommunity));
+  sumResultElement(&simpsonHD, &((*resultToSum).simpsonHD));
+  sumResultElement(&shannonHD, &((*resultToSum).shannonHD));
+  sumResultElement(&varietyDistribution, &((*resultToSum).varietyDistribution));
+  sumResultElement(&varietyQuantity, &((*resultToSum).varietyQuantity));
+  sumResultElement(&bergerParkerHD, &((*resultToSum).bergerParkerHD));
+  sumResultElement(&productivityFrequency, &((*resultToSum).productivityFrequency));
+  sumResultElement(&qualityFrequency, &((*resultToSum).qualityFrequency));
+  sumResultElement(&hdDistribution, &((*resultToSum).hdDistribution));
 }
+
+void Result::sumResultElement(std::vector<float>* v1, std::vector<float>* v2){
+  std::transform(v1->begin(), v1->end(), v2->begin(), v1->begin(),
+      std::plus<float>());
+}
+
 
 #endif
