@@ -24,47 +24,24 @@ void ModelRunner::run_standard(void){
     resultTemp = model.runStandard();
     result.sumResult(&resultTemp);
   }
-  time_t now = time(NULL);
-  std::string timestr = to_string(now);
-
-  int hdSize = parameter.latticeSize / sqrt(parameter.numberHousehold);
-  hdSize = hdSize * hdSize;
-  std::string header ("time; nVar; meanHD; totalPunctuation; ");
-  header.append("productivityPunctuation; qualityPunctuation; ");
-  header.append("bergerCommunity; simpsonCommunity; shannonCommunity; ");
-  header.append("bergerHD; simpsonHD; shannonHD");
-  fstream timeFile = open_file(
-      "test/" + timestr + "_standard.csv", header, parameter);
-  for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i){
-    timeFile << i*parameter.timeInterval << "; ";
-    timeFile << (float) result.numberVariety[i] / parameter.nRun << "; ";
-    timeFile << (float) result.meanVarietyHD[i] / parameter.nRun << "; ";
-    timeFile << result.totalPunctuation[i] / parameter.nRun << "; ";
-    timeFile << result.productivityPunctuation[i] / parameter.nRun << "; ";
-    timeFile << (result.totalPunctuation[i]-
-        result.productivityPunctuation[i]) / parameter.nRun << "; ";
-    timeFile << result.bergerParkerCommunity[i] / (hdSize * parameter.nRun);
-    timeFile << "; " << result.simpsonCommunity[i] / parameter.nRun << "; ";
-    timeFile << result.shannonCommunity[i] / parameter.nRun << "; ";
-    timeFile << result.bergerParkerHD[i] / (hdSize * parameter.nRun) << "; ";
-    timeFile << result.simpsonHD[i] / parameter.nRun << "; ";
-    timeFile << result.shannonHD[i] / parameter.nRun << endl;
-  }
   cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
-  timeFile.close();
+
+  Data standard("standard", parameter);
+  standard.write_standard(&result);
 
   fstream histogramFile = open_file(
-      "test/" + timestr +
-      "_histogramProductivity.csv", "value; productivity; quality", parameter);
+      Data::BASE_NAME + "histogramProductivity.csv",
+      "value; productivity; quality", parameter);
   fstream hdDistFile = open_file(
-      "test/" + timestr + "_hdDistribution.csv",
+      Data::BASE_NAME + "hdDistribution.csv",
       "value; hdDist", parameter);
   fstream varietyDistFile = open_file(
-      "test/" + timestr + "_varietyDistribution.csv",  "value; varDist",
-      parameter);
+      Data::BASE_NAME + "varietyDistribution.csv",
+      "value; varDist", parameter);
   fstream varietyQuantFile = open_file(
-      "test/" + timestr + "_varietyQuantity.csv",
+      Data::BASE_NAME + "varietyQuantity.csv",
       "quantity; frequency", parameter);
+
   for(int i = 0; i < round(1 / 0.05); ++i){
     histogramFile << i*0.05 + 0.025 << "; ";
     histogramFile << 100 * result.productivityFrequency[i] / parameter.nRun;
@@ -73,6 +50,8 @@ void ModelRunner::run_standard(void){
     histogramFile << endl;
   }
 
+  int hdSize = parameter.latticeSize / sqrt(parameter.numberHousehold);
+  hdSize = hdSize * hdSize;
   for(int i = 0; i <= hdSize - 1; ++i){
     hdDistFile << i << "; " << 100*result.hdDistribution[i] / parameter.nRun;
     hdDistFile << endl;

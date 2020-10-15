@@ -33,6 +33,7 @@ class Ambient;
 class Household;
 class Network;
 class Model;
+class Data;
 class ModelRunner;
 namespace metrics{
   void sumResults(Result* result, Result* resultTemp);
@@ -74,4 +75,5 @@ bool is_valid_key(char parameter_key);
 #include "model/Network.hpp"
 #include "model/Model.hpp"
 #include "model/Metrics.hpp"
+#include "Data.hpp"
 #include "ModelRunner.hpp"
