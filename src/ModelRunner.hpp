@@ -27,50 +27,16 @@ void ModelRunner::run_standard(void){
   cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
 
   Data standard("standard", parameter);
+  Data histogram_productivity("histogramProductivity", parameter);
+  Data hd_distribution("hdDistribution", parameter);
+  Data variety_distribution("varietyDistribution", parameter);
+  Data variety_quantity("varietyQuantity", parameter);
+
   standard.write_standard(&result);
-
-  fstream histogramFile = open_file(
-      Data::BASE_NAME + "histogramProductivity.csv",
-      "value; productivity; quality", parameter);
-  fstream hdDistFile = open_file(
-      Data::BASE_NAME + "hdDistribution.csv",
-      "value; hdDist", parameter);
-  fstream varietyDistFile = open_file(
-      Data::BASE_NAME + "varietyDistribution.csv",
-      "value; varDist", parameter);
-  fstream varietyQuantFile = open_file(
-      Data::BASE_NAME + "varietyQuantity.csv",
-      "quantity; frequency", parameter);
-
-  for(int i = 0; i < round(1 / 0.05); ++i){
-    histogramFile << i*0.05 + 0.025 << "; ";
-    histogramFile << 100 * result.productivityFrequency[i] / parameter.nRun;
-    histogramFile << "; ";
-    histogramFile << 100 * result.qualityFrequency[i] / parameter.nRun;
-    histogramFile << endl;
-  }
-
-  int hdSize = parameter.latticeSize / sqrt(parameter.numberHousehold);
-  hdSize = hdSize * hdSize;
-  for(int i = 0; i <= hdSize - 1; ++i){
-    hdDistFile << i << "; " << 100*result.hdDistribution[i] / parameter.nRun;
-    hdDistFile << endl;
-  }
-  for(int i = 0; i < parameter.numberHousehold; ++i){
-    varietyDistFile << 100.0*(i+1.0) / parameter.numberHousehold << "; ";
-    varietyDistFile << 100 * result.varietyDistribution[i] / parameter.nRun;
-    varietyDistFile << endl;
-  }
-  for(int i = 0; i < result.varietyQuantity.size(); ++i){
-    varietyQuantFile << 100*(pow(10,i * 0.2)) / pow(parameter.latticeSize,2);
-    varietyQuantFile << "; ";
-    varietyQuantFile << 100*result.varietyQuantity[i]/parameter.nRun<< endl;
-  }
-
-  histogramFile.close();
-  hdDistFile.close();
-  varietyDistFile.close();
-  varietyQuantFile.close();
+  histogram_productivity.write_histogram_productivity(&result);
+  hd_distribution.write_hd_distribution(&result);
+  variety_distribution.write_variety_distribution(&result);
+  variety_quantity.write_variety_quantity(&result);
 }
 
 void ModelRunner::run_plot(void){
