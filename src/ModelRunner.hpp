@@ -49,28 +49,12 @@ void ModelRunner::run_var_param(char param, std::vector<float> paramList){
   if(param == 'm')
     parameter.nRun = 1;
 
-  time_t now = time(NULL);
-  std::string timestr = to_string(now);
-
-  std::string header ("time; nVar; meanHD; totalPunctuation; ");
-  header.append("productivityPunctuation; qualityPunctuation; ");
-  header.append("bergerCommunity; simpsonCommunity; shannonCommunity; ");
-  header.append("bergerHD; simpsonHD; shannonHD; param");
-  fstream timeFile = open_file(
-      "test/" + timestr + "_varParam_" + param + ".csv",
-      header, parameter);
-  fstream histogramFile = open_file(
-      "test/" + timestr + "_histogramProductivityVar_" + param + ".csv",
-      "value; productivity; quality; param", parameter);
-  fstream hdDistFile = open_file(
-      "test/" + timestr + "_hdDistribution_" + param + ".csv",
-      "value; hdDist; param", parameter);
-  fstream varietyDistFile = open_file(
-      "test/" + timestr + "_varietyDistribution_" + param + ".csv",
-      "value; varDist; param", parameter);
-  fstream varietyQuantFile = open_file(
-      "test/" + timestr + "_varietyQuantity_" + param + ".csv",
-      "quantity; frequency; param", parameter);
+  std::string param_str (1, param);
+  Data timeline("varParam_" + param_str, parameter);
+  Data histogram_productivity("histogramProductivityVar_" + param_str, parameter);
+  Data hd_distribution("hdDistribution_" + param_str, parameter);
+  Data variety_distribution("varietyDistribution_" + param_str, parameter);
+  Data variety_quantity("varietyQuantity_" + param_str, parameter);
 
   for(auto paramValue : paramList){
     parameter.set_parameter(param, paramValue);
@@ -84,56 +68,15 @@ void ModelRunner::run_var_param(char param, std::vector<float> paramList){
       resultTemp = model.runStandard();
       result.sumResult(&resultTemp);
     }
-
-    int hdSize = parameter.latticeSize / sqrt(parameter.numberHousehold);
-    hdSize = hdSize * hdSize;
-    for(int i = 0; i < parameter.maxTime/parameter.timeInterval; ++i){
-      timeFile << i * parameter.timeInterval << "; ";
-      timeFile << (float) result.numberVariety[i] / parameter.nRun << "; ";
-      timeFile << (float) result.meanVarietyHD[i] / parameter.nRun<< "; ";
-      timeFile << result.totalPunctuation[i] / parameter.nRun << "; ";
-      timeFile << result.productivityPunctuation[i] / parameter.nRun << "; ";
-      timeFile << (result.totalPunctuation[i]-
-          result.productivityPunctuation[i]) / parameter.nRun << "; ";
-      timeFile << result.bergerParkerCommunity[i] / (hdSize*parameter.nRun);
-      timeFile << "; " << result.simpsonCommunity[i]/parameter.nRun << "; ";
-      timeFile << result.shannonCommunity[i] / parameter.nRun << "; ";
-      timeFile << result.bergerParkerHD[i] / (hdSize * parameter.nRun);
-      timeFile << "; " << result.simpsonHD[i] / parameter.nRun << "; ";
-      timeFile << result.shannonHD[i] / parameter.nRun << "; ";
-      timeFile << paramValue << endl;
-    }
-    for(int i = 0; i < round(1 / 0.05); ++i){
-      histogramFile << i*0.05 + 0.025 << "; ";
-      histogramFile << 100*result.productivityFrequency[i] / parameter.nRun;
-      histogramFile << "; ";
-      histogramFile << 100 * result.qualityFrequency[i] / parameter.nRun;
-      histogramFile << "; " << paramValue << endl;
-    }
-    for(int i = 0; i <= hdSize - 1; ++i){
-      hdDistFile << i << "; ";
-      hdDistFile << 100 * result.hdDistribution[i] / parameter.nRun << "; ";
-      hdDistFile << paramValue << endl;
-    }
-    for(int i = 0; i < parameter.numberHousehold; ++i){
-      varietyDistFile << 100.0*(i+1) / parameter.numberHousehold << "; ";
-      varietyDistFile << 100*result.varietyDistribution[i] / parameter.nRun;
-      varietyDistFile << "; " << paramValue << endl;
-    }
-    for(int i = 0; i < result.varietyQuantity.size(); ++i){
-      varietyQuantFile << 100*(pow(10,i*0.2)) / pow(parameter.latticeSize,2);
-      varietyQuantFile << "; ";
-      varietyQuantFile << 100 * result.varietyQuantity[i] / parameter.nRun;
-      varietyQuantFile << "; " << paramValue << endl;
-    }
-
     cout << "Time taken: "<< (double)(clock()-tStart)/CLOCKS_PER_SEC << endl;
+
+    timeline.write_timeline(&result, paramValue);
+    histogram_productivity.write_histogram_productivity(&result, paramValue);
+    hd_distribution.write_hd_distribution(&result, paramValue);
+    variety_distribution.write_variety_distribution(&result, paramValue);
+    variety_quantity.write_variety_quantity(&result, paramValue);
+
   }
-  timeFile.close();
-  histogramFile.close();
-  hdDistFile.close();
-  varietyDistFile.close();
-  varietyQuantFile.close();
 }
 
 void ModelRunner::run_var_param_fixed_points(char param){
@@ -229,13 +172,13 @@ void ModelRunner::run_var_param_fixed_points(char param){
 }
 
 void ModelRunner::write_standard_results(Parameter parameter, Result* result){
-  Data standard("standard", parameter);
+  Data timeline("standard", parameter);
   Data histogram_productivity("histogramProductivity", parameter);
   Data hd_distribution("hdDistribution", parameter);
   Data variety_distribution("varietyDistribution", parameter);
   Data variety_quantity("varietyQuantity", parameter);
 
-  standard.write_standard(result);
+  timeline.write_timeline(result);
   histogram_productivity.write_histogram_productivity(result);
   hd_distribution.write_hd_distribution(result);
   variety_distribution.write_variety_distribution(result);
