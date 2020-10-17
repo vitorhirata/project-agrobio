@@ -24,6 +24,7 @@ public:
   float percentageNewRandomVar;
   float crossingDeviation;
   float deathProbability;
+  int household_size();
   static std::vector<char> keys;
   Parameter();
   void set_parameter(char parameter_key, float value);
@@ -186,6 +187,12 @@ void Parameter::write_to_file(fstream& arquivo){
     arquivo << ", MAXTIME = " << maxTime;
     arquivo << ", TIMEINTERVAL = " << timeInterval;
     arquivo << ", NRUN = " << nRun << " ###" << endl << endl;
+}
+
+int Parameter::household_size(){
+  int household_size = latticeSize / sqrt(numberHousehold);
+  household_size = pow(household_size, 2);
+  return household_size;
 }
 
 std::vector<char> Parameter::keys =

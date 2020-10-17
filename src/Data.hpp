@@ -34,9 +34,6 @@ void Data::write_timeline(Result* result, float param){
     write_header(header, param);
   }
 
-  int hdSize = m_parameter.latticeSize / sqrt(m_parameter.numberHousehold);
-  hdSize = hdSize * hdSize;
-
   for(int i = 0; i < m_parameter.maxTime/m_parameter.timeInterval; ++i){
     file << i*m_parameter.timeInterval << "; ";
     file << (float) result->numberVariety[i] / m_parameter.nRun << "; ";
@@ -45,10 +42,12 @@ void Data::write_timeline(Result* result, float param){
     file << result->productivityPunctuation[i] / m_parameter.nRun << "; ";
     file << (result->totalPunctuation[i]-
         result->productivityPunctuation[i]) / m_parameter.nRun << "; ";
-    file << result->bergerParkerCommunity[i] / (hdSize * m_parameter.nRun);
+    file << result->bergerParkerCommunity[i] /
+      (m_parameter.household_size() * m_parameter.nRun);
     file << "; " << result->simpsonCommunity[i] / m_parameter.nRun << "; ";
     file << result->shannonCommunity[i] / m_parameter.nRun << "; ";
-    file << result->bergerParkerHD[i] / (hdSize * m_parameter.nRun) << "; ";
+    file << result->bergerParkerHD[i] /
+      (m_parameter.household_size() * m_parameter.nRun) << "; ";
     file << result->simpsonHD[i] / m_parameter.nRun << "; ";
     file << result->shannonHD[i] / m_parameter.nRun;
     if(round(param) != -1)
@@ -76,10 +75,7 @@ void Data::write_hd_distribution(Result* result, float param){
   if(need_header)
     write_header("value; hdDist", param);
 
-  int hdSize = m_parameter.latticeSize / sqrt(m_parameter.numberHousehold);
-  hdSize = hdSize * hdSize;
-
-  for(int i = 0; i <= hdSize - 1; ++i){
+  for(int i = 0; i <= m_parameter.household_size() - 1; ++i){
     file << i << "; " << 100 * result->hdDistribution[i] / m_parameter.nRun;
     if(round(param) != -1)
       file << "; " << param;
@@ -122,9 +118,6 @@ void Data::write_fixed_points(Result* result, float param){
     write_header(header, -1);
   }
 
-  int hdSize = m_parameter.latticeSize / sqrt(m_parameter.numberHousehold);
-  hdSize = hdSize * hdSize;
-
   file << param << "; ";
   file << (float) result->numberVariety[0] / m_parameter.nRun << "; ";
   file << (float) result->meanVarietyHD[0] / m_parameter.nRun << "; ";
@@ -132,10 +125,12 @@ void Data::write_fixed_points(Result* result, float param){
   file << result->productivityPunctuation[0] / m_parameter.nRun << "; ";
   file << (result->totalPunctuation[0] -
       result->productivityPunctuation[0]) / m_parameter.nRun << "; ";
-  file << result->bergerParkerCommunity[0] / (hdSize * m_parameter.nRun);
+  file << result->bergerParkerCommunity[0] /
+    (m_parameter.household_size() * m_parameter.nRun);
   file << "; " << result->simpsonCommunity[0] / m_parameter.nRun << "; ";
   file << result->shannonCommunity[0] / m_parameter.nRun << "; ";
-  file << result->bergerParkerHD[0] / (hdSize * m_parameter.nRun) << "; ";
+  file << result->bergerParkerHD[0] /
+    (m_parameter.household_size() * m_parameter.nRun) << "; ";
   file << result->simpsonHD[0] / m_parameter.nRun << "; ";
   file << result->shannonHD[0] / m_parameter.nRun << endl;
 }
