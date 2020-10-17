@@ -31,6 +31,7 @@ class Variety;
 class Patch;
 class Ambient;
 class Household;
+class WriteState;
 class Network;
 class Model;
 class Data;
@@ -60,8 +61,6 @@ namespace metrics{
   std::vector<float> computeQualityProfile(
       Patch* t_grid, const int t_latticeSize);
   float computeCorrelation(Household* household, int numberHD);
-  void printState(int t, Patch* grid, const int t_latticeSize);
-  void floatToRGB(int n, int* R, int* G, int* B);
 }
 bool is_valid_key(char parameter_key);
 
@@ -72,6 +71,7 @@ bool is_valid_key(char parameter_key);
 #include "model/Patch.hpp"
 #include "model/Ambient.hpp"
 #include "model/Household.hpp"
+#include "model/WriteState.hpp"
 #include "model/Network.hpp"
 #include "model/Model.hpp"
 #include "model/Metrics.hpp"

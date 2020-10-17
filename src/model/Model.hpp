@@ -163,14 +163,16 @@ Result Model::runFixedPoint(void){
 // a vector with the number of variety at each timeInterval
 Result Model::runPlot(void){
   Result result(0, 0, 0, 0);
+  WriteState writeState(ambient->grid, m_parameter.latticeSize);
+
   result.numberVariety.push_back(ambient->countSpecie());
-  metrics::printState(0, ambient->grid, m_parameter.latticeSize);
+  writeState.printState(0);
 
   for(int t = 0; t < m_parameter.maxTime; ++t){
     iterate();
     if (t % m_parameter.timeInterval == 0){
       result.numberVariety.push_back(ambient->countSpecie());
-      metrics::printState(t+1, ambient->grid, m_parameter.latticeSize);
+      writeState.printState(t+1);
       result.meanVarietyHD.push_back(metrics::computeVarietyMeanProfile(
             household, m_parameter.numberHousehold,
             m_parameter.latticeSize));
