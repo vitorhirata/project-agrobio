@@ -76,6 +76,7 @@ void Model::setHousehold(void){
 // Run standard version of the model. Gives as output a vector with the
 // number of variety at each timeInterval
 Result Model::runStandard(void){
+  Metrics metrics;
   Result result(0, 0, 0, 0);
   result.numberVariety.push_back(ambient->countSpecie());
 
@@ -83,39 +84,39 @@ Result Model::runStandard(void){
     iterate();
     if (t % m_parameter.timeInterval == 0){
       result.numberVariety.push_back(ambient->countSpecie());
-      result.meanVarietyHD.push_back(metrics::computeVarietyMeanProfile(
+      result.meanVarietyHD.push_back(metrics.computeVarietyMeanProfile(
             household, m_parameter.numberHousehold,
             m_parameter.latticeSize));
-      std::vector<float> tempPunctuation = metrics::computePunctuationAverage(
+      std::vector<float> tempPunctuation = metrics.computePunctuationAverage(
           household, m_parameter.numberHousehold);
       result.totalPunctuation.push_back(tempPunctuation[0]);
       result.productivityPunctuation.push_back(tempPunctuation[1]);
-      result.bergerParkerCommunity.push_back(metrics::computeBergerParker(
+      result.bergerParkerCommunity.push_back(metrics.computeBergerParker(
             household, m_parameter.numberHousehold,
             m_parameter.latticeSize));
-      result.bergerParkerHD.push_back(metrics::computeBergerParkerHD(
+      result.bergerParkerHD.push_back(metrics.computeBergerParkerHD(
             household, m_parameter.numberHousehold));
-      result.simpsonCommunity.push_back(metrics::computeSimpson(household,
+      result.simpsonCommunity.push_back(metrics.computeSimpson(household,
             m_parameter.numberHousehold, m_parameter.latticeSize));
-      result.shannonCommunity.push_back(metrics::computeShannon(household,
+      result.shannonCommunity.push_back(metrics.computeShannon(household,
             m_parameter.numberHousehold, m_parameter.latticeSize));
       result.simpsonHD.push_back(computeAverageSimpson());
       result.shannonHD.push_back(computeAverageShannon());
     }
   }
-  std::vector<float> tempPunctuation = metrics::computePunctuationAverage(
+  std::vector<float> tempPunctuation = metrics.computePunctuationAverage(
       household, m_parameter.numberHousehold);
   result.totalPunctuation.push_back(tempPunctuation[0]);
   result.productivityPunctuation.push_back(tempPunctuation[1]);
-  result.productivityFrequency = metrics::computeProductivityProfile(
+  result.productivityFrequency = metrics.computeProductivityProfile(
       ambient->grid, m_parameter.latticeSize);
-  result.qualityFrequency = metrics::computeQualityProfile(
+  result.qualityFrequency = metrics.computeQualityProfile(
       ambient->grid, m_parameter.latticeSize);
-  result.hdDistribution = metrics::computeHDprofile(
+  result.hdDistribution = metrics.computeHDprofile(
       household, m_parameter.numberHousehold, m_parameter.latticeSize);
-  result.varietyDistribution = metrics::computeVarietyProfile(
+  result.varietyDistribution = metrics.computeVarietyProfile(
       household, m_parameter.numberHousehold);
-  result.varietyQuantity = metrics::computeVarietyQuantity(
+  result.varietyQuantity = metrics.computeVarietyQuantity(
       household, m_parameter.numberHousehold, m_parameter.latticeSize);
   return result;
 }
@@ -123,38 +124,39 @@ Result Model::runStandard(void){
 // Run the model giving as output the final number of varieties and both
 // histograms
 Result Model::runFixedPoint(void){
+  Metrics metrics;
   Result result(0, 0, 0, 0);
   for(int t = 0; t < m_parameter.maxTime; ++t)
     iterate();
 
   result.numberVariety.push_back(ambient->countSpecie());
-  result.meanVarietyHD.push_back(metrics::computeVarietyMeanProfile(
+  result.meanVarietyHD.push_back(metrics.computeVarietyMeanProfile(
         household, m_parameter.numberHousehold,
         m_parameter.latticeSize));
-  std::vector<float> tempPunctuation = metrics::computePunctuationAverage(
+  std::vector<float> tempPunctuation = metrics.computePunctuationAverage(
       household, m_parameter.numberHousehold);
   result.totalPunctuation.push_back(tempPunctuation[0]);
   result.productivityPunctuation.push_back(tempPunctuation[1]);
-  result.simpsonCommunity.push_back(metrics::computeSimpson(household,
+  result.simpsonCommunity.push_back(metrics.computeSimpson(household,
         m_parameter.numberHousehold, m_parameter.latticeSize));
-  result.bergerParkerCommunity.push_back(metrics::computeBergerParker(
+  result.bergerParkerCommunity.push_back(metrics.computeBergerParker(
             household, m_parameter.numberHousehold,
             m_parameter.latticeSize));
-  result.shannonCommunity.push_back(metrics::computeShannon(household,
+  result.shannonCommunity.push_back(metrics.computeShannon(household,
         m_parameter.numberHousehold, m_parameter.latticeSize));
   result.simpsonHD.push_back(computeAverageSimpson());
   result.shannonHD.push_back(computeAverageShannon());
-  result.bergerParkerHD.push_back(metrics::computeBergerParkerHD(
+  result.bergerParkerHD.push_back(metrics.computeBergerParkerHD(
         household, m_parameter.numberHousehold));
-  result.productivityFrequency = metrics::computeProductivityProfile(
+  result.productivityFrequency = metrics.computeProductivityProfile(
       ambient->grid, m_parameter.latticeSize);
-  result.qualityFrequency = metrics::computeQualityProfile(
+  result.qualityFrequency = metrics.computeQualityProfile(
       ambient->grid, m_parameter.latticeSize);
-  result.hdDistribution = metrics::computeHDprofile(
+  result.hdDistribution = metrics.computeHDprofile(
       household, m_parameter.numberHousehold, m_parameter.latticeSize);
-  result.varietyDistribution = metrics::computeVarietyProfile(
+  result.varietyDistribution = metrics.computeVarietyProfile(
       household, m_parameter.numberHousehold);
-  result.varietyQuantity = metrics::computeVarietyQuantity(
+  result.varietyQuantity = metrics.computeVarietyQuantity(
       household, m_parameter.numberHousehold, m_parameter.latticeSize);
   return result;
 }
@@ -162,6 +164,7 @@ Result Model::runFixedPoint(void){
 // Run the model plotting each time image of the simulation. Gives as output
 // a vector with the number of variety at each timeInterval
 Result Model::runPlot(void){
+  Metrics metrics;
   Result result(0, 0, 0, 0);
   WriteState writeState(ambient->grid, m_parameter.latticeSize);
 
@@ -173,35 +176,35 @@ Result Model::runPlot(void){
     if (t % m_parameter.timeInterval == 0){
       result.numberVariety.push_back(ambient->countSpecie());
       writeState.printState(t+1);
-      result.meanVarietyHD.push_back(metrics::computeVarietyMeanProfile(
+      result.meanVarietyHD.push_back(metrics.computeVarietyMeanProfile(
             household, m_parameter.numberHousehold,
             m_parameter.latticeSize));
-      std::vector<float> tempPunctuation = metrics::computePunctuationAverage(
+      std::vector<float> tempPunctuation = metrics.computePunctuationAverage(
           household, m_parameter.numberHousehold);
       result.totalPunctuation.push_back(tempPunctuation[0]);
       result.productivityPunctuation.push_back(tempPunctuation[1]);
-      result.bergerParkerCommunity.push_back(metrics::computeBergerParker(
+      result.bergerParkerCommunity.push_back(metrics.computeBergerParker(
             household, m_parameter.numberHousehold,
             m_parameter.latticeSize));
-      result.bergerParkerHD.push_back(metrics::computeBergerParkerHD(
+      result.bergerParkerHD.push_back(metrics.computeBergerParkerHD(
             household, m_parameter.numberHousehold));
-      result.simpsonCommunity.push_back(metrics::computeSimpson(household,
+      result.simpsonCommunity.push_back(metrics.computeSimpson(household,
             m_parameter.numberHousehold, m_parameter.latticeSize));
-      result.shannonCommunity.push_back(metrics::computeShannon(household,
+      result.shannonCommunity.push_back(metrics.computeShannon(household,
             m_parameter.numberHousehold, m_parameter.latticeSize));
       result.simpsonHD.push_back(computeAverageSimpson());
       result.shannonHD.push_back(computeAverageShannon());
     }
   }
-  result.productivityFrequency = metrics::computeProductivityProfile(
+  result.productivityFrequency = metrics.computeProductivityProfile(
       ambient->grid, m_parameter.latticeSize);
-  result.qualityFrequency = metrics::computeQualityProfile(
+  result.qualityFrequency = metrics.computeQualityProfile(
       ambient->grid, m_parameter.latticeSize);
-  result.hdDistribution = metrics::computeHDprofile(
+  result.hdDistribution = metrics.computeHDprofile(
       household, m_parameter.numberHousehold, m_parameter.latticeSize);
-  result.varietyDistribution = metrics::computeVarietyProfile(
+  result.varietyDistribution = metrics.computeVarietyProfile(
       household, m_parameter.numberHousehold);
-  result.varietyQuantity = metrics::computeVarietyQuantity(
+  result.varietyQuantity = metrics.computeVarietyQuantity(
       household, m_parameter.numberHousehold, m_parameter.latticeSize);
   return result;
 }

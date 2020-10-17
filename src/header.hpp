@@ -32,36 +32,11 @@ class Patch;
 class Ambient;
 class Household;
 class WriteState;
+class Metrics;
 class Network;
 class Model;
 class Data;
 class ModelRunner;
-namespace metrics{
-  void sumResults(Result* result, Result* resultTemp);
-  float computeVarietyMeanProfile(Household* household,
-      const int t_numberHousehold, const int t_HDsize);
-  std::vector<float> computeHDprofile(Household* household,
-      const int t_numberHousehold, const int t_HDsize);
-  std::vector<float> computeVarietyProfile(
-      Household* household, const int t_numberHousehold);
-  std::vector<float> computeVarietyQuantity(Household* household,
-      const int t_numberHousehold, const int t_latticeSize);
-  float computeBergerParker(Household* household,
-      const int t_numberHousehold, const int t_latticeSize);
-  float computeBergerParkerHD(Household* household,
-      const int t_numberHousehold);
-  float computeShannon(Household* household,
-      const int t_numberHousehold, const int t_latticeSize);
-  float computeSimpson(Household* household,
-      const int t_numberHousehold, const int t_latticeSize);
-  std::vector<float> computePunctuationAverage(Household* household,
-      const int t_numberHousehold);
-  std::vector<float> computeProductivityProfile(
-      Patch* t_grid, const int t_latticeSize);
-  std::vector<float> computeQualityProfile(
-      Patch* t_grid, const int t_latticeSize);
-  float computeCorrelation(Household* household, int numberHD);
-}
 bool is_valid_key(char parameter_key);
 
 #include "model/Parameter.hpp"
@@ -72,8 +47,8 @@ bool is_valid_key(char parameter_key);
 #include "model/Ambient.hpp"
 #include "model/Household.hpp"
 #include "model/WriteState.hpp"
+#include "model/Metrics.hpp"
 #include "model/Network.hpp"
 #include "model/Model.hpp"
-#include "model/Metrics.hpp"
 #include "Data.hpp"
 #include "ModelRunner.hpp"
