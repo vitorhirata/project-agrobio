@@ -10,6 +10,7 @@ public:
   void write_hd_distribution(Result* result, float param = -1.0);
   void write_variety_distribution(Result* result, float param = -1.0);
   void write_variety_quantity(Result* result, float param = -1.0);
+  void write_fixed_points(Result* result, float param);
 private:
   fstream file;
   Parameter m_parameter;
@@ -110,6 +111,33 @@ void Data::write_variety_quantity(Result* result, float param){
       file << "; " << param;
     file << endl;
   }
+}
+
+void Data::write_fixed_points(Result* result, float param){
+  if(need_header){
+    std::string header ("param; nVar; meanHD; totalPunctuation; ");
+    header.append("productivityPunctuation; qualityPunctuation; ");
+    header.append("bergerCommunity; simpsonCommunity; shannonCommunity; ");
+    header.append("bergerHD; simpsonHD; shannonHD");
+    write_header(header, -1);
+  }
+
+  int hdSize = m_parameter.latticeSize / sqrt(m_parameter.numberHousehold);
+  hdSize = hdSize * hdSize;
+
+  file << param << "; ";
+  file << (float) result->numberVariety[0] / m_parameter.nRun << "; ";
+  file << (float) result->meanVarietyHD[0] / m_parameter.nRun << "; ";
+  file << result->totalPunctuation[0] / m_parameter.nRun << "; ";
+  file << result->productivityPunctuation[0] / m_parameter.nRun << "; ";
+  file << (result->totalPunctuation[0] -
+      result->productivityPunctuation[0]) / m_parameter.nRun << "; ";
+  file << result->bergerParkerCommunity[0] / (hdSize * m_parameter.nRun);
+  file << "; " << result->simpsonCommunity[0] / m_parameter.nRun << "; ";
+  file << result->shannonCommunity[0] / m_parameter.nRun << "; ";
+  file << result->bergerParkerHD[0] / (hdSize * m_parameter.nRun) << "; ";
+  file << result->simpsonHD[0] / m_parameter.nRun << "; ";
+  file << result->shannonHD[0] / m_parameter.nRun << endl;
 }
 
 void Data::write_header(std::string name, float param){
