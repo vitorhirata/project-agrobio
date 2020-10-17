@@ -23,7 +23,7 @@ void ModelRunner::run_standard(void){
     resultTemp = model.runStandard();
     result.sumResult(&resultTemp);
   }
-  cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
+  cout << "Time taken: "<< (clock() - tStart)/CLOCKS_PER_SEC << "s." << endl;
 
   write_standard_results(parameter, &result);
 }
@@ -36,7 +36,7 @@ void ModelRunner::run_plot(void){
 
   clock_t tStart = clock();
   result = model.runPlot();
-  cout << "Time taken: "<< (double)(clock() - tStart)/CLOCKS_PER_SEC << endl;
+  cout << "Time taken: "<< (clock() - tStart)/CLOCKS_PER_SEC << "s." << endl;
 
   write_standard_results(parameter, &result);
 }
@@ -66,7 +66,8 @@ void ModelRunner::run_var_param(char param, std::vector<float> paramList){
       resultTemp = model.runStandard();
       result.sumResult(&resultTemp);
     }
-    cout << "Time taken: "<< (double)(clock()-tStart)/CLOCKS_PER_SEC << endl;
+    cout << "Finish " << param << " = " << paramValue << ". ";
+    cout << "Time taken: "<< (clock() - tStart)/CLOCKS_PER_SEC << "s." << endl;
 
     timeline.write_timeline(&result, paramValue);
     histogram_productivity.write_histogram_productivity(&result, paramValue);
@@ -103,7 +104,8 @@ void ModelRunner::run_var_param_fixed_points(char param){
       resultTemp = model.runFixedPoint();
       result.sumResult(&resultTemp);
     }
-    cout << "Time taken: "<< (double)(clock()-tStart)/CLOCKS_PER_SEC << endl;
+    cout << "Finish " << param << " = " << paramValue << ". ";
+    cout << "Time taken: "<< (clock() - tStart)/CLOCKS_PER_SEC << "s." << endl;
 
     fixed_points.write_fixed_points(&result, paramValue);
     histogram_productivity.write_histogram_productivity(&result, paramValue);
