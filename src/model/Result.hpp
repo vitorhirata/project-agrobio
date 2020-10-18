@@ -84,6 +84,8 @@ void Result::save_timeline(){
   bergerParkerHD.push_back(metrics.computeBergerParkerHD());
   simpsonCommunity.push_back(metrics.computeSimpson());
   shannonCommunity.push_back(metrics.computeShannon());
+  simpsonHD.push_back(metrics.computeAverageSimpson());
+  shannonHD.push_back(metrics.computeAverageShannon());
 }
 
 void Result::save_final_state(){

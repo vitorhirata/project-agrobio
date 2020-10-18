@@ -9,8 +9,6 @@ private:
   void setAmbient(void);
   void setHousehold(void);
   void iterate(void);
-  float computeAverageSimpson(void);
-  float computeAverageShannon(void);
 public:
   Model(Parameter t_parameter);
   ~Model();
@@ -79,16 +77,12 @@ Result Model::runStandard(void){
   Result result(m_parameter, household, ambient->grid);
 
   result.numberVariety.push_back(ambient->countSpecie());
-  result.simpsonHD.push_back(computeAverageSimpson());
-  result.shannonHD.push_back(computeAverageShannon());
   result.save_timeline();
 
   for(int t = 0; t < m_parameter.maxTime; ++t){
     iterate();
     if (t % m_parameter.timeInterval == 0){
       result.numberVariety.push_back(ambient->countSpecie());
-      result.simpsonHD.push_back(computeAverageSimpson());
-      result.shannonHD.push_back(computeAverageShannon());
       result.save_timeline();
     }
   }
@@ -105,8 +99,6 @@ Result Model::runFixedPoint(void){
     iterate();
 
   result.numberVariety.push_back(ambient->countSpecie());
-  result.simpsonHD.push_back(computeAverageSimpson());
-  result.shannonHD.push_back(computeAverageShannon());
   result.save_timeline();
 
   result.save_final_state();
@@ -121,8 +113,6 @@ Result Model::runPlot(void){
 
   writeState.printState(0);
   result.numberVariety.push_back(ambient->countSpecie());
-  result.simpsonHD.push_back(computeAverageSimpson());
-  result.shannonHD.push_back(computeAverageShannon());
   result.save_timeline();
 
   for(int t = 0; t < m_parameter.maxTime; ++t){
@@ -130,8 +120,6 @@ Result Model::runPlot(void){
     if (t % m_parameter.timeInterval == 0){
       writeState.printState(t+1);
       result.numberVariety.push_back(ambient->countSpecie());
-      result.simpsonHD.push_back(computeAverageSimpson());
-      result.shannonHD.push_back(computeAverageShannon());
       result.save_timeline();
     }
   }
@@ -153,22 +141,6 @@ void Model::iterate(void){
   std::random_shuffle(HD_list.begin(),HD_list.end());
   for(auto i : HD_list)
     household[i].iterateHD();
-}
-
-float Model::computeAverageSimpson(void){
-  float simpson = 0;
-  for(int i = 0; i < m_parameter.numberHousehold; ++i)
-    simpson += household[i].computeSimpsonHD();
-  simpson /= m_parameter.numberHousehold;
-  return simpson;
-}
-
-float Model::computeAverageShannon(void){
-  float shannon = 0;
-  for(int i = 0; i < m_parameter.numberHousehold; ++i)
-    shannon += household[i].computeShannonHD();
-  shannon /= m_parameter.numberHousehold;
-  return shannon;
 }
 
 #endif

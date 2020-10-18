@@ -16,6 +16,8 @@ public:
   std::vector<float> computePunctuationAverage();
   std::vector<float> computeProductivityProfile();
   std::vector<float> computeQualityProfile();
+  float computeAverageSimpson();
+  float computeAverageShannon();
 private:
   Parameter m_parameter;
   Household* m_household;
@@ -222,6 +224,22 @@ std::vector<float> Metrics::computeProductivityProfile(){
     }
   }
   return productivityFrequency;
+}
+
+float Metrics::computeAverageSimpson(){
+  float simpson = 0;
+  for(int i = 0; i < m_parameter.numberHousehold; ++i)
+    simpson += m_household[i].computeSimpsonHD();
+  simpson /= m_parameter.numberHousehold;
+  return simpson;
+}
+
+float Metrics::computeAverageShannon(){
+  float shannon = 0;
+  for(int i = 0; i < m_parameter.numberHousehold; ++i)
+    shannon += m_household[i].computeShannonHD();
+  shannon /= m_parameter.numberHousehold;
+  return shannon;
 }
 
 #endif
