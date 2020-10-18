@@ -26,13 +26,13 @@ static std::normal_distribution<double> gaussQ(0.5,0.15);
 class Parameter;
 struct VarietyData;
 struct HDParameter;
-class Result;
 class Variety;
 class Patch;
 class Ambient;
 class Household;
 class WriteState;
 class Metrics;
+class Result;
 class Network;
 class Model;
 class Data;
@@ -41,13 +41,13 @@ bool is_valid_key(char parameter_key);
 
 #include "model/Parameter.hpp"
 #include "model/Structs.hpp"
-#include "model/Result.hpp"
 #include "model/Variety.hpp"
 #include "model/Patch.hpp"
 #include "model/Ambient.hpp"
 #include "model/Household.hpp"
 #include "model/WriteState.hpp"
 #include "model/Metrics.hpp"
+#include "model/Result.hpp"
 #include "model/Network.hpp"
 #include "model/Model.hpp"
 #include "Data.hpp"

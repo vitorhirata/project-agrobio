@@ -3,6 +3,7 @@
 
 class Metrics{
 public:
+  Metrics() = default;
   Metrics(Parameter t_parameter, Household* t_household, Patch* t_grid);
   float computeVarietyMeanProfile();
   std::vector<float> computeHDprofile();

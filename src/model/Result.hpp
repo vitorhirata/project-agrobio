@@ -20,8 +20,12 @@ public:
   std::vector<float> hdDistribution;
   Result() = default;
   Result(Parameter t_parameter, int timeSize);
+  Result(Parameter t_parameter, Household* t_household, Patch* t_grid);
   void sumResult(Result* resultToSum);
+  void save_timeline();
+  void save_final_state();
 private:
+  Metrics metrics;
   void sumResultElement(std::vector<float>* v1, std::vector<float>* v2);
 };
 
@@ -41,6 +45,9 @@ Result::Result(Parameter t_parameter, int timeSize)
   , varietyDistribution(t_parameter.latticeSize, 0)
   , varietyQuantity(17, 0)
   , hdDistribution(t_parameter.latticeSize, 0) {}
+
+Result::Result(Parameter t_parameter, Household* t_household, Patch* t_grid)
+  : metrics(t_parameter, t_household, t_grid) {}
 
 void Result::sumResult(Result* resultToSum){
   std::transform(numberVariety.begin(),
@@ -68,5 +75,23 @@ void Result::sumResultElement(std::vector<float>* v1, std::vector<float>* v2){
       std::plus<float>());
 }
 
+void Result::save_timeline(){
+  meanVarietyHD.push_back(metrics.computeVarietyMeanProfile());
+  std::vector<float> tempPunctuation = metrics.computePunctuationAverage();
+  totalPunctuation.push_back(tempPunctuation[0]);
+  productivityPunctuation.push_back(tempPunctuation[1]);
+  bergerParkerCommunity.push_back(metrics.computeBergerParker());
+  bergerParkerHD.push_back(metrics.computeBergerParkerHD());
+  simpsonCommunity.push_back(metrics.computeSimpson());
+  shannonCommunity.push_back(metrics.computeShannon());
+}
+
+void Result::save_final_state(){
+  productivityFrequency = metrics.computeProductivityProfile();
+  qualityFrequency = metrics.computeQualityProfile();
+  hdDistribution = metrics.computeHDprofile();
+  varietyDistribution = metrics.computeVarietyProfile();
+  varietyQuantity = metrics.computeVarietyQuantity();
+}
 
 #endif
