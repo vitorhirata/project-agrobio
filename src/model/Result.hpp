@@ -18,15 +18,14 @@ public:
   std::vector<float> varietyDistribution;
   std::vector<float> varietyQuantity;
   std::vector<float> hdDistribution;
-  Result(int timeSize = 0, int histogramSize = 0, int HDsize = 0,
-      int varQuantSize = 0);
+  Result() = default;
+  Result(Parameter t_parameter, int timeSize);
   void sumResult(Result* resultToSum);
 private:
   void sumResultElement(std::vector<float>* v1, std::vector<float>* v2);
 };
 
-// result constructor, default values
-Result::Result(int timeSize, int histogramSize, int HDsize, int varQuantSize)
+Result::Result(Parameter t_parameter, int timeSize)
   : numberVariety(timeSize, 0)
   , meanVarietyHD(timeSize, 0)
   , totalPunctuation(timeSize, 0)
@@ -37,11 +36,11 @@ Result::Result(int timeSize, int histogramSize, int HDsize, int varQuantSize)
   , simpsonHD(timeSize, 0)
   , shannonHD(timeSize, 0)
   , bergerParkerHD(timeSize, 0)
-  , productivityFrequency(histogramSize, 0)
-  , qualityFrequency(histogramSize, 0)
-  , varietyDistribution(HDsize, 0)
-  , varietyQuantity(varQuantSize, 0)
-  , hdDistribution(HDsize, 0) {}
+  , productivityFrequency(round(1 / 0.05), 0)
+  , qualityFrequency(round(1 / 0.05), 0)
+  , varietyDistribution(t_parameter.latticeSize, 0)
+  , varietyQuantity(17, 0)
+  , hdDistribution(t_parameter.latticeSize, 0) {}
 
 void Result::sumResult(Result* resultToSum){
   std::transform(numberVariety.begin(),

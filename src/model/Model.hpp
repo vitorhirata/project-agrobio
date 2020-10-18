@@ -77,7 +77,7 @@ void Model::setHousehold(void){
 // number of variety at each timeInterval
 Result Model::runStandard(void){
   Metrics metrics;
-  Result result(0, 0, 0, 0);
+  Result result;
   result.numberVariety.push_back(ambient->countSpecie());
 
   for(int t = 0; t < m_parameter.maxTime; ++t){
@@ -125,7 +125,7 @@ Result Model::runStandard(void){
 // histograms
 Result Model::runFixedPoint(void){
   Metrics metrics;
-  Result result(0, 0, 0, 0);
+  Result result;
   for(int t = 0; t < m_parameter.maxTime; ++t)
     iterate();
 
@@ -165,7 +165,7 @@ Result Model::runFixedPoint(void){
 // a vector with the number of variety at each timeInterval
 Result Model::runPlot(void){
   Metrics metrics;
-  Result result(0, 0, 0, 0);
+  Result result;
   WriteState writeState(ambient->grid, m_parameter.latticeSize);
 
   result.numberVariety.push_back(ambient->countSpecie());

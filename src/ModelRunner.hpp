@@ -13,9 +13,8 @@ private:
 
 void ModelRunner::run_standard(void){
   Parameter parameter;
-  Result result(parameter.maxTime/parameter.timeInterval,
-      round(1 / 0.05), parameter.latticeSize, 17);
-  Result resultTemp(0, 0, 0, 0);
+  Result result(parameter, parameter.maxTime / parameter.timeInterval);
+  Result resultTemp;
 
   clock_t tStart = clock();
   for(int run = 0; run < parameter.nRun; ++run){
@@ -31,7 +30,7 @@ void ModelRunner::run_standard(void){
 void ModelRunner::run_plot(void){
   Parameter parameter;
   Model model(parameter);
-  Result result(0, 0, 0, 0);
+  Result result;
   parameter.nRun = 1;
 
   clock_t tStart = clock();
@@ -58,9 +57,8 @@ void ModelRunner::run_var_param(char param, std::vector<float> paramList){
     parameter.set_parameter(param, paramValue);
 
     clock_t tStart = clock();
-    Result result(parameter.maxTime/parameter.timeInterval,
-        round(1 / 0.05), parameter.latticeSize, 17);
-    Result resultTemp(0, 0, 0, 0);
+    Result result(parameter, parameter.maxTime / parameter.timeInterval);
+    Result resultTemp;
     for(int run = 0; run < parameter.nRun; ++run){
       Model model(parameter);
       resultTemp = model.runStandard();
@@ -94,8 +92,8 @@ void ModelRunner::run_var_param_fixed_points(char param){
     parameter.set_parameter(param, paramValue);
 
     clock_t tStart = clock();
-    Result result(1, round(1 / 0.05), parameter.latticeSize, 17);
-    Result resultTemp(0, 0, 0, 0);
+    Result result(parameter, 1);
+    Result resultTemp;
     result.numberVariety[0];
     resultTemp.numberVariety.push_back(0);
 
