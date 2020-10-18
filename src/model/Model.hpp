@@ -75,16 +75,12 @@ void Model::setHousehold(void){
 // number of variety at each timeInterval
 Result Model::runStandard(void){
   Result result(m_parameter, household, ambient->grid);
-
-  result.numberVariety.push_back(ambient->countSpecie());
   result.save_timeline();
 
   for(int t = 0; t < m_parameter.maxTime; ++t){
     iterate();
-    if (t % m_parameter.timeInterval == 0){
-      result.numberVariety.push_back(ambient->countSpecie());
+    if (t % m_parameter.timeInterval == 0)
       result.save_timeline();
-    }
   }
   result.save_final_state();
   return result;
@@ -98,10 +94,9 @@ Result Model::runFixedPoint(void){
   for(int t = 0; t < m_parameter.maxTime; ++t)
     iterate();
 
-  result.numberVariety.push_back(ambient->countSpecie());
   result.save_timeline();
-
   result.save_final_state();
+
   return result;
 }
 
@@ -111,16 +106,14 @@ Result Model::runPlot(void){
   Result result(m_parameter, household, ambient->grid);
   WriteState writeState(ambient->grid, m_parameter.latticeSize);
 
-  writeState.printState(0);
-  result.numberVariety.push_back(ambient->countSpecie());
   result.save_timeline();
+  writeState.printState(0);
 
   for(int t = 0; t < m_parameter.maxTime; ++t){
     iterate();
     if (t % m_parameter.timeInterval == 0){
-      writeState.printState(t+1);
-      result.numberVariety.push_back(ambient->countSpecie());
       result.save_timeline();
+      writeState.printState(t+1);
     }
   }
   result.save_final_state();

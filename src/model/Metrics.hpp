@@ -5,6 +5,7 @@ class Metrics{
 public:
   Metrics() = default;
   Metrics(Parameter t_parameter, Household* t_household, Patch* t_grid);
+  int computeVarietyRichness();
   float computeVarietyMeanProfile();
   std::vector<float> computeHDprofile();
   std::vector<float> computeVarietyProfile();
@@ -181,6 +182,20 @@ std::vector<float> Metrics::computePunctuationAverage(){
   punctuationAverage[0] /= m_parameter.numberHousehold;
   punctuationAverage[1] /= m_parameter.numberHousehold;
   return punctuationAverage;
+}
+
+// Count the number of different varieties in the grid, return an int with
+// that number
+int Metrics::computeVarietyRichness(){
+  std::map<int,bool> varietyAvailability;
+
+  for(int i = 0; i < m_parameter.latticeSize * m_parameter.latticeSize; ++i){
+    int varNumber = m_grid[i].variety.varietyNumber;
+    varietyAvailability[varNumber] = true;
+  }
+  if(varietyAvailability.count(-1))
+    return varietyAvailability.size() - 1;
+  return varietyAvailability.size();
 }
 
 // Return the mean number of varieties owened by the Households

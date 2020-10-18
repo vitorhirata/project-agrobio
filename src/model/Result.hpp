@@ -76,6 +76,7 @@ void Result::sumResultElement(std::vector<float>* v1, std::vector<float>* v2){
 }
 
 void Result::save_timeline(){
+  numberVariety.push_back(metrics.computeVarietyRichness());
   meanVarietyHD.push_back(metrics.computeVarietyMeanProfile());
   std::vector<float> tempPunctuation = metrics.computePunctuationAverage();
   totalPunctuation.push_back(tempPunctuation[0]);
