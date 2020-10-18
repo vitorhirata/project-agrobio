@@ -101,7 +101,7 @@ void Data::write_variety_quantity(Result* result, float param){
     write_header("quantity; frequency", param);
 
   for(int i = 0; i < result->varietyQuantity.size(); ++i){
-    file << 100 * (pow(10,i * 0.2)) / pow(m_parameter.latticeSize, 2) << "; ";
+    file << 100 * (pow(10,i * 0.2)) / m_parameter.number_patches() << "; ";
     file << 100 * result->varietyQuantity[i] / m_parameter.nRun;
     if(round(param) != -1)
       file << "; " << param;

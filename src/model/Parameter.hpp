@@ -25,6 +25,7 @@ public:
   float crossingDeviation;
   float deathProbability;
   int household_size();
+  int number_patches();
   static std::vector<char> keys;
   Parameter();
   void set_parameter(char parameter_key, float value);
@@ -193,6 +194,10 @@ int Parameter::household_size(){
   int household_size = latticeSize / sqrt(numberHousehold);
   household_size = pow(household_size, 2);
   return household_size;
+}
+
+int Parameter::number_patches(){
+  return latticeSize * latticeSize;
 }
 
 std::vector<char> Parameter::keys =

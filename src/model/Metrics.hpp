@@ -75,8 +75,7 @@ std::vector<float> Metrics::computeVarietyQuantity(){
   if(numberHD.count(-1) > 0)
     numberHD.erase(-1);
   float step = 0.2;
-  int total_size = m_parameter.latticeSize * m_parameter.latticeSize;
-  float size = floor(log10(total_size)/step) + 1;
+  float size = floor(log10(m_parameter.number_patches())/step) + 1;
   std::vector<float> varietyProfile(size, 0);
   for(auto i : numberHD){
     int idx = floor(log10(i.second) / step);
@@ -135,7 +134,7 @@ float Metrics::computeSimpson(){
         numberHD[var.number] = var.quantity;
     }
   }
-  float totalArea = m_parameter.latticeSize * m_parameter.latticeSize;
+  float totalArea = m_parameter.number_patches();
   if(numberHD.count(-1) > 0){
     totalArea -= numberHD[-1];
     numberHD.erase(-1);
@@ -158,7 +157,7 @@ float Metrics::computeShannon(){
         numberHD[var.number] = var.quantity;
     }
   }
-  float totalArea = m_parameter.latticeSize * m_parameter.latticeSize;
+  float totalArea = m_parameter.number_patches();
   if(numberHD.count(-1) > 0){
     totalArea -= numberHD[-1];
     numberHD.erase(-1);
@@ -189,7 +188,7 @@ std::vector<float> Metrics::computePunctuationAverage(){
 int Metrics::computeVarietyRichness(){
   std::map<int,bool> varietyAvailability;
 
-  for(int i = 0; i < m_parameter.latticeSize * m_parameter.latticeSize; ++i){
+  for(int i = 0; i < m_parameter.number_patches(); ++i){
     int varNumber = m_grid[i].variety.varietyNumber;
     varietyAvailability[varNumber] = true;
   }
@@ -216,10 +215,10 @@ float Metrics::computeVarietyMeanProfile(){
 std::vector<float> Metrics::computeQualityProfile(){
   float step = 0.05;
   std::vector<float> varFrequency(round(1 / step), 0);
-  for(int i = 0; i < m_parameter.latticeSize*m_parameter.latticeSize; ++i){
+  for(int i = 0; i < m_parameter.number_patches(); ++i){
     if(m_grid[i].variety.quality != -1){
       int idx = floor(m_grid[i].variety.quality / step);
-      varFrequency[idx] += 1.0 / (m_parameter.latticeSize*m_parameter.latticeSize);
+      varFrequency[idx] += (1.0 / m_parameter.number_patches());
     }
   }
   return varFrequency;
@@ -229,13 +228,13 @@ std::vector<float> Metrics::computeQualityProfile(){
 std::vector<float> Metrics::computeProductivityProfile(){
   float step = 0.05;
   std::vector<float> productivityFrequency(round(1 / step), 0);
-  for(int i = 0; i < m_parameter.latticeSize*m_parameter.latticeSize; ++i){
+  for(int i = 0; i < m_parameter.number_patches(); ++i){
     if(m_grid[i].productivity != 0){
       float position = step;
       while(position < m_grid[i].productivity)
         position += step;
       int tick = round((position - step) / step);
-      productivityFrequency[tick] += (1.0 / (m_parameter.latticeSize * m_parameter.latticeSize));
+      productivityFrequency[tick] += (1.0 / (m_parameter.number_patches()));
     }
   }
   return productivityFrequency;
