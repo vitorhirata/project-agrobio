@@ -78,7 +78,18 @@ void Model::setHousehold(void){
 Result Model::runStandard(void){
   Metrics metrics(m_parameter, household, ambient->grid);
   Result result;
+
   result.numberVariety.push_back(ambient->countSpecie());
+  result.meanVarietyHD.push_back(metrics.computeVarietyMeanProfile());
+  std::vector<float> tempPunctuation = metrics.computePunctuationAverage();
+  result.totalPunctuation.push_back(tempPunctuation[0]);
+  result.productivityPunctuation.push_back(tempPunctuation[1]);
+  result.bergerParkerCommunity.push_back(metrics.computeBergerParker());
+  result.bergerParkerHD.push_back(metrics.computeBergerParkerHD());
+  result.simpsonCommunity.push_back(metrics.computeSimpson());
+  result.shannonCommunity.push_back(metrics.computeShannon());
+  result.simpsonHD.push_back(computeAverageSimpson());
+  result.shannonHD.push_back(computeAverageShannon());
 
   for(int t = 0; t < m_parameter.maxTime; ++t){
     iterate();
@@ -96,9 +107,6 @@ Result Model::runStandard(void){
       result.shannonHD.push_back(computeAverageShannon());
     }
   }
-  std::vector<float> tempPunctuation = metrics.computePunctuationAverage();
-  result.totalPunctuation.push_back(tempPunctuation[0]);
-  result.productivityPunctuation.push_back(tempPunctuation[1]);
   result.productivityFrequency = metrics.computeProductivityProfile();
   result.qualityFrequency = metrics.computeQualityProfile();
   result.hdDistribution = metrics.computeHDprofile();
@@ -126,6 +134,7 @@ Result Model::runFixedPoint(void){
   result.simpsonHD.push_back(computeAverageSimpson());
   result.shannonHD.push_back(computeAverageShannon());
   result.bergerParkerHD.push_back(metrics.computeBergerParkerHD());
+
   result.productivityFrequency = metrics.computeProductivityProfile();
   result.qualityFrequency = metrics.computeQualityProfile();
   result.hdDistribution = metrics.computeHDprofile();
@@ -141,14 +150,24 @@ Result Model::runPlot(void){
   Result result;
   WriteState writeState(ambient->grid, m_parameter.latticeSize);
 
-  result.numberVariety.push_back(ambient->countSpecie());
   writeState.printState(0);
+  result.numberVariety.push_back(ambient->countSpecie());
+  result.meanVarietyHD.push_back(metrics.computeVarietyMeanProfile());
+  std::vector<float> tempPunctuation = metrics.computePunctuationAverage();
+  result.totalPunctuation.push_back(tempPunctuation[0]);
+  result.productivityPunctuation.push_back(tempPunctuation[1]);
+  result.bergerParkerCommunity.push_back(metrics.computeBergerParker());
+  result.bergerParkerHD.push_back(metrics.computeBergerParkerHD());
+  result.simpsonCommunity.push_back(metrics.computeSimpson());
+  result.shannonCommunity.push_back(metrics.computeShannon());
+  result.simpsonHD.push_back(computeAverageSimpson());
+  result.shannonHD.push_back(computeAverageShannon());
 
   for(int t = 0; t < m_parameter.maxTime; ++t){
     iterate();
     if (t % m_parameter.timeInterval == 0){
-      result.numberVariety.push_back(ambient->countSpecie());
       writeState.printState(t+1);
+      result.numberVariety.push_back(ambient->countSpecie());
       result.meanVarietyHD.push_back(metrics.computeVarietyMeanProfile());
       std::vector<float> tempPunctuation = metrics.computePunctuationAverage();
       result.totalPunctuation.push_back(tempPunctuation[0]);

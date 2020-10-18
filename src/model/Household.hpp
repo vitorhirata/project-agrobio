@@ -58,6 +58,7 @@ void Household::initializeHD(Household* t_household, Patch* t_grid,
   varietyOwened = std::vector<HDvariety>(m_indexOwenedPatches.size());
   uniIntPlace.param(std::uniform_int_distribution<long>::param_type(0,
         m_indexOwenedPatches.size()-1));
+  computeHDpunctuations();
 }
 
 // Iterate over the Oweneds Patches, colect varieties and set varietyOwened
