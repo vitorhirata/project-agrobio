@@ -34,7 +34,7 @@ void Data::write_timeline(Result* result, float param){
     write_header(header, param);
   }
 
-  for(int i = 0; i < m_parameter.maxTime/m_parameter.timeInterval; ++i){
+  for(int i = 0; i < result->numberVariety.size(); ++i){
     file << i*m_parameter.timeInterval << "; ";
     file << (float) result->numberVariety[i] / m_parameter.nRun << "; ";
     file << (float) result->meanVarietyHD[i] / m_parameter.nRun << "; ";
@@ -60,7 +60,7 @@ void Data::write_histogram_productivity(Result* result, float param){
   if(need_header)
     write_header("value; productivity; quality", param);
 
-  for(int i = 0; i < round(1 / 0.05); ++i){
+  for(int i = 0; i < result->productivityFrequency.size(); ++i){
     file << i * 0.05 + 0.025 << "; ";
     file << 100 * result->productivityFrequency[i] / m_parameter.nRun;
     file << "; ";
@@ -75,7 +75,7 @@ void Data::write_hd_distribution(Result* result, float param){
   if(need_header)
     write_header("value; hdDist", param);
 
-  for(int i = 0; i <= m_parameter.household_size() - 1; ++i){
+  for(int i = 0; i <= result->hdDistribution.size(); ++i){
     file << i << "; " << 100 * result->hdDistribution[i] / m_parameter.nRun;
     if(round(param) != -1)
       file << "; " << param;
@@ -87,7 +87,7 @@ void Data::write_variety_distribution(Result* result, float param){
   if(need_header)
     write_header("value; varDist", param);
 
-  for(int i = 0; i < m_parameter.numberHousehold; ++i){
+  for(int i = 0; i < result->varietyDistribution.size(); ++i){
     file << 100.0 * (i + 1.0) / m_parameter.numberHousehold << "; ";
     file << 100 * result->varietyDistribution[i] / m_parameter.nRun;
     if(round(param) != -1)
