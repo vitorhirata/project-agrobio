@@ -13,7 +13,7 @@ private:
 
 void ModelRunner::run_standard(void){
   Parameter parameter;
-  Result result(parameter, parameter.maxTime / parameter.timeInterval);
+  Result result(parameter, parameter.maxTime / parameter.timeInterval + 1);
   Result resultTemp;
 
   clock_t tStart = clock();
@@ -57,7 +57,7 @@ void ModelRunner::run_var_param(char param, std::vector<float> paramList){
     parameter.set_parameter(param, paramValue);
 
     clock_t tStart = clock();
-    Result result(parameter, parameter.maxTime / parameter.timeInterval);
+    Result result(parameter, parameter.maxTime / parameter.timeInterval + 1);
     Result resultTemp;
     for(int run = 0; run < parameter.nRun; ++run){
       Model model(parameter);

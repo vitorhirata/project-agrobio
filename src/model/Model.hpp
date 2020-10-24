@@ -77,7 +77,7 @@ Result Model::runStandard(void){
   Result result(m_parameter, household, ambient->grid);
   result.save_timeline();
 
-  for(int t = 0; t < m_parameter.maxTime; ++t){
+  for(int t = 1; t < m_parameter.maxTime + 1; ++t){
     iterate();
     if (t % m_parameter.timeInterval == 0)
       result.save_timeline();
@@ -91,7 +91,7 @@ Result Model::runStandard(void){
 Result Model::runFixedPoint(void){
   Result result(m_parameter, household, ambient->grid);
 
-  for(int t = 0; t < m_parameter.maxTime; ++t)
+  for(int t = 1; t < m_parameter.maxTime + 1; ++t)
     iterate();
 
   result.save_timeline();
@@ -109,11 +109,11 @@ Result Model::runPlot(void){
   result.save_timeline();
   writeState.printState(0);
 
-  for(int t = 0; t < m_parameter.maxTime; ++t){
+  for(int t = 1; t < m_parameter.maxTime + 1; ++t){
     iterate();
     if (t % m_parameter.timeInterval == 0){
       result.save_timeline();
-      writeState.printState(t+1);
+      writeState.printState(t);
     }
   }
   result.save_final_state();
