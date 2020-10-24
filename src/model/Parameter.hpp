@@ -113,6 +113,9 @@ void Parameter::set_parameter(char parameter_key, float value){
       break;
     case 'M':
       deathProbability = value;
+      break;
+    case 'm':
+      break;
     default:
       cout << "ERROR: invalid character parameter key. '";
       cout << parameter_key << "' is not a valid parameter key" << endl;
