@@ -40,14 +40,14 @@ class ModelRunner;
 bool is_valid_key(char parameter_key);
 
 #include "model/Parameter.hpp"
-#include "model/Structs.hpp"
+#include "model_helper/Structs.hpp"
 #include "model/Variety.hpp"
 #include "model/Patch.hpp"
 #include "model/Ambient.hpp"
 #include "model/Household.hpp"
-#include "model/WriteState.hpp"
-#include "model/Metrics.hpp"
-#include "model/Result.hpp"
+#include "model_helper/WriteState.hpp"
+#include "model_helper/Metrics.hpp"
+#include "model_helper/Result.hpp"
 #include "model/Network.hpp"
 #include "model/Model.hpp"
 #include "Data.hpp"
