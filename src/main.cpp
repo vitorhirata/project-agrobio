@@ -8,18 +8,22 @@ int main(int argc, char *argv[]){
     cout << "program." << endl;
     exit(-1);
   }
+
+  ModelRunner modelRunner;
   switch (argv[1][0]) {
     case 's':
       if (argc > 2)
         cout << "WARNING: Number of input argument is invalid." << endl;
       cout << "Running standard model" << endl;
-      worker::Run_standard();
+
+      modelRunner.run_standard();
       break;
     case 'p':
       if (argc > 2)
         cout << "WARNING: Number of input argument is invalid." << endl;
       cout << "Running model with plot" << endl;
-      worker::Run_plot();
+
+      modelRunner.run_plot();
       break;
     case 'v':{
       char param;
@@ -29,12 +33,9 @@ int main(int argc, char *argv[]){
         cout << "assume" << endl;
         exit(-1);
       }
-      if (argv[2][0] == 'T' || argv[2][0] == 'L' ||
-          argv[2][0] == 'H' || argv[2][0] == 'v' || argv[2][0] == 'V' ||
-          argv[2][0] == 'a' || argv[2][0] == 'R' || argv[2][0] == 'N' ||
-          argv[2][0] == 'b' || argv[2][0] == 'r' || argv[2][0] == 'M' ||
-          argv[2][0] == 'S' || argv[2][0] == 'Q' || argv[2][0] == 'C')
+      if (is_valid_key(argv[2][0])){
         param = argv[2][0];
+      }
       else{
         cout << "ERROR: Invalid parameter variation." << endl;
         exit(-1);
@@ -48,7 +49,8 @@ int main(int argc, char *argv[]){
       }
       cout << "Running variation model, with variable ";
       cout << param << ". " << endl;
-      worker::Run_varParam(param, param_list);
+
+      modelRunner.run_var_param(param, param_list);
       break;
     }
     case 'f':{
@@ -58,11 +60,7 @@ int main(int argc, char *argv[]){
         cout << "'f' mode must have only the parameter that will vary" << endl;
         exit(-1);
       }
-      if (argv[2][0] == 'T' || argv[2][0] == 'L' ||
-          argv[2][0] == 'H' || argv[2][0] == 'v' || argv[2][0] == 'V' ||
-          argv[2][0] == 'a' || argv[2][0] == 'R' || argv[2][0] == 'N' ||
-          argv[2][0] == 'b' || argv[2][0] == 'r' || argv[2][0] == 'M' ||
-          argv[2][0] == 'S' || argv[2][0] == 'Q' || argv[2][0] == 'C')
+      if (is_valid_key(argv[2][0]))
         param = argv[2][0];
       else{
         cout << "ERROR: Invalid parameter variation." << endl;
@@ -71,7 +69,8 @@ int main(int argc, char *argv[]){
 
       cout << "Running variation model fixed points, with variable ";
       cout << param << ". " << endl;
-      worker::Run_varParamFixedPoints(param);
+
+      modelRunner.run_var_param_fixed_points(param);
       break;
     }
     case 'm':{
@@ -85,7 +84,8 @@ int main(int argc, char *argv[]){
       std::iota(param_list.begin(), param_list.end(), 0);
       cout << "Running multiple run model, with ";
       cout << numRun << " runs." << endl;
-      worker::Run_varParam('m', param_list);
+
+      modelRunner.run_var_param('m', param_list);
       break;
     }
     default:
@@ -93,4 +93,12 @@ int main(int argc, char *argv[]){
       exit(-1);
   }
   return 0;
+}
+
+bool is_valid_key(char parameter_key){
+  return std::find(
+      Parameter::keys.begin(),
+      Parameter::keys.end(),
+      parameter_key
+  ) != Parameter::keys.end();
 }
