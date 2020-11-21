@@ -95,8 +95,6 @@ Result Model::runFixedPoint(void){
     iterate();
 
   result.save_timeline();
-  result.save_final_state();
-
   return result;
 }
 

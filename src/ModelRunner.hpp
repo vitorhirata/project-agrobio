@@ -81,10 +81,6 @@ void ModelRunner::run_var_param_fixed_points(char param){
 
   std::string param_str (1, param);
   Data fixed_points("varParamFixedPoints_" + param_str, parameter);
-  Data histogram_productivity("histogramProductivityVar_" + param_str, parameter);
-  Data hd_distribution("hdDistribution_" + param_str, parameter);
-  Data variety_distribution("varietyDistribution_" + param_str, parameter);
-  Data variety_quantity("varietyQuantity_" + param_str, parameter);
 
   std::vector<float> paramList = Parameter::get_parameter_variation(param);
 
@@ -94,23 +90,16 @@ void ModelRunner::run_var_param_fixed_points(char param){
     clock_t tStart = clock();
     Result result(parameter, 1);
     Result resultTemp;
-    result.numberVariety[0];
-    resultTemp.numberVariety.push_back(0);
 
     for(int run = 0; run < parameter.nRun; ++run){
       Model model(parameter);
       resultTemp = model.runFixedPoint();
-      result.sumResult(&resultTemp);
+      result.sumTemporal(&resultTemp);
     }
     cout << "Finish " << param << " = " << paramValue << ". ";
     cout << "Time taken: "<< (clock() - tStart)/CLOCKS_PER_SEC << "s." << endl;
 
     fixed_points.write_fixed_points(&result, paramValue);
-    histogram_productivity.write_histogram_productivity(&result, paramValue);
-    hd_distribution.write_hd_distribution(&result, paramValue);
-    variety_distribution.write_variety_distribution(&result, paramValue);
-    variety_quantity.write_variety_quantity(&result, paramValue);
-
   }
 }
 
