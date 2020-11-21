@@ -10,7 +10,7 @@ public:
   void write_hd_distribution(Result* result, float param = -1.0);
   void write_variety_distribution(Result* result, float param = -1.0);
   void write_variety_quantity(Result* result, float param = -1.0);
-  void write_fixed_points(Result* result, float param);
+  void write_final_state(Result* result, float param);
 private:
   fstream file;
   Parameter m_parameter;
@@ -109,7 +109,7 @@ void Data::write_variety_quantity(Result* result, float param){
   }
 }
 
-void Data::write_fixed_points(Result* result, float param){
+void Data::write_final_state(Result* result, float param){
   if(need_header){
     std::string header ("param; nVar; meanHD; totalPunctuation; ");
     header.append("productivityPunctuation; qualityPunctuation; ");
