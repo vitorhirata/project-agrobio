@@ -21,6 +21,8 @@ public:
   Result() = default;
   Result(Parameter t_parameter, int timeSize);
   Result(Parameter t_parameter, Household* t_household, Patch* t_grid);
+  void sumTemporal(Result* resultToSum);
+  void sumDistributions(Result* resultToSum);
   void sumResult(Result* resultToSum);
   void save_timeline();
   void save_final_state();
@@ -49,7 +51,7 @@ Result::Result(Parameter t_parameter, int timeSize)
 Result::Result(Parameter t_parameter, Household* t_household, Patch* t_grid)
   : metrics(t_parameter, t_household, t_grid) {}
 
-void Result::sumResult(Result* resultToSum){
+void Result::sumTemporal(Result* resultToSum){
   std::transform(numberVariety.begin(),
       numberVariety.end(), (*resultToSum).numberVariety.begin(),
       numberVariety.begin(), std::plus<int>());
@@ -62,12 +64,20 @@ void Result::sumResult(Result* resultToSum){
   sumResultElement(&bergerParkerCommunity, &((*resultToSum).bergerParkerCommunity));
   sumResultElement(&simpsonHD, &((*resultToSum).simpsonHD));
   sumResultElement(&shannonHD, &((*resultToSum).shannonHD));
+  sumResultElement(&bergerParkerHD, &((*resultToSum).bergerParkerHD));
+}
+
+void Result::sumDistributions(Result* resultToSum){
   sumResultElement(&varietyDistribution, &((*resultToSum).varietyDistribution));
   sumResultElement(&varietyQuantity, &((*resultToSum).varietyQuantity));
-  sumResultElement(&bergerParkerHD, &((*resultToSum).bergerParkerHD));
   sumResultElement(&productivityFrequency, &((*resultToSum).productivityFrequency));
   sumResultElement(&qualityFrequency, &((*resultToSum).qualityFrequency));
   sumResultElement(&hdDistribution, &((*resultToSum).hdDistribution));
+}
+
+void Result::sumResult(Result* resultToSum){
+  sumTemporal(resultToSum);
+  sumDistributions(resultToSum);
 }
 
 void Result::sumResultElement(std::vector<float>* v1, std::vector<float>* v2){
