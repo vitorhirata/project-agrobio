@@ -14,7 +14,7 @@ public:
   ~Model();
   Result runStandard(void);
   Result runPlot(void);
-  Result runFixedPoint(void);
+  Result runFinalState(void);
 };
 
 // Model constructor, receive model parameters, initialize then, and call for
@@ -88,7 +88,7 @@ Result Model::runStandard(void){
 
 // Run the model giving as output the final number of varieties and both
 // histograms
-Result Model::runFixedPoint(void){
+Result Model::runFinalState(void){
   Result result(m_parameter, household, ambient->grid);
 
   for(int t = 1; t < m_parameter.maxTime + 1; ++t)

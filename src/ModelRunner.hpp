@@ -6,7 +6,7 @@ public:
   void run_standard(void);
   void run_plot(void);
   void run_var_param(char param, std::vector<float> paramList);
-  void run_var_param_fixed_points(char param);
+  void run_final_state(char param);
 private:
   void write_standard_results(Parameter parameter, Result* result);
 };
@@ -76,11 +76,11 @@ void ModelRunner::run_var_param(char param, std::vector<float> paramList){
   }
 }
 
-void ModelRunner::run_var_param_fixed_points(char param){
+void ModelRunner::run_final_state(char param){
   Parameter parameter;
 
   std::string param_str (1, param);
-  Data fixed_points("varParamFixedPoints_" + param_str, parameter);
+  Data final_state("finalStateVariation_" + param_str, parameter);
 
   std::vector<float> paramList = Parameter::get_parameter_variation(param);
 
@@ -93,13 +93,13 @@ void ModelRunner::run_var_param_fixed_points(char param){
 
     for(int run = 0; run < parameter.nRun; ++run){
       Model model(parameter);
-      resultTemp = model.runFixedPoint();
+      resultTemp = model.runFinalState();
       result.sumTemporal(&resultTemp);
     }
     cout << "Finish " << param << " = " << paramValue << ". ";
     cout << "Time taken: "<< (clock() - tStart)/CLOCKS_PER_SEC << "s." << endl;
 
-    fixed_points.write_fixed_points(&result, paramValue);
+    final_state.write_final_state(&result, paramValue);
   }
 }
 

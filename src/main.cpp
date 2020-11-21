@@ -70,7 +70,7 @@ int main(int argc, char *argv[]){
       cout << "Running variation model fixed points, with variable ";
       cout << param << ". " << endl;
 
-      modelRunner.run_var_param_fixed_points(param);
+      modelRunner.run_final_state(param);
       break;
     }
     case 'm':{

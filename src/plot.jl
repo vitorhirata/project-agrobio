@@ -52,8 +52,8 @@ function plotHandler(input_file)
     plotHistogramProductivity(df, output_file)
   elseif mode == "histogramProductivityVar"
     plotHistogramProductivityVar(df, output_file)
-  elseif mode == "varParamFixedPoints"
-    plotVarParamFixedPoints(df, output_file)
+  elseif mode == "finalStateVariation"
+    plotModelFinalStates(df, output_file)
   else
     println("$(input_file) is an invalid file.")
   end
@@ -275,7 +275,7 @@ function plotHistogramProductivityVar(df, output_file)
     println("Image $(output_file2) successfully generated.")
 end
 
-function plotVarParamFixedPoints(df, output_file)
+function plotModelFinalStates(df, output_file)
     param = string(output_file[end-4])
     p=plot(layer(df, x=:param, y=:nVar, Geom.line,
                      Theme(default_color=colorant"green")),
