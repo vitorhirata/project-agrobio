@@ -16,6 +16,7 @@ private:
   Parameter m_parameter;
   void write_header(std::string name, float param);
   bool need_header = true;
+  static std::string BASE_TIMELINE_HEADER;
 };
 
 Data::Data(std::string name, Parameter t_parameter)
@@ -26,13 +27,8 @@ Data::Data(std::string name, Parameter t_parameter)
 }
 
 void Data::write_timeline(Result* result, float param){
-  if(need_header){
-    std::string header ("time; nVar; meanHD; totalPunctuation; ");
-    header.append("productivityPunctuation; qualityPunctuation; ");
-    header.append("bergerCommunity; simpsonCommunity; shannonCommunity; ");
-    header.append("bergerHD; simpsonHD; shannonHD");
-    write_header(header, param);
-  }
+  if(need_header)
+    write_header("time; " + BASE_TIMELINE_HEADER, param);
 
   for(int i = 0; i < result->numberVariety.size(); ++i){
     file << i*m_parameter.timeInterval << "; ";
@@ -110,13 +106,8 @@ void Data::write_variety_quantity(Result* result, float param){
 }
 
 void Data::write_final_state(Result* result, float param){
-  if(need_header){
-    std::string header ("param; nVar; meanHD; totalPunctuation; ");
-    header.append("productivityPunctuation; qualityPunctuation; ");
-    header.append("bergerCommunity; simpsonCommunity; shannonCommunity; ");
-    header.append("bergerHD; simpsonHD; shannonHD");
-    write_header(header, -1);
-  }
+  if(need_header)
+    write_header("param; " + BASE_TIMELINE_HEADER, -1);
 
   file << param << "; ";
   file << (float) result->numberVariety[0] / m_parameter.nRun << "; ";
@@ -146,4 +137,9 @@ void Data::write_header(std::string name, float param){
 
 std::string Data::BASE_NAME = "test/" + to_string(time(NULL)) + '_';
 
+std::string Data::BASE_TIMELINE_HEADER =
+  "nVar; meanHD; "
+  "totalPunctuation; productivityPunctuation; qualityPunctuation; "
+  "bergerCommunity; simpsonCommunity; shannonCommunity; "
+  "bergerHD; simpsonHD; shannonHD";
 #endif
