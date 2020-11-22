@@ -7,6 +7,7 @@ public:
   void run_plot(void);
   void run_var_param(char param, std::vector<float> paramList);
   void run_final_state(char param);
+  void run_phase_diagram(char param, char param2);
 private:
   void write_standard_results(Parameter parameter, Result* result);
 };
@@ -100,6 +101,39 @@ void ModelRunner::run_final_state(char param){
     cout << "Time taken: "<< (clock() - tStart)/CLOCKS_PER_SEC << "s." << endl;
 
     final_state.write_final_state(&result, paramValue);
+  }
+}
+
+void ModelRunner::run_phase_diagram(char param, char param2){
+  Parameter parameter;
+
+  std::string param_str (1, param);
+  std::string param2_str (1, param2);
+  Data final_state("phaseDiagram_" + param_str + "_" + param2_str, parameter);
+
+  std::vector<float> paramList = Parameter::get_parameter_variation(param);
+  std::vector<float> param2List = Parameter::get_parameter_variation(param2);
+
+  for(auto paramValue : paramList){
+    for(auto param2Value : param2List){
+      parameter.set_parameter(param, paramValue);
+      parameter.set_parameter(param2, param2Value);
+
+      clock_t tStart = clock();
+      Result result(parameter, 1);
+      Result resultTemp;
+
+      for(int run = 0; run < parameter.nRun; ++run){
+        Model model(parameter);
+        resultTemp = model.runFinalState();
+        result.sumTemporal(&resultTemp);
+      }
+      cout << "Finish " << param << " = " << paramValue << ", ";
+      cout << param2 << " = " << param2Value << ". ";
+      cout << "Time taken: "<< (clock() - tStart)/CLOCKS_PER_SEC << "s." << endl;
+
+      final_state.write_final_state(&result, paramValue, param2Value);
+    }
   }
 }
 
