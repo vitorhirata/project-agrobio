@@ -1,4 +1,4 @@
-using DataFrames, Colors, CSV, Gadfly, Printf, StatsBase, GLM
+using DataFrames, Colors, ColorSchemes, CSV, Gadfly, Printf, StatsBase, GLM
 
 
 # Plot all csv files in the $folder. Assumes julia is in src/
@@ -54,6 +54,8 @@ function plotHandler(input_file)
     plotHistogramProductivityVar(df, output_file)
   elseif mode == "finalStateVariation"
     plotModelFinalStates(df, output_file)
+  elseif mode == "phaseDiagram"
+    plotPhaseDiagram(df, output_file)
   else
     println("$(input_file) is an invalid file.")
   end
@@ -293,3 +295,28 @@ function plotModelFinalStates(df, output_file)
     println("Image $(output_file) successfully generated.")
 end
 
+function plotPhaseDiagram(df, output_file)
+    param = string(output_file[end-6])
+    param2 = string(output_file[end-4])
+    cpalette(pt) = get(ColorSchemes.viridis, pt)
+    p=plot(df, x=:param, y=:param2, color=:nVar, Geom.rectbin,
+            Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
+                    key_title_font_size=14pt, key_label_font_size=12pt),
+            Scale.color_continuous(colormap=cpalette),
+            Guide.xlabel(param),
+            Guide.ylabel(param2),
+            Guide.colorkey(title="Varietal richness\nin community"))
+    draw(SVG(output_file, 23cm, 10cm), p)
+    println("Image $(output_file) successfully generated.")
+
+    p2=plot(df, x=:param, y=:param2, color=:meanHD, Geom.rectbin,
+            Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
+                    key_title_font_size=14pt, key_label_font_size=12pt),
+            Scale.color_continuous(colormap=cpalette),
+            Guide.xlabel(param),
+            Guide.ylabel(param2),
+            Guide.colorkey(title="Average varietal\nrichness per HD"))
+    output_file2 = output_file[1:end-4] * "2.svg"
+    draw(SVG(output_file2, 23cm, 10cm), p2)
+    println("Image $(output_file2) successfully generated.")
+end
