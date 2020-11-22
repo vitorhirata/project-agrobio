@@ -67,10 +67,33 @@ int main(int argc, char *argv[]){
         exit(-1);
       }
 
-      cout << "Running variation model fixed points, with variable ";
+      cout << "Running final state variation model, with variable ";
       cout << param << ". " << endl;
 
       modelRunner.run_final_state(param);
+      break;
+    }
+    case 'd':{
+      char param;
+      char param2;
+      if (argc != 4) {
+        cout << "ERROR: Number of input argument invalid. ";
+        cout << "'d' mode must have two parameters that will vary" << endl;
+        exit(-1);
+      }
+      if (is_valid_key(argv[2][0]) && is_valid_key(argv[3][0])){
+        param = argv[2][0];
+        param2 = argv[3][0];
+      }
+      else{
+        cout << "ERROR: Invalid parameter variation." << endl;
+        exit(-1);
+      }
+
+      cout << "Running phase diagram model, with variable ";
+      cout << param << " and " << param2 << ". " << endl;
+
+      modelRunner.run_phase_diagram(param, param2);
       break;
     }
     case 'm':{
