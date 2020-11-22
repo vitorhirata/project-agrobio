@@ -10,7 +10,7 @@ public:
   void write_hd_distribution(Result* result, float param = -1.0);
   void write_variety_distribution(Result* result, float param = -1.0);
   void write_variety_quantity(Result* result, float param = -1.0);
-  void write_final_state(Result* result, float param);
+  void write_final_state(Result* result, float param, float param2 = -1.0);
 private:
   fstream file;
   Parameter m_parameter;
@@ -105,11 +105,15 @@ void Data::write_variety_quantity(Result* result, float param){
   }
 }
 
-void Data::write_final_state(Result* result, float param){
-  if(need_header)
-    write_header("param; " + BASE_TIMELINE_HEADER, -1);
+void Data::write_final_state(Result* result, float param, float param2){
+  if(need_header){
+    std::string params = (round(param2) == -1) ? "param; " : "param; param2; ";
+    write_header(params + BASE_TIMELINE_HEADER, -1);
+  }
 
   file << param << "; ";
+  if(round(param2) != -1)
+    file << param2 << "; ";
   file << (float) result->numberVariety[0] / m_parameter.nRun << "; ";
   file << (float) result->meanVarietyHD[0] / m_parameter.nRun << "; ";
   file << result->totalPunctuation[0] / m_parameter.nRun << "; ";
