@@ -12,14 +12,15 @@ gdf = gpd.GeoDataFrame(df, crs=crs, geometry=geometry)
 world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
 
 fig, ax = plt.subplots(1)
+fig.set_dpi(1000.0)
 base = world.plot(ax=ax, color='white', edgecolor='black')
-gdf[gdf.Specie == 'Manioc'].plot(ax=base, color='black', markersize=6)
-#gdf[gdf.Specie == 'Maiz'].plot(ax=base, color='blue', markersize=7)
+gdf[gdf.Specie == 'Manioc'].plot(ax=base, color='k', markersize=25, marker='^', facecolors='none')
+gdf[gdf.Specie == 'Maiz'].plot(ax=base, color='k', markersize=20, marker='o', facecolors='none')
 #gdf[gdf.Specie == 'Potato'].plot(ax=base, color='green', markersize=7)
 _ = ax.axis('off')
-plt.show()
 
-leg = [Line2D([0], [0], marker='o', color='w', label='Manioc', markerfacecolor='r', markersize=5),
-        Line2D([0], [0], marker='o', color='w', label='Potato', markerfacecolor='g', markersize=5),
-        Line2D([0], [0], marker='o', color='w', label='Maiz', markerfacecolor='b', markersize=5)]
-ax.legend(handles=leg, loc='lower left')
+leg = [Line2D([0], [0], marker='o', color='w', label='Maiz', markeredgecolor='k', markerfacecolor='none', markersize=6),
+        #Line2D([0], [0], marker='o', color='w', label='Potato', markerfacecolor='g', markersize=5),
+        Line2D([0], [0], marker='^', color='w', label='Manioc', markeredgecolor='k', markerfacecolor='none', markersize=7)]
+ax.legend(handles=leg, loc=(0.1, 0.4), fontsize = 'x-large')
+plt.show()
