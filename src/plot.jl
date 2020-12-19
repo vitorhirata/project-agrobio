@@ -147,8 +147,14 @@ function plotVarParam(df, output_file)
     draw(SVG(output_file2, 16cm, 12cm), p2)
     println("Image $(output_file2) successfully generated.")
     if param == "m"
-      maxTime = maximum(df[:time])
-      df2 = df[df[:time] .== maxTime, :]
+      maxTime = maximum(df.time)
+      df2 = df[df.time .== maxTime, :]
+
+      println("Printing diversity indexes for varParam_m")
+      columns_print = append!([2, 3], 7:12)
+      println(describe(df2[:, columns_print], :mean, :std, :min, :max, :median))
+      print('\n')
+
       ols = lm(@formula(nVar ~ 0 + meanHD), df2)
       f(x) = coef(ols)[1]*x
       println("Printing fit result for varParam_m")
