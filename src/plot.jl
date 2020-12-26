@@ -132,8 +132,10 @@ function plotVarParam(df, output_file)
     if param == "a"
       param = "α"
     end
+    colors = [colorant"#FCD400", colorant"#F43939", colorant"#1DD200",
+                                   colorant"#0063D7", colorant"#F473FF"]
     p = plot(df, x=:time, y=:nVar, color=:param, Geom.line,
-                  Scale.color_discrete, Guide.colorkey(title=param),
+                  Scale.color_discrete_manual(colors...), Guide.colorkey(title=param),
                   Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
                         key_title_font_size=14pt, key_label_font_size=12pt),
                   Guide.xlabel("Agricultural cycle"),
@@ -193,10 +195,14 @@ function plothdDistribution(df, output_file)
       draw(SVG(output_file, 15cm, 10cm), p)
       println("Image $(output_file) successfully generated.")
     elseif length(split(output_file, "_")) == 3
+      colors = [colorant"#FCD400", colorant"#F43939", colorant"#1DD200",
+                                   colorant"#0063D7", colorant"#F473FF"]
       p = plot(df, x=:value, y=:hdDist, color=:param, Geom.line,
                   Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
                         key_title_font_size=14pt, key_label_font_size=12pt),
-                  Scale.color_discrete(),Guide.colorkey(title=param),
+                  Coord.cartesian(xmin=0, xmax=20),
+                  Scale.color_discrete_manual(colors...),
+                  Guide.colorkey(title=param),
                   Guide.ylabel("Percentage (%)"),
                   Guide.xlabel("HD varietal richness"))
       draw(SVG(output_file, 15cm, 10cm), p)
@@ -220,8 +226,11 @@ function plotVarietyDistribution(df, output_file)
       draw(SVG(output_file, 15cm, 10cm), p)
       println("Image $(output_file) successfully generated.")
     elseif length(split(output_file, "_")) == 3
+      colors = [colorant"#FCD400", colorant"#F43939", colorant"#1DD200",
+                                   colorant"#0063D7", colorant"#F473FF"]
       p = plot(df, x=:value, y=:varDist, color=:param, Geom.line,
-                   Scale.color_discrete(),Guide.colorkey(title=param),
+                  Scale.color_discrete_manual(colors...),
+                  Guide.colorkey(title=param),
                   Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
                         key_title_font_size=14pt, key_label_font_size=12pt),
                   Guide.xticks(ticks=[0.0,20,40,50,60,80,100]),
@@ -248,8 +257,11 @@ function plotVarietyQuantity(df, output_file)
       draw(SVG(output_file, 15cm, 10cm), p)
       println("Image $(output_file) successfully generated.")
     elseif length(split(output_file, "_")) == 3
+      colors = [colorant"#FCD400", colorant"#F43939", colorant"#1DD200",
+                                   colorant"#0063D7", colorant"#F473FF"]
       p = plot(df, x=:quantity, y=:frequency, color=:param, Geom.line,
-                  Scale.color_discrete(),Guide.colorkey(title=param),
+                  Scale.color_discrete_manual(colors...),
+                  Guide.colorkey(title=param),
                   Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
                         key_title_font_size=14pt, key_label_font_size=12pt),
                   Guide.ylabel("Percentage of varieties (%)"),
