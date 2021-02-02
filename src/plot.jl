@@ -183,7 +183,7 @@ function plothdDistribution(df, output_file)
                         key_title_font_size=14pt, key_label_font_size=12pt),
                   Coord.cartesian(xmin=0, xmax=15),
                   Guide.ylabel("Percentage (%)"),
-                  Guide.xlabel("Varietal richness per HD"))
+                  Guide.xlabel("HD varietal richness"))
       draw(SVG(output_file, 15cm, 10cm), p)
       println("Image $(output_file) successfully generated.")
     elseif length(split(output_file, "_")) == 3
@@ -192,7 +192,7 @@ function plothdDistribution(df, output_file)
                         key_title_font_size=14pt, key_label_font_size=12pt),
                   Scale.color_discrete(),Guide.colorkey(title=param),
                   Guide.ylabel("Percentage (%)"),
-                  Guide.xlabel("Varietal richness per HD"))
+                  Guide.xlabel("HD varietal richness"))
       draw(SVG(output_file, 15cm, 10cm), p)
       println("Image $(output_file) successfully generated.")
     end
