@@ -54,13 +54,13 @@ Parameter::Parameter()
   , kWT(4)
   , betaWT(0.2)
   , probabilyConnectionER(0.15)
-  , outsideTradeLimit(0.32)
-  , selectionStrength(10)
+  , outsideTradeLimit(0.2)
+  , selectionStrength(20)
   , alpha(0.6)
-  , probabilityNewVar(0.06)
-  , percentageNewRandomVar(0.1)
+  , probabilityNewVar(0.25)
+  , percentageNewRandomVar(0.025)
   , crossingDeviation(0.005)
-  , deathProbability(0.2) {}
+  , deathProbability(0.35) {}
 
 
 

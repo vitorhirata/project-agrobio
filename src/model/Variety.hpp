@@ -46,7 +46,7 @@ void Variety::setVariety(VarietyData t_data){
 // the variety
 int Variety::computeVarietyNumber(void){
   int varNumber = 0;
-  float step = 0.1;
+  float step = 0.2;
   int scale = pow(1 / step, 2);
   int temp;
   int currentScale = scale;
