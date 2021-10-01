@@ -81,20 +81,20 @@ function plotStandard(df, output_file)
     output_file2 = output_file[1:end-4] * "2.svg"
     draw(SVG(output_file2, 20cm, 10cm), p2)
     println("Image $(output_file2) successfully generated.")
-    p3 = plot(layer(df, x=:time, y=:totalPunctuation, Geom.line,
+    p3 = plot(layer(df, x=:time, y=:totalScore, Geom.line,
                         Theme(default_color=colorant"blue")),
-               layer(df, x=:time, y=:productivityPunctuation, Geom.line,
+               layer(df, x=:time, y=:productivityScore, Geom.line,
                          Theme(default_color=colorant"red")),
-               layer(df, x=:time, y=:qualityPunctuation, Geom.line,
+               layer(df, x=:time, y=:qualityScore, Geom.line,
                          Theme(default_color=colorant"green")),
                 Theme(minor_label_font_size=10pt, major_label_font_size=14pt,
                         key_title_font_size=14pt, key_label_font_size=12pt),
-               Guide.manual_color_key("",["Total Punctuation",
-                                          "Productivity Punctuation",
-                                          "Quality Punctuation"],
+               Guide.manual_color_key("",["Total Score",
+                                          "Productivity Score",
+                                          "Quality Score"],
                                       ["blue", "red", "green"]),
                Coord.cartesian(ymin=0, ymax=1),
-               Guide.ylabel("Punctuation"), Guide.xlabel("Agricultural cycle"))
+               Guide.ylabel("Score"), Guide.xlabel("Agricultural cycle"))
     output_file3 = output_file[1:end-4] * "3.svg"
     draw(SVG(output_file3, 23cm, 10cm), p3)
     println("Image $(output_file3) successfully generated.")

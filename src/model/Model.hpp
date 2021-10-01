@@ -118,12 +118,12 @@ Result Model::runPlot(void){
   return result;
 }
 
-// Run one interation of the model, computing HD punctuations and evaluating
+// Run one interation of the model, computing HD scores and evaluating
 // it's production
 void Model::iterate(void){
   ambient->runDeath();
   for(int i = 0; i < m_parameter.numberHousehold; ++i)
-    household[i].computeHDpunctuations();
+    household[i].computeHDscores();
 
   // Shuffle order randomly
   std::vector<int> HD_list(m_parameter.numberHousehold);

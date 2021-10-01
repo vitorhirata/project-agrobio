@@ -34,10 +34,10 @@ void Data::write_timeline(Result* result, float param){
     file << i*m_parameter.timeInterval << "; ";
     file << (float) result->numberVariety[i] / m_parameter.nRun << "; ";
     file << (float) result->meanVarietyHD[i] / m_parameter.nRun << "; ";
-    file << result->totalPunctuation[i] / m_parameter.nRun << "; ";
-    file << result->productivityPunctuation[i] / m_parameter.nRun << "; ";
-    file << (result->totalPunctuation[i]-
-        result->productivityPunctuation[i]) / m_parameter.nRun << "; ";
+    file << result->totalScore[i] / m_parameter.nRun << "; ";
+    file << result->productivityScore[i] / m_parameter.nRun << "; ";
+    file << (result->totalScore[i]-
+        result->productivityScore[i]) / m_parameter.nRun << "; ";
     file << result->bergerParkerCommunity[i] /
       (m_parameter.household_size() * m_parameter.nRun);
     file << "; " << result->simpsonCommunity[i] / m_parameter.nRun << "; ";
@@ -116,10 +116,10 @@ void Data::write_final_state(Result* result, float param, float param2){
     file << param2 << "; ";
   file << (float) result->numberVariety[0] / m_parameter.nRun << "; ";
   file << (float) result->meanVarietyHD[0] / m_parameter.nRun << "; ";
-  file << result->totalPunctuation[0] / m_parameter.nRun << "; ";
-  file << result->productivityPunctuation[0] / m_parameter.nRun << "; ";
-  file << (result->totalPunctuation[0] -
-      result->productivityPunctuation[0]) / m_parameter.nRun << "; ";
+  file << result->totalScore[0] / m_parameter.nRun << "; ";
+  file << result->productivityScore[0] / m_parameter.nRun << "; ";
+  file << (result->totalScore[0] -
+      result->productivityScore[0]) / m_parameter.nRun << "; ";
   file << result->bergerParkerCommunity[0] /
     (m_parameter.household_size() * m_parameter.nRun);
   file << "; " << result->simpsonCommunity[0] / m_parameter.nRun << "; ";
@@ -143,7 +143,7 @@ std::string Data::BASE_NAME = "test/" + to_string(time(NULL)) + '_';
 
 std::string Data::BASE_TIMELINE_HEADER =
   "nVar; meanHD; "
-  "totalPunctuation; productivityPunctuation; qualityPunctuation; "
+  "totalScore; productivityScore; qualityScore; "
   "bergerCommunity; simpsonCommunity; shannonCommunity; "
   "bergerHD; simpsonHD; shannonHD";
 #endif
