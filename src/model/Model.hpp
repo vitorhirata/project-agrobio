@@ -1,6 +1,11 @@
 #ifndef MODEL_H
 #define MODEL_H
 
+/*
+Class that defines one model execution. It calls functions to initialize the
+model, defines a model iteration, and calls functions to save necessary data.
+*/
+
 class Model{
 private:
   const Parameter m_parameter;

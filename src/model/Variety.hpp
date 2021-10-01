@@ -1,6 +1,11 @@
 #ifndef VARIETY_H
 #define VARIETY_H
 
+/*
+Class that defines a variety. It is defined by its half-saturation constants
+and quality.
+*/
+
 class Variety{
 public:
   float quality;

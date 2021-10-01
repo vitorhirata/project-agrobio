@@ -1,3 +1,9 @@
+#=
+Code to plot csv files produced by the model. In the julia console run
+plotAll(folder) to plot all csv files in the desired folder.
+=#
+
+
 using DataFrames, Colors, ColorSchemes, CSV, Gadfly, Printf, StatsBase, GLM
 
 

@@ -1,13 +1,17 @@
+/*
+ Includes all necessary libraries and defines base functions and classes.
+*/
+
 #include <iostream> // inputs and outputs
 #include <random>  // random number
 #include <fstream> // handling files
 #include <ctime>  // count time of run
-#include <vector> // using std vectors
+#include <vector> // allow using std::vector
 #include <algorithm> // allow to use transform
 #include <tuple> // allow tuple return
-#include "EasyBMP.cpp" // BITMAP
-#include <map>
-#include <cmath>
+#include "EasyBMP.cpp" // produces BITMAP images
+#include <map> // allow using std::map
+#include <cmath> // basic mathematical functions
 
 using namespace std;
 

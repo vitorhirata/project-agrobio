@@ -1,7 +1,12 @@
 #ifndef AMBIENT_H
 #define AMBIENT_H
 
-// Ambient class. Contain the grid and handle environment container
+/*
+Class that groups all model's plot fractions. Responsible for initializing
+plot fraction (or patch) varieties, and running death probability for each
+plot fraction.
+*/
+
 class Ambient{
 private:
   const int m_latticeSize;
@@ -112,7 +117,6 @@ void Ambient::setPatch(int numberResources, int nResourceDistribution,
   }
 }
 
-// Return the a vector of vector of int, containing numberVarHD random index
 std::vector<std::vector<int> > Ambient::defineHDindex(
     std::uniform_int_distribution<long> uniIntSP, int numberVarHD){
   std::vector<std::vector<int> > indexHD(49, std::vector<int>(numberVarHD));
@@ -122,7 +126,7 @@ std::vector<std::vector<int> > Ambient::defineHDindex(
   return indexHD;
 }
 
-// Receives on patch index and return the household that own this patch
+// Receives a patch index and return the household that owns this patch
 int Ambient::computeHDnumber(int place){
   int sizeGrid = 49;
   int sizeHD = sqrt(sizeGrid);
@@ -150,6 +154,8 @@ std::vector<VarietyData> Ambient::defineInitialVarieties(int numberResources,
   return varietyAvailable;
 }
 
+// For each plot fraction decide if the variety will be killed with a given
+// probability
 void Ambient::runDeath(void){
   for(int i = 0; i < m_latticeSize*m_latticeSize; ++i){
     if(uniFLOAT(rand64) < m_deathProbability - 0.17 * grid[i].productivity)

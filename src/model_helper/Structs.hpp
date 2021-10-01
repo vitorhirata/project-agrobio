@@ -1,12 +1,17 @@
 #ifndef STRUCTS_H
 #define STRUCTS_H
 
-// Variety struct contain all the proprieties of each variety
+/*
+Defines two smaller model's structs.
+*/
+
+// Struct containing proprieties of a variety
 struct VarietyData{
   std::vector<float> halfSaturation;
   float quality;
 };
 
+// Struct with a set of parameters that need to be saved on the household.
 struct HDParameter{
   float alpha;
   float probabilityNewVar;
