@@ -21,7 +21,6 @@ public:
       int t_numberInitialVarietyHD, float t_deathProbability,
       float t_crossingDeviation);
   ~Ambient();
-  int countSpecie(void);
   void runDeath(void);
 };
 
@@ -149,19 +148,6 @@ std::vector<VarietyData> Ambient::defineInitialVarieties(int numberResources,
         varietyAvailable[i].quality = gaussQ(rand64);
   }
   return varietyAvailable;
-}
-
-// Count the number of different varieties in the grid, return a int to
-// that number
-int Ambient::countSpecie(void){
-  std::map<int,bool> varietyAvailability;
-  for(int i = 0; i < m_latticeSize*m_latticeSize; ++i){
-    int varNumber = grid[i].variety.varietyNumber;
-    varietyAvailability[varNumber] = true;
-  }
-  if(varietyAvailability.count(-1))
-    return varietyAvailability.size() - 1;
-  return varietyAvailability.size();
 }
 
 void Ambient::runDeath(void){
