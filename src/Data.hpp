@@ -1,6 +1,10 @@
 #ifndef DATA_H
 #define DATA_H
 
+/*
+Class responsible for writting model's result in a csv file.
+*/
+
 class Data{
 public:
   static std::string BASE_NAME;

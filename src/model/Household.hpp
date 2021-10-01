@@ -1,7 +1,12 @@
 #ifndef HOUSEHOLD_H
 #define HOUSEHOLD_H
 
-// Household class. It is where the decision making takes place.
+/*
+Class that defines a household and its actions. Main responsabilities includes
+saving household constants, function that determines which varieties will be
+planted (see iterateHD), computing varieties scode, handling varieties exchange
+*/
+
 class Household{
 private:
   struct HDvariety;

@@ -1,29 +1,34 @@
 #ifndef PARAMETER_H
 #define PARAMETER_H
 
+/*
+Class responsible for dealing with the model's parameters. Including parameter
+initialization, variating parameters and writting parameters to file.
+*/
+
 class Parameter{
 public:
   int latticeSize;
-  int numberInitialVariety; // Number of species in initialization
-  int numberInitialVarietyHD; // Number of species in initialization of HD
+  int numberInitialVariety; // Initial number of varieties in the community
+  int numberInitialVarietyHD; // Initial number of varieties per household
   int numberResources; // Number of existing resources
-  int numberHabitat; // Number of different resources in grid
-  int maxTime; // Max time of iteration
-  int timeInterval; // Interval in which metrics are counted
+  int numberHabitat; // Ambient heterogeneity
+  int maxTime; // Number of agricultural cycles (iterations)
+  int timeInterval; // Time interval in which metrics are computed
   int numberHousehold; // Number of households
-  int nRun; // number of rounds
-  int networkType; // algorithm used to create network, 0 is ER, 1 is WT 2 is SF
-  int mSF; // scale free
-  int kWT; // watts-strogatz
-  float betaWT; // watts-strogatz
-  float probabilyConnectionER; // Probability of connection ER
-  float outsideTradeLimit;
-  int selectionStrength;
-  float alpha;
-  float probabilityNewVar;
-  float percentageNewRandomVar;
-  float crossingDeviation;
-  float deathProbability;
+  int nRun; // Number of simulations runned
+  int networkType; // Algorithm used to create network, 0 is Erdos-Renyi, 1 is Watts-Strogatz and 2 is Barabasi-Albert
+  int mSF; // Number of initial connected nodes of the Barabasi-Albert model
+  int kWT; // Number of connections of the initial regular network of the Watts-Strogatz model
+  float betaWT; // Rewiring probability of the Watts-Strogatz model
+  float probabilyConnectionER; // Probability of connection of the Erdos-Renyi model
+  float outsideTradeLimit; // Base exchange probability
+  int selectionStrength; // Intensity of selection
+  float alpha; // Importance of productivity on variety score
+  float probabilityNewVar; // Total probability of new variety
+  float percentageNewRandomVar; // Percentage of new variety randomly initialized
+  float crossingDeviation; // Traits matting deviation
+  float deathProbability; // Base death probability
   int household_size();
   int number_patches();
   static std::vector<char> keys;
@@ -33,7 +38,7 @@ public:
   static std::vector<float> get_parameter_variation(char parameter_key);
 };
 
-// parameter constructor, default values
+// Parameter constructor, defines the default values used in the model
 Parameter::Parameter()
   : latticeSize(49)
   , numberInitialVariety(10)

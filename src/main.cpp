@@ -1,5 +1,8 @@
-#include "header.hpp"
+/*
+Defines main function, with initial parse of the input and calling modelRunner.
+*/
 
+#include "header.hpp"
 int main(int argc, char *argv[]){
 
   if (argc == 1){

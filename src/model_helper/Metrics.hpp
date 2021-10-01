@@ -1,6 +1,10 @@
 #ifndef METRICS_H
 #define METRICS_H
 
+/*
+Class responsible for computing model's metrics.
+*/
+
 class Metrics{
 public:
   Metrics() = default;

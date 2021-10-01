@@ -1,6 +1,12 @@
 #ifndef RESULT_H
 #define RESULT_H
 
+/*
+Class responsible for dealing with model's results. It contains the output of
+one or multiple model's execution, also handling aggregation of multiple
+model's output and calling Metrics functions to save data on Result.
+*/
+
 class Result{
 public:
   std::vector<int> numberVariety;

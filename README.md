@@ -1,14 +1,23 @@
 # Agricultural diversity modeling
 
 ## About
-This project contain the code of an agent-based model used to analyse agricultural diversity in traditional agroecosystems. This model was developed during my master's graduation in Complex Systems Modeling at Universidade de São Paulo (USP).
+This project contains the code of an agent-based model used to analyze varietal agricultural diversity in traditional agro-ecosystems. It is the result of my master's degree in Complex Systems Modeling at Universidade de São Paulo (USP).
 
-The master's dissertation (in portuguese) is available in this [link](https://www.teses.usp.br/teses/disponiveis/100/100132/tde-13122019-195850/pt-br.php).
+The master's dissertation (in Portuguese) is available at this [link](https://www.teses.usp.br/teses/disponiveis/100/100132/tde-13122019-195850/pt-br.php).
 
-## Utilization
-To utilize the project start running the script initialize.sh, that will set up the project and dowload the required library in src/lib. In addition to that it is also required a C++ compiler, julia and the julia packages Gadfly and DataFrames, which are used to plot the results.
+## Running the model
 
-To compile the code go to /src and run `g++ main.cpp -std=c++11 -I lib/bmp -o program.out`.
-To execute the code run ./program.out and the desired mode: 's' for standard, 'p' for plot, 'v' for parameter variation, and 'f' to get the fixed points under parameter variation. For 'v' and 'f' mode it is necessary to type the parameter that will vary, for example `./program.out v a 0 0.5 1` will execute the program with α assuming the values of 0, 0.5 and 1.
+To run the model, run the executable `src/agrobiodiversity_model.out` and the desired mode:
+- 's' for a standard run with default parameters
+- 'p' for plotting model's state of one execution of the model
+- 'v' for a compared run varying the specified parameter with specified values
+- 'f' for generating the model's final states under a variation of the specified parameter variation
+- 'd' for generating a phase diagram varying two specified parameters
 
-The result will be saved in src/test, in a csv format. The julia file src/plot.jl contain the function plotAll that plot all the csv files in the src/test folder.
+For example, run `./agrobiodiversity_model.out s` to execute the standard run or `./agrobiodiversity_model.out v V 5 10 25 50 100` to execute the model with the initial number of varieties in the community (V) assuming the values of 5, 10, 25, 50 and 100. The result will be saved in the src/test folder (if the file does not exist you need to create it) in the csv format.
+
+[Julia](https://julialang.org/) and the packages [Gadfly](http://gadflyjl.org/stable/) and [DataFrames](https://dataframes.juliadata.org/stable/) are required for plotting the results. Run the julia console in the src folder, then run `include("plot.jl")` to include the plot file and finally run `plotAll` to plot all the csv files in the src/test folder.
+
+## Compiling the model
+This setup was only tested on Linux operating system. First of all, run the bash script initialize.sh to set up the project and download the EasyBMP library in src/lib. Then, with a C++ compiler installed ([GCC](https://gcc.gnu.org/) for example), compile the code under the /src folder with `g++ main.cpp -std=c++11 -I lib/bmp -Ofast -o agrobiodiversity_model.out`.
+

@@ -1,6 +1,11 @@
 #ifndef MODELRUNNER_H
 #define MODELRUNNER_H
 
+/*
+Class responsible for running model's instances, grouping results and saving
+csv with final result.
+*/
+
 class ModelRunner{
 public:
   void run_standard(void);

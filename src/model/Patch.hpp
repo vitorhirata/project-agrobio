@@ -1,8 +1,12 @@
 #ifndef PATCH_H
 #define PATCH_H
 
-// Each patch equivales to one produceble site, and contain up to one
-// plantation an the resources present in the soil.
+/*
+Class with the smaller scale of the model, also called plot fraction. It
+contains one variety individual and the bio-chemical resources present in the
+soil.
+*/
+
 class Patch{
 private:
   float m_crossingDeviation;

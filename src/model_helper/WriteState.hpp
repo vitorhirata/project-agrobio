@@ -1,6 +1,10 @@
 #ifndef WRITESTATE_H
 #define WRITESTATE_H
 
+/*
+Class responsible for writting a BMP image of the current model state
+*/
+
 class WriteState{
 public:
   WriteState(Patch* t_grid, int t_latticeSize);

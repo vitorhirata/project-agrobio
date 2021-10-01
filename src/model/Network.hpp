@@ -1,6 +1,12 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
+/*
+Class that creates the fixed household network where exchange of varieties
+happens. It can create three types of networks, based on Erdos-Renyi,
+Watts-Strogatz and Barabasi-Albert models.
+*/
+
 class Network{
 private:
   int m_numberHousehold;
