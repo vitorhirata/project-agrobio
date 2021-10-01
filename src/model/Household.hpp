@@ -12,20 +12,20 @@ private:
   std::vector<int> m_indexOwenedPatches;
   void changeProduction(VarietyData varietyData, int varNumber = -10);
   int findVariety(int var);
-  float computePunctuation(float varProductivity, float varQuality);
+  float computeScore(float varProductivity, float varQuality);
   void fillvarietyOwened(std::map<int,std::vector<float> >* varietyData);
   void computeDeltas(int * minorDeltaIdx, int * majorDeltaIdx);
   float renormalizationFunction(float x);
 public:
-  float punctuation;
-  float productivity_punctuation;
+  float score;
+  float productivity_score;
   std::vector<HDvariety> varietyOwened;
   std::vector<int> indexLinkedHD;
   int numberVarietyOwened(void);
   void initializeHD(Household* t_household, Patch* t_grid,
       std::vector<int> t_indexLinkedHD, std::vector<int> t_indexOwenedPatches,
       HDParameter t_hdParameter);
-  void computeHDpunctuations(void);
+  void computeHDscores(void);
   void iterateHD(void);
   float computeSimpsonHD(void);
   float computeShannonHD(void);
@@ -34,8 +34,8 @@ public:
 struct Household::HDvariety{
   int number;
   int quantity;
-  float punctuation;
-  float productivity_punctuation;
+  float score;
+  float productivity_score;
   VarietyData varietyData;
 };
 
@@ -58,11 +58,11 @@ void Household::initializeHD(Household* t_household, Patch* t_grid,
   varietyOwened = std::vector<HDvariety>(m_indexOwenedPatches.size());
   uniIntPlace.param(std::uniform_int_distribution<long>::param_type(0,
         m_indexOwenedPatches.size()-1));
-  computeHDpunctuations();
+  computeHDscores();
 }
 
 // Iterate over the Oweneds Patches, colect varieties and set varietyOwened
-void Household::computeHDpunctuations(void){
+void Household::computeHDscores(void){
   // Map the variety in a vector, where the 0th element is quantity,
   // the 1st productivity and the 2nd quality
   std::map<int,std::vector<float> > varietyData;
@@ -82,15 +82,15 @@ void Household::computeHDpunctuations(void){
 
   fillvarietyOwened(&varietyData);
 
-  //Set HD punctuation
-  float puncTemp = 0;
-  float productivityPuncTemp = 0;
+  //Set HD score
+  float scoreTemp = 0;
+  float productivityScoreTemp = 0;
   for(auto i : varietyOwened){
-    puncTemp += (i.punctuation * i.quantity);
-    productivityPuncTemp += (i.productivity_punctuation * i.quantity);
+    scoreTemp += (i.score * i.quantity);
+    productivityScoreTemp += (i.productivity_score * i.quantity);
   }
-  punctuation = puncTemp / m_indexOwenedPatches.size();
-  productivity_punctuation = productivityPuncTemp / m_indexOwenedPatches.size();
+  score = scoreTemp / m_indexOwenedPatches.size();
+  productivity_score = productivityScoreTemp / m_indexOwenedPatches.size();
 }
 
 // Fill the varietyOwened vector with the data provided by the input map
@@ -103,33 +103,33 @@ void Household::fillvarietyOwened(std::map<int,
     newVar.number = itr->first;
     newVar.quantity = itr->second[0];
     newVar.varietyData = m_grid[(int) itr->second[3]].giveVarietyData();
-    if(newVar.number == -1){ // if there is no variety punctuation is zero
-      newVar.punctuation = 0;
-      newVar.productivity_punctuation = 0;
+    if(newVar.number == -1){ // if there is no variety score is zero
+      newVar.score = 0;
+      newVar.productivity_score = 0;
     }
     else{
-      newVar.punctuation = computePunctuation(itr->second[1] / itr->second[0],
+      newVar.score = computeScore(itr->second[1] / itr->second[0],
           itr->second[2] / itr->second[0]);
-      newVar.productivity_punctuation = m_hdParameter.alpha *
+      newVar.productivity_score = m_hdParameter.alpha *
         itr->second[1] / itr->second[0];
     }
     varietyOwened.push_back(newVar);
   }
 }
 
-// Compute the punctuation based on the productivity, quality and alpha
-float Household::computePunctuation(float varProductivity,
+// Compute the score based on the productivity, quality and alpha
+float Household::computeScore(float varProductivity,
     float varQuality){
-  float culturalPunc = 1 - 2 *  std::min(abs(varQuality -
+  float culturalScore = 1 - 2 *  std::min(abs(varQuality -
         m_HDpreference), 1 - abs(varQuality - m_HDpreference));
   return m_hdParameter.alpha * varProductivity +
-    (1 - m_hdParameter.alpha) * culturalPunc;
+    (1 - m_hdParameter.alpha) * culturalScore;
 }
 
 // Iterate the household. Changes cultivated variety if
 // max(majorDelta, minorDelta) > 'i',
 // exist a null variety,
-// extpunctuationDifference > 'o',
+// extScoreDifference > 'o',
 // or with a probability 'p' a new variety is created
 void Household::iterateHD(void){
   int majorDeltaIdx;
@@ -155,7 +155,7 @@ void Household::iterateHD(void){
 
   for(auto ud :indexLinkedHD){
     if(uniFLOAT(rand64) <
-        m_household[ud].punctuation * m_hdParameter.outsideTradeLimit){
+        m_household[ud].score * m_hdParameter.outsideTradeLimit){
       std::vector<HDvariety>* hdVec = &m_household[ud].varietyOwened;
       int extBestVarietyIdx = floor(uniFLOAT(rand64) * hdVec->size());
       while(hdVec->at(extBestVarietyIdx).number == -1)
@@ -207,17 +207,17 @@ float Household::renormalizationFunction(float x){
 void Household::computeDeltas(int * minorDeltaIdx, int * majorDeltaIdx){
   float minorDelta = -10;
   float majorDelta = -10;
-  float totalPunctuationNorm = 0;
-  float averagePunctuation = 0;
+  float totalScoreNorm = 0;
+  float averageScore = 0;
   *minorDeltaIdx = -10;
   *majorDeltaIdx = -10;
   for(uint i = 0; i < varietyOwened.size(); ++i)
-    averagePunctuation += varietyOwened[i].punctuation;
-  averagePunctuation /= numberVarietyOwened();
+    averageScore += varietyOwened[i].score;
+  averageScore /= numberVarietyOwened();
   for(uint i = 0; i < varietyOwened.size(); ++i){
     if(varietyOwened[i].number != -1){
-      totalPunctuationNorm += renormalizationFunction(
-          varietyOwened[i].punctuation - averagePunctuation);
+      totalScoreNorm += renormalizationFunction(
+          varietyOwened[i].score - averageScore);
     }
   }
 
@@ -225,8 +225,8 @@ void Household::computeDeltas(int * minorDeltaIdx, int * majorDeltaIdx){
     if(varietyOwened[i].number == -1)
       continue;
 
-    float temp = renormalizationFunction(varietyOwened[i].punctuation -
-      averagePunctuation) / totalPunctuationNorm -
+    float temp = renormalizationFunction(varietyOwened[i].score -
+      averageScore) / totalScoreNorm -
       (float) varietyOwened[i].quantity / m_indexOwenedPatches.size();
     if(temp > majorDelta){
       majorDelta = temp;

@@ -5,8 +5,8 @@ class Result{
 public:
   std::vector<int> numberVariety;
   std::vector<float> meanVarietyHD;
-  std::vector<float> totalPunctuation;
-  std::vector<float> productivityPunctuation;
+  std::vector<float> totalScore;
+  std::vector<float> productivityScore;
   std::vector<float> productivityFrequency;
   std::vector<float> simpsonCommunity;
   std::vector<float> shannonCommunity;
@@ -34,8 +34,8 @@ private:
 Result::Result(Parameter t_parameter, int timeSize)
   : numberVariety(timeSize, 0)
   , meanVarietyHD(timeSize, 0)
-  , totalPunctuation(timeSize, 0)
-  , productivityPunctuation(timeSize, 0)
+  , totalScore(timeSize, 0)
+  , productivityScore(timeSize, 0)
   , simpsonCommunity(timeSize, 0)
   , shannonCommunity(timeSize, 0)
   , bergerParkerCommunity(timeSize, 0)
@@ -57,8 +57,8 @@ void Result::sumTemporal(Result* resultToSum){
       numberVariety.begin(), std::plus<int>());
 
   sumResultElement(&meanVarietyHD, &((*resultToSum).meanVarietyHD));
-  sumResultElement(&totalPunctuation, &((*resultToSum).totalPunctuation));
-  sumResultElement(&productivityPunctuation, &((*resultToSum).productivityPunctuation));
+  sumResultElement(&totalScore, &((*resultToSum).totalScore));
+  sumResultElement(&productivityScore, &((*resultToSum).productivityScore));
   sumResultElement(&simpsonCommunity, &((*resultToSum).simpsonCommunity));
   sumResultElement(&shannonCommunity, &((*resultToSum).shannonCommunity));
   sumResultElement(&bergerParkerCommunity, &((*resultToSum).bergerParkerCommunity));
@@ -88,9 +88,9 @@ void Result::sumResultElement(std::vector<float>* v1, std::vector<float>* v2){
 void Result::save_timeline(){
   numberVariety.push_back(metrics.computeVarietyRichness());
   meanVarietyHD.push_back(metrics.computeVarietyMeanProfile());
-  std::vector<float> tempPunctuation = metrics.computePunctuationAverage();
-  totalPunctuation.push_back(tempPunctuation[0]);
-  productivityPunctuation.push_back(tempPunctuation[1]);
+  std::vector<float> tempScore = metrics.computeScoreAverage();
+  totalScore.push_back(tempScore[0]);
+  productivityScore.push_back(tempScore[1]);
   bergerParkerCommunity.push_back(metrics.computeBergerParker());
   bergerParkerHD.push_back(metrics.computeBergerParkerHD());
   simpsonCommunity.push_back(metrics.computeSimpson());

@@ -14,7 +14,7 @@ public:
   float computeBergerParkerHD();
   float computeShannon();
   float computeSimpson();
-  std::vector<float> computePunctuationAverage();
+  std::vector<float> computeScoreAverage();
   std::vector<float> computeProductivityProfile();
   std::vector<float> computeQualityProfile();
   float computeAverageSimpson();
@@ -171,16 +171,16 @@ float Metrics::computeShannon(){
   return shannon;
 }
 
-// Return the average punctuation of Households
-std::vector<float> Metrics::computePunctuationAverage(){
-  std::vector<float> punctuationAverage(2, 0);
+// Return the average score of Households
+std::vector<float> Metrics::computeScoreAverage(){
+  std::vector<float> scoreAverage(2, 0);
   for(int i = 0; i < m_parameter.numberHousehold; ++i){
-    punctuationAverage[0] += m_household[i].punctuation;
-    punctuationAverage[1] += m_household[i].productivity_punctuation;
+    scoreAverage[0] += m_household[i].score;
+    scoreAverage[1] += m_household[i].productivity_score;
   }
-  punctuationAverage[0] /= m_parameter.numberHousehold;
-  punctuationAverage[1] /= m_parameter.numberHousehold;
-  return punctuationAverage;
+  scoreAverage[0] /= m_parameter.numberHousehold;
+  scoreAverage[1] /= m_parameter.numberHousehold;
+  return scoreAverage;
 }
 
 // Count the number of different varieties in the grid, return an int with
