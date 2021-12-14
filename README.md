@@ -19,5 +19,5 @@ For example, run `./agrobiodiversity_model.out s` to execute the standard run or
 [Julia](https://julialang.org/) and the packages [Gadfly](http://gadflyjl.org/stable/) and [DataFrames](https://dataframes.juliadata.org/stable/) are required for plotting the results. Run the julia console in the src folder, then run `include("plot.jl")` to include the plot file and finally run `plotAll` to plot all the csv files in the src/test folder.
 
 ## Compiling the model
-This setup was only tested on Linux operating system. First of all, run the bash script initialize.sh to set up the project and download the EasyBMP library in src/lib. Then, with a C++ compiler installed ([GCC](https://gcc.gnu.org/) for example), compile the code under the /src folder with `g++ main.cpp -std=c++11 -I lib/bmp -Ofast -o agrobiodiversity_model.out`.
+This setup was only tested on Linux operating system and requires [GCC](https://gcc.gnu.org/) compiler. To compile the code run the makefile with `make`. The output will be a agrobiodiversity_model.out in the root of the project.
 
