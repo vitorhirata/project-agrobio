@@ -1,5 +1,5 @@
 agrobiodiversity_model: initialize
-	g++ src/main.cpp -std=c++11 -I src/lib/bmp -Ofast -o agrobiodiversity_model.out
+	g++ src/main.cpp -std=c++11 -I src/lib/bmp -Ofast -o agrobiodiversity_model.exe
 
 initialize:
 	@if [ ! -e src/test ]; then\

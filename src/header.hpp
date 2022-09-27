@@ -15,6 +15,8 @@
 
 using namespace std;
 
+#define uint unsigned int
+
 /* Imported functions */
 static std::random_device rd;
 static std::mt19937_64 rand64(rd());
