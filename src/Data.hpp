@@ -143,7 +143,7 @@ void Data::write_header(std::string name, float param){
   need_header = false;
 }
 
-std::string Data::BASE_NAME = "test/" + to_string(time(NULL)) + '_';
+std::string Data::BASE_NAME = "src/test/" + to_string(time(NULL)) + '_';
 
 std::string Data::BASE_TIMELINE_HEADER =
   "nVar; meanHD; "
