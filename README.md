@@ -3,7 +3,9 @@
 ## About
 This project contains the code of an agent-based model used to analyze varietal agricultural diversity in traditional agro-ecosystems. It is the result of my master's degree in Complex Systems Modeling at Universidade de São Paulo (USP).
 
-The master's dissertation (in Portuguese) is available at this [link](https://www.teses.usp.br/teses/disponiveis/100/100132/tde-13122019-195850/pt-br.php).
+This work is published at Plos One:
+
+Hirata Sanches, V., Adams, C. and Ferreira, F.F., 2022. An integrated model to study varietal diversity in traditional agroecosystems. Plos one, 17(1), p.e0263064. DOI: [10.1371/journal.pone.0263064](https://doi.org/10.1371/journal.pone.0263064) 
 
 ## Running the model
 
